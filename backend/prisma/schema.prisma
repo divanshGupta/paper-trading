@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../src/generated/prisma"
+  //If you don’t really need a custom path, simpler and safer is to remove the output line in schema.prisma
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")  // <-- prisma reads this fron .env
+}
+
+
+// ------- Models -------
+
+// User model
+model User {
+  id          Int          @id @default(autoincrement())
+  username    String       @unique
+  email       String       @unique
+  password    String
+  balance     Decimal      @default(100000.00)
+  createdAt   DateTime     @default(now())
+  portfolio   Portfolio[]
+  transactions Transaction[]
+  watchlist   Watchlist[]
+  refreshTokens RefreshToken[]
+}
+
+// Portfolio: current holdings
+model Portfolio {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  symbol    String
+  quantity  Int
+  avgPrice  Decimal
+  updatedAt DateTime @default(now())
+}
+
+// Each trade (buy/sell)
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  symbol    String
+  type      String   // "BUY" or "SELL"
+  quantity  Int
+  price     Decimal
+  total     Decimal
+  createdAt DateTime @default(now())
+}
+
+// Watchlist for each user
+model Watchlist {
+  id     Int    @id @default(autoincrement())
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
+  symbol String
+}
+
+// Refresh tokens for authentication
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
