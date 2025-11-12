@@ -1,28 +1,40 @@
 import http from 'http';
 import { app } from './app.js';
-import { initSocket } from './config/socket.js';
-
+import { initSocket} from './config/socket.js';
 import { PORT } from './config/env.js';
+import { startPriceEngine, PRICES } from './services/priceEngine.js';
 
-// Create HTTP server and attach socket.io
+global.STOCKS = PRICES;
+
+global.STOCKS = PRICES;
+
 const server = http.createServer(app);
-initSocket(server);
 
-const startApp = async () => {
-    try {
-        // 1. AWAIT the database connection. The message will print here.
+const io = initSocket(server);
 
-        // 2. Start the Express server ONLY after a successful DB connection
-        server.listen(PORT, () => {
-            console.log(`✅ Server running on port ${PORT}`);
-        });
-    } catch (error) {
-        console.error("❌ Failed to start application due to a database error:", error.message);
-        process.exit(1); 
-    }
-};
+// ✅ Start live ticker
+startPriceEngine(io);
 
-startApp(); // Execute the application start function
+server.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log("💹 Price engine initialized, broadcasting every 2s...");
+});
+
+// const startApp = async () => {
+//     try {
+//         // 1. AWAIT the database connection. The message will print here.
+
+//         // 2. Start the Express server ONLY after a successful DB connection
+//         server.listen(PORT, () => {
+//             console.log(`✅ Server running on port ${PORT}`);
+//         });
+//     } catch (error) {
+//         console.error("❌ Failed to start application due to a database error:", error.message);
+//         process.exit(1); 
+//     }
+// };
+
+// startApp(); // Execute the application start function
 
 // Handle unhandled promise rejections
 process.on("unhandledRejection", (err) => {

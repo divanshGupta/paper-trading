@@ -1,14 +1,9 @@
-import { Router } from 'express';
-import { authenticateToken } from '../middlewares/auth.middleware.js';
-// import { verifyToken } from '../middlewares/auth.middleware.js';
+import { Router } from "express";
+import { getPortfolio } from "../controllers/portfolio.controller.js";
+import { verifyAuth } from "../middlewares/auth.middleware.js";
 
-const portfolioRouter = Router();
+const router = Router();
 
-portfolioRouter.get('/', authenticateToken, (req, res) => {
-    res.json({ 
-        message: `Welcome ${req.user.username}, here's your portfolio data.`,
-        user: req.user 
-    });
-});
+router.get("/", verifyAuth, getPortfolio);
 
-export default portfolioRouter;
+export default router;

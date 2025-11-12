@@ -1,18 +1,25 @@
 version: '3.9'
 
 services:
-  db:
-    image: postgres:15
-    container_name: postgres_db
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
     restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: trading_simulator
     ports:
-      - "5432:5432"
+      - "3000:3000"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./frontend:/app:cached
+      - frontend_node_modules:/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:5500
+      - WATCHPACK_POLLING=true
+    env_file:
+      - ./frontend/.env.local
+    depends_on:
+      - backend
 
   backend:
     build:
@@ -20,32 +27,20 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     restart: always
-    depends_on:
-      - db
     environment:
-      DATABASE_URL: "postgresql://postgres:password@db:5432/trading_simulator?schema=public"
+      - NODE_ENV=development
+    env_file:
+      - ./backend/.env.local
     ports:
       - "5500:5500"
     volumes:
       - ./backend:/app
-      - /app/node_modules
-    command: sh -c "npx prisma migrate deploy && npm run dev"
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    restart: always
-    depends_on:
-      - backend
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    environment:
-      NEXT_PUBLIC_API_URL: http://backend:5500
-
+      - backend_node_modules:/app/node_modules
+    # Add public DNS servers to improve resolution of external hosts (e.g. Supabase)
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    command: sh -c "echo DATABASE_URL=$DATABASE_URL && npx prisma generate && npm run start:dev"
 volumes:
-  postgres_data:
+  frontend_node_modules:
+  backend_node_modules:

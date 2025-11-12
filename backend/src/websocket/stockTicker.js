@@ -1,18 +1,14 @@
-export const registerStockHandlers = (io, socket) => {
-  const stocks = ['AAPL', 'TSLA', 'GOOG', 'INFY.NS'];
+import { startPriceEngine, getSnapshot } from "../services/priceEngine.js";
 
-  const interval = setInterval(() => {
-    const stock = stocks[Math.floor(Math.random() * stocks.length)];
-    const price = (Math.random() * 1000).toFixed(2);
+export function registerStockHandlers(io, socket) {
+  // ensure engine is running once globally
+  startPriceEngine(io);
 
-    io.emit('stock:update', {
-      symbol: stock,
-      price,
-      time: new Date().toLocaleTimeString(),
-    });
+  // send latest to this client immediately
+  socket.emit("price:snapshot", getSnapshot());
 
-    console.log(`📤 Emitting: ${stock} - ₹${price}`);
-  }, 2000);
-
-  socket.on('disconnect', () => clearInterval(interval));
-};
+  // (Optional) allow client to ping or resubscribe later
+  socket.on("price:resubscribe", () => {
+    socket.emit("price:snapshot", getSnapshot());
+  });
+}

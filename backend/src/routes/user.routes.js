@@ -1,14 +1,19 @@
 import { Router } from 'express';
-import { getAllUsers, getUserById } from '../controllers/user.controller.js';
+import { fetchBalance, getAllUsers, getProfile, updateProfile } from '../controllers/user.controller.js';
+import { verifyAuth } from '../middlewares/auth.middleware.js';
 
 const userRouter = Router();
 
+// fetch all users
 userRouter.get('/', getAllUsers);
 
-userRouter.get('/:id', getUserById);
+// fetch user balance
+userRouter.get('/balance', verifyAuth, fetchBalance);
 
-// userRouter.put('/:id', updateUser);
+// GET profile
+userRouter.get('/profile', verifyAuth, getProfile);
 
-// userRouter.delete('/:id', deleteUser);
+// UPDATE profile
+userRouter.put('/profile', verifyAuth, updateProfile);
 
 export default userRouter;

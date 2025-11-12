@@ -10,19 +10,122 @@ export const getAllUsers = async (req, res) => {
     }       
 };
 
+// fetch balance for individual user
+export const fetchBalance = async (req, res) => {
+  try {
+    const userId = req.user.id;  // uuid from supabase JWT
 
-// Get user by ID
-export const getUserById = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const user = await prisma.user.findUnique({
-            where: { id: parseInt(id) },
-        });             
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
-    }           
+    const user = await prisma.user.findUnique({
+      where: { supabaseId: userId },
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({ balance: Number(user.balance) });
+
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
+
+// GET profile
+export const getProfile = async (req, res) => {
+  try {
+    // ✅ Make sure to read it from req.user (set in middleware)
+    const supabaseId = req.user.id;  // this was missing
+
+    console.log("Supabase ID from token:", supabaseId);
+
+    const user = await prisma.user.findUnique({
+      where: { supabaseId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        phone: true,
+        dob: true,
+        gender: true,
+        address: true,
+        fatherName: true,
+        balance: true,
+        createdAt: true,
+      },
+    });
+
+    // ✅ Log for debugging
+    const allUsers = await prisma.user.findMany({
+      select: { supabaseId: true, email: true },
+    });
+    console.log("Supabase IDs in DB:", allUsers.map(u => u.supabaseId));
+
+    if (!user) {
+      console.log("User not found, creating new entry...");
+      const newUser = await prisma.user.create({
+        data: {
+          supabaseId,
+          email: req.user.email,
+          balance: 100000.0,
+        },
+      });
+      return res.status(200).json({ user: newUser });
+    }
+
+    return res.status(200).json({ user });
+
+  } catch (err) {
+    console.error("Profile fetch error:", err);
+    return res.status(500).json({ error: "Failed to fetch profile" });
+  }
+};
+
+
+// UPDATE profile
+export const updateProfile = async (req, res) => {
+  try {
+    const supabaseId = req.user.id; // ✅ Correct property from middleware
+    const data = req.body;
+
+    const allowedFields = [
+      "name", "phone", "dob", "gender", "address", "fatherName"
+    ];
+
+    // Filter only allowed fields
+    const updateData = Object.fromEntries(
+      Object.entries(data).filter(([key]) => allowedFields.includes(key))
+    );
+
+    // Convert date string to Date object (if present)
+    if (updateData.dob) {
+      updateData.dob = new Date(updateData.dob);
+    }
+
+    const updated = await prisma.user.update({
+      where: { supabaseId },
+      data: updateData,
+    });
+
+    if (!updated) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json({
+      success: true,
+      user: {
+        name: updated.name,
+        email: updated.email,
+        phone: updated.phone,
+        dob: updated.dob,
+        gender: updated.gender,
+        address: updated.address,
+        fatherName: updated.fatherName,
+        balance: updated.balance,
+      },
+    });
+  } catch (err) {
+    console.error("Profile update error:", err);
+    res.status(500).json({ error: "Failed to update profile" });
+  }
+};
+

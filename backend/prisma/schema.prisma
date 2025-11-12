@@ -12,64 +12,67 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")  // <-- prisma reads this fron .env
+  url      = env("DATABASE_URL")
+  schemas  = ["public"]
 }
-
 
 // ------- Models -------
 
 // User model
 model User {
-  id          Int          @id @default(autoincrement())
-  username    String       @unique
-  email       String       @unique
-  password    String
-  balance     Decimal      @default(100000.00)
-  createdAt   DateTime     @default(now())
-  portfolio   Portfolio[]
-  transactions Transaction[]
-  watchlist   Watchlist[]
-  refreshTokens RefreshToken[]
+  id          Int       @id @default(autoincrement())
+  supabaseId  String    @unique @db.Uuid
+  email       String    @unique
+  balance     Decimal   @default(100000) @db.Decimal(12,2)
+  name        String?
+  phone       String?   @unique
+  dob         DateTime?
+  gender      String?   // "male", "female", "other"
+  address     String?
+  fatherName  String?
+  createdAt   DateTime  @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@schema("public")
 }
 
 // Portfolio: current holdings
 model Portfolio {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
+  userId    String   @db.Uuid
   symbol    String
   quantity  Int
-  avgPrice  Decimal
+  avgPrice  Decimal @db.Decimal(12,2)
   updatedAt DateTime @default(now())
+
+  @@schema("public")
+
 }
 
 // Each trade (buy/sell)
 model Transaction {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  symbol    String
-  type      String   // "BUY" or "SELL"
-  quantity  Int
-  price     Decimal
-  total     Decimal
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  userId      String   @db.Uuid
+  symbol      String
+  type        String
+  quantity    Int
+  price       Decimal  @db.Decimal(10,2)
+  total       Decimal  @db.Decimal(10,2)
+  realizedPnl Decimal? @db.Decimal(10,2)
+
+  createdAt   DateTime @default(now())
+
+  @@schema("public")
 }
+
+
 
 // Watchlist for each user
 model Watchlist {
   id     Int    @id @default(autoincrement())
-  user   User   @relation(fields: [userId], references: [id])
-  userId Int
+  userId String @db.Uuid
   symbol String
+
+  @@schema("public")
 }
 
-// Refresh tokens for authentication
-model RefreshToken {
-  id        Int      @id @default(autoincrement())
-  token     String   @unique
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-}

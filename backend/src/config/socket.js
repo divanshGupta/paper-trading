@@ -1,25 +1,34 @@
-import { Server } from 'socket.io';
-import { registerStockHandlers } from '../websocket/stockTicker.js';
+import { Server } from "socket.io";
+import { registerStockHandlers } from "../websocket/stockTicker.js";
+import { socketAuth } from "../middlewares/socketAuth.middleware.js";
 
 let io;
 
 export const initSocket = (server) => {
+  console.log("🧩 Initializing socket server...");
+
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000",  // 👈 must match your Next.js port
+      origin: "http://localhost:3000",
       methods: ["GET", "POST"],
       credentials: true,
     },
   });
 
-  io.on('connection', (socket) => {
-    console.log('🟢 User connected:', socket.id);
-    registerStockHandlers(io, socket);  // <-- crucial line
+  // attach middleware BEFORE connection
+  io.use(socketAuth);
 
-    socket.on('disconnect', () => {
-      console.log('🔴 User disconnected:', socket.id);
+  io.on("connection", (socket) => {
+    console.log("🟢 User connected:", socket.user?.id);
+    registerStockHandlers(io, socket);
+
+    socket.on("disconnect", () => {
+      console.log("🔴 User disconnected:", socket.user?.id);
     });
   });
+
+  // ✅ return io so it can be used in server.js
+  return io;
 };
 
 export { io };

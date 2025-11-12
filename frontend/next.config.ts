@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+import { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const config: NextConfig = {
+  reactStrictMode: true,
+  output: 'standalone',
+  webpack: (config: any) => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    };
+    return config;
+  }
 };
 
-export default nextConfig;
+export default config;

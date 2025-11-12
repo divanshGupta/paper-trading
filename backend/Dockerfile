@@ -22,5 +22,5 @@ COPY . .
 # Expose your backend port (adjust if needed)
 EXPOSE 5500
 
-# Start the app
-CMD ["npm", "run", "dev"]
+# Start the app with environment variables loaded
+CMD ["sh", "-c", "node -r dotenv/config src/server.js"]
