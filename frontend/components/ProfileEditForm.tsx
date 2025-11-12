@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
+import { toast } from "sonner";
 
 interface ProfileData {
   name?: string;
@@ -50,11 +51,14 @@ export default function ProfileEditForm({ profile, onSave, onCancel }: Props) {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Failed to update profile");
 
-      setMessage("✅ Profile updated successfully!");
+      toast.success("Profile updated Successfully!");
+    //   setMessage("✅ Profile updated successfully!");
       onSave(json.user);
     } catch (err: any) {
       console.error("Update error:", err);
-      setMessage("❌ " + err.message);
+
+      toast.error(err.message || "Something went wrong")
+    //   setMessage("❌ " + err.message);
     } finally {
       setLoading(false);
     }
