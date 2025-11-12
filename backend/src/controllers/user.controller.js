@@ -36,8 +36,6 @@ export const getProfile = async (req, res) => {
     // ✅ Make sure to read it from req.user (set in middleware)
     const supabaseId = req.user.id;  // this was missing
 
-    console.log("Supabase ID from token:", supabaseId);
-
     const user = await prisma.user.findUnique({
       where: { supabaseId },
       select: {
@@ -53,12 +51,6 @@ export const getProfile = async (req, res) => {
         createdAt: true,
       },
     });
-
-    // ✅ Log for debugging
-    const allUsers = await prisma.user.findMany({
-      select: { supabaseId: true, email: true },
-    });
-    console.log("Supabase IDs in DB:", allUsers.map(u => u.supabaseId));
 
     if (!user) {
       console.log("User not found, creating new entry...");

@@ -1,0 +1,70 @@
+[33mcommit 4a0e8adab410f9b76c17649adeffc7b4d525e19c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Divyansh Gupta <gdivyansh442@gmail.com>
+Date:   Thu Nov 13 00:02:13 2025 +0530
+
+    Stop tracking environment local files and update gitignore
+
+[1mdiff --git a/backend/.env.development.local b/backend/.env.development.local[m
+[1mdeleted file mode 100644[m
+[1mindex f7e5d29..0000000[m
+[1m--- a/backend/.env.development.local[m
+[1m+++ /dev/null[m
+[36m@@ -1,21 +0,0 @@[m
+[31m-#PORT [m
+[31m-PORT = 5500[m
+[31m-SERVER_URL = "http://localhost:5500"[m
+[31m-[m
+[31m-# ENVIRONMENT[m
+[31m-NODE_ENV = 'development'[m
+[31m-[m
+[31m-# DATABASE[m
+[31m-DATABASE_URL="postgresql://postgres:YIicWEBRpLJgfIH7@db.letqjygetjfbchsbytyl.supabase.co:5432/postgres"[m
+[31m-DATABASE_HOST="db"[m
+[31m-DATABASE_PORT=5432[m
+[31m-DATABASE_USER="postgres"[m
+[31m-DATABASE_PASSWORD="YIicWEBRpLJgfIH7"[m
+[31m-DATABASE_NAME="postgres"[m
+[31m-[m
+[31m-# shared[m
+[31m-SUPABASE_URL=https://letqjygetjfbchsbytyl.supabase.co[m
+[31m-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldHFqeWdldGpmYmNoc2J5dHlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIyNTQxMjgsImV4cCI6MjA3NzgzMDEyOH0.Aa_KmjCdhsEmw6e0aMo5hr3SrzLHWgh8PVvncKHH2Os[m
+[31m-SUPABASE_SERVICE_ROLE=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxldHFqeWdldGpmYmNoc2J5dHlsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjI1NDEyOCwiZXhwIjoyMDc3ODMwMTI4fQ.7o3geSvFGSeVYUH_vOu1F4NQrFoewydnRLhb1YqPA4Y   # server-only[m
+[31m-SUPABASE_JWT_SECRET=MFwj/QN+Eq0IArcvgLzo68Ax1QTbIm5ppsKoVPt4vFdegUgp/Y4rFHEVX8+p6wlbSTXOXhqI0s6cHZ+VXHRlJQ== # used to verify access tokens in Express[m
+[31m-[m
+[1mdiff --git a/backend/.env.production.local b/backend/.env.production.local[m
+[1mdeleted file mode 100644[m
+[1mindex 1981e87..0000000[m
+[1m--- a/backend/.env.production.local[m
+[1m+++ /dev/null[m
+[36m@@ -1 +0,0 @@[m
+[31m-NODE_ENV='production'[m
+\ No newline at end of file[m
+[1mdiff --git a/frontend/components/ProfileEditForm.tsx b/frontend/components/ProfileEditForm.tsx[m
+[1mindex b83ec2f..8ac63e6 100644[m
+[1m--- a/frontend/components/ProfileEditForm.tsx[m
+[1m+++ b/frontend/components/ProfileEditForm.tsx[m
+[36m@@ -2,6 +2,7 @@[m
+ [m
+ import { useState } from "react";[m
+ import { supabase } from "@/utils/supabaseClient";[m
+[32m+[m[32mimport { toast } from "sonner";[m
+ [m
+ interface ProfileData {[m
+   name?: string;[m
+[36m@@ -50,11 +51,14 @@[m [mexport default function ProfileEditForm({ profile, onSave, onCancel }: Props) {[m
+       const json = await res.json();[m
+       if (!res.ok) throw new Error(json.error || "Failed to update profile");[m
+ [m
+[31m-      setMessage("✅ Profile updated successfully!");[m
+[32m+[m[32m      toast.success("Profile updated Successfully!");[m
+[32m+[m[32m    //   setMessage("✅ Profile updated successfully!");[m
+       onSave(json.user);[m
+     } catch (err: any) {[m
+       console.error("Update error:", err);[m
+[31m-      setMessage("❌ " + err.message);[m
+[32m+[m
+[32m+[m[32m      toast.error(err.message || "Something went wrong")[m
+[32m+[m[32m    //   setMessage("❌ " + err.message);[m
+     } finally {[m
+       setLoading(false);[m
+     }[m
