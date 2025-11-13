@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 
@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handle = async () => {
     setBusy(true);
@@ -39,6 +40,21 @@ export default function LoginPage() {
 
     router.push("/dashboard");
   };
+
+  useEffect(()=> {
+    const checkLogin = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if(session) {
+        router.replace("/dashboard"); // already logged in redirect
+      } else {
+        setLoading(false);
+      }
+    };
+    checkLogin();
+  }, []);
+
+  if (loading) return null; // prevent UI flash
 
   return (
     <div className="flex flex-col gap-3 p-10 min-h-screen justify-center items-center">

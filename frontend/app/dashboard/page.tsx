@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { toast } from "sonner";
-import { useBalance } from "../providers/BalanceProvider";
+import { useBalance } from "../../components/providers/BalanceProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import MarketClock from "@/components/MarketClock";
-import Link from "next/link";
+import TickerBar from "@/components/dashboard/StockTicker";
+import StockCard from "@/components/dashboard/StockCard";
 
 export default function Dashboard() {
   const { balance, refreshBalance } = useBalance();
@@ -85,12 +86,11 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Live Market</h1>
-      <div className="text-xl font-semibold text-white">Balance: ₹{balance}</div>
-      
+    <div className="max-w-7xl bg-[var(--bg)]  mx-auto px-4 py-6 pt-20">
+
+      {/* Market Ticker Bar */}
       {/* ✅ Market status banner (always visible) */}
-      {!marketOpen ? (
+      {/* {!marketOpen ? (
         <div className="bg-red-100 text-red-700 p-3 text-center rounded mb-4 font-medium flex gap-4 justify-center">
           <div className="">🚫 Market Closed — Opens at 9:15 AM, Closes at 3:30 PM</div>
           <MarketClock />
@@ -99,7 +99,23 @@ export default function Dashboard() {
         <div className="bg-green-100 text-green-700 p-3 text-center rounded mb-4 font-medium">
           ✅ Market Open — Trading Live
         </div>
-      )}
+      )} */}
+
+      {/* Stocks Grid */}
+      <div className="
+        grid 
+        grid-cols-1 
+        sm:grid-cols-2 
+        md:grid-cols-3 
+        lg:grid-cols-4 
+        gap-4 mb-4
+      ">
+        {/* Example stock cards */}
+        <StockCard symbol="TCS" price={3920} change={1.24} />
+        <StockCard symbol="INFY" price={1476} change={-0.82} />
+        <StockCard symbol="RELIANCE" price={2540} change={0.45} />
+        <StockCard symbol="HDFCBANK" price={1620} change={-0.35} />
+      </div>
 
       {/* ✅ Show table if prices available */}
       {prices.length > 0 ? (
@@ -153,21 +169,7 @@ export default function Dashboard() {
         <p className="text-center text-gray-500">Loading market data...</p>
       )}
 
-      <button className="mt-6 underline text-blue-500"
-        onClick={() => router.push("/portfolio")}
-      >
-        View Portfolio
-      </button>
-
-      <Link href="/orders" className="text-blue-600 hover:underline ml-4">Orders</Link>
-      <Link href="/realized-pnl" className="text-blue-600 hover:underline ml-4">Realized PnL</Link>
-      <Link href="/profile" className="text-red-600 hover:underline ml-4">Profile</Link>
-
-
       <p className="mt-6 border px-3 py-2 rounded text-gray-300">Logged in as {email}</p>
-      <button className="mt-6 border px-3 py-2 rounded" onClick={() => supabase.auth.signOut().then(() => router.replace("/login"))}>
-        Logout
-      </button>
     </div>
   );
 }

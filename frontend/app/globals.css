@@ -1,5 +1,10 @@
-@import "tailwindcss";
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
 
-body {
-    @apply bg-gray-950 text-gray-100;
+@import "./theme.css";
+
+/* Global resets */
+html, body {
+  background: var(--bg);
+  color: var(--text);
 }

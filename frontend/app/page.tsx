@@ -59,7 +59,7 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-6">📈 Live Stock Ticker</h1>
 
       <button 
-        className="bg-black text-white px-6 py-2 rounded"
+        className="px-6 py-2 rounded"
         onClick={() => router.push("/login")}
       >
         Login / Signup

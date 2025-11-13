@@ -1,0 +1,25 @@
+/* LIGHT THEME */
+:root {
+  --bg: #F9FAFB;
+  --bg-surface: #FFFFFF;
+  --text: #111827;
+  --text-secondary: #6B7280;
+
+  --brand: #00C49A;
+  --brand-light: #5EF7D0;
+  --brand-dark: #009F7A;
+
+  --positive: #16A34A;
+  --negative: #DC2626;
+
+  --border: #E5E7EB;
+}
+
+/* DARK THEME */
+.dark {
+  --bg: #0E141B;
+  --bg-surface: #1A212B;
+  --text: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --border: #374151;
+}

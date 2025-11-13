@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import ProfileEditForm from "@/components/ProfileEditForm";
+import { useRouter }  from "next/navigation";
 import Link from "next/link";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -67,6 +70,10 @@ export default function ProfilePage() {
       </button>
 
       <Link href="/dashboard" className="text-blue-600 ml-4">Back to homepage</Link>
+
+      <button className="mt-6 border px-3 py-2 rounded" onClick={() => supabase.auth.signOut().then(() => router.replace("/login"))}>
+        Logout
+      </button>
     </div>
   );
 }

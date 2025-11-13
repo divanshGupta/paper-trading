@@ -5,7 +5,7 @@ import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { toast } from "sonner";
-import { useBalance } from "../providers/BalanceProvider";
+import { useBalance } from "../../components/providers/BalanceProvider";
 import SellModal from "@/components/SellModal";
 
 export default function PortfolioPage() {
