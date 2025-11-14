@@ -22,8 +22,8 @@ export default function Navbar() {
   ];
 
  return (
-    <nav className="fixed top-0 left-0  w-full z-50 border-b bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 left-0  w-full z-50 bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between">
         
         {/* Left side */}
         <div className="flex items-center gap-10">
@@ -40,7 +40,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors pb-1 ${
+                className={`text-md font-medium transition-colors pb-1 ${
                   pathname === link.href
                     ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-500"
                     : "text-gray-600 hover:text-teal-600 dark:text-gray-300 dark:hover:text-white"

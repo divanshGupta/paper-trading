@@ -5,6 +5,8 @@ export let PRICES = [
   { symbol: "INFY",      name: "Infosys",                   price: 1530 },
   { symbol: "HDFCBANK",  name: "HDFC Bank",                 price: 991 },
   { symbol: "MARUTI",    name: "Maruti Suzuki",             price: 11800 },
+  { symbol: "ADANI",     name: "Adani Enterprises",         price: 456 },
+  { symbol: "BPCL",      name: "Bharat Petroleum LTD",      price: 256 },
 ];
 
 // simple ±0.5% random walk

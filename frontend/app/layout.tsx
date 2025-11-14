@@ -4,8 +4,8 @@ import "./globals.css";
 import ToastProvider from "../components/providers/ToastProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { BalanceProvider } from "../components/providers/BalanceProvider";
-import Footer from "@/components/shared/Footer";
-import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

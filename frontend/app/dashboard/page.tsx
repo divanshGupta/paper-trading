@@ -7,9 +7,11 @@ import { useLivePrices } from "../hooks/useLivePrices";
 import { toast } from "sonner";
 import { useBalance } from "../../components/providers/BalanceProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
-import MarketClock from "@/components/MarketClock";
-import TickerBar from "@/components/dashboard/StockTicker";
-import StockCard from "@/components/dashboard/StockCard";
+import Sidebar from "@/components/layout/Sidebar";
+import StockGrid from "@/components/layout/StockGrid";
+import StockTable from "@/components/layout/StockTable";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export default function Dashboard() {
   const { balance, refreshBalance } = useBalance();
@@ -86,90 +88,184 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="max-w-7xl bg-[var(--bg)]  mx-auto px-4 py-6 pt-20">
+    <div className="pt-20">
+      <div className="max-w-7xl mx-auto flex gap-6">
+        {/* Left content */}
+        <div className="flex-1 min-w-0">
+          {/* Stocks Grid */}
+          <StockGrid />
 
-      {/* Market Ticker Bar */}
-      {/* ✅ Market status banner (always visible) */}
-      {/* {!marketOpen ? (
-        <div className="bg-red-100 text-red-700 p-3 text-center rounded mb-4 font-medium flex gap-4 justify-center">
-          <div className="">🚫 Market Closed — Opens at 9:15 AM, Closes at 3:30 PM</div>
-          <MarketClock />
-        </div>
-      ) : (
-        <div className="bg-green-100 text-green-700 p-3 text-center rounded mb-4 font-medium">
-          ✅ Market Open — Trading Live
-        </div>
-      )} */}
+          {/* Gainers / Losers / Trending */}
+          <StockTable />
 
-      {/* Stocks Grid */}
-      <div className="
-        grid 
-        grid-cols-1 
-        sm:grid-cols-2 
-        md:grid-cols-3 
-        lg:grid-cols-4 
-        gap-4 mb-4
-      ">
-        {/* Example stock cards */}
-        <StockCard symbol="TCS" price={3920} change={1.24} />
-        <StockCard symbol="INFY" price={1476} change={-0.82} />
-        <StockCard symbol="RELIANCE" price={2540} change={0.45} />
-        <StockCard symbol="HDFCBANK" price={1620} change={-0.35} />
+          {/* ✅ Show table if prices available */}
+          {prices.length > 0 ? (
+            <div className="w-full">
+
+              {/* Desktop Table */}
+              <div className="hidden md:block overflow-hidden rounded-xl shadow-card bg-[var(--light-bg)] dark:bg-dark-surface">
+                <table className="w-full border border-gray-200 mb-3">
+                  <thead>
+                    <tr className="bg-gray-200 dark:bg-gray-800 text-left text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                      <th className="p-3">Symbol</th>
+                      <th className="p-3">Company</th>
+                      <th className="p-3">Price</th>
+                      <th className="p-3">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {prices.map((s) => {
+                      const isUp = flash[s.symbol] === "up";
+                      const isDown = flash[s.symbol] === "down";
+
+                      return (
+                        <tr
+                          key={s.symbol}
+                          className="border-t border-gray-200 dark:border-gray-700 text-sm"
+                        >
+                          <td className="p-3 font-semibold text-light-text dark:text-dark-text">
+                            {s.symbol}
+                          </td>
+
+                          <td className="p-3 text-light-text-secondary dark:text-dark-text-secondary">
+                            {s.name}
+                          </td>
+
+                          <td
+                            className={`p-3 font-medium transition-all ${
+                              isUp
+                                ? "bg-green-100 dark:bg-green-900 text-positive"
+                                : isDown
+                                ? "bg-red-100 dark:bg-red-900 text-negative"
+                                : "text-light-text dark:text-dark-text"
+                            }`}
+                          >
+                            ₹{s.price}
+                          </td>
+
+                          <td className="p-3 flex items-center gap-3">
+                            {/* BUY BUTTON */}
+                            <button
+                              disabled={tradingSymbol === s.symbol || !marketOpen}
+                              onClick={() => tradeStock(s.symbol, s.price, "buy")}
+                              className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
+                                !marketOpen || tradingSymbol === s.symbol
+                                  ? "bg-gray-400 cursor-not-allowed"
+                                  : "bg-brand hover:bg-brand-dark"
+                              }`}
+                            >
+                              {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
+                            </button>
+
+                            {/* SELL BUTTON */}
+                            <button
+                              disabled={tradingSymbol === s.symbol || !marketOpen}
+                              onClick={() => tradeStock(s.symbol, s.price, "sell")}
+                              className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
+                                !marketOpen || tradingSymbol === s.symbol
+                                  ? "bg-gray-400 cursor-not-allowed"
+                                  : "bg-red-500 hover:bg-red-600"
+                              }`}
+                            >
+                              {tradingSymbol === s.symbol ? "Processing..." : "Sell"}
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+
+                <Link 
+                  href="/" 
+                  className='text-blue-400 text-sm font-semibold inline-flex items-center justify-center'
+                  >
+                    {/* Wrap the text to ensure it's a solid element for Flexbox to align */}
+                    <span className="**leading-none**">See more</span> 
+                    <ChevronRight size={16} />
+                </Link>
+              </div>
+
+              {/* Mobile Cards View */}
+              <div className="md:hidden flex flex-col gap-4">
+                {prices.map((s) => {
+                  const isUp = flash[s.symbol] === "up";
+                  const isDown = flash[s.symbol] === "down";
+
+                  return (
+                    <div
+                      key={s.symbol}
+                      className="
+                        rounded-xl p-4 shadow-card bg-light-surface dark:bg-dark-surface
+                        border border-gray-200 dark:border-gray-700
+                      "
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="text-base font-semibold">{s.symbol}</p>
+                          <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                            {s.name}
+                          </p>
+                        </div>
+
+                        <div
+                          className={`
+                            px-3 py-2 rounded-md text-sm font-semibold transition-all
+                            ${
+                              isUp
+                                ? "bg-green-100 dark:bg-green-900 text-positive"
+                                : isDown
+                                ? "bg-red-100 dark:bg-red-900 text-negative"
+                                : "text-light-text dark:text-dark-text"
+                            }
+                          `}
+                        >
+                          ₹{s.price}
+                        </div>
+                      </div>
+
+                      <div className="flex gap-4 mt-4">
+                        <button
+                          disabled={tradingSymbol === s.symbol || !marketOpen}
+                          onClick={() => tradeStock(s.symbol, s.price, "buy")}
+                          className={`flex-1 px-4 py-2 rounded-md text-white font-medium ${
+                            !marketOpen || tradingSymbol === s.symbol
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "bg-brand hover:bg-brand-dark"
+                          }`}
+                        >
+                          {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
+                        </button>
+
+                        <button
+                          disabled={tradingSymbol === s.symbol || !marketOpen}
+                          onClick={() => tradeStock(s.symbol, s.price, "sell")}
+                          className={`flex-1 px-4 py-2 rounded-md text-white font-medium ${
+                            !marketOpen || tradingSymbol === s.symbol
+                              ? "bg-gray-400 cursor-not-allowed"
+                              : "bg-red-500 hover:bg-red-600"
+                          }`}
+                        >
+                          {tradingSymbol === s.symbol ? "Processing..." : "Sell"}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <p className="text-center text-gray-500">Loading market data...</p>
+          )}
+
+
+          <p className="mt-6 border px-3 py-2 rounded text-gray-300">Logged in as {email}</p>
+        </div>
+
+        {/* right content */}
+        <Sidebar />
       </div>
-
-      {/* ✅ Show table if prices available */}
-      {prices.length > 0 ? (
-        <table className="border w-full">
-          <thead>
-            <tr className="border-b bg-gray-100 text-black">
-              <th className="p-2">Symbol</th>
-              <th className="p-2">Company</th>
-              <th className="p-2">Price</th>
-              <th className="p-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {prices.map(s => (
-              <tr key={s.symbol} className="border-b">
-                <td className="p-2 font-semibold">{s.symbol}</td>
-                <td className="p-2">{s.name}</td>
-                <td className={`p-2 transition duration-300 ${
-                  flash[s.symbol] === "up" ? "bg-green-200" : flash[s.symbol] === "down" ? "bg-red-200" : ""
-                }`}>₹{s.price}</td>
-                <td className="p-2 flex items-center gap-4">
-                  <button
-                    disabled={tradingSymbol === s.symbol}
-                    className={`px-4 py-2 rounded text-white ${
-                      !marketOpen || tradingSymbol === s.symbol
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-600 hover:bg-blue-700"
-                    }`}
-                    onClick={() => tradeStock(s.symbol, s.price, "buy")}
-                  >
-                    {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
-                  </button>
-
-                  <button
-                    disabled={!marketOpen || tradingSymbol === s.symbol}
-                    className={`px-4 py-2 rounded text-white ${
-                      !marketOpen || tradingSymbol === s.symbol
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-blue-600 hover:bg-blue-700"
-                    }`}
-                    onClick={() => tradeStock(s.symbol, s.price, "sell")}
-                  >
-                    {tradingSymbol === s.symbol ? "Processing..." : "Sell"}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p className="text-center text-gray-500">Loading market data...</p>
-      )}
-
-      <p className="mt-6 border px-3 py-2 rounded text-gray-300">Logged in as {email}</p>
     </div>
   );
 }

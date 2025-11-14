@@ -1,0 +1,12 @@
+ {/* Market Ticker Bar */}
+      {/* ✅ Market status banner (always visible) */}
+      {/* {!marketOpen ? (
+        <div className="bg-red-100 text-red-700 p-3 text-center rounded mb-4 font-medium flex gap-4 justify-center">
+          <div className="">🚫 Market Closed — Opens at 9:15 AM, Closes at 3:30 PM</div>
+          <MarketClock />
+        </div>
+      ) : (
+        <div className="bg-green-100 text-green-700 p-3 text-center rounded mb-4 font-medium">
+          ✅ Market Open — Trading Live
+        </div>
+      )} */}
