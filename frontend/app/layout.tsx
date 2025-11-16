@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ToastProvider from "../components/providers/ToastProvider";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { BalanceProvider } from "../components/providers/BalanceProvider";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,31 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tradesim",
+  title: "Tradesim - Trading Simulator",
   description: "Practice intraday & delivery trading with live market data",
+  keywords: ["Trade", "Paper Trading", "Trading Simulator", "Trading Learning", "Stock Trading", "Stock Game", "Stock Market Learning"],
+  authors: [{name: "Divyansh Gupta"}],
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`bg-[var(--bg)] text-[var(--text)]`}>
-        <ToastProvider /> {/* global toast */ }
-        <ThemeProvider attribute="class" defaultTheme="system">
-          <BalanceProvider> 
-
-            <Navbar />
-            <main className="pt-[72px]"> {/* keeps content below fixed navbar */}
-              {children}
-            </main>
-            <Footer />
-
-          </BalanceProvider>
-        </ThemeProvider>
+    <html lang="en"  suppressHydrationWarning>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased `}>
+        {children}
       </body>
     </html>
   );
-};
+}

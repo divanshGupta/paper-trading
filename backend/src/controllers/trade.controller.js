@@ -2,7 +2,6 @@ import { prisma } from "../utils/db.js";
 import { Prisma } from "@prisma/client";
 import { isMarketOpen } from "../utils/marketTimes.js";
 
-
 // BUY
 export const buyStock = async (req, res) => {
   try {

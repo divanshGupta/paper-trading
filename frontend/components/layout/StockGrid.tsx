@@ -1,9 +1,13 @@
 import React from 'react'
 import StockCard from '../dashboard/StockCard'
 import Link from 'next/link'
-import { ChevronRight } from 'lucide-react'
+import { useLivePrices } from '@/app/(main)/hooks/useLivePrices'
+import { StockCardSkeleton } from '../dashboard/StockCardSkeleton';
 
 export default function StockGrid() {
+  const { prices, bySymbol, movementArrow, flash } = useLivePrices();
+  const featuredStocks = ["TCS", "INFY", "RELIANCE", "HDFCBANK"];
+
   return (
     <div className='mb-6'>
         <h4 className='font-semibold text-xl mb-3'>Most traded stocks on Groww</h4>
@@ -15,19 +19,38 @@ export default function StockGrid() {
             lg:grid-cols-4 
             gap-4 mb-3
             ">
-            {/* Example stock cards */}
-            <StockCard symbol="TCS" price={3920} change={1.24} />  
-            <StockCard symbol="INFY" price={1476} change={-0.82} />
-            <StockCard symbol="RELIANCE" price={2540} change={0.45} />     
-            <StockCard symbol="HDFCBANK" price={1620} change={-0.35} />
+            {/* Stock cards */}
+
+            {/* skeleton cards */}
+            {prices.length === 0 &&
+              featuredStocks.map((s) => <StockCardSkeleton key={s} />)}
+
+            {/* real cards */}
+
+            {featuredStocks.map((sym) => {
+              const p = bySymbol(sym);
+              if (!p) return null;
+
+              return (
+                <StockCard
+                  key={sym}
+                  symbol={p.symbol}
+                  name={p.name ?? sym}
+                  price={p.price}
+                  previousClose={p.previousClose}
+                  movementArrow={movementArrow}
+                  flash={flash[p.symbol]}
+                />
+              );
+            })}
         </div>
         <Link 
         href="/" 
         className='text-blue-400 text-sm font-semibold inline-flex items-center justify-center'
         >
           {/* Wrap the text to ensure it's a solid element for Flexbox to align */}
-          <span className="**leading-none**">See more</span> 
-          <ChevronRight size={16} />
+          <span className="leading-none mr-2">See more</span> 
+          <span className="text-xl">›</span>
         </Link>
     </div>
   )

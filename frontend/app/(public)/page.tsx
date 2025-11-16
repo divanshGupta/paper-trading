@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { StockData } from "../types";
+import { StockData } from "@/types";
 import { socket } from "@/utils/socket";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";

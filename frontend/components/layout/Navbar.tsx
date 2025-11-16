@@ -1,17 +1,28 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { supabase } from '@/utils/supabaseClient';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { Menu, X, Bell, Search, Sun, Moon } from 'lucide-react';
+import { Menu, X, Bell, Search, Sun, Moon, MoonIcon } from 'lucide-react';
 import TickerBar from '../dashboard/StockTicker';
+import ProfileDropDown from '../ui/ProfileDropDown';
+import ThemeToggle from '../ui/ThemeToggle';
+
+type UserInfo = {
+  name: string;
+  email: string;
+}
 
 export default function Navbar() {
 
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [name, setName] = useState("User");
+  const [email, setEmail] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
 
   const navLinks = [
     { href: "/dashboard", label: "Explore" },
@@ -20,6 +31,25 @@ export default function Navbar() {
     { href: "/orders", label: "Orders" },
     { href: "/watchlist", label: "Watchlist" },
   ];
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+useEffect(() => {
+  async function loadUser() {
+    const { data } = await supabase.auth.getUser();
+
+    if (data.user) {
+      setName(data.user.user_metadata.full_name || "User");
+      setEmail(data.user.email!);
+    }
+  }
+
+  loadUser();
+}, []);
+
+
 
  return (
     <nav className="fixed top-0 left-0  w-full z-50 bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md">
@@ -67,11 +97,18 @@ export default function Navbar() {
 
           {/* Theme toggle */}
           <button
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-          >
-            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+              >
+        {/* 3. Conditional Rendering based on isMounted */}
+        {isMounted ? (
+          // Renders the correct icon after mounting and client theme is known
+          theme === "light" ? <MoonIcon size={18} /> : <Sun size={18} />
+        ) : (
+          // Renders a default icon or a neutral icon during SSR/hydration
+          <div style={{ width: 18, height: 18 }} /> // or maybe <MoonIcon size={18} />
+        )}
+      </button>
 
           {/* Notifications */}
           <button className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition relative">
@@ -82,15 +119,7 @@ export default function Navbar() {
           </button>
 
           {/* Avatar */}
-          <div className="w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-700 overflow-hidden cursor-pointer">
-            <Link href="/profile">
-              <img
-                src="https://i.pravatar.cc/300"
-                alt="user"
-                className="w-full h-full object-cover"
-              />
-            </Link>
-          </div>
+          <ProfileDropDown name={name} email={email} />
 
           {/* Mobile menu button */}
           <button
