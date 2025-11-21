@@ -10,3 +10,169 @@
           ✅ Market Open — Trading Live
         </div>
       )} */}
+
+export const getDayPnL = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // 1. Define "today start" in IST timezone (so trades match NSE/BSE)
+
+    const today = moment().tz("Asia/Kolkata").startOf("day");
+
+    // 2. Fetch holdings, price data, and full trade history IN PARALLEL
+    //    - Promise.all runs all DB queries at the same time → 3x faster
+
+    const [holdings, priceData, allTx] = await Promise.all([
+      prisma.holding.findMany({
+        where: { userId },
+        select: { symbol: true, quantity: true }
+      }),
+
+      prisma.price.findMany({
+        select: { symbol: true, price: true, prevClose: true }
+      }),
+
+      prisma.transaction.findMany({
+        where: { userId },
+        orderBy: { createdAt: "asc" },  // FIFO requires chronological ordering
+        select: {
+          symbol: true,
+          type: true,
+          price: true,
+          quantity: true,
+          createdAt: true
+        }
+      })
+    ]);
+
+
+
+    // 3. Convert price list to a map for fast lookup
+    //    priceMap["TCS"] = { current: 3920, prevClose: 3880 }
+
+    const priceMap = {};
+
+    for (const p of priceData) {
+      priceMap[p.symbol] = {
+        current: Number(p.price),
+        prevClose: Number(p.prevClose)
+      };
+    }
+
+    // 4. UNREALIZED PnL for today
+    //
+    // Unrealized Day PnL = (LastTradedPrice - PreviousClose) * Quantity
+    //
+    // This is the change in portfolio value DURING TODAY.
+
+    let unrealizedPnL = 0;
+
+    for (const h of holdings) {
+      const data = priceMap[h.symbol];
+      if (!data) continue; // skip if no price data (rare)
+
+      unrealizedPnL += (data.current - data.prevClose) * h.quantity;
+    }
+
+    // 5. REALIZED PnL for today's SELL trades (using FIFO)
+    //
+    // To compute realized today, we MUST match today's sells against
+    // ALL past buy lots in order.
+    //
+    // So we:
+    //    - iterate ALL transactions (not just today's)
+    //    - build FIFO buy queues
+    //    - when SELL happens, match + compute PnL
+    //    - ONLY add to realizedToday IF the sell is from today
+
+    const buyQueue = {}; // symbol → [{ price, qty }]
+    let realizedToday = 0;
+    let anySellToday = false; // track if user sold today
+
+    for (const tx of allTx) {
+      const { symbol, type, price, quantity, createdAt } = tx;
+
+      if (!buyQueue[symbol]) buyQueue[symbol] = [];
+
+      const sellPrice = Number(price);
+
+      // --------------------------- BUY ---------------------------
+      if (type === "BUY") {
+        buyQueue[symbol].push({
+          price: sellPrice,
+          qty: quantity
+        });
+        continue;
+      }
+
+      // --------------------------- SELL ---------------------------
+      if (type === "SELL") {
+        let qtyToSell = quantity;
+
+        // Check if this SELL transaction is from today
+        const isToday = moment(createdAt)
+          .tz("Asia/Kolkata")
+          .isSame(today, "day");
+
+        if (isToday) anySellToday = true;
+
+        // FIFO matching loop
+        while (qtyToSell > 0 && buyQueue[symbol].length > 0) {
+          const lot = buyQueue[symbol][0]; // earliest buy lot
+          const matchQty = Math.min(lot.qty, qtyToSell);
+
+          // FIFO PnL for this portion
+          const pnl = (sellPrice - lot.price) * matchQty;
+
+          // Add pnl ONLY if this sell happened today
+          if (isToday) realizedToday += pnl;
+
+          // Reduce quantities
+          lot.qty -= matchQty;
+          qtyToSell -= matchQty;
+
+          // Remove buy lot if fully consumed
+          if (lot.qty === 0) buyQueue[symbol].shift();
+        }
+
+        // Edge case: user sells more than they own
+        if (qtyToSell > 0) {
+          // In a real system, this would be rejected.
+          // Here we simply discard unmatched qty.
+          qtyToSell = 0;
+        }
+      }
+    }
+
+    // 6. If NO sells happened today:
+    //    RealizedToday = 0
+    //    DayPnL = unrealized only
+
+    if (!anySellToday) {
+      return res.json({
+        unrealizedPnL: Number(unrealizedPnL.toFixed(2)),
+        realizedToday: 0,
+        dayPnL: Number(unrealizedPnL.toFixed(2))
+      });
+    }
+
+    // 7. Final Day PnL
+    //
+    // DayPnL = Unrealized PnL + RealizedToday
+
+    const dayPnL = unrealizedPnL + realizedToday;
+
+        console.log(allTx, "this is debuggin log");
+    console.log("Tx:", createdAt, "IST:", moment(createdAt).tz("Asia/Kolkata").format());
+console.log("isToday:", isToday);
+
+    return res.json({
+      unrealizedPnL: Number(unrealizedPnL.toFixed(2)),
+      realizedToday: Number(realizedToday.toFixed(2)),
+      dayPnL: Number(dayPnL.toFixed(2))
+    });
+
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};

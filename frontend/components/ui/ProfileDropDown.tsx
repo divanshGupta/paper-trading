@@ -3,17 +3,24 @@
 import { useState, useRef, useEffect } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useApp } from "@/components/providers/AppProvider";
 
-type ProfileMenuProps = {
-  name: string;
-  email: string;
-};
+// type ProfileMenuProps = {
+//   name: string;
+//   email: string;
+// };
 
-export default function ProfileMenu({ name, email }: ProfileMenuProps) {
+export default function ProfileMenu() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  const { state, refresh } = useApp();
+  const { profile, loading } = state;
+  const name = profile?.name || "User";
+  const email = profile?.email || "";
+  
   // Handle outside click
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -63,13 +70,13 @@ export default function ProfileMenu({ name, email }: ProfileMenuProps) {
           <div className="mb-4">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-[var(--text)] font-semibold text-lg">{name}</p>
+                <Link href="/profile" className="text-[var(--text)] font-semibold text-lg">{name}</Link>
                 <p className="text-[var(--text-secondary)] text-sm">{email}</p>
               </div>
 
-              <button className="text-[var(--text-secondary)] hover:text-[var(--text)]">
+              <Link href="/profile" className="text-[var(--text-secondary)] hover:text-[var(--text)]">
                 ⚙️
-              </button>
+              </Link>
             </div>
           </div>
 

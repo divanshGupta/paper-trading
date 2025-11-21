@@ -2,56 +2,55 @@
 
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import { toast } from "sonner";
-import { useBalance } from "@/components/providers/BalanceProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
-import Sidebar from "@/components/layout/Sidebar";
-import StockGrid from "@/components/layout/StockGrid";
-import StockTable from "@/components/layout/StockTable";
+import Sidebar from "@/components/dashboard/Sidebar";
+import StockGrid from "@/components/dashboard/StockGrid";
+import StockTable from "@/components/dashboard/StockTable";
+import { ArrowDown, ArrowUp } from "lucide-react";
+import StocksList from "../../../components/stocks/StocksList";
 import Link from "next/link";
+import StockFilterTabs from "@/components/stocks/StockFilterTab";
 
 export default function Dashboard() {
-  // const { balance, refreshBalance } = useBalance();
-  // const [loading, setLoading] = useState(true); // 👈 New loading state
-  const { prices, flash, bySymbol, movementArrow } = useLivePrices();
+  const { prices, bySymbol, flash } = useLivePrices();
   const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
-  // const [holdings, setHoldings] = useState<any[]>([]);
+  // this state is for gainer/loser filter
+  const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
 
   const { state, refresh } = useApp();
-  const { profile, holdings, loading } = state;
-
-  const { marketOpen } = getMarketStatusIST();
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   const fetchPortfolio = async () => {
-  //     const session = await supabase.auth.getSession();
-  //     const token = session.data.session?.access_token;
-
-  //     if (!token) return router.replace("/login");
-
-  //     const res = await fetch("http://localhost:5500/api/v1/portfolio", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     const json = await res.json();
-  //     setHoldings(json.holdings);
-  //   };
-
-  //   fetchPortfolio();
-  // }, [router]);
+  const { profile, holdings, loading, realizedToday } = state
 
   const totalValue = holdings.reduce((acc, h) => {
     const p = bySymbol(h.symbol)?.price ?? 0;
     return acc + p * h.quantity;
   }, 0);
 
+  const unrealizedPnL = useMemo(() => {
+    return holdings.reduce((acc, h) => {
+      const p = bySymbol(h.symbol);
+      if (!p) return acc;
+      const diff = p.price - p.previousClose;
+      return acc + diff * h.quantity;
+    }, 0);
+  }, [holdings, prices]);
+
+  const dayPnl = unrealizedPnL + (realizedToday ?? 0);
+
+  const { marketOpen } = getMarketStatusIST();
+
+  const router = useRouter();
+
+  // 🔥 Your movementArrow function lives HERE
+  const movementArrow = (symbol: string) => {
+    const f = flash[symbol];
+    if (f === "up") return <ArrowUp size={18} className="text-green-500" />;
+    if (f === "down") return <ArrowDown size={18} className="text-red-500" />;
+    return null;
+  };
 
   // buy / sell function
   const tradeStock = async (symbol: string, price: number, action: "buy" | "sell") => {
@@ -100,8 +99,29 @@ export default function Dashboard() {
     }
   };
 
+  const dashboardStocks = useMemo(() => {
+    let arr = prices.map((s) => ({
+      ...s,
+      changePercent:
+        s.previousClose > 0
+          ? ((s.price - s.previousClose) / s.previousClose) * 100
+          : 0,
+    }));
+
+    if (filter === "gainers") {
+      return [...arr].sort((a, b) => b.changePercent - a.changePercent).slice(0, 6);
+    }
+
+    if (filter === "losers") {
+      return [...arr].sort((a, b) => a.changePercent - b.changePercent).slice(0, 6);
+    }
+
+    return arr.slice(0, 6);
+  }, [prices, filter]);
+
+
   return (
-    <div className="pt-20">
+    <div className="pt-10">
       <div className="max-w-7xl mx-auto flex gap-6">
         {/* Left content */}
         <div className="flex-1 min-w-0">
@@ -109,172 +129,35 @@ export default function Dashboard() {
           <StockGrid />
 
           {/* Gainers / Losers / Trending */}
-          <StockTable />
+          <div className="flex gap-3 mb-4">
+            <button onClick={() => setFilter("all")}>All</button>
+            <button onClick={() => setFilter("gainers")}>Top Gainers</button>
+            <button onClick={() => setFilter("losers")}>Top Losers</button>
+          </div>
 
           {/* ✅ Show table if prices available */}
-          {prices.length > 0 ? (
-            <div className="w-full">
+    
+          <StocksList 
+            prices={dashboardStocks}
+            flash={flash}
+            marketOpen={marketOpen}
+            tradingSymbol={tradingSymbol}
+            onBuy={(symbol, price) => tradeStock(symbol, price, "buy")}
+            onSell={(symbol, price) => tradeStock(symbol, price, "sell")}
+          />
 
-              {/* Desktop Table */}
-              <div className="hidden md:block overflow-hidden rounded-xl shadow-card dark:bg-dark-surface">
-                <table className="w-full border border-gray-200 mb-3">
-                  <thead>
-                    <tr className="bg-gray-200 dark:bg-gray-800 text-left text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                      <th className="p-3">Symbol</th>
-                      <th className="p-3">Company</th>
-                      <th className="p-3">Price</th>
-                      <th className="p-3">Action</th>
-                    </tr>
-                  </thead>
+          <Link
+              href="/stocks"
+              className="text-blue-400 text-sm font-semibold inline-flex items-center justify-center mt-3 mb-4"
+              >
+              <span className="mr-2">See more</span>
+              <span className="text-xl">›</span>
+          </Link>
 
-                  <tbody>
-                    {prices.map((s) => {
-                      const isUp = flash[s.symbol] === "up";
-                      const isDown = flash[s.symbol] === "down";
-
-                      return (
-                        <tr
-                          key={s.symbol}
-                          className="border-t border-gray-200 dark:border-gray-700 text-sm"
-                        >
-                          <td className="p-3 font-semibold text-light-text dark:text-dark-text">
-                            {s.symbol}
-                          </td>
-
-                          <td className="p-3 text-light-text-secondary dark:text-dark-text-secondary">
-                            {s.name}
-                          </td>
-
-                          <td
-                            className={`p-3 font-medium transition-all ${
-                              isUp
-                                ? "bg-green-100 dark:bg-green-900 text-positive"
-                                : isDown
-                                ? "bg-red-100 dark:bg-red-900 text-negative"
-                                : "text-light-text dark:text-dark-text"
-                            }`}
-                          >
-                            ₹{s.price} {movementArrow(s.symbol)}
-                          </td>
-
-                          <td className="p-3 flex items-center gap-3">
-                            {/* BUY BUTTON */}
-                            <button
-                              disabled={tradingSymbol === s.symbol || !marketOpen}
-                              onClick={() => tradeStock(s.symbol, s.price, "buy")}
-                              className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
-                                !marketOpen || tradingSymbol === s.symbol
-                                  ? "bg-gray-400 cursor-not-allowed"
-                                  : "bg-brand hover:bg-brand-dark"
-                              }`}
-                            >
-                              {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
-                            </button>
-
-                            {/* SELL BUTTON */}
-                            <button
-                              disabled={tradingSymbol === s.symbol || !marketOpen}
-                              onClick={() => tradeStock(s.symbol, s.price, "sell")}
-                              className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
-                                !marketOpen || tradingSymbol === s.symbol
-                                  ? "bg-gray-400 cursor-not-allowed"
-                                  : "bg-red-500 hover:bg-red-600"
-                              }`}
-                            >
-                              {tradingSymbol === s.symbol ? "Processing..." : "Sell"}
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-
-                <Link 
-                  href="/" 
-                  className='text-blue-400 text-sm font-semibold inline-flex items-center justify-center'
-                  >
-                    {/* Wrap the text to ensure it's a solid element for Flexbox to align */}
-                    <span className="leading-none mr-2">See more</span> 
-                    <span className="text-xl">›</span>
-                </Link>
-              </div>
-
-              {/* Mobile Cards View */}
-              <div className="md:hidden flex flex-col gap-4">
-                {prices.map((s) => {
-                  const isUp = flash[s.symbol] === "up";
-                  const isDown = flash[s.symbol] === "down";
-
-                  return (
-                    <div
-                      key={s.symbol}
-                      className="
-                        rounded-xl p-4 shadow-card bg-light-surface dark:bg-dark-surface
-                        border border-gray-200 dark:border-gray-700
-                      "
-                    >
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="text-base font-semibold">{s.symbol}</p>
-                          <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                            {s.name}
-                          </p>
-                        </div>
-
-                        <div
-                          className={`
-                            px-3 py-2 rounded-md text-sm font-semibold transition-all
-                            ${
-                              isUp
-                                ? "bg-green-100 dark:bg-green-900 text-positive"
-                                : isDown
-                                ? "bg-red-100 dark:bg-red-900 text-negative"
-                                : "text-light-text dark:text-dark-text"
-                            }
-                          `}
-                        >
-                          ₹{s.price}
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4 mt-4">
-                        <button
-                          disabled={tradingSymbol === s.symbol || !marketOpen}
-                          onClick={() => tradeStock(s.symbol, s.price, "buy")}
-                          className={`flex-1 px-4 py-2 rounded-md text-white font-medium ${
-                            !marketOpen || tradingSymbol === s.symbol
-                              ? "bg-gray-400 cursor-not-allowed"
-                              : "bg-brand hover:bg-brand-dark"
-                          }`}
-                        >
-                          {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
-                        </button>
-
-                        <button
-                          disabled={tradingSymbol === s.symbol || !marketOpen}
-                          onClick={() => tradeStock(s.symbol, s.price, "sell")}
-                          className={`flex-1 px-4 py-2 rounded-md text-white font-medium ${
-                            !marketOpen || tradingSymbol === s.symbol
-                              ? "bg-gray-400 cursor-not-allowed"
-                              : "bg-red-500 hover:bg-red-600"
-                          }`}
-                        >
-                          {tradingSymbol === s.symbol ? "Processing..." : "Sell"}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ) : (
-            <p className="text-center text-gray-500">Loading market data...</p>
-          )}
         </div>
 
         {/* right content */}
-        <Sidebar balance={profile?.balance ?? 0} totalValue={totalValue} />
+        <Sidebar balance={profile?.balance ?? 0} totalValue={totalValue} dayPnl={dayPnl}/>
       </div>
     </div>
   );

@@ -1,31 +1,35 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/utils/supabaseClient';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { Menu, X, Bell, Search, Sun, Moon, MoonIcon } from 'lucide-react';
-import TickerBar from '../dashboard/StockTicker';
+import { Menu, X, Bell, Sun, MoonIcon } from 'lucide-react';
+// import TickerBar from '../dashboard/StockTicker';
 import ProfileDropDown from '../ui/ProfileDropDown';
 import ThemeToggle from '../ui/ThemeToggle';
+import StockSearch from '../stocks/StockSearch';
+import { useRouter } from 'next/navigation';
+import { useLivePrices } from '@/app/(main)/hooks/useLivePrices';
 
-type UserInfo = {
-  name: string;
-  email: string;
-}
+// type UserInfo = {
+//   name: string;
+//   email: string;
+// }
 
 export default function Navbar() {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
 
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [name, setName] = useState("User");
-  const [email, setEmail] = useState("");
   const [isMounted, setIsMounted] = useState(false);
 
+  const { prices } = useLivePrices();
+
   const navLinks = [
-    { href: "/dashboard", label: "Explore" },
+    { href: "/stocks", label: "Explore" },
     { href: "/portfolio", label: "Portfolio" },
     { href: "/realized-pnl", label: "Realized P&L" },
     { href: "/orders", label: "Orders" },
@@ -36,30 +40,15 @@ export default function Navbar() {
     setIsMounted(true);
   }, []);
 
-useEffect(() => {
-  async function loadUser() {
-    const { data } = await supabase.auth.getUser();
-
-    if (data.user) {
-      setName(data.user.user_metadata.full_name || "User");
-      setEmail(data.user.email!);
-    }
-  }
-
-  loadUser();
-}, []);
-
-
-
  return (
-    <nav className="fixed top-0 left-0  w-full z-50 bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md">
+    <nav className="fixed top-0 left-0  w-full z-50 bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md border-b border-gray-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between">
         
         {/* Left side */}
         <div className="flex items-center gap-10">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 ">
+          <Link href="/dashboard" className="flex items-center gap-2 ">
             <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-400 to-teal-500" />
             <span className="font-semibold text-xl">TradeSim</span>
           </Link>
@@ -86,14 +75,9 @@ useEffect(() => {
         <div className="flex items-center gap-4">
 
           {/* Search bar */}
-          <div className="hidden md:flex items-center gap-2 bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded-md">
-            <Search size={16} className="text-gray-500 dark:text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search stocks..."
-              className="bg-transparent focus:outline-none text-sm w-40 dark:text-gray-200"
-            />
-          </div>
+          <div className="hidden md:block">
+          <StockSearch value={search} onChange={setSearch} fullList={prices}/>
+        </div>
 
           {/* Theme toggle */}
           <button
@@ -119,7 +103,7 @@ useEffect(() => {
           </button>
 
           {/* Avatar */}
-          <ProfileDropDown name={name} email={email} />
+          <ProfileDropDown />
 
           {/* Mobile menu button */}
           <button
@@ -130,7 +114,9 @@ useEffect(() => {
           </button>
         </div>
       </div>
-      <TickerBar />
+
+      {/* we will implement ticker bar when real market data feed arrive */}
+      {/* <TickerBar /> */}
 
       {/* Mobile Menu */}
       {mobileOpen && (

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import type { AppState, UserProfile, Holding, Position } from "@/types/index";
+import type { AppState } from "@/types";
 
 const AppContext = createContext<{
   state: AppState;
@@ -11,6 +11,8 @@ const AppContext = createContext<{
   state: {
     profile: null,
     holdings: [],
+    dayPnl: 0,
+    realizedToday: 0,
     loading: true,
   },
   refresh: async () => {},
@@ -20,66 +22,70 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AppState>({
     profile: null,
     holdings: [],
+    dayPnl: 0,
+    realizedToday: 0,
     loading: true,
   });
 
   const fetchAll = async () => {
-    // Start loading
     setState((s) => ({ ...s, loading: true }));
 
-    // 🔥 1. Check authentication
     const {
       data: { session },
     } = await supabase.auth.getSession();
 
     const token = session?.access_token;
 
-    // ❗ Not authenticated → do NOT fetch anything
     if (!token) {
-      console.log("No valid session — skipping all API fetches");
       setState({
         profile: null,
         holdings: [],
+        dayPnl: 0,
+        realizedToday: 0,
         loading: false,
       });
       return;
     }
 
-    // 🔥 2. Fetch all in parallel
     try {
-      const [profileRes, holdingsRes] = await Promise.all([
+      // Fetch profile, holdings, and realizedToday
+      const [profileRes, holdingsRes, realizedRes] = await Promise.all([
         fetch("http://localhost:5500/api/v1/users/profile", {
           headers: { Authorization: `Bearer ${token}` },
         }),
+
         fetch("http://localhost:5500/api/v1/portfolio", {
+          headers: { Authorization: `Bearer ${token}` },
+        }),
+
+        fetch("http://localhost:5500/api/v1/transactions/realized-today", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
 
-      const [profileData, holdingsData] = await Promise.all([
+      const [profileData, holdingsData, realizedData] = await Promise.all([
         profileRes.json(),
         holdingsRes.json(),
+        realizedRes.json(),
       ]);
 
-      // 🔥 3. Update state
-      setState({
-        profile: profileData.user,
+      setState((prev) => ({
+        ...prev,
+        profile: profileData.user ?? null,
         holdings: holdingsData.holdings ?? [],
+        realizedToday: realizedData.realizedToday ?? 0,
         loading: false,
-      });
+      }));
     } catch (err) {
       console.error("AppProvider fetch error:", err);
 
-      // Fail safe → no data, but app won't crash
       setState((s) => ({ ...s, loading: false }));
     }
   };
 
   useEffect(() => {
-    // First load
     fetchAll();
 
-    // 🔥 4. React to login/logout
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
       fetchAll();
     });

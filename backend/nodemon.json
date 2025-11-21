@@ -1,0 +1,20 @@
+{
+  "watch": ["src"],
+  "ext": "js,json",
+  "ignore": [
+    "dist",
+    "node_modules",
+    "logs",
+    "data",
+    "*.log",
+    "**/*.json",
+    "src/storage/*",
+    "src/storage/**/*",
+    "../frontend",
+    "../frontend/**",
+    "../frontend/.next/**",
+    ".next",
+    ".next/**"
+  ],
+  "exec": "node -r dotenv/config src/server.js"
+}

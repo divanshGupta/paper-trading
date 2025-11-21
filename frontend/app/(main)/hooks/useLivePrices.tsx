@@ -3,106 +3,130 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { supabase } from "@/utils/supabaseClient";
-import { ArrowUp, ArrowDown } from "lucide-react";
-
-type Price = {
-  symbol: string;
-  name?: string;
-  price: number;
-  previousClose: number;
-  todayOpen: number;
-};
+import { Price, Candle, PricePoint, FlashState } from "@/types";
 
 export function useLivePrices() {
   const [prices, setPrices] = useState<Price[]>([]);
+  const [flash, setFlash] = useState<FlashState>({});
   const socketRef = useRef<Socket | null>(null);
 
-  // flash effect for red/green blinking on price movement
-  const [flash, setFlash] = useState<{ [symbol: string]: "up" | "down" | null }>({});
+  // -----------------------------
+  // Helper: convert intraday OHLC → sparkline [{time, value}]
+  // -----------------------------
+  const buildSparkline = (intraday: Candle[], price: number) => {
+    const points = intraday.map((c) => ({
+      time: Math.floor(c.tStart / 1000),
+      value: c.close,
+    }));
 
-  // fast lookup map
+    // Add latest tick price as last “live point”
+    if (points.length > 0) {
+      points.push({
+        time: Math.floor(Date.now() / 1000),
+        value: price,
+      });
+    }
+
+    return points.slice(-120); // keep last 120 points
+  };
+
+  // -----------------------------
+  // Quick map for O(log n) lookup
+  // -----------------------------
   const map = useMemo(() => {
     const m = new Map<string, Price>();
     for (const p of prices) m.set(p.symbol, p);
     return m;
   }, [prices]);
 
+  // -----------------------------
+  // Socket Setup
+  // -----------------------------
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
-      const { data } = await supabase.auth.getSession();
-      const token = data.session?.access_token;
-      if (!token) return; // not logged in
+      const session = await supabase.auth.getSession();
+      const token = session.data.session?.access_token;
+      if (!token) return;
 
-      const s = io("http://localhost:5500", {
+      const socket = io("http://localhost:5500", {
         transports: ["websocket"],
         auth: { token },
       });
-      socketRef.current = s;
 
-      s.on("connect", () => {
-        console.log("socket connected", s.id);
+      socketRef.current = socket;
+
+      socket.on("connect", () => {
+        console.log("socket connected", socket.id);
       });
 
-      /**
-       * 🔥 1) FULL SNAPSHOT (includes previousClose & todayOpen)
-       */
-      s.on("price:snapshot", (arr: Price[]) => {
-        if (!cancelled) setPrices(arr);
+      // -----------------------------
+      // INITIAL SNAPSHOT
+      // -----------------------------
+      socket.on("price:snapshot", (snapshot: Price[]) => {
+        if (cancelled) return;
+
+        console.log("📥 snapshot received", snapshot);
+
+        const flashInit: FlashState = {};
+        snapshot.forEach((p) => (flashInit[p.symbol] = null));
+
+        // attach sparkline
+        const enriched = snapshot.map((p) => ({
+          ...p,
+          sparkline: buildSparkline(p.intraday ?? [], p.price),
+        })) as any;
+
+        setFlash(flashInit);
+        setPrices(enriched);
       });
 
-      /**
-       * 🔥 2) TICK UPDATES (just changed symbols)
-       *     Now includes previousClose & todayOpen
-       */
-      s.on(
-        "price:ticks",
-        (
-          diffs: Array<{
-            symbol: string;
-            price: number;
-            previousClose: number;
-            todayOpen: number;
-          }>
-        ) => {
-          if (cancelled) return;
+      // -----------------------------
+      // REAL-TIME TICKS
+      // -----------------------------
+      socket.on("price:ticks", (diffs) => {
+        if (cancelled) return;
 
-          setPrices((prev) =>
-            prev.map((p) => {
-              const found = diffs.find((d) => d.symbol === p.symbol);
-              if (!found) return p;
+        setPrices((prev) => {
+          const updated = [...prev];
 
-              // detect direction (for flashing)
-              const direction =
-                found.price > p.price
-                  ? "up"
-                  : found.price < p.price
-                  ? "down"
-                  : null;
+          diffs.forEach((diff:any) => {
+            const idx = updated.findIndex((p) => p.symbol === diff.symbol);
+            if (idx === -1) return;
 
-              if (direction) {
-                setFlash((f) => ({ ...f, [p.symbol]: direction }));
+            const before = updated[idx].price;
+            const after = diff.price;
 
-                setTimeout(() => {
-                  setFlash((f) => ({ ...f, [p.symbol]: null }));
-                }, 300);
-              }
+            // flash direction
+            let move: "up" | "down" | null = null;
+            if (after > before) move = "up";
+            else if (after < before) move = "down";
 
-              return {
-                ...p,
-                price: found.price,
-                previousClose: found.previousClose,
-                todayOpen: found.todayOpen,
-              };
-            })
-          );
-        }
-      );
+            if (move) {
+              setFlash((f) => ({ ...f, [diff.symbol]: move }));
+              setTimeout(
+                () => setFlash((f) => ({ ...f, [diff.symbol]: null })),
+                300
+              );
+            }
 
-      s.on("disconnect", () => {
-        console.log("socket disconnected");
+            // update object + sparkline
+            updated[idx] = {
+              ...updated[idx],
+              ...diff,
+              sparkline: buildSparkline(
+                updated[idx].intraday ?? [],
+                diff.price
+              ),
+            };
+          });
+
+          return updated;
+        });
       });
+
+      socket.on("disconnect", () => console.log("❌ socket disconnected"));
     })();
 
     return () => {
@@ -112,24 +136,9 @@ export function useLivePrices() {
     };
   }, []);
 
-  /**
-   * 🔥  Compute arrow movement for UI
-   *  Example usage:
-   *    const arrow = movementArrow(symbol)
-   */
-  const movementArrow = (symbol: string) => {
-    const dir = flash[symbol];
-
-    if (dir === "up") return <ArrowUp size={14} className="text-green-500" />;
-    if (dir === "down") return <ArrowDown size={14} className="text-red-500" />;
-
-    return null;
-  };
-
   return {
     prices,
     flash,
     bySymbol: (sym: string) => map.get(sym) || null,
-    movementArrow,
   };
 }

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import { toast } from "sonner";
-import SellModal from "@/components/SellModal";
+import SellModal from "@/components/trade/SellModal";
 
 export default function PortfolioPage() {
   const router = useRouter();
@@ -46,7 +46,7 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="p-8">
+    <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold mb-2">Your Portfolio</h1>
 
       <p className="mb-6 text-lg font-semibold">

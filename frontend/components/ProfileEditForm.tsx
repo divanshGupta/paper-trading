@@ -2,42 +2,55 @@
 
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import { toast } from "sonner";
 
-interface ProfileData {
-  name?: string;
-  phone?: string;
-  dob?: string;
-  gender?: string;
-  address?: string;
-  fatherName?: string;
-}
-
-interface Props {
-  profile: ProfileData;
-  onSave: (updated: ProfileData) => void;
+interface ProfileEditFormProps {
+  profile: any;
+  onSave: (updated: any) => void;
   onCancel: () => void;
 }
 
-export default function ProfileEditForm({ profile, onSave, onCancel }: Props) {
-  const [formData, setFormData] = useState<ProfileData>(profile);
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+export default function ProfileEditForm({
+  profile,
+  onSave,
+  onCancel,
+}: ProfileEditFormProps) {
+  const [form, setForm] = useState({
+    name: profile.name || "",
+    phone: profile.phone || "",
+    gender: profile.gender || "",
+    address: profile.address || "",
+    fatherName: profile.fatherName || "",
+    dob: profile.dob ? profile.dob.substring(0, 10) : "",
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (field: string, value: string) => {
+    setForm({ ...form, [field]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setLoading(true);
-    setMessage("");
+    setError("");
 
     try {
+      const { name, phone } = form;
+
+      if (!name.trim()) {
+        setError("Name cannot be empty");
+        setLoading(false);
+        return;
+      }
+
+      if (phone && phone.length !== 10) {
+        setError("Phone number must be 10 digits");
+        setLoading(false);
+        return;
+      }
+
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
-      if (!token) throw new Error("User not logged in");
 
       const res = await fetch("http://localhost:5500/api/v1/users/profile", {
         method: "PUT",
@@ -45,107 +58,144 @@ export default function ProfileEditForm({ profile, onSave, onCancel }: Props) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(form),
       });
 
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || "Failed to update profile");
 
-      toast.success("Profile updated Successfully!");
-    //   setMessage("✅ Profile updated successfully!");
       onSave(json.user);
-    } catch (err: any) {
-      console.error("Update error:", err);
-
-      toast.error(err.message || "Something went wrong")
-    //   setMessage("❌ " + err.message);
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-4 bg-white text-gray-700 border rounded-xl shadow p-6 max-w-md mx-auto"
-    >
+    <div>
       <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
 
-      <input
-        type="text"
-        name="name"
-        placeholder="Full Name"
-        value={formData.name || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded-md"
-      />
+      {/* Error message */}
+      {error && (
+        <div className="mb-3 p-2 rounded bg-red-100 text-red-700 text-sm">
+          {error}
+        </div>
+      )}
 
-      <input
-        type="tel"
-        name="phone"
-        placeholder="Phone Number"
-        value={formData.phone || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded-md"
-      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
 
-      <input
-        type="date"
-        name="dob"
-        value={formData.dob || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded-md"
-      />
+        {/* Name */}
+        <Field
+          label="Full Name"
+          value={form.name}
+          onChange={(v) => handleChange("name", v)}
+          required
+        />
 
-      <select
-        name="gender"
-        value={formData.gender || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded-md"
-      >
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
+        {/* Phone */}
+        <Field
+          label="Phone"
+          value={form.phone}
+          onChange={(v) => handleChange("phone", v)}
+          placeholder="10-digit number"
+        />
 
-      <input
-        type="text"
-        name="fatherName"
-        placeholder="Father's Name"
-        value={formData.fatherName || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded-md"
-      />
+        {/* Gender */}
+        <div className="flex flex-col">
+          <label className="text-sm font-medium mb-1">Gender</label>
+          <select
+            value={form.gender}
+            onChange={(e) => handleChange("gender", e.target.value)}
+            className="border rounded-lg px-3 py-2"
+          >
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
-      <input
-      type="text"
-        name="address"
-        placeholder="Address"
-        value={formData.address || ""}
-        onChange={handleChange}
-        className="w-full border px-3 py-2 rounded-md"
-      />
+        {/* DOB */}
+        <Field
+          label="Date of Birth"
+          type="date"
+          value={form.dob}
+          onChange={(v) => handleChange("dob", v)}
+        />
 
-      <div className="flex justify-between items-center">
+        {/* Address (full width) */}
+        <div className="md:col-span-2">
+          <Field
+            label="Address"
+            value={form.address}
+            onChange={(v) => handleChange("address", v)}
+          />
+        </div>
+
+        {/* Father's Name */}
+        <Field
+          label="Father's Name"
+          value={form.fatherName}
+          onChange={(v) => handleChange("fatherName", v)}
+        />
+      </div>
+
+      {/* Buttons */}
+      <div className="flex justify-end gap-3 mt-4">
         <button
-          type="button"
           onClick={onCancel}
-          className="text-gray-600 underline"
+          className="px-5 py-2 rounded-lg border hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           Cancel
         </button>
 
         <button
-          type="submit"
+          onClick={handleSubmit}
           disabled={loading}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:opacity-50"
+          className={`px-5 py-2 rounded-lg text-white font-semibold ${
+            loading
+              ? "bg-blue-400"
+              : "bg-blue-600 hover:bg-blue-700"
+          }`}
         >
           {loading ? "Saving..." : "Save Changes"}
         </button>
       </div>
+    </div>
+  );
+}
 
-      {message && <p className="text-center text-sm mt-3">{message}</p>}
-    </form>
+/* ----------------------------------------
+   REUSABLE FIELD COMPONENT
+---------------------------------------- */
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+  required = false,
+  placeholder = "",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+}) {
+  return (
+    <div className="flex flex-col">
+      <label className="text-sm font-medium mb-1">
+        {label} {required && <span className="text-red-500">*</span>}
+      </label>
+      <input
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        className="border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+      />
+    </div>
   );
 }

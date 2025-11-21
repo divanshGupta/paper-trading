@@ -76,48 +76,40 @@ export const getProfile = async (req, res) => {
 // UPDATE profile
 export const updateProfile = async (req, res) => {
   try {
-    const supabaseId = req.user.id; // ✅ Correct property from middleware
+    const supabaseId = req.user.id; 
     const data = req.body;
 
     const allowedFields = [
-      "name", "phone", "dob", "gender", "address", "fatherName"
+      "name",
+      "phone",
+      "dob",
+      "gender",
+      "address",
+      "fatherName"
     ];
 
-    // Filter only allowed fields
     const updateData = Object.fromEntries(
       Object.entries(data).filter(([key]) => allowedFields.includes(key))
     );
 
-    // Convert date string to Date object (if present)
     if (updateData.dob) {
       updateData.dob = new Date(updateData.dob);
     }
 
-    const updated = await prisma.user.update({
+    const updatedUser = await prisma.user.update({
       where: { supabaseId },
       data: updateData,
     });
 
-    if (!updated) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
     return res.json({
       success: true,
-      user: {
-        name: updated.name,
-        email: updated.email,
-        phone: updated.phone,
-        dob: updated.dob,
-        gender: updated.gender,
-        address: updated.address,
-        fatherName: updated.fatherName,
-        balance: updated.balance,
-      },
+      user: updatedUser
     });
+
   } catch (err) {
     console.error("Profile update error:", err);
-    res.status(500).json({ error: "Failed to update profile" });
+    return res.status(500).json({ error: "Failed to update profile" });
   }
 };
+
 

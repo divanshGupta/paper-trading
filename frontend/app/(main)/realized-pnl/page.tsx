@@ -2,16 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-
-interface RealizedRow {
-  symbol: string;
-  avgBuy: string;
-  avgSell: string;
-  buyTrades: number;
-  sellTrades: number;
-  realizedPnL: string;
-  pnlPercent: string;
-}
+import { RealizedRow } from "@/types";
 
 export default function RealizedPnLPage() {
   const [rows, setRows] = useState<RealizedRow[]>([]);
@@ -29,10 +20,10 @@ export default function RealizedPnLPage() {
     fetchPnL();
   }, []);
 
-  const totalPnL = rows.reduce((sum, r) => sum + parseFloat(r.realizedPnL), 0);
+  const totalPnL = rows.reduce((sum, r) => sum + (r.realizedPnL), 0);
 
   return (
-    <div className="p-8">
+    <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Realized Profit & Loss</h1>
 
       <div className="flex justify-between mb-4">
@@ -63,21 +54,17 @@ export default function RealizedPnLPage() {
             {rows.map((r) => (
               <tr key={r.symbol} className="border-b transition">
                 <td className="p-2 font-semibold">{r.symbol}</td>
-                <td className="p-2">{r.buyTrades}</td>
-                <td className="p-2">{r.sellTrades}</td>
+                <td className="p-2">{r.buyQty}</td>
+                <td className="p-2">{r.sellQty}</td>
                 <td className="p-2">₹{r.avgBuy}</td>
                 <td className="p-2">₹{r.avgSell}</td>
                 <td
-                  className={`p-2 font-bold ${
-                    parseFloat(r.realizedPnL) >= 0 ? "text-green-600" : "text-red-600"
-                  }`}
+                  className={`p-2 font-bold ${(r.realizedPnL) >= 0 ? "text-green-600" : "text-red-600"}`}
                 >
                   ₹{r.realizedPnL}
                 </td>
                 <td
-                  className={`p-2 font-bold ${
-                    parseFloat(r.pnlPercent) >= 0 ? "text-green-600" : "text-red-600"
-                  }`}
+                  className={`p-2 font-bold ${(r.pnlPercent) >= 0 ? "text-green-600" : "text-red-600"}`}
                 >
                   {r.pnlPercent}%
                 </td>

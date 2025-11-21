@@ -49,7 +49,7 @@ export default function TransactionsPage() {
   }, [page, filter]); // 👈 refetch when page or filter changes
 
   return (
-    <div className="p-8">
+    <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Order History</h1>
 

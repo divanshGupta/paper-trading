@@ -2,7 +2,7 @@ import { prisma } from "../utils/db.js";
 import { Prisma } from "@prisma/client";
 import { isMarketOpen } from "../utils/marketTimes.js";
 
-// BUY
+// BUY stock
 export const buyStock = async (req, res) => {
   try {
 
@@ -17,6 +17,8 @@ export const buyStock = async (req, res) => {
     }
     const userId = req.user.id;
     const totalCost = price * quantity;
+    //log for debug
+    console.log("Authenticated user:", req.user);
 
     await prisma.$transaction(async (tx) => {
       const user = await tx.user.findUnique({ where: { supabaseId: userId } });
@@ -83,6 +85,8 @@ export const sellStock = async (req, res) => {
 
     const { symbol, quantity } = req.body;
     const userId = req.user.id;
+    //log for debug
+    console.log("Authenticated user:", req.user);
 
     if (!symbol || !quantity || quantity <= 0) {
       return res.status(400).json({ message: "Valid symbol and quantity required" });
@@ -155,7 +159,7 @@ export const sellStock = async (req, res) => {
   }
 };
 
-// SQUARE OFF
+// SQUARE-OFF stock
 export const squaredOffPosition = async (req, res) => {
   try {
 
@@ -169,6 +173,9 @@ export const squaredOffPosition = async (req, res) => {
       return res.status(400).json({ message: "Valid symbol & price required" });
     }
     const userId = req.user.id;
+    //log for debug
+    console.log("Authenticated user:", req.user);
+
 
     await prisma.$transaction(async (tx) => {
       const holding = await tx.portfolio.findFirst({ where: { userId, symbol } });
@@ -210,7 +217,6 @@ export const squaredOffPosition = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 // import { quartersInYear } from "date-fns/constants";
 // import { prisma } from "../utils/db.js";
