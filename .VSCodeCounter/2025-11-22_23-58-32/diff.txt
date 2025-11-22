@@ -1,0 +1,92 @@
+Date : 2025-11-22 23:58:32
+Directory : c:\Users\divya\trading-simulator\frontend
+Total : 36 files,  8394 codes, 162 comments, 329 blanks, all 8885 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          2 |      7,048 |          0 |          2 |      7,050 |
+| TypeScript JSX     |         16 |      1,022 |        102 |        230 |      1,354 |
+| TypeScript         |          6 |        215 |         53 |         63 |        331 |
+| JSON with Comments |          1 |         27 |          0 |          1 |         28 |
+| JavaScript         |          2 |         25 |          0 |          7 |         32 |
+| Markdown           |          1 |         23 |          0 |         14 |         37 |
+| PostCSS            |          2 |         20 |          2 |          5 |         27 |
+| Docker             |          1 |          9 |          5 |          7 |         21 |
+| XML                |          5 |          5 |          0 |          0 |          5 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                             |         36 |      8,394 |        162 |        329 |      8,885 |
+| . (Files)                                                                     |          9 |      7,175 |          5 |         40 |      7,220 |
+| app                                                                           |         18 |      1,042 |        104 |        235 |      1,381 |
+| app (Files)                                                                   |          3 |         50 |          2 |          9 |         61 |
+| app\(main)                                                                    |         10 |        853 |         63 |        176 |      1,092 |
+| app\(main) (Files)                                                            |          1 |         23 |          6 |          3 |         32 |
+| app\(main)\dashboard                                                          |          1 |        127 |          8 |         29 |        164 |
+| app\(main)\hooks                                                              |          1 |         98 |         19 |         28 |        145 |
+| app\(main)\orders                                                             |          1 |         74 |          2 |         16 |         92 |
+| app\(main)\portfolio                                                          |          1 |        153 |          5 |         26 |        184 |
+| app\(main)\profile                                                            |          1 |        109 |          7 |         19 |        135 |
+| app\(main)\realized-pnl                                                       |          1 |         71 |          0 |          8 |         79 |
+| app\(main)\stocks                                                             |          2 |        171 |         15 |         41 |        227 |
+| app\(main)\stocks (Files)                                                     |          1 |        107 |          8 |         26 |        141 |
+| app\(main)\stocks\[symbol]                                                    |          1 |         64 |          7 |         15 |         86 |
+| app\(main)\watchlist                                                          |          1 |         27 |          1 |          6 |         34 |
+| app\(public)                                                                  |          3 |        109 |         30 |         38 |        177 |
+| app\(public) (Files)                                                          |          2 |         37 |         28 |         18 |         83 |
+| app\(public)\login                                                            |          1 |         72 |          2 |         20 |         94 |
+| app\auth                                                                      |          2 |         30 |          9 |         12 |         51 |
+| app\auth\callback                                                             |          1 |         16 |          9 |          8 |         33 |
+| app\auth\debug                                                                |          1 |         14 |          0 |          4 |         18 |
+| public                                                                        |          5 |          5 |          0 |          0 |          5 |
+| types                                                                         |          1 |        118 |         51 |         38 |        207 |
+| utils                                                                         |          3 |         54 |          2 |         16 |         72 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                      | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\divya\trading-simulator\frontend\Dockerfile                          | Docker             |          9 |          5 |          7 |         21 |
+| c:\Users\divya\trading-simulator\frontend\README.md                           | Markdown           |         23 |          0 |         14 |         37 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\dashboard\page.tsx       | TypeScript JSX     |        127 |          8 |         29 |        164 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\hooks\useLivePrices.tsx  | TypeScript JSX     |         98 |         19 |         28 |        145 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\layout.tsx               | TypeScript JSX     |         23 |          6 |          3 |         32 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\orders\page.tsx          | TypeScript JSX     |         74 |          2 |         16 |         92 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\portfolio\page.tsx       | TypeScript JSX     |        153 |          5 |         26 |        184 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\profile\page.tsx         | TypeScript JSX     |        109 |          7 |         19 |        135 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\realized-pnl\page.tsx    | TypeScript JSX     |         71 |          0 |          8 |         79 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\[symbol]\page.tsx | TypeScript JSX     |         64 |          7 |         15 |         86 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\page.tsx          | TypeScript JSX     |        107 |          8 |         26 |        141 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\watchlist\page.tsx       | TypeScript JSX     |         27 |          1 |          6 |         34 |
+| c:\Users\divya\trading-simulator\frontend\app\(public)\layout.tsx             | TypeScript JSX     |         11 |          1 |          2 |         14 |
+| c:\Users\divya\trading-simulator\frontend\app\(public)\login\page.tsx         | TypeScript JSX     |         72 |          2 |         20 |         94 |
+| c:\Users\divya\trading-simulator\frontend\app\(public)\page.tsx               | TypeScript JSX     |         26 |         27 |         16 |         69 |
+| c:\Users\divya\trading-simulator\frontend\app\auth\callback\page.tsx          | TypeScript JSX     |         16 |          9 |          8 |         33 |
+| c:\Users\divya\trading-simulator\frontend\app\auth\debug\page.tsx             | TypeScript JSX     |         14 |          0 |          4 |         18 |
+| c:\Users\divya\trading-simulator\frontend\app\globals.css                     | PostCSS            |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\app\layout.tsx                      | TypeScript JSX     |         30 |          0 |          4 |         34 |
+| c:\Users\divya\trading-simulator\frontend\app\theme.css                       | PostCSS            |         19 |          2 |          5 |         26 |
+| c:\Users\divya\trading-simulator\frontend\eslint.config.mjs                   | JavaScript         |         21 |          0 |          5 |         26 |
+| c:\Users\divya\trading-simulator\frontend\next.config.ts                      | TypeScript         |         13 |          0 |          3 |         16 |
+| c:\Users\divya\trading-simulator\frontend\package-lock.json                   | JSON               |      7,009 |          0 |          1 |      7,010 |
+| c:\Users\divya\trading-simulator\frontend\package.json                        | JSON               |         39 |          0 |          1 |         40 |
+| c:\Users\divya\trading-simulator\frontend\postcss.config.mjs                  | JavaScript         |          4 |          0 |          2 |          6 |
+| c:\Users\divya\trading-simulator\frontend\public\file.svg                     | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\public\globe.svg                    | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\public\next.svg                     | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\public\vercel.svg                   | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\public\window.svg                   | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\tailwind.config.ts                  | TypeScript         |         30 |          0 |          6 |         36 |
+| c:\Users\divya\trading-simulator\frontend\tsconfig.json                       | JSON with Comments |         27 |          0 |          1 |         28 |
+| c:\Users\divya\trading-simulator\frontend\types\index.ts                      | TypeScript         |        118 |         51 |         38 |        207 |
+| c:\Users\divya\trading-simulator\frontend\utils\marketTime.ts                 | TypeScript         |         36 |          2 |         12 |         50 |
+| c:\Users\divya\trading-simulator\frontend\utils\socket.ts                     | TypeScript         |          6 |          0 |          2 |          8 |
+| c:\Users\divya\trading-simulator\frontend\utils\supabaseClient.ts             | TypeScript         |         12 |          0 |          2 |         14 |
+| Total                                                                         |                    |      8,394 |        162 |        329 |      8,885 |
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

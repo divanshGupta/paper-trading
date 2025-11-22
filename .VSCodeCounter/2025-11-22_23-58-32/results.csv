@@ -1,0 +1,77 @@
+"filename", "language", "TypeScript", "JSON with Comments", "JavaScript", "Markdown", "XML", "JSON", "TypeScript JSX", "PostCSS", "Docker", "comment", "blank", "total"
+"c:\Users\divya\trading-simulator\frontend\Dockerfile", "Docker", 0, 0, 0, 0, 0, 0, 0, 0, 9, 5, 7, 21
+"c:\Users\divya\trading-simulator\frontend\README.md", "Markdown", 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 14, 37
+"c:\Users\divya\trading-simulator\frontend\app\(main)\dashboard\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 127, 0, 0, 8, 29, 164
+"c:\Users\divya\trading-simulator\frontend\app\(main)\hooks\useLivePrices.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 98, 0, 0, 19, 28, 145
+"c:\Users\divya\trading-simulator\frontend\app\(main)\layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 23, 0, 0, 6, 3, 32
+"c:\Users\divya\trading-simulator\frontend\app\(main)\orders\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 74, 0, 0, 2, 16, 92
+"c:\Users\divya\trading-simulator\frontend\app\(main)\portfolio\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 153, 0, 0, 5, 26, 184
+"c:\Users\divya\trading-simulator\frontend\app\(main)\profile\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 109, 0, 0, 7, 19, 135
+"c:\Users\divya\trading-simulator\frontend\app\(main)\realized-pnl\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 71, 0, 0, 0, 8, 79
+"c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\[symbol]\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 64, 0, 0, 7, 15, 86
+"c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 107, 0, 0, 8, 26, 141
+"c:\Users\divya\trading-simulator\frontend\app\(main)\watchlist\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 27, 0, 0, 1, 6, 34
+"c:\Users\divya\trading-simulator\frontend\app\(public)\layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 11, 0, 0, 1, 2, 14
+"c:\Users\divya\trading-simulator\frontend\app\(public)\login\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 72, 0, 0, 2, 20, 94
+"c:\Users\divya\trading-simulator\frontend\app\(public)\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 26, 0, 0, 27, 16, 69
+"c:\Users\divya\trading-simulator\frontend\app\auth\callback\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 16, 0, 0, 9, 8, 33
+"c:\Users\divya\trading-simulator\frontend\app\auth\debug\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 4, 18
+"c:\Users\divya\trading-simulator\frontend\app\globals.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\app\layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 4, 34
+"c:\Users\divya\trading-simulator\frontend\app\theme.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 19, 0, 2, 5, 26
+"c:\Users\divya\trading-simulator\frontend\components\MarketClock.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 4, 25
+"c:\Users\divya\trading-simulator\frontend\components\Pagination.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 5, 43
+"c:\Users\divya\trading-simulator\frontend\components\ProfileEditForm.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 165, 0, 0, 11, 26, 202
+"c:\Users\divya\trading-simulator\frontend\components\TransactionTable.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 71, 0, 0, 2, 6, 79
+"c:\Users\divya\trading-simulator\frontend\components\chart\MiniSparkline.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 4, 38
+"c:\Users\divya\trading-simulator\frontend\components\chart\Sparkline.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 45, 0, 0, 3, 9, 57
+"c:\Users\divya\trading-simulator\frontend\components\chart\StockMiniChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 63, 0, 0, 5, 13, 81
+"c:\Users\divya\trading-simulator\frontend\components\dashboard\Sidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 35, 0, 0, 0, 10, 45
+"c:\Users\divya\trading-simulator\frontend\components\dashboard\StockCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 69, 0, 0, 6, 9, 84
+"c:\Users\divya\trading-simulator\frontend\components\dashboard\StockCardSkeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 11
+"c:\Users\divya\trading-simulator\frontend\components\dashboard\StockGrid.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 51, 0, 0, 2, 9, 62
+"c:\Users\divya\trading-simulator\frontend\components\dashboard\StockTable.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 2, 22
+"c:\Users\divya\trading-simulator\frontend\components\dashboard\StockTicker.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 10
+"c:\Users\divya\trading-simulator\frontend\components\layout\Footer.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 21, 0, 0, 3, 4, 28
+"c:\Users\divya\trading-simulator\frontend\components\layout\Navbar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 103, 0, 0, 20, 20, 143
+"c:\Users\divya\trading-simulator\frontend\components\providers\AppProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 114, 0, 0, 18, 28, 160
+"c:\Users\divya\trading-simulator\frontend\components\providers\BalanceProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 10, 37
+"c:\Users\divya\trading-simulator\frontend\components\providers\ThemeProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 19, 0, 0, 1, 4, 24
+"c:\Users\divya\trading-simulator\frontend\components\providers\ToastProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 7
+"c:\Users\divya\trading-simulator\frontend\components\providers\UserProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 52, 0, 0, 2, 14, 68
+"c:\Users\divya\trading-simulator\frontend\components\skeletons\StockChartSkeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1, 6
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StockFilterTab.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 2, 23
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StockFilters.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 28, 0, 0, 0, 3, 31
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StockSearch.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 65, 0, 0, 4, 12, 81
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StockSorter.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 3, 26
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StocksCardsMobile.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 72, 0, 0, 0, 6, 78
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StocksList.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 39, 0, 0, 3, 5, 47
+"c:\Users\divya\trading-simulator\frontend\components\stocks\StocksTableDesktop.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 104, 0, 0, 8, 14, 126
+"c:\Users\divya\trading-simulator\frontend\components\stocks\WatchlistButton.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 6, 45
+"c:\Users\divya\trading-simulator\frontend\components\trade\BuyModal.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 13, 81
+"c:\Users\divya\trading-simulator\frontend\components\trade\BuySellPanel.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 117, 0, 0, 4, 22, 143
+"c:\Users\divya\trading-simulator\frontend\components\trade\SellModal.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 13, 81
+"c:\Users\divya\trading-simulator\frontend\components\ui\Badge.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 8
+"c:\Users\divya\trading-simulator\frontend\components\ui\Button.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 2, 21
+"c:\Users\divya\trading-simulator\frontend\components\ui\Card.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 11
+"c:\Users\divya\trading-simulator\frontend\components\ui\Container.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 8
+"c:\Users\divya\trading-simulator\frontend\components\ui\NavLink.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 3, 20
+"c:\Users\divya\trading-simulator\frontend\components\ui\ProfileDropDown.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 113, 0, 0, 11, 20, 144
+"c:\Users\divya\trading-simulator\frontend\components\ui\ThemeToggle.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 13, 0, 0, 1, 2, 16
+"c:\Users\divya\trading-simulator\frontend\eslint.config.mjs", "JavaScript", 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 5, 26
+"c:\Users\divya\trading-simulator\frontend\next.config.ts", "TypeScript", 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 16
+"c:\Users\divya\trading-simulator\frontend\package-lock.json", "JSON", 0, 0, 0, 0, 0, 7009, 0, 0, 0, 0, 1, 7010
+"c:\Users\divya\trading-simulator\frontend\package.json", "JSON", 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 1, 40
+"c:\Users\divya\trading-simulator\frontend\postcss.config.mjs", "JavaScript", 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 2, 6
+"c:\Users\divya\trading-simulator\frontend\public\file.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\public\globe.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\public\next.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\public\vercel.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\public\window.svg", "XML", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\tailwind.config.ts", "TypeScript", 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 36
+"c:\Users\divya\trading-simulator\frontend\tsconfig.json", "JSON with Comments", 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 1, 28
+"c:\Users\divya\trading-simulator\frontend\types\index.ts", "TypeScript", 118, 0, 0, 0, 0, 0, 0, 0, 0, 51, 38, 207
+"c:\Users\divya\trading-simulator\frontend\utils\marketTime.ts", "TypeScript", 36, 0, 0, 0, 0, 0, 0, 0, 0, 2, 12, 50
+"c:\Users\divya\trading-simulator\frontend\utils\socket.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"c:\Users\divya\trading-simulator\frontend\utils\supabaseClient.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 14
+"Total", "-", 215, 27, 25, 23, 5, 7048, 2829, 20, 9, 266, 640, 11107

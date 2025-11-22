@@ -9,7 +9,6 @@ import { toast } from "sonner";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import Sidebar from "@/components/dashboard/Sidebar";
 import StockGrid from "@/components/dashboard/StockGrid";
-import StockTable from "@/components/dashboard/StockTable";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import StocksList from "../../../components/stocks/StocksList";
 import Link from "next/link";

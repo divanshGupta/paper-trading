@@ -4,11 +4,15 @@ import { useParams } from "next/navigation";
 import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import BuySellPanel from "@/components/trade/BuySellPanel";
+import { useApp } from "@/components/providers/AppProvider";
+import WatchlistButton from "@/components/stocks/WatchlistButton";
 
 export default function StockInfoPage() {
   const { symbol } = useParams() as { symbol: string };
   const { bySymbol, flash } = useLivePrices();
 
+  const { watchlist, toggleWatchlist} = useApp();
+  
   const stock = bySymbol(symbol);
 
   if (!stock) {
@@ -29,18 +33,27 @@ export default function StockInfoPage() {
       {/* LEFT AREA — STOCK NAME + PRICE + CHART */}
       <div className="flex-1">
         {/* NAME */}
-        <div className="mb-3">
-          <h1 className="text-3xl font-bold">{stock.name ?? stock.symbol}</h1>
-        </div>
+        <div className="group flex items-center justify-between">
+          <div>
+            <div className="mb-3">
+              <h1 className="text-3xl font-bold">{stock.name ?? stock.symbol}</h1>
+            </div>
 
-        {/* PRICE SECTION */}
-        <div className="mt-4">
-          <p className="text-4xl font-semibold">₹{stock.price}</p>
+            {/* PRICE SECTION */}
+            <div className="mt-4">
+              <p className="text-4xl font-semibold">₹{stock.price}</p>
 
-          <div className={`mt-1 flex items-center gap-1 text-lg font-medium ${dayColor}`}>
-            {dayChange >= 0 ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
-            {dayChange >= 0 && "+"}
-            {dayChange.toFixed(2)} ({dayChangePct.toFixed(2)}%)
+              <div className={`mt-1 flex items-center gap-1 text-lg font-medium ${dayColor}`}>
+                {dayChange >= 0 ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
+                {dayChange >= 0 && "+"}
+                {dayChange.toFixed(2)} ({dayChangePct.toFixed(2)}%)
+              </div>
+            </div>
+          </div>
+
+          {/* Watchlist toggle */}
+          <div className="relative">
+            <WatchlistButton symbol={symbol} alwaysVisible />
           </div>
         </div>
 

@@ -1,0 +1,93 @@
+Date : 2025-11-22 23:58:47
+Directory : c:\Users\divya\trading-simulator\backend
+Total : 41 files,  29533 codes, 497 comments, 393 blanks, all 30423 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          4 |     28,106 |          0 |          3 |     28,109 |
+| JavaScript |         25 |      1,307 |        424 |        341 |      2,072 |
+| MS SQL     |         10 |         61 |         53 |         22 |        136 |
+| Prisma     |          1 |         50 |         11 |         18 |         79 |
+| Docker     |          1 |          9 |          9 |          9 |         27 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                               | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                  |         41 |     29,533 |        497 |        393 |     30,423 |
+| . (Files)                                                                                                          |          4 |      2,737 |          9 |         12 |      2,758 |
+| prisma                                                                                                             |         11 |        111 |         64 |         40 |        215 |
+| prisma (Files)                                                                                                     |          1 |         50 |         11 |         18 |         79 |
+| prisma\migrations                                                                                                  |         10 |         61 |         53 |         22 |        136 |
+| prisma\migrations\20251105141608_init_public                                                                       |          1 |         26 |          3 |          6 |         35 |
+| prisma\migrations\20251106140527_user_model                                                                        |          1 |         10 |          3 |          4 |         17 |
+| prisma\migrations\20251110180047_database_update                                                                   |          1 |          7 |         14 |          4 |         25 |
+| prisma\migrations\20251110210129_transacation_model_update                                                         |          1 |          3 |          1 |          1 |          5 |
+| prisma\migrations\20251110212055_add_precision_realized_pnl                                                        |          1 |          1 |          7 |          1 |          9 |
+| prisma\migrations\20251111105630_fix_decimal_precision_all                                                         |          1 |          3 |          8 |          1 |         12 |
+| prisma\migrations\20251111110012_make_realized_pnl_optional                                                        |          1 |          1 |          1 |          1 |          3 |
+| prisma\migrations\20251112054849_add_profile_fields                                                                |          1 |          8 |          8 |          2 |         18 |
+| prisma\migrations\20251112055158_add_updatedat_optional                                                            |          1 |          1 |          1 |          1 |          3 |
+| prisma\migrations\20251112055241_make_updatedat_required                                                           |          1 |          1 |          7 |          1 |          9 |
+| src                                                                                                                |         26 |     26,685 |        424 |        341 |     27,450 |
+| src (Files)                                                                                                        |          2 |         90 |         25 |         27 |        142 |
+| src\config                                                                                                         |          2 |         48 |          5 |         14 |         67 |
+| src\controllers                                                                                                    |          5 |        516 |        191 |        175 |        882 |
+| src\middlewares                                                                                                    |          3 |         48 |          3 |         15 |         66 |
+| src\routes                                                                                                         |          6 |         54 |          7 |         27 |         88 |
+| src\services                                                                                                       |          2 |        496 |        176 |         64 |        736 |
+| src\storage                                                                                                        |          1 |     25,378 |          0 |          0 |     25,378 |
+| src\utils                                                                                                          |          4 |         47 |         14 |         15 |         76 |
+| src\websocket                                                                                                      |          1 |          8 |          3 |          4 |         15 |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                           | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\divya\trading-simulator\backend\Dockerfile                                                                | Docker     |          9 |          9 |          9 |         27 |
+| c:\Users\divya\trading-simulator\backend\nodemon.json                                                              | JSON       |         20 |          0 |          1 |         21 |
+| c:\Users\divya\trading-simulator\backend\package-lock.json                                                         | JSON       |      2,667 |          0 |          1 |      2,668 |
+| c:\Users\divya\trading-simulator\backend\package.json                                                              | JSON       |         41 |          0 |          1 |         42 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251105141608_init_public\migration.sql                | MS SQL     |         26 |          3 |          6 |         35 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251106140527_user_model\migration.sql                 | MS SQL     |         10 |          3 |          4 |         17 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251110180047_database_update\migration.sql            | MS SQL     |          7 |         14 |          4 |         25 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251110210129_transacation_model_update\migration.sql  | MS SQL     |          3 |          1 |          1 |          5 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251110212055_add_precision_realized_pnl\migration.sql | MS SQL     |          1 |          7 |          1 |          9 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251111105630_fix_decimal_precision_all\migration.sql  | MS SQL     |          3 |          8 |          1 |         12 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251111110012_make_realized_pnl_optional\migration.sql | MS SQL     |          1 |          1 |          1 |          3 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251112054849_add_profile_fields\migration.sql         | MS SQL     |          8 |          8 |          2 |         18 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251112055158_add_updatedat_optional\migration.sql     | MS SQL     |          1 |          1 |          1 |          3 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251112055241_make_updatedat_required\migration.sql    | MS SQL     |          1 |          7 |          1 |          9 |
+| c:\Users\divya\trading-simulator\backend\prisma\schema.prisma                                                      | Prisma     |         50 |         11 |         18 |         79 |
+| c:\Users\divya\trading-simulator\backend\src\app.js                                                                | JavaScript |         62 |          8 |         15 |         85 |
+| c:\Users\divya\trading-simulator\backend\src\config\env.js                                                         | JavaScript |         24 |          3 |          5 |         32 |
+| c:\Users\divya\trading-simulator\backend\src\config\socket.js                                                      | JavaScript |         24 |          2 |          9 |         35 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\portfolio.controller.js                                   | JavaScript |         13 |          0 |          5 |         18 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\trade.controller.js                                       | JavaScript |        168 |        169 |         73 |        410 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\transaction.controller.js                                 | JavaScript |        180 |         16 |         49 |        245 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\user.controller.js                                        | JavaScript |         89 |          5 |         22 |        116 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\watchlist.controller.js                                   | JavaScript |         66 |          1 |         26 |         93 |
+| c:\Users\divya\trading-simulator\backend\src\middlewares\auth.middleware.js                                        | JavaScript |         29 |          2 |          8 |         39 |
+| c:\Users\divya\trading-simulator\backend\src\middlewares\error.middleware.js                                       | JavaScript |          6 |          0 |          3 |          9 |
+| c:\Users\divya\trading-simulator\backend\src\middlewares\socketAuth.middleware.js                                  | JavaScript |         13 |          1 |          4 |         18 |
+| c:\Users\divya\trading-simulator\backend\src\routes\market.routes.js                                               | JavaScript |          7 |          0 |          4 |         11 |
+| c:\Users\divya\trading-simulator\backend\src\routes\portfolio.routes.js                                            | JavaScript |          6 |          0 |          3 |          9 |
+| c:\Users\divya\trading-simulator\backend\src\routes\trade.routes.js                                                | JavaScript |          8 |          2 |          3 |         13 |
+| c:\Users\divya\trading-simulator\backend\src\routes\transaction.routes.js                                          | JavaScript |          8 |          0 |          3 |         11 |
+| c:\Users\divya\trading-simulator\backend\src\routes\user.routes.js                                                 | JavaScript |          9 |          4 |          6 |         19 |
+| c:\Users\divya\trading-simulator\backend\src\routes\watchlist.routes.js                                            | JavaScript |         16 |          1 |          8 |         25 |
+| c:\Users\divya\trading-simulator\backend\src\server.js                                                             | JavaScript |         28 |         17 |         12 |         57 |
+| c:\Users\divya\trading-simulator\backend\src\services\priceEngine.js                                               | JavaScript |        476 |        176 |         60 |        712 |
+| c:\Users\divya\trading-simulator\backend\src\services\priceStorage.js                                              | JavaScript |         20 |          0 |          4 |         24 |
+| c:\Users\divya\trading-simulator\backend\src\storage\prices.json                                                   | JSON       |     25,378 |          0 |          0 |     25,378 |
+| c:\Users\divya\trading-simulator\backend\src\utils\ApiError.js                                                     | JavaScript |          6 |          0 |          0 |          6 |
+| c:\Users\divya\trading-simulator\backend\src\utils\db.js                                                           | JavaScript |         10 |          2 |          4 |         16 |
+| c:\Users\divya\trading-simulator\backend\src\utils\marketTimes.js                                                  | JavaScript |          3 |         11 |          5 |         19 |
+| c:\Users\divya\trading-simulator\backend\src\utils\supabaseClient.js                                               | JavaScript |         28 |          1 |          6 |         35 |
+| c:\Users\divya\trading-simulator\backend\src\websocket\stockTicker.js                                              | JavaScript |          8 |          3 |          4 |         15 |
+| Total                                                                                                              |            |     29,533 |        497 |        393 |     30,423 |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

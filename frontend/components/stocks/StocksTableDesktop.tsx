@@ -4,6 +4,7 @@ import React from "react";
 import { StocksListProps, Price } from "@/types";;
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
+import WatchlistButton from "./WatchlistButton";
 
 function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
   if (dir === "up") return <ArrowUp size={16} className="text-green-500" />;
@@ -44,11 +45,15 @@ export default function StocksTableDesktop({
               <tr
                 onClick={() => router.push(`/stocks/${s.symbol}`)}
                 key={s.symbol}
-                className="border-t border-gray-200 dark:border-gray-700 text-sm"
+                className="group border-t border-gray-200 dark:border-gray-700 text-sm hover:shadow-md hover:border-gray-300"
               >
                 {/* SYMBOL */}
                 <td className="p-3 font-semibold text-light-text dark:text-dark-text">
-                  {s.symbol}
+                  <div className="relative flex items-center gap-2">
+                    <span>{s.symbol}</span>
+                    {/* bookmard only visible on hover */}
+                      <WatchlistButton symbol={s.symbol} />
+                  </div>
                 </td>
 
                 {/* COMPANY NAME */}

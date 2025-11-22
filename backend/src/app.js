@@ -9,6 +9,7 @@ import portfolioRouter from './routes/portfolio.routes.js';
 import tradeRouter from './routes/trade.routes.js';
 import marketRouter from './routes/market.routes.js';
 import transactionRouter from './routes/transaction.routes.js';
+import watchlistRouter from './routes/watchlist.routes.js';
 
 export const app = express();
 
@@ -76,6 +77,7 @@ app.use('/api/v1/trade/', tradeRouter);
 app.use('/api/v1/portfolio/', portfolioRouter);
 app.use('/api/v1/market/', marketRouter);
 app.use('/api/v1/transactions/', transactionRouter);
+app.use('/api/v1/watchlist/', watchlistRouter);
 
 app.use(errorHandler); // Error handling middleware
 

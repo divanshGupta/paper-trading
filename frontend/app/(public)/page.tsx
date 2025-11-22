@@ -1,45 +1,44 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { StockData } from "@/types";
-import { socket } from "@/utils/socket";
+// import { socket } from "@/utils/socket";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 
-type StocksState = Record<string, StockData>;
+// type StocksState = Record<string, StockData>;
 export const dynamic = "force-static"; // disables HMR for this page
 
 export default function Home() {
-  const [stocks, setStocks] = useState<StocksState>({});
+  // const [stocks, setStocks] = useState<StocksState>({});
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  // useEffect(() => {
+  //   if (typeof window === "undefined") return;
 
-    if (!socket) return;
+  //   if (!socket) return;
 
     // Handle live stock updates
-    const handleStockUpdate = (data: StockData) => {
-      setStocks((prev) => ({
-        ...prev,
-        [data.symbol]: data,
-      }));
-    };
+  //   const handleStockUpdate = (data: StockData) => {
+  //     setStocks((prev) => ({
+  //       ...prev,
+  //       [data.symbol]: data,
+  //     }));
+  //   };
 
-    socket.on("stock:update", handleStockUpdate);
+  //   socket.on("stock:update", handleStockUpdate);
 
-    socket.on("connect", () => {
-      console.log("✅ Connected to socket:", socket.id);
-    });
+  //   socket.on("connect", () => {
+  //     console.log("✅ Connected to socket:", socket.id);
+  //   });
 
-    socket.on("connect_error", (err: Error) => {
-      console.error("❌ Socket connection error:", err.message);
-    });
+  //   socket.on("connect_error", (err: Error) => {
+  //     console.error("❌ Socket connection error:", err.message);
+  //   });
 
-    // 5️⃣ Cleanup
-    return () => {
-      socket.off("stock:update", handleStockUpdate);
-      socket.disconnect();
-    };
-  }, []);
+  //   // 5️⃣ Cleanup
+  //   return () => {
+  //     socket.off("stock:update", handleStockUpdate);
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const router = useRouter()
 
@@ -52,7 +51,6 @@ export default function Home() {
     })
   }, [])
 
-  const stockList = Object.values(stocks);
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-6 p-8">

@@ -1,0 +1,20 @@
+"filename", "language", "TypeScript JSX", "PostCSS", "comment", "blank", "total"
+"c:\Users\divya\trading-simulator\frontend\app\(main)\dashboard\page.tsx", "TypeScript JSX", 127, 0, 8, 29, 164
+"c:\Users\divya\trading-simulator\frontend\app\(main)\hooks\useLivePrices.tsx", "TypeScript JSX", 98, 0, 19, 28, 145
+"c:\Users\divya\trading-simulator\frontend\app\(main)\layout.tsx", "TypeScript JSX", 23, 0, 6, 3, 32
+"c:\Users\divya\trading-simulator\frontend\app\(main)\orders\page.tsx", "TypeScript JSX", 74, 0, 2, 16, 92
+"c:\Users\divya\trading-simulator\frontend\app\(main)\portfolio\page.tsx", "TypeScript JSX", 153, 0, 5, 26, 184
+"c:\Users\divya\trading-simulator\frontend\app\(main)\profile\page.tsx", "TypeScript JSX", 109, 0, 7, 19, 135
+"c:\Users\divya\trading-simulator\frontend\app\(main)\realized-pnl\page.tsx", "TypeScript JSX", 71, 0, 0, 8, 79
+"c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\[symbol]\page.tsx", "TypeScript JSX", 64, 0, 7, 15, 86
+"c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\page.tsx", "TypeScript JSX", 107, 0, 8, 26, 141
+"c:\Users\divya\trading-simulator\frontend\app\(main)\watchlist\page.tsx", "TypeScript JSX", 27, 0, 1, 6, 34
+"c:\Users\divya\trading-simulator\frontend\app\(public)\layout.tsx", "TypeScript JSX", 11, 0, 1, 2, 14
+"c:\Users\divya\trading-simulator\frontend\app\(public)\login\page.tsx", "TypeScript JSX", 72, 0, 2, 20, 94
+"c:\Users\divya\trading-simulator\frontend\app\(public)\page.tsx", "TypeScript JSX", 26, 0, 27, 16, 69
+"c:\Users\divya\trading-simulator\frontend\app\auth\callback\page.tsx", "TypeScript JSX", 16, 0, 9, 8, 33
+"c:\Users\divya\trading-simulator\frontend\app\auth\debug\page.tsx", "TypeScript JSX", 14, 0, 0, 4, 18
+"c:\Users\divya\trading-simulator\frontend\app\globals.css", "PostCSS", 0, 1, 0, 0, 1
+"c:\Users\divya\trading-simulator\frontend\app\layout.tsx", "TypeScript JSX", 30, 0, 0, 4, 34
+"c:\Users\divya\trading-simulator\frontend\app\theme.css", "PostCSS", 0, 19, 2, 5, 26
+"Total", "-", 1022, 20, 104, 235, 1381

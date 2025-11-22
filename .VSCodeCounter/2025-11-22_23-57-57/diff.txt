@@ -1,0 +1,135 @@
+Date : 2025-11-22 23:57:57
+Directory : c:\Users\divya\trading-simulator\frontend\app
+Total : 59 files,  -28491 codes, -393 comments, -158 blanks, all -29042 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         16 |      1,022 |        102 |        230 |      1,354 |
+| PostCSS        |          2 |         20 |          2 |          5 |         27 |
+| Docker         |          1 |         -9 |         -9 |         -9 |        -27 |
+| Prisma         |          1 |        -50 |        -11 |        -18 |        -79 |
+| MS SQL         |         10 |        -61 |        -53 |        -22 |       -136 |
+| JavaScript     |         25 |     -1,307 |       -424 |       -341 |     -2,072 |
+| JSON           |          4 |    -28,106 |          0 |         -3 |    -28,109 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                               | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| (main)                                                                                                             |         10 |        853 |         63 |        176 |      1,092 |
+| (main) (Files)                                                                                                     |          1 |         23 |          6 |          3 |         32 |
+| (main)\dashboard                                                                                                   |          1 |        127 |          8 |         29 |        164 |
+| (main)\hooks                                                                                                       |          1 |         98 |         19 |         28 |        145 |
+| (main)\orders                                                                                                      |          1 |         74 |          2 |         16 |         92 |
+| (main)\portfolio                                                                                                   |          1 |        153 |          5 |         26 |        184 |
+| (main)\profile                                                                                                     |          1 |        109 |          7 |         19 |        135 |
+| (main)\realized-pnl                                                                                                |          1 |         71 |          0 |          8 |         79 |
+| (main)\stocks                                                                                                      |          2 |        171 |         15 |         41 |        227 |
+| (main)\stocks (Files)                                                                                              |          1 |        107 |          8 |         26 |        141 |
+| (main)\stocks\[symbol]                                                                                             |          1 |         64 |          7 |         15 |         86 |
+| (main)\watchlist                                                                                                   |          1 |         27 |          1 |          6 |         34 |
+| (public)                                                                                                           |          3 |        109 |         30 |         38 |        177 |
+| (public) (Files)                                                                                                   |          2 |         37 |         28 |         18 |         83 |
+| (public)\login                                                                                                     |          1 |         72 |          2 |         20 |         94 |
+| .                                                                                                                  |         59 |    -28,491 |       -393 |       -158 |    -29,042 |
+| . (Files)                                                                                                          |          3 |         50 |          2 |          9 |         61 |
+| ..                                                                                                                 |         41 |    -29,533 |       -497 |       -393 |    -30,423 |
+| ..\..                                                                                                              |         41 |    -29,533 |       -497 |       -393 |    -30,423 |
+| ..\..\backend                                                                                                      |         41 |    -29,533 |       -497 |       -393 |    -30,423 |
+| ..\..\backend (Files)                                                                                              |          4 |     -2,737 |         -9 |        -12 |     -2,758 |
+| ..\..\backend\prisma                                                                                               |         11 |       -111 |        -64 |        -40 |       -215 |
+| ..\..\backend\prisma (Files)                                                                                       |          1 |        -50 |        -11 |        -18 |        -79 |
+| ..\..\backend\prisma\migrations                                                                                    |         10 |        -61 |        -53 |        -22 |       -136 |
+| ..\..\backend\prisma\migrations\20251105141608_init_public                                                         |          1 |        -26 |         -3 |         -6 |        -35 |
+| ..\..\backend\prisma\migrations\20251106140527_user_model                                                          |          1 |        -10 |         -3 |         -4 |        -17 |
+| ..\..\backend\prisma\migrations\20251110180047_database_update                                                     |          1 |         -7 |        -14 |         -4 |        -25 |
+| ..\..\backend\prisma\migrations\20251110210129_transacation_model_update                                           |          1 |         -3 |         -1 |         -1 |         -5 |
+| ..\..\backend\prisma\migrations\20251110212055_add_precision_realized_pnl                                          |          1 |         -1 |         -7 |         -1 |         -9 |
+| ..\..\backend\prisma\migrations\20251111105630_fix_decimal_precision_all                                           |          1 |         -3 |         -8 |         -1 |        -12 |
+| ..\..\backend\prisma\migrations\20251111110012_make_realized_pnl_optional                                          |          1 |         -1 |         -1 |         -1 |         -3 |
+| ..\..\backend\prisma\migrations\20251112054849_add_profile_fields                                                  |          1 |         -8 |         -8 |         -2 |        -18 |
+| ..\..\backend\prisma\migrations\20251112055158_add_updatedat_optional                                              |          1 |         -1 |         -1 |         -1 |         -3 |
+| ..\..\backend\prisma\migrations\20251112055241_make_updatedat_required                                             |          1 |         -1 |         -7 |         -1 |         -9 |
+| ..\..\backend\src                                                                                                  |         26 |    -26,685 |       -424 |       -341 |    -27,450 |
+| ..\..\backend\src (Files)                                                                                          |          2 |        -90 |        -25 |        -27 |       -142 |
+| ..\..\backend\src\config                                                                                           |          2 |        -48 |         -5 |        -14 |        -67 |
+| ..\..\backend\src\controllers                                                                                      |          5 |       -516 |       -191 |       -175 |       -882 |
+| ..\..\backend\src\middlewares                                                                                      |          3 |        -48 |         -3 |        -15 |        -66 |
+| ..\..\backend\src\routes                                                                                           |          6 |        -54 |         -7 |        -27 |        -88 |
+| ..\..\backend\src\services                                                                                         |          2 |       -496 |       -176 |        -64 |       -736 |
+| ..\..\backend\src\storage                                                                                          |          1 |    -25,378 |          0 |          0 |    -25,378 |
+| ..\..\backend\src\utils                                                                                            |          4 |        -47 |        -14 |        -15 |        -76 |
+| ..\..\backend\src\websocket                                                                                        |          1 |         -8 |         -3 |         -4 |        -15 |
+| auth                                                                                                               |          2 |         30 |          9 |         12 |         51 |
+| auth\callback                                                                                                      |          1 |         16 |          9 |          8 |         33 |
+| auth\debug                                                                                                         |          1 |         14 |          0 |          4 |         18 |
++--------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                           | language       | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\divya\trading-simulator\backend\Dockerfile                                                                | Docker         |         -9 |         -9 |         -9 |        -27 |
+| c:\Users\divya\trading-simulator\backend\nodemon.json                                                              | JSON           |        -20 |          0 |         -1 |        -21 |
+| c:\Users\divya\trading-simulator\backend\package-lock.json                                                         | JSON           |     -2,667 |          0 |         -1 |     -2,668 |
+| c:\Users\divya\trading-simulator\backend\package.json                                                              | JSON           |        -41 |          0 |         -1 |        -42 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251105141608_init_public\migration.sql                | MS SQL         |        -26 |         -3 |         -6 |        -35 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251106140527_user_model\migration.sql                 | MS SQL         |        -10 |         -3 |         -4 |        -17 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251110180047_database_update\migration.sql            | MS SQL         |         -7 |        -14 |         -4 |        -25 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251110210129_transacation_model_update\migration.sql  | MS SQL         |         -3 |         -1 |         -1 |         -5 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251110212055_add_precision_realized_pnl\migration.sql | MS SQL         |         -1 |         -7 |         -1 |         -9 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251111105630_fix_decimal_precision_all\migration.sql  | MS SQL         |         -3 |         -8 |         -1 |        -12 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251111110012_make_realized_pnl_optional\migration.sql | MS SQL         |         -1 |         -1 |         -1 |         -3 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251112054849_add_profile_fields\migration.sql         | MS SQL         |         -8 |         -8 |         -2 |        -18 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251112055158_add_updatedat_optional\migration.sql     | MS SQL         |         -1 |         -1 |         -1 |         -3 |
+| c:\Users\divya\trading-simulator\backend\prisma\migrations\20251112055241_make_updatedat_required\migration.sql    | MS SQL         |         -1 |         -7 |         -1 |         -9 |
+| c:\Users\divya\trading-simulator\backend\prisma\schema.prisma                                                      | Prisma         |        -50 |        -11 |        -18 |        -79 |
+| c:\Users\divya\trading-simulator\backend\src\app.js                                                                | JavaScript     |        -62 |         -8 |        -15 |        -85 |
+| c:\Users\divya\trading-simulator\backend\src\config\env.js                                                         | JavaScript     |        -24 |         -3 |         -5 |        -32 |
+| c:\Users\divya\trading-simulator\backend\src\config\socket.js                                                      | JavaScript     |        -24 |         -2 |         -9 |        -35 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\portfolio.controller.js                                   | JavaScript     |        -13 |          0 |         -5 |        -18 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\trade.controller.js                                       | JavaScript     |       -168 |       -169 |        -73 |       -410 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\transaction.controller.js                                 | JavaScript     |       -180 |        -16 |        -49 |       -245 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\user.controller.js                                        | JavaScript     |        -89 |         -5 |        -22 |       -116 |
+| c:\Users\divya\trading-simulator\backend\src\controllers\watchlist.controller.js                                   | JavaScript     |        -66 |         -1 |        -26 |        -93 |
+| c:\Users\divya\trading-simulator\backend\src\middlewares\auth.middleware.js                                        | JavaScript     |        -29 |         -2 |         -8 |        -39 |
+| c:\Users\divya\trading-simulator\backend\src\middlewares\error.middleware.js                                       | JavaScript     |         -6 |          0 |         -3 |         -9 |
+| c:\Users\divya\trading-simulator\backend\src\middlewares\socketAuth.middleware.js                                  | JavaScript     |        -13 |         -1 |         -4 |        -18 |
+| c:\Users\divya\trading-simulator\backend\src\routes\market.routes.js                                               | JavaScript     |         -7 |          0 |         -4 |        -11 |
+| c:\Users\divya\trading-simulator\backend\src\routes\portfolio.routes.js                                            | JavaScript     |         -6 |          0 |         -3 |         -9 |
+| c:\Users\divya\trading-simulator\backend\src\routes\trade.routes.js                                                | JavaScript     |         -8 |         -2 |         -3 |        -13 |
+| c:\Users\divya\trading-simulator\backend\src\routes\transaction.routes.js                                          | JavaScript     |         -8 |          0 |         -3 |        -11 |
+| c:\Users\divya\trading-simulator\backend\src\routes\user.routes.js                                                 | JavaScript     |         -9 |         -4 |         -6 |        -19 |
+| c:\Users\divya\trading-simulator\backend\src\routes\watchlist.routes.js                                            | JavaScript     |        -16 |         -1 |         -8 |        -25 |
+| c:\Users\divya\trading-simulator\backend\src\server.js                                                             | JavaScript     |        -28 |        -17 |        -12 |        -57 |
+| c:\Users\divya\trading-simulator\backend\src\services\priceEngine.js                                               | JavaScript     |       -476 |       -176 |        -60 |       -712 |
+| c:\Users\divya\trading-simulator\backend\src\services\priceStorage.js                                              | JavaScript     |        -20 |          0 |         -4 |        -24 |
+| c:\Users\divya\trading-simulator\backend\src\storage\prices.json                                                   | JSON           |    -25,378 |          0 |          0 |    -25,378 |
+| c:\Users\divya\trading-simulator\backend\src\utils\ApiError.js                                                     | JavaScript     |         -6 |          0 |          0 |         -6 |
+| c:\Users\divya\trading-simulator\backend\src\utils\db.js                                                           | JavaScript     |        -10 |         -2 |         -4 |        -16 |
+| c:\Users\divya\trading-simulator\backend\src\utils\marketTimes.js                                                  | JavaScript     |         -3 |        -11 |         -5 |        -19 |
+| c:\Users\divya\trading-simulator\backend\src\utils\supabaseClient.js                                               | JavaScript     |        -28 |         -1 |         -6 |        -35 |
+| c:\Users\divya\trading-simulator\backend\src\websocket\stockTicker.js                                              | JavaScript     |         -8 |         -3 |         -4 |        -15 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\dashboard\page.tsx                                            | TypeScript JSX |        127 |          8 |         29 |        164 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\hooks\useLivePrices.tsx                                       | TypeScript JSX |         98 |         19 |         28 |        145 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\layout.tsx                                                    | TypeScript JSX |         23 |          6 |          3 |         32 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\orders\page.tsx                                               | TypeScript JSX |         74 |          2 |         16 |         92 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\portfolio\page.tsx                                            | TypeScript JSX |        153 |          5 |         26 |        184 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\profile\page.tsx                                              | TypeScript JSX |        109 |          7 |         19 |        135 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\realized-pnl\page.tsx                                         | TypeScript JSX |         71 |          0 |          8 |         79 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\[symbol]\page.tsx                                      | TypeScript JSX |         64 |          7 |         15 |         86 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\stocks\page.tsx                                               | TypeScript JSX |        107 |          8 |         26 |        141 |
+| c:\Users\divya\trading-simulator\frontend\app\(main)\watchlist\page.tsx                                            | TypeScript JSX |         27 |          1 |          6 |         34 |
+| c:\Users\divya\trading-simulator\frontend\app\(public)\layout.tsx                                                  | TypeScript JSX |         11 |          1 |          2 |         14 |
+| c:\Users\divya\trading-simulator\frontend\app\(public)\login\page.tsx                                              | TypeScript JSX |         72 |          2 |         20 |         94 |
+| c:\Users\divya\trading-simulator\frontend\app\(public)\page.tsx                                                    | TypeScript JSX |         26 |         27 |         16 |         69 |
+| c:\Users\divya\trading-simulator\frontend\app\auth\callback\page.tsx                                               | TypeScript JSX |         16 |          9 |          8 |         33 |
+| c:\Users\divya\trading-simulator\frontend\app\auth\debug\page.tsx                                                  | TypeScript JSX |         14 |          0 |          4 |         18 |
+| c:\Users\divya\trading-simulator\frontend\app\globals.css                                                          | PostCSS        |          1 |          0 |          0 |          1 |
+| c:\Users\divya\trading-simulator\frontend\app\layout.tsx                                                           | TypeScript JSX |         30 |          0 |          4 |         34 |
+| c:\Users\divya\trading-simulator\frontend\app\theme.css                                                            | PostCSS        |         19 |          2 |          5 |         26 |
+| Total                                                                                                              |                |    -28,491 |       -393 |       -158 |    -29,042 |
++--------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
