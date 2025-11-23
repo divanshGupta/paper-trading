@@ -42,7 +42,7 @@ export default function Navbar() {
 
  return (
     <nav className="fixed top-0 left-0  w-full z-50 bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md border-b border-gray-200 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
         {/* Left side */}
         <div className="flex items-center gap-10">
@@ -80,20 +80,7 @@ export default function Navbar() {
         </div>
 
           {/* Theme toggle */}
-          <button
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-              >
-        {/* 3. Conditional Rendering based on isMounted */}
-        {isMounted ? (
-          // Renders the correct icon after mounting and client theme is known
-          theme === "light" ? <MoonIcon size={18} /> : <Sun size={18} />
-        ) : (
-          // Renders a default icon or a neutral icon during SSR/hydration
-          <div style={{ width: 18, height: 18 }} /> // or maybe <MoonIcon size={18} />
-        )}
-      </button>
-
+          <ThemeToggle />
           {/* Notifications */}
           <button className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition relative">
             <Bell size={20} />

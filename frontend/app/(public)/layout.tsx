@@ -1,4 +1,4 @@
-// import "../globals.css";
+import "../globals.css";
 
 export default function PublicLayout({
   children,
@@ -6,7 +6,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-[var(--bg)] text-[var(--text)]">
+    <div className="bg-bg-main">
       {children}
     </div>
   );

@@ -13,10 +13,11 @@ export const getAllUsers = async (req, res) => {
 // fetch balance for individual user
 export const fetchBalance = async (req, res) => {
   try {
-    const userId = req.user.id;  // uuid from supabase JWT
+    const userId = req.user.id;
 
     const user = await prisma.user.findUnique({
       where: { supabaseId: userId },
+      select: { balance: true }, // only this column
     });
 
     if (!user) {
@@ -24,20 +25,28 @@ export const fetchBalance = async (req, res) => {
     }
 
     return res.status(200).json({ balance: Number(user.balance) });
-
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 
+
 // GET profile
+// optimized getProfile (single DB call)
 export const getProfile = async (req, res) => {
   try {
-    // ✅ Make sure to read it from req.user (set in middleware)
-    const supabaseId = req.user.id;  // this was missing
+    const supabaseId = req.user.id;
 
-    const user = await prisma.user.findUnique({
+    // upsert: returns existing row or creates & returns new one
+    const user = await prisma.user.upsert({
       where: { supabaseId },
+      update: {}, // no-op update when exists
+      create: {
+        supabaseId,
+        email: req.user.email,
+        balance: 100000.0,
+        // set any other defaults you want
+      },
       select: {
         id: true,
         email: true,
@@ -52,25 +61,13 @@ export const getProfile = async (req, res) => {
       },
     });
 
-    if (!user) {
-      console.log("User not found, creating new entry...");
-      const newUser = await prisma.user.create({
-        data: {
-          supabaseId,
-          email: req.user.email,
-          balance: 100000.0,
-        },
-      });
-      return res.status(200).json({ user: newUser });
-    }
-
     return res.status(200).json({ user });
-
   } catch (err) {
     console.error("Profile fetch error:", err);
     return res.status(500).json({ error: "Failed to fetch profile" });
   }
 };
+
 
 
 // UPDATE profile
