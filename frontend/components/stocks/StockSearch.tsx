@@ -47,30 +47,28 @@ export default function StockSearch({ value, onChange, fullList = [] }: StockSea
 
   return (
     <div className="relative w-full md:w-64">
-      <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+      <Search className="absolute left-3 top-2.5 h-5 w-5 text-text" />
 
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Search stocks..."
-        className="w-full pl-10 pr-3 py-2 rounded-lg border border-gray-300 
-                   bg-white dark:bg-dark-surface dark:border-gray-700 text-sm"
+        className="w-full pl-10 pr-3 py-2 rounded-lg border border-border 
+                   bg-bg-main text-sm text-text"
       />
 
       {/* Suggestions Dropdown */}
       {suggestions.length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-dark-surface 
-                        shadow-lg rounded-lg border border-gray-200 dark:border-gray-700
+        <div className="absolute left-0 right-0 top-full mt-1 bg-bg-main 
+                        shadow-lg rounded-lg border border-border
                         z-20">
           {suggestions.map((s) => (
             <Link
               key={s.symbol}
               href={`/stocks/${s.symbol}`}
-              className="block px-3 py-2 text-sm hover:bg-gray-100 
-                         dark:hover:bg-gray-800 cursor-pointer"
-            >
-              <div className="font-semibold">{s.symbol}</div>
-              <div className="text-xs text-gray-500">{s.name}</div>
+              className="block px-3 py-2 text-sm cursor-pointer hover:bg-bg-elevated">
+              <div className="font-semibold text-text">{s.symbol}</div>
+              <div className="text-xs text-text-secondary">{s.name}</div>
             </Link>
           ))}
         </div>

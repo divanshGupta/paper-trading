@@ -1,10 +1,10 @@
-@import "./theme.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import "./theme.css";
 
-* {
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+/* optional: smooth transitions */
+html {
+  @apply transition-colors duration-300;
 }

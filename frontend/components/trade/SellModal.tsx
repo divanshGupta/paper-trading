@@ -1,20 +1,22 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
+import { toast } from "sonner";
 
 export default function SellModal({ symbol, holdingQty, onClose, onSuccess }: any) {
+
   const [quantity, setQuantity] = useState<number>(0);
   const [loading, setLoading] = useState(false);
 
-  const handleSell = async (qty: number) => {
-    if (qty <= 0) return alert("Enter a valid quantity");
-    if (qty > holdingQty) return alert("You don’t have that many shares");
+  const handleSell = async (sellQty: number) => {
+
+    if (sellQty <= 0) return toast.error("Enter a valid quantity");
+    if (sellQty > holdingQty) return toast.error("You don’t have that many shares");
 
     setLoading(true);
+
     const { data } = await supabase.auth.getSession();
     const token = data.session?.access_token;
-
-    console.log("SELL DEBUG:", { symbol, qty, holdingQty });
 
     const res = await fetch("http://localhost:5500/api/v1/trade/sell", {
       method: "POST",
@@ -22,14 +24,14 @@ export default function SellModal({ symbol, holdingQty, onClose, onSuccess }: an
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ symbol, quantity: qty }),
+      body: JSON.stringify({ symbol, quantity: sellQty }) // ✔ FIXED
     });
 
     setLoading(false);
     const json = await res.json();
 
     if (res.ok) {
-      alert(`Sold ${qty} shares of ${symbol}`);
+      toast.success(`Sold ${sellQty} shares of ${symbol}`);
       onSuccess?.();
       onClose?.();
     } else {
@@ -38,40 +40,35 @@ export default function SellModal({ symbol, holdingQty, onClose, onSuccess }: an
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-      <div className="bg-white text-black p-6 rounded-xl w-80 shadow-xl">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div className="bg-white dark:bg-dark-surface p-6 rounded-xl w-80">
         <h2 className="text-lg font-bold mb-3">Sell {symbol}</h2>
 
         <input
           type="number"
-          className="border px-3 py-2 rounded w-full mb-3"
+          className="border px-3 py-2 rounded w-full mb-3 dark:bg-gray-800"
           placeholder="Enter quantity"
           value={quantity}
           onChange={(e) => setQuantity(Number(e.target.value))}
         />
 
-        <div className="flex justify-between">
+        <div className="flex gap-2">
           <button
             onClick={() => handleSell(quantity)}
-            disabled={loading}
-            className="bg-red-600 text-white px-4 py-2 rounded w-[48%]"
+            className="bg-red-600 text-white px-4 py-2 rounded w-1/2"
           >
-            {loading ? "Selling..." : "Sell"}
+            Sell
           </button>
 
           <button
             onClick={() => handleSell(holdingQty)}
-            disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded w-[48%]"
+            className="bg-green-600 text-white px-4 py-2 rounded w-1/2"
           >
-            {loading ? "Selling..." : "Square Off Full"}
+            Full Exit
           </button>
         </div>
 
-        <button
-          onClick={onClose}
-          className="mt-4 text-gray-500 underline w-full text-sm"
-        >
+        <button onClick={onClose} className="mt-4 text-sm underline text-gray-400">
           Cancel
         </button>
       </div>

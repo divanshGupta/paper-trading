@@ -1,28 +1,71 @@
-/* LIGHT THEME (default) */
+/* =========================================================
+   TRADESIM VIBRANT THEME (LIGHT MODE)
+   ========================================================= */
 :root {
-  --color-bg: #F9FAFB;
-  --color-bg-surface: #FFFFFF;
+  /* ----- BRAND COLORS ----- */
+  --color-brand: #00d09c;         /* Main Brand Teal */
+  --color-brand-dark: #009f79;
+  --color-brand-light: #5ef7d0;
+  --color-brand-glow: rgba(0, 208, 156, 0.55);
 
-  --color-text: #111827;
-  --color-text-secondary: #6B7280;
+  /* ----- BACKGROUND ----- */
+  --color-bg: #f6f7f9;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #f0f2f5;
 
-  --color-brand: #00C49A;
-  --color-brand-light: #5EF7D0;
-  --color-brand-dark: #009F7A;
+  /* ----- TEXT ----- */
+  --color-text: #1f2937;
+  --color-text-secondary: #6b7280;
 
-  --color-positive: #16A34A;
-  --color-negative: #DC2626;
+  /* ----- POSITIVE / NEGATIVE ----- */
+  --color-positive: #22c55e;
+  --color-positive-soft: #dcfce7;
 
-  --color-border: #E5E7EB;
+  --color-negative: #ef4444;
+  --color-negative-soft: #fee2e2;
+
+  /* ----- BORDERS ----- */
+  --color-border: #C4C4C4;
+
+
+  /* ----- ACCENTS ----- */
+  --color-blue: #60a5fa;
+  --color-yellow: #facc15;
+  --color-purple: #c084fc;
 }
 
-/* DARK THEME */
+
+/* =========================================================
+   TRADESIM DARK MODE (VIBRANT)
+   ========================================================= */
 .dark {
-  --color-bg: #0E141B;
-  --color-bg-surface: #1A212B;
+  /* ----- BRAND COLORS ----- */
+  --color-brand: #00e6b3;
+  --color-brand-dark: #009c75;
+  --color-brand-light: #77ffdd;
+  --color-brand-glow: rgba(0, 230, 179, 0.45);
 
-  --color-text: #F3F4F6;
-  --color-text-secondary: #9CA3AF;
+  /* ----- BACKGROUND ----- */
+  --color-bg: #0d1117;
+  --color-bg-surface: #161b22;
+  --color-bg-elevated: #1d232b;
 
-  --color-border: #374151;
+  /* ----- TEXT ----- */
+  --color-text: #e5e7eb;
+  --color-text-secondary: #9ca3af;
+
+  /* ----- POSITIVE / NEGATIVE ----- */
+  --color-positive: #22e57f;
+  --color-positive-soft: #073f26;
+
+  --color-negative: #ff5757;
+  --color-negative-soft: #3a1f1f;
+
+  /* ----- BORDERS ----- */
+  --color-border: #4A4A4A;
+
+  /* ----- ACCENTS ----- */
+  --color-blue: #87b7ff;
+  --color-yellow: #ffe066;
+  --color-purple: #d8a8ff;
 }

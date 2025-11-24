@@ -28,14 +28,14 @@ export default function WatchlistButton({ symbol, alwaysVisible }: WatchlistButt
       }}
       className={`absolute right-2 top-2
         p-1.5 rounded-full
-        bg-white/80 dark:bg-black/40
-        hover:bg-white dark:hover:bg-gray-900
+        bg-bg-surface
+        hover:bg-bg-surface
         transition shadow-md
         ${alwaysVisible ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
       `}
     >
       {isInWatchlist ? (
-        <BookmarkCheck size={20} className="text-green-500" />
+        <BookmarkCheck size={20} className="text-positive" />
       ) : (
         <Bookmark size={20} className="text-gray-500" />
       )}

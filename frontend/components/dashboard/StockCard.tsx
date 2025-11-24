@@ -18,36 +18,27 @@ export default function StockCard({
 
   const flashBorder =
     flash === "up"
-      ? "border-green-400"
+      ? "border-positive"
       : flash === "down"
-      ? "border-red-400"
-      : "border-gray-200 dark:border-gray-700";
+      ? "border-negative"
+      : "border-border";
 
   return (
     <div
       className={`
-        group relative p-4 rounded-xl shadow-card border transition-all bg-white
-        dark:bg-dark-surface hover:shadow-md hover:border-gray-300  
+        bg-bg-main text-text border group relative p-4 rounded-xl shadow-card transition-all hover:shadow-sm 
         ${flashBorder}
       `}
     >
       {/* ⭐ Watchlist Button (Groww-style) */}
-      <div
-        className="
-          absolute top-2 right-2 
-          opacity-0 group-hover:opacity-100 transition
-          bg-white/80 dark:bg-black/40 backdrop-blur-md p-1
-          z-10
-        "
-      >
-        <WatchlistButton symbol={symbol} />
-      </div>
+      <WatchlistButton symbol={symbol} />
+      
 
       {/* Content */}
       <div>
         {/* Symbol & Name */}
-        <h2 className="font-bold text-lg">{symbol}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{name}</p>
+        <h2 className="font-bold text-lg text-text">{symbol}</h2>
+        <p className="text-sm text-text-secondary">{name}</p>
 
         {/* Price */}
         <p className="text-2xl font-semibold mt-3">₹{price}</p>
@@ -55,7 +46,7 @@ export default function StockCard({
         {/* Day Change */}
         <div
           className={`mt-1 text-sm font-semibold flex items-center gap-1 ${
-            dayChange >= 0 ? "text-green-600" : "text-red-600"
+            dayChange >= 0 ? "text-positive" : "text-negative"
           }`}
         >
           {dayChange >= 0 ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
@@ -64,14 +55,14 @@ export default function StockCard({
         </div>
 
         {/* Sparkline */}
-        <div className="mt-3 h-12">
+        <div className="mt-3 h-10">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={sparkline}>
               <Line
                 type="monotone"
                 dataKey="value"
                 dot={false}
-                stroke={dayChange >= 0 ? "#22c55e" : "#ef4444"}
+                stroke={dayChange >= 0 ? "#22e57f" : "#ff5757"}
                 strokeWidth={2}
               />
             </LineChart>

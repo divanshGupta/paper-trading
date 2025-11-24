@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import ProfileEditForm from "@/components/ProfileEditForm";
+import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 

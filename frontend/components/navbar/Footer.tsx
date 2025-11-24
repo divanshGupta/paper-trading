@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="border-t bg-white dark:bg-[#1A212B] py-6 h-20">
+    <footer className="border-t bg-bg-main py-6 h-20">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
 
         {/* Brand */}
@@ -18,7 +18,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-text-secondary">
           © {new Date().getFullYear()} TradeSim • For education & simulation only
         </p>
       </div>

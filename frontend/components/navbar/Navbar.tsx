@@ -3,26 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useTheme } from 'next-themes';
-import { Menu, X, Bell, Sun, MoonIcon } from 'lucide-react';
+import { Menu, X, Bell } from 'lucide-react';
 // import TickerBar from '../dashboard/StockTicker';
-import ProfileDropDown from '../ui/ProfileDropDown';
+import ProfileDropDown from './ProfileDropDown';
 import ThemeToggle from '../ui/ThemeToggle';
 import StockSearch from '../stocks/StockSearch';
-import { useRouter } from 'next/navigation';
 import { useLivePrices } from '@/app/(main)/hooks/useLivePrices';
 
-// type UserInfo = {
-//   name: string;
-//   email: string;
-// }
-
 export default function Navbar() {
-  const router = useRouter();
   const [search, setSearch] = useState("");
 
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -41,7 +32,7 @@ export default function Navbar() {
   }, []);
 
  return (
-    <nav className="fixed top-0 left-0  w-full z-50 bg-white/80 dark:bg-[#1A212B]/80 backdrop-blur-md border-b border-gray-200 shadow-xs">
+    <nav className="fixed top-0 left-0  w-full z-50 bg-bg-main backdrop-blur-md border-b border-border shadow-xs">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
         {/* Left side */}
@@ -49,7 +40,7 @@ export default function Navbar() {
           
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2 ">
-            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-400 to-teal-500" />
+            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-red-400 to-green-400" />
             <span className="font-semibold text-xl">TradeSim</span>
           </Link>
 
@@ -82,7 +73,7 @@ export default function Navbar() {
           {/* Theme toggle */}
           <ThemeToggle />
           {/* Notifications */}
-          <button className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition relative">
+          <button className="p-2 rounded-full hover:bg-bg-surface transition relative">
             <Bell size={20} />
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-[5px] py-[1px]">
               5
@@ -107,7 +98,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t bg-white dark:bg-[#1A212B] px-4 py-3">
+        <div className="md:hidden border-t bg-bg-main px-4 py-3">
           {navLinks.map((link) => (
             <Link
               key={link.href}

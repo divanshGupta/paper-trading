@@ -24,10 +24,10 @@ export default function StocksTableDesktop({
     const router = useRouter();
 
   return (
-    <div className="hidden md:block overflow-hidden rounded-xl shadow-card dark:bg-dark-surface">
-      <table className="w-full border border-gray-200 mb-3">
+    <div className="hidden md:block overflow-hidden rounded-xl shadow-card">
+      <table className="w-full border border-border mb-3">
         <thead>
-          <tr className="bg-gray-200 dark:bg-gray-800 text-sm text-left">
+          <tr className="bg-bg-elevated text-sm text-left">
             <th className="p-3">Symbol</th>
             <th className="p-3">Company</th>
             <th className="p-3">Price</th>
@@ -45,11 +45,11 @@ export default function StocksTableDesktop({
               <tr
                 onClick={() => router.push(`/stocks/${s.symbol}`)}
                 key={s.symbol}
-                className="group border-t border-gray-200 dark:border-gray-700 text-sm hover:shadow-md hover:border-gray-300"
+                className="group border-t border-border text-sm hover:bg-bg-surface"
               >
                 {/* SYMBOL */}
-                <td className="p-3 font-semibold text-light-text dark:text-dark-text">
-                  <div className="relative flex items-center gap-2">
+                <td className="p-3 font-semibold text-text">
+                  <div className="relative flex gap-2">
                     <span>{s.symbol}</span>
                     {/* bookmard only visible on hover */}
                       <WatchlistButton symbol={s.symbol} />
@@ -57,7 +57,7 @@ export default function StocksTableDesktop({
                 </td>
 
                 {/* COMPANY NAME */}
-                <td className="p-3 text-light-text-secondary dark:text-dark-text-secondary">
+                <td className="p-3 text-text-secondary">
                   {s.name}
                 </td>
 
@@ -65,10 +65,10 @@ export default function StocksTableDesktop({
                 <td
                   className={`p-3 font-medium transition-all ${
                     isUp
-                      ? "bg-green-100 dark:bg-green-900 text-positive"
+                      ? "text-positive"
                       : isDown
-                      ? "bg-red-100 dark:bg-red-900 text-negative"
-                      : "text-light-text dark:text-dark-text"
+                      ? "text-negative"
+                      : "text-text-secondary"
                   }`}
                 >
                   ₹{s.price}
@@ -88,15 +88,15 @@ export default function StocksTableDesktop({
                 </td>
 
                 {/* ACTION BUTTONS */}
-                <td className="p-3 flex items-start gap-3">
+                <td className="p-3 flex items-start gap-6">
                   {/* BUY */}
                   <button
                     disabled={tradingSymbol === s.symbol || !marketOpen}
                     onClick={() => onBuy(s.symbol, s.price)}
-                    className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
+                    className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
                       !marketOpen || tradingSymbol === s.symbol
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-green-400 hover:bg-brand-dark"
+                        ? "bg-bg-elevated border border-border cursor-not-allowed"
+                        : "bg-positive"
                     }`}
                   >
                     {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
@@ -106,10 +106,10 @@ export default function StocksTableDesktop({
                   <button
                     disabled={tradingSymbol === s.symbol || !marketOpen}
                     onClick={() => onSell(s.symbol, s.price)}
-                    className={`px-4 py-2 rounded-md text-white text-sm font-medium transition ${
+                    className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
                       !marketOpen || tradingSymbol === s.symbol
-                        ? "bg-gray-400 cursor-not-allowed"
-                        : "bg-red-500 hover:bg-red-600"
+                        ? "bg-bg-elevated border border-border cursor-not-allowed"
+                        : "bg-negative"
                     }`}
                   >
                     {tradingSymbol === s.symbol ? "Processing..." : "Sell"}

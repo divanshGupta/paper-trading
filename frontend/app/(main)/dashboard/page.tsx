@@ -98,7 +98,7 @@ export default function Dashboard() {
   }, [prices, filter]);
 
   return (
-    <div className="pt-10 bg-bgMain text-text-primary">
+    <div className="pt-10 bg-bg-main text-text">
       <div className="max-w-7xl mx-auto flex gap-6">
 
         {/* LEFT */}
@@ -113,10 +113,10 @@ export default function Dashboard() {
                 key={f}
                 onClick={() => setFilter(f as any)}
                 className={`
-                  px-4 py-1.5 rounded-full text-sm font-medium transition border
+                  px-4 py-2 rounded-full text-sm font-medium transition border
                   ${filter === f 
-                    ? "bg-blue-600 text-white border-blue-600" 
-                    : "bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700"}
+                    ? "bg-bg-elevated text-text border border-border" 
+                    : "bg-bg-main border border-border "}
                 `}
               >
                 {f === "all" ? "All" : f === "gainers" ? "Top Gainers" : "Top Losers"}
@@ -135,7 +135,7 @@ export default function Dashboard() {
 
           <Link
             href="/stocks"
-            className="text-blue-400 text-sm font-semibold inline-flex items-center justify-center mt-3 mb-4"
+            className="text-positive text-sm font-semibold inline-flex items-center justify-center mt-3 mb-4"
           >
             <span className="mr-2">See more</span>
             <span className="text-xl">›</span>

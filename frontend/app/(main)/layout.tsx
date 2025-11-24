@@ -1,8 +1,8 @@
 import ToastProvider from "../../components/providers/ToastProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { BalanceProvider } from "../../components/providers/BalanceProvider";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/navbar/Footer";
+import Navbar from "@/components/navbar/Navbar";
 import { AppProvider } from "@/components/providers/AppProvider";
 
 export default function MainLayout({

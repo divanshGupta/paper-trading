@@ -1,34 +1,44 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: "class",
+
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{ts,tsx,jsx,js,mdx}",
+    "./components/**/*.{ts,tsx,jsx,js,mdx}",
   ],
+
   theme: {
     extend: {
       colors: {
-        // Brand
+        // brand
         brand: "var(--color-brand)",
-        brandLight: "var(--color-brand-light)",
-        brandDark: "var(--color-brand-dark)",
+        "brand-dark": "var(--color-brand-dark)",
+        "brand-light": "var(--color-brand-light)",
+        "brand-glow": "var(--color-brand-glow)",
 
-        // Backgrounds
-        bgMain: "var(--color-bg)",
-        bgSurface: "var(--color-bg-surface)",
+        // backgrounds
+        "bg-main": "var(--color-bg)",
+        "bg-surface": "var(--color-bg-surface)",
+        "bg-elevated": "var(--color-bg-elevated)",
 
-        // Text
-        textMain: "var(--color-text)",
-        textSecondary: "var(--color-text-secondary)",
+        // text
+        text: "var(--color-text)",
+        "text-secondary": "var(--color-text-secondary)",
 
-        // Alerts
+        // positive / negative
         positive: "var(--color-positive)",
-        negative: "var(--color-negative)",
+        "positive-soft": "var(--color-positive-soft)",
 
-        // Border
-        borderMain: "var(--color-border)",
+        negative: "var(--color-negative)",
+        "negative-soft": "var(--color-negative-soft)",
+
+        // borders
+        border: "var(--color-border)",
+
+        // accents
+        blue: "var(--color-blue)",
+        yellow: "var(--color-yellow)",
+        purple: "var(--color-purple)",
       },
     },
   },
-  plugins: [],
 };

@@ -86,7 +86,12 @@ export const sellStock = async (req, res) => {
     const { symbol, quantity } = req.body;
     const userId = req.user.id;
     //log for debug
-    console.log("Authenticated user:", req.user);
+    console.log("SELL ENDPOINT HIT");
+    console.log("REQ BODY:", req.body);
+    console.log("USER:", req.user);
+    console.log("VALIDATION FAIL:", { symbol, quantity });
+
+
 
     if (!symbol || !quantity || quantity <= 0) {
       return res.status(400).json({ message: "Valid symbol and quantity required" });

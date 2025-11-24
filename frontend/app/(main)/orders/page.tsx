@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
-import TransactionTable from "@/components/TransactionTable";
-import Pagination from "@/components/Pagination";
+import TransactionTable from "@/components/orders/TransactionTable";
+import Pagination from "@/components/ui/Pagination";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<any[]>([]);
