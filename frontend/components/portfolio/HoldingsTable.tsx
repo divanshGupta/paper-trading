@@ -1,12 +1,16 @@
 "use client";
 
+import { useApp } from "../providers/AppProvider";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
-import SellModal from "../trade/SellModal";
+import SellModal from "../trade/TradeModal";
 
 export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
+
+  const { state, refresh } = useApp();
+  const { profile } = state;
   const router = useRouter();
   const [active, setActive] = useState<null | { symbol: string; holdingQty: number }>(null);
 
@@ -60,7 +64,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
                 {/* SELL BUTTON → opens modal */}
                 <td className="py-3 text-center">
                   <button
-                    className="px-3 py-1 bg-brand text-white rounded-lg hover:bg-brand-dark"
+                    className="px-3 py-1 bg-brand text-text rounded-lg hover:bg-brand-dark"
                     onClick={() => setActive({ symbol: h.symbol, holdingQty: h.quantity })}
                   >
                     Sell
@@ -115,8 +119,10 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
       {/* MODAL HERE */}
       {active && (
         <SellModal
+          mode="sell"
           symbol={active.symbol}
           holdingQty={active.holdingQty}
+          price={profile?.balance}
           onClose={() => setActive(null)}
           onSuccess={onSuccess}
         />

@@ -16,7 +16,7 @@ export default function BuyModal({ symbol, holdingQty, onClose, onSuccess }: any
 
     console.log("SELL DEBUG:", { symbol, qty, holdingQty });
 
-    const res = await fetch("http://localhost:5500/api/v1/trade/sell", {
+    const res = await fetch("http://localhost:5500/api/v1/trade/buy", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

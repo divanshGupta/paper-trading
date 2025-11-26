@@ -11,6 +11,8 @@ import StockSearch from "@/components/stocks/StockSearch";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
 
 export default function AllStocksPage() {
+
+
   const { prices, flash } = useLivePrices();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
   const [search, setSearch] = useState("");

@@ -51,7 +51,7 @@ export default function Navbar() {
           
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2 ">
-            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-red-400 to-green-400" />
+            <div className="w-7 h-7 rounded-full bg-brand" />
             <span className="font-semibold text-xl">TradeSim</span>
           </Link>
 
@@ -83,8 +83,9 @@ export default function Navbar() {
 
           {/* Theme toggle */}
           <ThemeToggle />
+
           {/* Notifications */}
-          <button className="p-2 rounded-full hover:bg-bg-surface transition relative">
+          <button className="hidden md:block p-2 rounded-full hover:bg-bg-surface transition relative">
             <Bell size={20} />
             <span className="absolute -top-1 -right-1 bg-red-500 text-text text-xs rounded-full px-[5px] py-[1px]">
               5

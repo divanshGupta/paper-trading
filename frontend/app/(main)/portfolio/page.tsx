@@ -82,7 +82,6 @@ function PortfolioPage() {
         holdings={enrichedHoldings}
         flash={flash}
         onSuccess={refresh}
-
       />
     </div>
   );

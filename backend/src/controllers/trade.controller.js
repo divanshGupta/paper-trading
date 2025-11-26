@@ -8,69 +8,114 @@ export const buyStock = async (req, res) => {
 
     // Block trading outside market hours
     if (!isMarketOpen()) {
-      return res.status(403).json({ message: "Market is closed. Try again between 9:15 AM and 3:30 PM."});
-    }
-
-    const { symbol, quantity, price } = req.body;
-    if (!symbol || !quantity || !price || quantity <= 0 || price <= 0) {
-      return res.status(400).json({ message: "Valid symbol, quantity, price required" });
-    }
-    const userId = req.user.id;
-    const totalCost = price * quantity;
-    //log for debug
-    console.log("Authenticated user:", req.user);
-
-    await prisma.$transaction(async (tx) => {
-      const user = await tx.user.findUnique({ where: { supabaseId: userId } });
-      if (!user) throw new Error("USER_NOT_FOUND");
-      if (user.balance < totalCost) throw new Error("INSUFFICIENT_FUNDS");
-
-      await tx.user.update({
-        where: { supabaseId: userId },
-        data: { balance: { decrement: totalCost } }
+      return res.status(403).json({
+        message: "Market is closed. Try again between 9:15 AM and 3:30 PM."
       });
+    }
 
-      const existing = await tx.portfolio.findFirst({ where: { userId, symbol } });
+    const { symbol, quantity } = req.body;
+    const userId = req.user.id;
 
-      if (!existing) {
-        await tx.portfolio.create({
-          data: { userId, symbol, quantity, avgPrice: price }
-        });
-      } else {
-        const newQty = existing.quantity + quantity;
-        const newAvgRaw = ((existing.quantity * existing.avgPrice) + (quantity * price)) / newQty;
-        const newAvg = Math.round(newAvgRaw * 100) / 100; // keep as number, 2dp
+    console.log("BUY ENDPOINT HIT");
+    console.log("REQ BODY:", req.body);
+    console.log("USER:", req.user);
 
-        await tx.portfolio.update({
-          where: { id: existing.id },
-          data: { quantity: newQty, avgPrice: newAvg }
-        });
-      }
+    if (!symbol || !quantity || quantity <= 0) {
+      return res.status(400).json({ message: "Valid symbol and quantity required" });
+    }
 
-      await tx.transaction.create({
+    // ✅ 1. Fetch live market price from backend engine
+    const stock = global.STOCKS?.find(
+      s => s.symbol.toUpperCase() === symbol.toUpperCase()
+    );
+    if (!stock) {
+      return res.status(404).json({ message: "Stock not found" });
+    }
+
+    const price = stock.price; // ✔ TRUSTED PRICE
+
+    // Total cost
+    const totalCost = price * quantity;
+
+    // ✅ 2. Fetch user wallet balance
+    const user = await prisma.user.findUnique({
+      where: { supabaseId: userId }
+    });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const currentBalance = Number(user.balance);
+
+    // Check if user has enough funds
+    if (currentBalance < totalCost) {
+      return res.status(400).json({
+        message: "Insufficient balance"
+      });
+    }
+
+    // ✅ 3. Fetch or create portfolio entry
+    let holding = await prisma.portfolio.findFirst({
+      where: { userId, symbol }
+    });
+
+    if (!holding) {
+      // Create a new holding
+      holding = await prisma.portfolio.create({
         data: {
           userId,
           symbol,
-          type: "BUY",
           quantity,
-          price: new Prisma.Decimal(price),
-          total: new Prisma.Decimal(totalCost),
-          realizedPnl: new Prisma.Decimal(0)
+          avgPrice: price
         }
       });
+    } else {
+      // Update avg price
+      const oldQty = holding.quantity;
+      const oldAvg = Number(holding.avgPrice);
 
+      const newQty = oldQty + quantity;
+      const newAvgPrice =
+        (oldAvg * oldQty + price * quantity) / newQty;
+
+      await prisma.portfolio.update({
+        where: { id: holding.id },
+        data: {
+          quantity: newQty,
+          avgPrice: newAvgPrice
+        }
+      });
+    }
+
+    // ✅ 4. Deduct balance
+    const newBalance = currentBalance - totalCost;
+
+    await prisma.user.update({
+      where: { supabaseId: userId },
+      data: { balance: newBalance }
     });
 
-    return res.status(200).json({ message: "Buy executed" });
-  } catch (err) {
-    if (err.message === "INSUFFICIENT_FUNDS") {
-      return res.status(403).json({ error: "Insufficient Funds", message: "Balance too low to execute order" });
-    }
-    if (err.message === "USER_NOT_FOUND") {
-      return res.status(404).json({ message: "User not found" });
-    }
-    console.error(err);
-    return res.status(500).json({ message: "Internal Server Error" });
+    // ✅ 5. Record transaction
+    await prisma.transaction.create({
+      data: {
+        userId,
+        symbol,
+        type: "BUY",
+        quantity,
+        price,
+        total: totalCost
+      }
+    });
+
+    return res.status(200).json({
+      message: "Buy successful",
+      price,
+      totalCost,
+      newBalance
+    });
+
+  } catch (error) {
+    console.error("BUY ERROR:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 

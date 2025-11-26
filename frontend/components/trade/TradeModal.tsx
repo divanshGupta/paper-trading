@@ -1,0 +1,165 @@
+"use client";
+
+import { useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
+import { toast } from "sonner";
+import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";   // <-- WebSocket price feed
+
+export default function TradeModal({
+  mode,             // "buy" | "sell"
+  symbol,
+  holdingQty = 0,   // Sell mode
+  balance = 0,      // Buy mode
+  avgPrice,         // Optional for future P/L display
+  onClose,
+  onSuccess
+}: any) {
+
+  const { bySymbol } = useLivePrices();     // <-- global WebSocket feed
+  const liveStock = bySymbol(symbol);
+  const price = liveStock?.price ?? null;   // <-- REAL TIME PRICE
+
+  const [quantity, setQuantity] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
+
+  const isBuy = mode === "buy";
+  const isSell = mode === "sell";
+
+  const total = price ? quantity * price : 0;
+  const newBalance = isBuy ? balance - total : balance + total;
+
+  const handleTrade = async () => {
+    if (!price) return toast.error("Unable to read live price");
+    if (quantity <= 0) return toast.error("Enter a valid quantity");
+
+    if (isSell && quantity > holdingQty)
+      return toast.error("You don't have that many shares");
+
+    setLoading(true);
+
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+
+    const url = isBuy
+      ? "http://localhost:5500/api/v1/trade/buy"
+      : "http://localhost:5500/api/v1/trade/sell";
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        symbol,
+        quantity
+      }),
+    });
+
+    setLoading(false);
+
+    const json = await res.json();
+    if (!res.ok) return toast.error(json.message);
+
+    toast.success(`${isBuy ? "Bought" : "Sold"} ${quantity} shares of ${symbol}`);
+    onSuccess?.();
+    onClose?.();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+      <div className="bg-white dark:bg-dark-surface p-6 rounded-2xl w-full max-w-sm shadow-xl">
+
+        {/* HEADER */}
+        <h2 className="text-lg font-bold mb-1">
+          {isBuy ? "Buy" : "Sell"} {symbol}
+        </h2>
+
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+          {price ? (
+            <>Market Price: <span className="font-semibold">₹{price}</span></>
+          ) : (
+            "Connecting to price feed…"
+          )}
+        </p>
+
+        {/* INPUT */}
+        <div className="mb-4">
+          <label className="text-sm text-gray-600 dark:text-gray-300">Quantity</label>
+
+          <input
+            type="number"
+            className="border dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 rounded-lg w-full mt-1"
+            placeholder="Enter quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+          />
+        </div>
+
+        {/* BUY SECTION */}
+        {isBuy && (
+          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-4 text-sm">
+            <div className="flex justify-between">
+              <span>Available Balance:</span>
+              <span className="font-semibold">₹{balance.toLocaleString()}</span>
+            </div>
+
+            <div className="flex justify-between mt-1">
+              <span>Total Cost:</span>
+              <span className="font-semibold">₹{total.toLocaleString()}</span>
+            </div>
+
+            <div className="flex justify-between mt-1">
+              <span>Balance After Buy:</span>
+              <span className={`${newBalance < 0 ? "text-red-600" : ""}`}>
+                ₹{newBalance.toLocaleString()}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* SELL SECTION */}
+        {isSell && (
+          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-4 text-sm">
+            <div className="flex justify-between">
+              <span>Your Holdings:</span>
+              <span className="font-semibold">{holdingQty} shares</span>
+            </div>
+
+            <div className="flex justify-between mt-1">
+              <span>Value:</span>
+              <span className="font-semibold">₹{total.toLocaleString()}</span>
+            </div>
+          </div>
+        )}
+
+        {/* BUTTONS */}
+        <div className="flex gap-2">
+          <button
+            onClick={handleTrade}
+            disabled={loading || !price}
+            className={`${isBuy ? "bg-green-600" : "bg-red-600"} text-white px-4 py-2 rounded-lg w-full font-semibold`}
+          >
+            {loading ? "Processing…" : isBuy ? "Buy" : "Sell"}
+          </button>
+
+          {isSell && (
+            <button
+              onClick={() => setQuantity(holdingQty)}
+              className="bg-gray-200 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded-lg"
+            >
+              Max
+            </button>
+          )}
+        </div>
+
+        <button
+          onClick={onClose}
+          className="mt-4 text-sm text-gray-400 hover:text-gray-500 mx-auto block"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+}
