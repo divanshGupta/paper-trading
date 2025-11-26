@@ -1,9 +1,7 @@
 "use client";
 
-import { ArrowUp, ArrowDown } from "lucide-react";
 import { StockCardProps } from "@/types";
 import WatchlistButton from "../stocks/WatchlistButton";
-import Sparkline from "../chart/Sparkline";
 
 export default function StockCard({
   symbol,
@@ -11,7 +9,6 @@ export default function StockCard({
   price,
   previousClose,
   flash,
-  sparkline,
 }: StockCardProps) {
   const dayChange = price - previousClose;
   const pct = (dayChange / previousClose) * 100;
@@ -26,41 +23,33 @@ export default function StockCard({
   return (
     <div
       className={`
-        bg-bg-main text-text border group relative p-4 rounded-xl shadow-card transition-all hover:shadow-sm 
-        ${flashBorder}
+        bg-bg-surface text-text border rounded-xl shadow-card 
+        transition-all hover:shadow-sm ${flashBorder}
+        p-4 h-40 flex flex-col justify-between 
+        relative group
       `}
     >
-      {/* ⭐ Watchlist Button (Groww-style) */}
-      <WatchlistButton symbol={symbol} />
-      
+      {/* Header */}
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="font-bold text-base">{symbol}</h2>
+          <p className="text-xs text-text-secondary truncate w-[90px]">{name}</p>
+        </div>
 
-      {/* Content */}
+        <WatchlistButton symbol={symbol} />
+      </div>
+
+      {/* Price */}
       <div>
-        {/* Symbol & Name */}
-        <h2 className="font-bold text-lg text-text">{symbol}</h2>
-        <p className="text-sm text-text-secondary">{name}</p>
-
-        {/* Price */}
-        <p className="text-2xl font-semibold mt-3">₹{price}</p>
-
-        {/* Day Change */}
-        <div
-          className={`mt-1 text-sm font-semibold flex items-center gap-1 ${
+        <p className="text-xl font-semibold">₹{price}</p>
+        <p
+          className={`text-sm font-semibold ${
             dayChange >= 0 ? "text-positive" : "text-negative"
           }`}
         >
-          {dayChange >= 0 ? <ArrowUp size={14} /> : <ArrowDown size={14} />}
           {dayChange >= 0 && "+"}
           {dayChange.toFixed(2)} ({pct.toFixed(2)}%)
-        </div>
-
-        {/* Sparkline */}
-        <div className="mt-3 h-10">
-           <Sparkline
-              data={sparkline}
-              positive={price >= previousClose}
-            />
-        </div>
+        </p>
       </div>
     </div>
   );

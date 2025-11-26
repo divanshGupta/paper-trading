@@ -48,7 +48,7 @@ export default function ProfileMenu() {
       {open && (
         <div className="
           absolute right-0 mt-3 w-72 
-          bg-bg-main border border-border
+          bg-bg-elevated border border-border
           rounded-xl shadow-lg  z-50
         ">
           {/* User Info */}
@@ -91,7 +91,7 @@ export default function ProfileMenu() {
             </ul>
           </div>  
 
-          <div className="bg-bg-elevated px-4 py-2 w-full h-full rounded-b-xl flex items-center justify-between">
+          <div className="border-t border-border px-4 py-2 w-full h-full rounded-b-xl flex items-center justify-between">
             {/* Theme Switcher */}
             <ThemeToggle />
 

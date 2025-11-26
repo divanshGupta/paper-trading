@@ -1,31 +1,18 @@
 "use client";
 
+import AuthGuard from "../hooks/authGaurd";
 import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
-import SellModal from "@/components/trade/SellModal";
 import PortfolioSummary from "@/components/portfolio/PortfolioSummary";
 import PortfolioInsights from "@/components/portfolio/PortfolioInsights";
 import HoldingsTable from "@/components/portfolio/HoldingsTable";
 
-export default function PortfolioPage() {
-  const router = useRouter();
+function PortfolioPage() {
+
   const { state, refresh } = useApp();
   const { profile, holdings = [], loading, realizedToday } = state;
   const { bySymbol, flash } = useLivePrices();
-
-  const [activeSell, setActiveSell] = useState<{
-    symbol: string;
-    holdingQty: number;
-  } | null>(null);
-
-
-  // Redirect to login
-  if (!loading && !profile) {
-    router.replace("/login");
-    return null;
-  }
 
   // SUMMARIES
   const enrichedHoldings = useMemo(() => {
@@ -52,6 +39,7 @@ export default function PortfolioPage() {
     const current = enrichedHoldings.reduce((acc, h) => acc + h.value, 0);
     const unrealized = current - invested;
     const roi = invested > 0 ? (unrealized / invested) * 100 : 0;
+    
     const dayPnl = enrichedHoldings.reduce((acc, h) => {
       const live = bySymbol(h.symbol);
       if (!live) return acc;
@@ -96,17 +84,14 @@ export default function PortfolioPage() {
         onSuccess={refresh}
 
       />
-
-      {/* Sell Modal */}
-      {/* {activeSell && (
-        <SellModal
-          symbol={activeSell.symbol}
-          holdingQty={activeSell.holdingQty}
-          price={bySymbol(activeSell.symbol)?.price ?? 0}
-          onClose={() => setActiveSell(null)}
-          onSuccess={refresh}
-        />
-      )} */}
     </div>
   );
 }
+
+const ProtectedPortfolioPage = () => (
+    <AuthGuard>
+      <PortfolioPage />
+    </AuthGuard>
+);
+
+export default ProtectedPortfolioPage;

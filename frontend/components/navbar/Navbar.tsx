@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Bell } from 'lucide-react';
@@ -12,7 +12,7 @@ import { useLivePrices } from '@/app/(main)/hooks/useLivePrices';
 
 export default function Navbar() {
   const [search, setSearch] = useState("");
-
+  const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -31,8 +31,19 @@ export default function Navbar() {
     setIsMounted(true);
   }, []);
 
+  // Handle outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMobileOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
  return (
-    <nav className="fixed top-0 left-0  w-full z-50 bg-bg-main backdrop-blur-md border-b border-border shadow-xs">
+    <nav className="fixed top-0 left-0  w-full z-50 bg-bg-elevated backdrop-blur-md border-b border-border shadow-xs">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
         {/* Left side */}
@@ -67,15 +78,15 @@ export default function Navbar() {
 
           {/* Search bar */}
           <div className="hidden md:block">
-          <StockSearch value={search} onChange={setSearch} fullList={prices}/>
-        </div>
+            <StockSearch value={search} onChange={setSearch} fullList={prices}/>
+          </div>
 
           {/* Theme toggle */}
           <ThemeToggle />
           {/* Notifications */}
           <button className="p-2 rounded-full hover:bg-bg-surface transition relative">
             <Bell size={20} />
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-[5px] py-[1px]">
+            <span className="absolute -top-1 -right-1 bg-red-500 text-text text-xs rounded-full px-[5px] py-[1px]">
               5
             </span>
           </button>
@@ -98,7 +109,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t bg-bg-main px-4 py-3">
+        <div ref={menuRef} className="md:hidden border-t bg-bg-main px-4 py-3">
           {navLinks.map((link) => (
             <Link
               key={link.href}

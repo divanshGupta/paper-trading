@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
+import { toast } from "sonner";
 
 interface ProfileEditFormProps {
   profile: any;
@@ -74,7 +75,7 @@ export default function ProfileEditForm({
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
+      <h2 className="text-text text-xl font-semibold mb-4">Edit Profile</h2>
 
       {/* Error message */}
       {error && (
@@ -91,6 +92,7 @@ export default function ProfileEditForm({
           value={form.name}
           onChange={(v) => handleChange("name", v)}
           required
+          placeholder="Full Name"
         />
 
         {/* Phone */}
@@ -107,7 +109,7 @@ export default function ProfileEditForm({
           <select
             value={form.gender}
             onChange={(e) => handleChange("gender", e.target.value)}
-            className="border rounded-lg px-3 py-2"
+            className="border border-border bg-bg-elevated rounded-lg px-3 py-2"
           >
             <option value="">Select</option>
             <option value="Male">Male</option>
@@ -122,6 +124,7 @@ export default function ProfileEditForm({
           type="date"
           value={form.dob}
           onChange={(v) => handleChange("dob", v)}
+
         />
 
         {/* Address (full width) */}
@@ -130,6 +133,7 @@ export default function ProfileEditForm({
             label="Address"
             value={form.address}
             onChange={(v) => handleChange("address", v)}
+            placeholder="Your Full Address"
           />
         </div>
 
@@ -138,6 +142,7 @@ export default function ProfileEditForm({
           label="Father's Name"
           value={form.fatherName}
           onChange={(v) => handleChange("fatherName", v)}
+          placeholder="Your Father's Name"
         />
       </div>
 
@@ -145,7 +150,7 @@ export default function ProfileEditForm({
       <div className="flex justify-end gap-3 mt-4">
         <button
           onClick={onCancel}
-          className="px-5 py-2 rounded-lg border hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="px-5 py-2 rounded-lg border border-border bg-bg-surface hover:bg-bg-elevated"
         >
           Cancel
         </button>
@@ -153,10 +158,10 @@ export default function ProfileEditForm({
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className={`px-5 py-2 rounded-lg text-white font-semibold ${
+          className={`px-5 py-2 rounded-lg text-text border border-border font-semibold ${
             loading
-              ? "bg-blue-400"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-bg-surface"
+              : "bg-bg-surface hover:bg-bg-elevated"
           }`}
         >
           {loading ? "Saving..." : "Save Changes"}
@@ -194,7 +199,7 @@ function Field({
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="border rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+        className="border border-border rounded-lg px-3 py-2 bg-bg-elevated focus:outline-none"
       />
     </div>
   );

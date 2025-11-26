@@ -110,12 +110,13 @@ export default function Dashboard() {
 
         {/* LEFT */}
         <div className="flex-1 px-4">
+          {/* popular stocks */}
           <StockGrid />
 
           {/* FILTER BUTTONS */}
           <StockFilterTabs
-           onSelect={setFilter}
            select={filter}
+           onSelect={setFilter}
           />
 
           <StocksList

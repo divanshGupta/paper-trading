@@ -1,10 +1,13 @@
 "use client";
 
+import AuthGuard from "../hooks/authGaurd";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { RealizedRow } from "@/types";
+import { deflate } from "zlib";
+import { div } from "framer-motion/client";
 
-export default function RealizedPnLPage() {
+function RealizedPnLPage() {
   const [rows, setRows] = useState<RealizedRow[]>([]);
 
   useEffect(() => {
@@ -24,55 +27,68 @@ export default function RealizedPnLPage() {
 
   return (
     <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
-      <h1 className="text-text text-2xl font-bold mb-4">Realized Profit & Loss</h1>
-
-      <div className="flex justify-between mb-4">
-        <p className="font-medium text-text-secondary">
-          Total Realized P&L:{" "}
-          <span className={totalPnL >= 0 ? "text-positive font-bold" : "text-negative font-bold"}>
-            ₹{totalPnL.toFixed(2)}
-          </span>
-        </p>
-      </div>
 
       {rows.length === 0 ? (
         <p>No realized trades yet.</p>
       ) : (
-        <table className="border border-border w-full text-center">
-          <thead className="bg-bg-elevated text-text">
-            <tr className="border-b border-border">
-              <th className="p-2">Symbol</th>
-              <th className="p-2">Buy Qty</th>
-              <th className="p-2">Sell Qty</th>
-              <th className="p-2">Avg Buy</th>
-              <th className="p-2">Avg Sell</th>
-              <th className="p-2">PnL ₹</th>
-              <th className="p-2">PnL %</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => (
-              <tr key={r.symbol} className="border-b transition">
-                <td className="p-2 font-semibold">{r.symbol}</td>
-                <td className="p-2">{r.buyQty}</td>
-                <td className="p-2">{r.sellQty}</td>
-                <td className="p-2">₹{r.avgBuy}</td>
-                <td className="p-2">₹{r.avgSell}</td>
-                <td
-                  className={`p-2 font-bold ${(r.realizedPnL) >= 0 ? "text-green-600" : "text-red-600"}`}
-                >
-                  ₹{r.realizedPnL}
-                </td>
-                <td
-                  className={`p-2 font-bold ${(r.pnlPercent) >= 0 ? "text-green-600" : "text-red-600"}`}
-                >
-                  {r.pnlPercent}%
-                </td>
+        <div className="bg-bg-surface border border-border rounded-xl p-6">
+
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold mb-4">Your Holdings</h2>
+            <div className="flex justify-between mb-4">
+              <p className="font-medium text-text-secondary">
+                Total Realized P&L:{" "}
+                <span className={totalPnL >= 0 ? "text-positive font-bold" : "text-negative font-bold"}>
+                  ₹{totalPnL.toFixed(2)}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-text-secondary border-b border-border">
+                <th className="py-3 text-left">Symbol</th>
+                <th className="py-3 text-left">Buy Qty</th>
+                <th className="py-3 text-left">Sell Qty</th>
+                <th className="py-3 text-left">Avg Buy</th>
+                <th className="py-3 text-left">Avg Sell</th>
+                <th className="py-3 text-left">PnL ₹</th>
+                <th className="py-3 text-left">PnL %</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rows.map((r) => (
+                <tr key={r.symbol} className="border-b border-border hover:bg-bg-elevated transition">
+                  <td className="py-3 font-semibold">{r.symbol}</td>
+                  <td className="py-3">{r.buyQty}</td>
+                  <td className="py-3">{r.sellQty}</td>
+                  <td className="py-3">₹{r.avgBuy}</td>
+                  <td className="py-3">₹{r.avgSell}</td>
+                  <td
+                    className={`p-3 font-bold ${(r.realizedPnL) >= 0 ? "text-green-600" : "text-red-600"}`}
+                  >
+                    ₹{r.realizedPnL}
+                  </td>
+                  <td
+                    className={`p-3 font-bold ${(r.pnlPercent) >= 0 ? "text-green-600" : "text-red-600"}`}
+                  >
+                    {r.pnlPercent}%
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
 }
+
+const ProtectedPnlPage = () => (
+  <AuthGuard>
+    <RealizedPnLPage />
+  </AuthGuard>
+)
+
+export default ProtectedPnlPage;

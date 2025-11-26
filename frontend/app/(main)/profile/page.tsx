@@ -5,8 +5,9 @@ import { supabase } from "@/utils/supabaseClient";
 import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import AuthGuard from "../hooks/authGaurd";
 
-export default function ProfilePage() {
+function ProfilePage() {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -35,10 +36,10 @@ export default function ProfilePage() {
   }, []);
 
   if (loading) return (
-    <div className="p-10 text-center text-gray-500">Loading your profile...</div>
+    <div className="w-screen h-screen flex items-center justify-center">Loading your profile...</div>
   );
 
-  if (!profile) return <p className="p-6">No profile data found.</p>;
+  if (!profile) return <div className="w-screen h-screen flex items-center justify-center">No profile data found.</div>;
 
   // Avatar initials
   const initials =
@@ -54,7 +55,7 @@ export default function ProfilePage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setEditing((s) => !s)}
-            className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
+            className="px-4 py-2 rounded-lg bg-bg-main hover:bg-bg-elevated text-text border border-border"
           >
             {editing ? "Close" : "Edit Profile"}
           </button>
@@ -62,23 +63,25 @@ export default function ProfilePage() {
       </div>
 
       {/* Top card (avatar + basic) */}
-      <div className="flex items-center gap-4 p-5 rounded-xl shadow bg-white dark:bg-gray-900 border mb-6">
-        <div className="w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-2xl font-semibold">
-          {initials}
-        </div>
-        <div className="flex-1">
-          <p className="text-xl font-semibold">{profile.name || "Unnamed User"}</p>
-          <p className="text-gray-600 dark:text-gray-400">{profile.email}</p>
-        </div>
+      <div className="flex items-center gap-4 p-5 rounded-xl shadow bg-bg-surface border border-border mb-6">
+
+          <div className="hidden w-16 h-16 rounded-full bg-bg-elevated text-text md:flex items-center justify-center text-2xl font-semibold">
+            {initials}
+          </div>
+          <div className="flex-1">
+            <p className="text-text text-xl font-semibold">{profile.name || "Unnamed User"}</p>
+            <p className="text-text-secondary">{profile.email}</p>
+          </div>
+
 
         <div className="text-right">
-          <p className="text-sm text-gray-500">Balance</p>
-          <p className="text-lg font-bold">₹{Number(profile.balance).toFixed(2)}</p>
+          <p className="text-sm text-text-secondary">Balance</p>
+          <p className="text-lg font-bold text-text">₹{Number(profile.balance).toFixed(2)}</p>
         </div>
       </div>
 
       {/* Main card: either details or edit form shown inline */}
-      <div className="p-5 rounded-xl shadow bg-white dark:bg-gray-900 border mb-6">
+      <div className="p-5 rounded-xl shadow bg-bg-surface border border-border mb-6">
         {editing ? (
           // Inline edit form — stays inside the card
           <ProfileEditForm
@@ -91,7 +94,7 @@ export default function ProfilePage() {
           />
         ) : (
           <>
-            <h2 className="text-xl font-semibold mb-3">Personal Information</h2>
+            <h2 className="text-xl font-semibold mb-3 text-text-secondary">Personal Information</h2>
 
             <div className="grid grid-cols-2 gap-4">
               <Detail label="Phone" value={profile.phone} />
@@ -109,12 +112,12 @@ export default function ProfilePage() {
 
       {/* Footer actions */}
       <div className="mt-4 flex items-center justify-between">
-        <Link href="/dashboard" className="text-blue-600 font-medium">
+        <Link href="/dashboard" className="text-text-secondary font-medium">
           ← Back to dashboard
         </Link>
 
         <button
-          className="border px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="px-4 py-2 rounded-lg hover:bg-bg-elevated border border-border"
           onClick={() => supabase.auth.signOut().then(() => router.replace("/login"))}
         >
           Logout
@@ -132,3 +135,11 @@ function Detail({ label, value, colSpan = 1 }: { label: string; value: any; colS
     </div>
   );
 }
+
+const ProtectedProfilePage = () => (
+  <AuthGuard>
+    <ProfilePage />
+  </AuthGuard>
+)
+
+export default ProtectedProfilePage;

@@ -20,7 +20,7 @@ export function StocksCardsMobile({
           <Link href={`/stocks/${s.symbol}`} key={s.symbol}>
             <div
                 key={s.symbol}
-                className="rounded-xl p-4 shadow-card bg-light-surface dark:bg-dark-surface border border-gray-200 dark:border-gray-700"
+                className="rounded-xl p-4 shadow-card bg-bg-surface border border-border"
             >
                 <div className="flex justify-between items-center">
                 <div>

@@ -52,20 +52,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col gap-3 p-10 min-h-screen justify-center items-center">
+    <div className="bg-bg-main flex flex-col gap-3 p-10 min-h-screen justify-center items-center">
       <h1 className="text-xl font-bold">
         {mode === "login" ? "Login" : "Create Account"}
       </h1>
 
       <input
-        className="border px-3 py-2 rounded w-72"
+        className="bg-bg-surface border px-3 py-2 rounded w-72"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
       <input
-        className="border px-3 py-2 rounded w-72"
+        className="bg-bg-surface border px-3 py-2 rounded w-72"
         type="password"
         placeholder="Password"
         value={password}
@@ -75,14 +75,14 @@ export default function LoginPage() {
       <button
         onClick={handleSubmit}
         disabled={busy}
-        className="bg-black text-white px-4 py-2 rounded w-72 mt-2"
+        className={`${mode === "login" ? "bg-blue ": "bg-yellow"} text-black font-semibold px-4 py-2 rounded w-72 mt-2`}
       >
         {busy ? "Please wait..." : mode === "login" ? "Login" : "Sign Up"}
       </button>
 
       <button
         onClick={() => setMode(mode === "login" ? "signup" : "login")}
-        className="text-blue-600 underline text-sm"
+        className=" text-text underline text-base"
       >
         {mode === "login"
           ? "Create a new account"

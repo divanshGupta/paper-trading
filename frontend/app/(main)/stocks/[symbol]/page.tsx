@@ -4,7 +4,6 @@ import { useParams } from "next/navigation";
 import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import BuySellPanel from "@/components/trade/BuySellPanel";
-import { useApp } from "@/components/providers/AppProvider";
 import WatchlistButton from "@/components/stocks/WatchlistButton";
 import StockCard from "@/components/dashboard/StockCard";
 import Sparkline from "@/components/chart/Sparkline";
@@ -12,8 +11,6 @@ import Sparkline from "@/components/chart/Sparkline";
 export default function StockInfoPage() {
   const { symbol } = useParams() as { symbol: string };
   const { prices, bySymbol, flash } = useLivePrices();
-
-  const { watchlist, toggleWatchlist} = useApp();
   
   const stock = bySymbol(symbol);
 
@@ -32,30 +29,29 @@ export default function StockInfoPage() {
 
   function Stat({ label, value }: { label: string; value: any }) {
     return (
-      <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-700">
-        <p className="text-xs text-gray-500">{label}</p>
-        <p className="text-lg font-semibold mt-1">{value}</p>
+      <div className="p-4 rounded-lg bg-bg-surface border border-border">
+        <p className="text-xs text-text-secondary">{label}</p>
+        <p className="text-lg font-semibold mt-1 text-text">{value}</p>
       </div>
     );
   }
 
-
   return (
-    <div className="max-w-7xl mx-auto px-6 py-6 flex gap-10 pt-10">
+    <div className="pt-6 md:pt-10 max-w-7xl mx-auto flex gap-6 mb-4">
       {/* LEFT AREA — STOCK NAME + PRICE + CHART */}
-      <div className="flex-1">
+      <div className="flex-1 px-4">
         {/* HEADER */}
         <div className="group relative flex items-start justify-between">
           <div>
 
-            <h1 className="text-3xl font-bold mb-2">{stock.name}</h1>
+            <h1 className="text-text text-lg md:text-3xl font-bold mb-2">{stock.name}</h1>
 
-            <p className="text-gray-400 text-sm">{stock.symbol}</p>
+            <p className="text-text-secondary text-sm">{stock.symbol}</p>
 
             <div className="mt-4 flex gap-4">
-              <p className="text-3xl font-semibold">₹{stock.price}</p>
+              <p className="text-text text-xl md:text-3xl font-semibold">₹{stock.price}</p>
 
-              <div className={`mt-1 flex items-center gap-1 text-lg font-medium ${dayColor}`}>
+              <div className={`mt-1 flex items-center gap-1 text-sm md:text-lg font-medium ${dayColor}`}>
                 {dayChange >= 0 ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
                 {dayChange >= 0 && "+"}
                 {dayChange.toFixed(2)} ({dayChangePct.toFixed(2)}%)
@@ -68,7 +64,7 @@ export default function StockInfoPage() {
 
 
         {/* CHART PLACEHOLDER */}
-        <div className="mt-8 h-[380px] w-full rounded-xl border border-border  bg-bg-main flex items-center justify-center">
+        <div className="mt-8 h-[380px] w-full rounded-xl border border-border  bg-bg-surface flex items-center justify-center">
           <Sparkline
             data={stock.sparkline}
             positive={stock.price >= stock.previousClose}
@@ -82,7 +78,7 @@ export default function StockInfoPage() {
             <button
               key={t}
               className="px-4 py-1 rounded-full border text-sm
-              border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
+              border-border hover:bg-bg-elevated"
             >
               {t}
             </button>
@@ -106,7 +102,7 @@ export default function StockInfoPage() {
 
         {/* RELATED STOCKS */}
         <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4">Similar Stocks</h2>
+          <h2 className="text-lg md:text-xl font-semibold mb-4">Similar Stocks</h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.values(prices)
@@ -130,7 +126,7 @@ export default function StockInfoPage() {
       </div>
 
       {/* RIGHT AREA — BUY / SELL PANEL */}
-      <div className="w-[360px]">
+      <div className="hidden md:block w-[360px]">
         <BuySellPanel symbol={stock.symbol} price={stock.price} />
       </div>
     </div>

@@ -36,7 +36,7 @@ export default function StocksTableDesktop({
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className="bg-bg-surface">
           {prices.map((s: Price) => {
             const isUp = flash[s.symbol] === "up";
             const isDown = flash[s.symbol] === "down";
@@ -45,7 +45,7 @@ export default function StocksTableDesktop({
               <tr
                 onClick={() => router.push(`/stocks/${s.symbol}`)}
                 key={s.symbol}
-                className="group border-t border-border text-sm hover:bg-bg-surface"
+                className="group border-t border-border text-sm hover:bg-bg-elevated"
               >
                 {/* SYMBOL */}
                 <td className="p-3 font-semibold text-text">

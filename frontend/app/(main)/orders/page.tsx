@@ -1,5 +1,6 @@
 "use client";
 
+import AuthGuard from "../hooks/authGaurd";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
@@ -7,7 +8,7 @@ import TransactionTable from "@/components/orders/TransactionTable";
 import Pagination from "@/components/ui/Pagination";
 import OrdersFilter from "@/components/orders/OrdersFilter";
 
-export default function TransactionsPage() {
+function TransactionsPage() {
   const [transactions, setTransactions] = useState<any[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -50,7 +51,7 @@ export default function TransactionsPage() {
   }, [page, filter]); // 👈 refetch when page or filter changes
 
   return (
-    <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
+    <div className="p-8 pt-10 mb-10 h-screen max-w-7xl mx-auto">
 
       <OrdersFilter filter={filter} setFilter={setFilter} setPage={setPage} />
 
@@ -71,3 +72,11 @@ export default function TransactionsPage() {
     </div>
   );
 }
+
+const ProtectedOrdersPage = () => (
+  <AuthGuard>
+    <TransactionsPage />
+  </AuthGuard>
+);
+
+export default ProtectedOrdersPage;

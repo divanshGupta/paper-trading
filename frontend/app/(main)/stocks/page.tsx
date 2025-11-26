@@ -91,7 +91,7 @@ if (filter === "losers") {
   const { marketOpen } = getMarketStatusIST();
 
   return (
-    <div className="pt-10 max-w-6xl mx-auto px-4">
+    <div className="pt-10 max-w-6xl mx-auto px-4  mb-4">
       {/* Page Heading */}
       <h1 className="text-2xl font-semibold mb-6">All Stocks</h1>
 

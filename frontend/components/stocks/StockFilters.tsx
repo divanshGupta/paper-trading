@@ -13,7 +13,7 @@ const sectors: SectorFilter[] = [
 
 export default function StockFilters({ selected, onSelect }: StockFiltersProps) {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="hidden md:flex gap-2 flex-wrap">
       {sectors.map((sec) => (
         <button
           key={sec}
