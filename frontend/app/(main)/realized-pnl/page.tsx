@@ -24,12 +24,12 @@ export default function RealizedPnLPage() {
 
   return (
     <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Realized Profit & Loss</h1>
+      <h1 className="text-text text-2xl font-bold mb-4">Realized Profit & Loss</h1>
 
       <div className="flex justify-between mb-4">
-        <p className="font-medium text-gray-700">
+        <p className="font-medium text-text-secondary">
           Total Realized P&L:{" "}
-          <span className={totalPnL >= 0 ? "text-green-600 font-bold" : "text-red-600 font-bold"}>
+          <span className={totalPnL >= 0 ? "text-positive font-bold" : "text-negative font-bold"}>
             ₹{totalPnL.toFixed(2)}
           </span>
         </p>
@@ -38,9 +38,9 @@ export default function RealizedPnLPage() {
       {rows.length === 0 ? (
         <p>No realized trades yet.</p>
       ) : (
-        <table className="border w-full text-center">
-          <thead className="bg-gray-100 text-black">
-            <tr className="border-b">
+        <table className="border border-border w-full text-center">
+          <thead className="bg-bg-elevated text-text">
+            <tr className="border-b border-border">
               <th className="p-2">Symbol</th>
               <th className="p-2">Buy Qty</th>
               <th className="p-2">Sell Qty</th>

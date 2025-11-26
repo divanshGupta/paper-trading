@@ -2,8 +2,8 @@
 
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { StockCardProps } from "@/types";
-import { LineChart, Line, ResponsiveContainer } from "recharts";
 import WatchlistButton from "../stocks/WatchlistButton";
+import Sparkline from "../chart/Sparkline";
 
 export default function StockCard({
   symbol,
@@ -56,17 +56,10 @@ export default function StockCard({
 
         {/* Sparkline */}
         <div className="mt-3 h-10">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sparkline}>
-              <Line
-                type="monotone"
-                dataKey="value"
-                dot={false}
-                stroke={dayChange >= 0 ? "#22e57f" : "#ff5757"}
-                strokeWidth={2}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+           <Sparkline
+              data={sparkline}
+              positive={price >= previousClose}
+            />
         </div>
       </div>
     </div>

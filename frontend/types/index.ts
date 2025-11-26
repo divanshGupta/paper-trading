@@ -204,3 +204,10 @@ export type StockCardProps = {
 
 // Search types
 export type SearchQuery = string;
+
+// Orders Filter 
+export type OrdersFilter = {
+  setPage: (value: number) => void;
+  setFilter: (value: string) => void;
+  filter: number;
+}

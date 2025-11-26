@@ -7,6 +7,7 @@ import BuySellPanel from "@/components/trade/BuySellPanel";
 import { useApp } from "@/components/providers/AppProvider";
 import WatchlistButton from "@/components/stocks/WatchlistButton";
 import StockCard from "@/components/dashboard/StockCard";
+import Sparkline from "@/components/chart/Sparkline";
 
 export default function StockInfoPage() {
   const { symbol } = useParams() as { symbol: string };
@@ -52,7 +53,7 @@ export default function StockInfoPage() {
             <p className="text-gray-400 text-sm">{stock.symbol}</p>
 
             <div className="mt-4 flex gap-4">
-              <p className="text-4xl font-semibold">₹{stock.price}</p>
+              <p className="text-3xl font-semibold">₹{stock.price}</p>
 
               <div className={`mt-1 flex items-center gap-1 text-lg font-medium ${dayColor}`}>
                 {dayChange >= 0 ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
@@ -67,8 +68,11 @@ export default function StockInfoPage() {
 
 
         {/* CHART PLACEHOLDER */}
-        <div className="mt-8 h-[380px] w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-inner flex items-center justify-center">
-          <span className="text-gray-400 text-sm">Chart coming soon…</span>
+        <div className="mt-8 h-[380px] w-full rounded-xl border border-border  bg-bg-main flex items-center justify-center">
+          <Sparkline
+            data={stock.sparkline}
+            positive={stock.price >= stock.previousClose}
+          />
         </div>
 
 

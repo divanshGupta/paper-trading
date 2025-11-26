@@ -18,8 +18,8 @@ export default function StockFilters({ selected, onSelect }: StockFiltersProps) 
         <button
           key={sec}
           onClick={() => onSelect(sec)}   // << NO TYPE ERROR NOW
-          className={`px-3 py-1 rounded ${
-            selected === sec ? "bg-blue-500 text-white" : "bg-gray-200"
+          className={`px-4 py-2 rounded-lg ${
+            selected === sec ? "bg-bg-elevated text-text border border-border" : "bg-bg-main text-text border border-border"
           }`}
         >
           {sec}

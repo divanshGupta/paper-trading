@@ -8,6 +8,7 @@ import StockFilters from "@/components/stocks/StockFilters";
 import StockSorter from "@/components/stocks/StockSorter";
 import type { SectorFilter, SortKey } from "@/types";
 import StockSearch from "@/components/stocks/StockSearch";
+import StockFilterTabs from "@/components/stocks/StockFilterTab";
 
 export default function AllStocksPage() {
   const { prices, flash } = useLivePrices();
@@ -101,21 +102,26 @@ if (filter === "losers") {
         <StockSorter sortKey={sortKey} onChange={setSortKey} />
       </div>
 
-      <div className="flex gap-3 my-4">
+      {/* <div className="flex gap-3 my-4">
         {["all", "gainers", "losers"].map((t) => (
           <button
             key={t}
             onClick={() => setFilter(t as "all" | "gainers" | "losers")}
             className={`px-4 py-2 rounded-lg text-sm font-medium
               ${filter === t
-                ? "bg-black text-white"
-                : "bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300"}
+                ? "bg-bg-elevated text-text border border-border"
+                : "bg-bg-main text-text border border-border"}
             `}
           >
             {t === "all" ? "All" : t === "gainers" ? "Top Gainers" : "Top Losers"}
           </button>
         ))}
-      </div>
+      </div> */}
+
+      <StockFilterTabs
+       onSelect={setFilter}
+       selected={filter}
+      />
 
 
       {/* Stocks List */}

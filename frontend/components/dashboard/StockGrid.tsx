@@ -50,8 +50,8 @@ export default function StockGrid() {
       </div>
 
       <Link
-        href="/"
-        className="text-blue-400 text-sm font-semibold inline-flex items-center justify-center"
+        href="/stocks"
+        className="text-positive text-sm font-semibold inline-flex items-center justify-center"
       >
         <span className="mr-2">See more</span>
         <span className="text-xl">›</span>

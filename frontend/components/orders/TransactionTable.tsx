@@ -18,39 +18,41 @@ interface TransactionTableProps {
   transactions: Transaction[];
 }
 
-export default function TransactionTable({ transactions}: TransactionTableProps) {
+export default function TransactionTable({ transactions }: TransactionTableProps) {
   if (!transactions.length) {
     return (
-      <p className="text-center text-gray-500 py-8">
+      <p className="text-center text-text-secondary py-8">
         No transactions found.
       </p>
     );
   }
 
   return (
-    <div className="overflow-x-auto border rounded-lg mt-4">
-      <table className="min-w-full text-sm text-left text-gray-700">
-        <thead className="bg-gray-100 text-gray-900">
-          <tr>
-            <th className="p-3">Symbol</th>
-            <th className="p-3">Type</th>
-            <th className="p-3">Quantity</th>
-            <th className="p-3">Price</th>
-            <th className="p-3">Total</th>
-            <th className="p-3">Realized PnL</th>
-            <th className="p-3">Date</th>
+    <div className="bg-bg-surface border border-border rounded-xl p-6">
+      <h2 className="text-xl font-semibold mb-4">All Orders</h2>
+
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="text-text-secondary border-b border-border">
+            <th className="p-3 text-left">Symbol</th>
+            <th className="p-3 text-left">Type</th>
+            <th className="p-3 text-left">Quantity</th>
+            <th className="p-3 text-left">Price</th>
+            <th className="p-3 text-left">Total</th>
+            <th className="p-3 text-left">Realized PnL</th>
+            <th className="p-3 text-left">Date</th>
           </tr>
         </thead>
         <tbody>
           {transactions.map((t) => (
             <tr
               key={t.id}
-              className="border-t hover:bg-gray-50 transition-all duration-150"
+              className="border-b border-border hover:bg-bg-elevated transition"
             >
               <td className="p-3 font-medium">{t.symbol}</td>
               <td
                 className={`p-3 font-semibold ${
-                  t.type === "BUY" ? "text-green-600" : "text-red-600"
+                  t.type === "BUY" ? "text-positive" : "text-negative"
                 }`}
               >
                 {t.type}

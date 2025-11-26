@@ -11,6 +11,7 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import StockGrid from "@/components/dashboard/StockGrid";
 import StocksList from "@/components/stocks/StocksList";
 import Link from "next/link";
+import StockFilterTabs from "@/components/stocks/StockFilterTab";
 
 export default function Dashboard() {
   const { prices, bySymbol, flash } = useLivePrices();
@@ -87,10 +88,16 @@ export default function Dashboard() {
 
     switch (filter) {
       case "gainers":
-        return [...arr].sort((a, b) => b.changePercent - a.changePercent).slice(0, 6);
+        return arr
+          .filter(s => s.price > s.previousClose)
+          .sort((a, b) => b.changePercent - a.changePercent)
+          .slice(0, 6);
 
       case "losers":
-        return [...arr].sort((a, b) => a.changePercent - b.changePercent).slice(0, 6);
+        return arr
+          .filter(s => s.price < s.previousClose)
+          .sort((a, b) => a.changePercent - b.changePercent)
+          .slice(0, 6);
 
       default:
         return arr.slice(0, 6);
@@ -98,31 +105,18 @@ export default function Dashboard() {
   }, [prices, filter]);
 
   return (
-    <div className="pt-10 bg-bg-main text-text">
+    <div className="pt-6 md:pt-10 bg-bg-main text-text">
       <div className="max-w-7xl mx-auto flex gap-6">
 
         {/* LEFT */}
-        <div className="flex-1 min-w-0">
-
+        <div className="flex-1 px-4">
           <StockGrid />
 
           {/* FILTER BUTTONS */}
-          <div className="flex gap-2 mb-4">
-            {["all", "gainers", "losers"].map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f as any)}
-                className={`
-                  px-4 py-2 rounded-full text-sm font-medium transition border
-                  ${filter === f 
-                    ? "bg-bg-elevated text-text border border-border" 
-                    : "bg-bg-main border border-border "}
-                `}
-              >
-                {f === "all" ? "All" : f === "gainers" ? "Top Gainers" : "Top Losers"}
-              </button>
-            ))}
-          </div>
+          <StockFilterTabs
+           onSelect={setFilter}
+           select={filter}
+          />
 
           <StocksList
             prices={dashboardStocks}

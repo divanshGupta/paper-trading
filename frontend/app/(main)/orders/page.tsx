@@ -5,6 +5,7 @@ import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import TransactionTable from "@/components/orders/TransactionTable";
 import Pagination from "@/components/ui/Pagination";
+import OrdersFilter from "@/components/orders/OrdersFilter";
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState<any[]>([]);
@@ -50,29 +51,16 @@ export default function TransactionsPage() {
 
   return (
     <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Order History</h1>
 
-        {/* 🔽 Filter Dropdown */}
-        <select
-          value={filter}
-          onChange={(e) => {
-            setPage(1); // reset to first page when filter changes
-            setFilter(e.target.value);
-          }}
-          className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-        >
-          <option value="ALL">All Orders</option>
-          <option value="BUY">Buy Orders</option>
-          <option value="SELL">Sell Orders</option>
-        </select>
-      </div>
+      <OrdersFilter filter={filter} setFilter={setFilter} setPage={setPage} />
 
       {transactions.length === 0 ? (
         <p>No {filter === "ALL" ? "" : filter.toLowerCase()} orders found.</p>
       ) : (
-        <TransactionTable transactions={transactions} />
-      )}
+        
+          <TransactionTable transactions={transactions}  />
+      
+        )}
 
       <Pagination
         page={page}
@@ -80,12 +68,6 @@ export default function TransactionsPage() {
         onPageChange={(newPage) => setPage(newPage)}
       />
 
-      <button
-        className="underline text-blue-500 mt-6"
-        onClick={() => router.push("/dashboard")}
-      >
-        Back To Market
-      </button>
     </div>
   );
 }
