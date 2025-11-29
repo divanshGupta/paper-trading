@@ -1,27 +1,29 @@
 "use client";
 
 import React from "react";
-import { StocksListProps, Price } from "@/types";;
+import { useApp } from "@/components/providers/AppProvider";
+import { StocksListProps } from "@/types";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import WatchlistButton from "./WatchlistButton";
 
 function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
-  if (dir === "up") return <ArrowUp size={16} className="text-green-500" />;
-  if (dir === "down") return <ArrowDown size={16} className="text-red-500" />;
+  if (dir === "up") return <ArrowUp size={16} className="text-positive" />;
+  if (dir === "down") return <ArrowDown size={16} className="text-negative" />;
   return null;
 }
 
 export default function StocksTableDesktop({
   prices,
   flash,
+  bySymbol,
   marketOpen,
   tradingSymbol,
   onBuy,
   onSell,
 }: StocksListProps) {
-
-    const router = useRouter();
+  const { state } = useApp();
+  const router = useRouter();
 
   return (
     <div className="hidden md:block overflow-hidden rounded-xl shadow-card">
@@ -37,9 +39,9 @@ export default function StocksTableDesktop({
         </thead>
 
         <tbody className="bg-bg-surface">
-          {prices.map((s: Price) => {
-            const isUp = flash[s.symbol] === "up";
-            const isDown = flash[s.symbol] === "down";
+          {prices.map((s) => {
+            const isUp = s.change > 0;
+            const isDown = s.change < 0;
 
             return (
               <tr
@@ -47,23 +49,17 @@ export default function StocksTableDesktop({
                 key={s.symbol}
                 className="group border-t border-border text-sm hover:bg-bg-elevated"
               >
-                {/* SYMBOL */}
                 <td className="p-3 font-semibold text-text">
                   <div className="relative flex gap-2">
                     <span>{s.symbol}</span>
-                    {/* bookmard only visible on hover */}
-                      <WatchlistButton symbol={s.symbol} />
+                    <WatchlistButton symbol={s.symbol} />
                   </div>
                 </td>
 
-                {/* COMPANY NAME */}
-                <td className="p-3 text-text-secondary">
-                  {s.name}
-                </td>
+                <td className="p-3 text-text-secondary">{s.name}</td>
 
-                {/* PRICE */}
                 <td
-                  className={`p-3 font-medium transition-all ${
+                  className={`p-3 font-medium ${
                     isUp
                       ? "text-positive"
                       : isDown
@@ -73,26 +69,21 @@ export default function StocksTableDesktop({
                 >
                   ₹{s.price}
                 </td>
-
-                {/* CHANGE */}
                 <td className="p-3 text-sm gap-2">
-                  <MovementArrow
-                    dir={isUp ? "up" : isDown ? "down" : null}
-                  />
-
-                  {typeof s.previousClose === "number" ? (
-                    <span>{(s.price - s.previousClose).toFixed(2)}</span>
-                  ) : (
-                    <span>—</span>
-                  )}
+                  <MovementArrow dir={isUp ? "up" : isDown ? "down" : null} />
+                  <span>{s.change.toFixed(2)}</span>
+                  <span className="text-xs text-text-secondary">
+                    ({s.changePercent.toFixed(2)}%)
+                  </span>
                 </td>
 
-                {/* ACTION BUTTONS */}
                 <td className="p-3 flex items-start gap-6">
-                  {/* BUY */}
                   <button
                     disabled={tradingSymbol === s.symbol || !marketOpen}
-                    onClick={() => onBuy(s.symbol, s.price)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onBuy(s.symbol, s.price);
+                    }}
                     className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
                       !marketOpen || tradingSymbol === s.symbol
                         ? "bg-bg-elevated border border-border cursor-not-allowed"
@@ -102,10 +93,12 @@ export default function StocksTableDesktop({
                     {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
                   </button>
 
-                  {/* SELL */}
                   <button
                     disabled={tradingSymbol === s.symbol || !marketOpen}
-                    onClick={() => onSell(s.symbol, s.price)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSell(s.symbol, s.price);
+                    }}
                     className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
                       !marketOpen || tradingSymbol === s.symbol
                         ? "bg-bg-elevated border border-border cursor-not-allowed"

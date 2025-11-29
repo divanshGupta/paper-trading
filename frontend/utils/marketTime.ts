@@ -9,7 +9,8 @@ export function getMarketStatusIST() {
   const openMinutes = 9 * 60 + 15;
   const closeMinutes = 15 * 60 + 30;
 
-  const marketOpen = totalMinutes >= openMinutes && totalMinutes <= closeMinutes;
+  // const marketOpen = totalMinutes >= openMinutes && totalMinutes <= closeMinutes; // commented for testing
+  const marketOpen = true;
   return { marketOpen, now };
 }
 

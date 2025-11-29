@@ -72,18 +72,18 @@ export type PricePoint = {
  */
 export type Price = {
   symbol: string;
-  name: string;
+  name?: string;
 
   // live price data
   price: number;
   previousClose: number;
-  todayOpen: number;
+  todayOpen?: number;
 
   // intraday OHLC and volumes
-  high: number;
-  low: number;
-  volume: number;
-  intraday: Candle[];
+  high?: number;
+  low?: number;
+  volume?: number;
+  intraday?: Candle[];
 
   // optional sparkline support
   sparkline?: PricePoint[];
@@ -145,9 +145,26 @@ export type TradeAction = "buy" | "sell";
    Components: StockList / Table / Cards
 ------------------------------------- */
 
+export type EnrichedPrice = Price & {
+  change: number;
+  changePercent: number;
+  flash: "up" | "down" | null;
+
+
+  // holding fields
+  holdingQty: number;
+  avgPrice: number;
+  invested: number;
+  liveValue: number;
+  unrealized: number;
+};
+
 export type StocksListProps = {
-  prices: Price[];
+  // prices: Price[];
+  prices: EnrichedPrice[]; // now enriched
   flash: FlashState;
+  bySymbol?: (sym: string) => Price | null;
+  holdings?: Holding[];
   marketOpen: boolean;
   tradingSymbol: string | null;
 

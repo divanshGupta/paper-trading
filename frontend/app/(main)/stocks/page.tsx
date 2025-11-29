@@ -13,7 +13,7 @@ import StockFilterTabs from "@/components/stocks/StockFilterTab";
 export default function AllStocksPage() {
 
 
-  const { prices, flash } = useLivePrices();
+  const { prices, flash, bySymbol } = useLivePrices();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
   const [search, setSearch] = useState("");
   const [sector, setSector] = useState<SectorFilter>("All");
@@ -128,13 +128,14 @@ if (filter === "losers") {
 
       {/* Stocks List */}
       {sorted.length === 0 ? (
-        <div className="text-center py-20 text-gray-500 dark:text-gray-400 text-lg">
+        <div className="text-center py-20 text-text dark:text-text-secondary text-lg">
           No Stocks Found!
         </div>
       ) : (
         <StocksList
           prices={sorted}
           flash={flash}
+          bySymbol={bySymbol}
           marketOpen={marketOpen}
           tradingSymbol={null}
           onBuy={() => {}}

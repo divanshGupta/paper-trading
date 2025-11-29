@@ -1,30 +1,31 @@
-// components/stocks/StocksList.tsx
 "use client";
 
 import React from "react";
 import { StocksListProps } from "@/types";
-import StocksTableDesktop  from "./StocksTableDesktop";
-import { StockCardSkeleton } from "../dashboard/StockCardSkeleton";
+import StocksTableDesktop from "./StocksTableDesktop";
+import { StockCardSkeleton } from "@/components/dashboard/StockCardSkeleton";
 import Link from "next/link";
-import StockCard from "../dashboard/StockCard";
+import StockCard from "@/components/dashboard/StockCard";
 
 export default function StocksList(props: StocksListProps) {
   const {
     prices,
     flash,
+    bySymbol,
     marketOpen,
     tradingSymbol,
     onBuy,
     onSell,
+    disableActions,
   } = props;
 
   return (
     <div className="w-full">
-      {/* Desktop Table */}
       <div className="hidden md:block">
         <StocksTableDesktop
           prices={prices}
           flash={flash}
+          bySymbol={bySymbol}
           marketOpen={marketOpen}
           tradingSymbol={tradingSymbol}
           onBuy={onBuy}
@@ -32,36 +33,21 @@ export default function StocksList(props: StocksListProps) {
         />
       </div>
 
-      {/* Mobile Cards */}
-      <div className="md:hidden
-          grid 
-          grid-cols-2
-          sm:grid-cols-2 
-          md:grid-cols-3 
-          lg:grid-cols-4 
-          gap-4 mb-3
-        "
-      >
-        {/* Skeletons while waiting */}
-        {prices.length === 0 &&
-            <StockCardSkeleton />}
+      <div className="md:hidden grid grid-cols-2 gap-3 mb-3">
+        {(!prices || prices.length === 0) && <StockCardSkeleton />}
 
-        {/* Live Stock Cards */}
-        {prices.map((p) => { 
-          return (
-            <Link href="/stocks/[symbol]" as={`/stocks/${p.symbol}`} key={p.symbol}>
-              <StockCard
-                key={p.symbol}
-                symbol={p.symbol}
-                name={p.name || p.symbol}
-                price={p.price}
-                previousClose={p.previousClose || p.price}
-                flash={flash[p.symbol]}
-                sparkline={p.sparkline ?? []}
-              />
-            </Link>
-          );
-        })}
+        {prices?.map((p) => (
+          <Link key={p.symbol} href={`/stocks/${p.symbol}`} className="block">
+            <StockCard
+              symbol={p.symbol}
+              name={p.name || p.symbol}
+              price={p.price}
+              previousClose={p.previousClose ?? p.price}
+              flash={p.flash}
+              sparkline={p.sparkline ?? []}
+            />
+          </Link>
+        ))}
       </div>
     </div>
   );

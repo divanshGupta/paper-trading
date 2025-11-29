@@ -12,6 +12,7 @@ import StockGrid from "@/components/dashboard/StockGrid";
 import StocksList from "@/components/stocks/StocksList";
 import Link from "next/link";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
+import { useEnrichedStocks } from "../hooks/useEnrichedStocks";
 
 export default function Dashboard() {
   const { prices, bySymbol, flash } = useLivePrices();
@@ -24,13 +25,18 @@ export default function Dashboard() {
   const router = useRouter();
   const { marketOpen } = getMarketStatusIST();
 
-  const totalValue = holdings.reduce((acc, h) => {
+  // central enrichment
+  const enriched = useEnrichedStocks(prices, holdings, bySymbol, flash);
+
+  // portfolio total value (live)
+  const totalValue = holdings.reduce((acc: number, h: any) => {
     const p = bySymbol(h.symbol)?.price ?? 0;
     return acc + p * h.quantity;
   }, 0);
 
+  // unrealized PnL (quick)
   const unrealizedPnL = useMemo(() => {
-    return holdings.reduce((acc, h) => {
+    return holdings.reduce((acc: number, h: any) => {
       const p = bySymbol(h.symbol);
       if (!p) return acc;
       const diff = p.price - p.previousClose;
@@ -64,64 +70,89 @@ export default function Dashboard() {
       const payload = await res.json().catch(() => ({}));
 
       if (res.ok) {
-        refresh();
+        await refresh();
         toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully!`);
       } else {
         toast.error(payload.message || "Something went wrong");
       }
     } catch (err) {
       toast.error("Network error / server offline");
+    } finally {
+      setTradingSymbol(null);
     }
-
-    setTradingSymbol(null);
   };
 
-  // --- FINAL FILTER LOGIC ---
-  const dashboardStocks = useMemo(() => {
-    const arr = prices.map((s) => ({
-      ...s,
-      changePercent:
-        s.previousClose > 0
-          ? ((s.price - s.previousClose) / s.previousClose) * 100
-          : 0,
-    }));
+  // --- Enrich prices with holdings data (so downstream components have everything they need) ---
+  const enrichedPrices = useMemo(() => {
+    // holdings map: symbol -> aggregated holding (qty, avgPrice, id)
+    const holdMap: Record<string, any> = {};
+    for (const h of holdings || []) {
+      const sym = String(h.symbol).toUpperCase();
+      if (!holdMap[sym]) {
+        holdMap[sym] = { quantity: 0, avgPrice: 0, ids: [] };
+      }
+      holdMap[sym].quantity += h.quantity;
+      holdMap[sym].avgPrice = h.avgPrice ?? holdMap[sym].avgPrice; // keep last avgPrice if available
+      holdMap[sym].ids.push(h.id);
+    }
 
+    // compute changePercent and attach holding info
+    const arr = prices.map((p: any) => {
+      const sym = String(p.symbol).toUpperCase();
+      const holding = holdMap[sym] || null;
+      const holdingQty = holding ? holding.quantity : 0;
+      const avgPrice = holding ? holding.avgPrice : 0;
+      const livePrice = p.price ?? 0;
+      const value = livePrice * holdingQty;
+      const invested = avgPrice * holdingQty;
+      const unrealized = value - invested;
+
+      const changePercent = p.previousClose > 0 ? ((livePrice - p.previousClose) / p.previousClose) * 100 : 0;
+
+      return {
+        ...p,
+        changePercent,
+        holdingQty,
+        avgPrice,
+        invested,
+        value,
+        unrealized,
+        holdingIds: holding ? holding.ids : [],
+      };
+    });
+
+    // apply dashboard-level filter (gainers/losers)
     switch (filter) {
       case "gainers":
         return arr
-          .filter(s => s.price > s.previousClose)
-          .sort((a, b) => b.changePercent - a.changePercent)
+          .filter((s: any) => s.price > (s.previousClose ?? 0))
+          .sort((a: any, b: any) => b.changePercent - a.changePercent)
           .slice(0, 6);
-
       case "losers":
         return arr
-          .filter(s => s.price < s.previousClose)
-          .sort((a, b) => a.changePercent - b.changePercent)
+          .filter((s: any) => s.price < (s.previousClose ?? 0))
+          .sort((a: any, b: any) => a.changePercent - b.changePercent)
           .slice(0, 6);
-
       default:
         return arr.slice(0, 6);
     }
-  }, [prices, filter]);
+  }, [prices, holdings, filter]);
 
   return (
-    <div className="pt-6 md:pt-10 bg-bg-main text-text">
-      <div className="max-w-7xl mx-auto flex gap-6">
-
+    <div className="pt-6 md:pt-10 bg-bg-main text-text min-h-screen">
+      <div className="max-w-7xl mx-auto flex gap-6 px-4">
         {/* LEFT */}
-        <div className="flex-1 px-4">
-          {/* popular stocks */}
+        <div className="flex-1">
           <StockGrid />
 
-          {/* FILTER BUTTONS */}
-          <StockFilterTabs
-           select={filter}
-           onSelect={setFilter}
-          />
+          <div className="mt-4 mb-3">
+            <StockFilterTabs select={filter} onSelect={setFilter} />
+          </div>
 
           <StocksList
-            prices={dashboardStocks}
+            prices={enrichedPrices}
             flash={flash}
+            bySymbol={bySymbol}
             marketOpen={marketOpen}
             tradingSymbol={tradingSymbol}
             onBuy={(symbol, price) => tradeStock(symbol, price, "buy")}
@@ -138,7 +169,9 @@ export default function Dashboard() {
         </div>
 
         {/* RIGHT • SIDEBAR */}
-        <Sidebar balance={profile?.balance ?? 0} totalValue={totalValue} dayPnl={dayPnl} />
+        <aside className="w-[340px] hidden lg:block">
+          <Sidebar balance={profile?.balance ?? 0} totalValue={totalValue} dayPnl={dayPnl} />
+        </aside>
       </div>
     </div>
   );
