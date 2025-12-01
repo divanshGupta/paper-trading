@@ -3,10 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { supabase } from "@/utils/supabaseClient";
-import { Price, Candle, PricePoint, FlashState } from "@/types";
+import { EnrichedPrice, Candle, PricePoint, FlashState } from "@/types";
 
 export function useLivePrices() {
-  const [prices, setPrices] = useState<Price[]>([]);
+  const [prices, setPrices] = useState<EnrichedPrice[]>([]);
   const [flash, setFlash] = useState<FlashState>({});
   const socketRef = useRef<Socket | null>(null);
 
@@ -34,7 +34,7 @@ export function useLivePrices() {
   // Quick map for O(log n) lookup
   // -----------------------------
   const map = useMemo(() => {
-    const m = new Map<string, Price>();
+    const m = new Map<string, EnrichedPrice>();
     for (const p of prices) m.set(p.symbol, p);
     return m;
   }, [prices]);
@@ -64,7 +64,7 @@ export function useLivePrices() {
       // -----------------------------
       // INITIAL SNAPSHOT
       // -----------------------------
-      socket.on("price:snapshot", (snapshot: Price[]) => {
+      socket.on("price:snapshot", (snapshot: EnrichedPrice[]) => {
         if (cancelled) return;
 
         console.log("📥 snapshot received", snapshot);

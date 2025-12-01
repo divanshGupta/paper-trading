@@ -1,10 +1,9 @@
 // ---------------------------------------------------------
 // GLOBAL TYPES — Trading Simulator (Next.js + Socket + Node)
-// /types/index.ts
 // ---------------------------------------------------------
 
 /* -------------------------------------
-   Basic Utility Types
+   Flash state from websocket feed
 ------------------------------------- */
 
 export type FlashState = {
@@ -12,7 +11,7 @@ export type FlashState = {
 };
 
 /* -------------------------------------
-   User & Auth
+   AUTH / USER PROFILE
 ------------------------------------- */
 
 export type UserProfile = {
@@ -28,7 +27,7 @@ export type UserProfile = {
 };
 
 /* -------------------------------------
-   Holdings / Portfolio
+   HOLDINGS / PORTFOLIO
 ------------------------------------- */
 
 export type Holding = {
@@ -38,15 +37,8 @@ export type Holding = {
   avgPrice: number;
 };
 
-export type Position = {
-  id: number;
-  symbol: string;
-  quantity: number;
-  pnl: number;
-};
-
 /* -------------------------------------
-   Live Price Engine Types
+   Live Price Engine — Base Price Type
 ------------------------------------- */
 
 export type Candle = {
@@ -63,39 +55,51 @@ export type PricePoint = {
   value: number;
 };
 
-/**  
- * EXTENDED PRICE TYPE — used everywhere in frontend:
- * - Dashboard
- * - Stocks page
- * - Sorting
- * - Filters
- */
 export type Price = {
   symbol: string;
   name?: string;
 
-  // live price data
+  // Live market price
   price: number;
   previousClose: number;
   todayOpen?: number;
 
-  // intraday OHLC and volumes
+  // Intraday OHLC
   high?: number;
   low?: number;
   volume?: number;
   intraday?: Candle[];
 
-  // optional sparkline support
+  // Optional sparkline
   sparkline?: PricePoint[];
 
-  // new fields for filters & sorting
+  // For filters/sorting
   sector?: string;
   marketCap?: number; // in crores
-  pe?: number;        // P/E ratio
+  pe?: number;
 };
 
 /* -------------------------------------
-   API Response Types
+   ENRICHED PRICE (frontend)
+------------------------------------- */
+
+export type EnrichedPrice = Price & {
+  change: number;
+  changePercent: number;
+
+  // portfolio related
+  holdingQty: number;
+  invested: number;
+  liveValue: number;
+  unrealized: number;
+  isHolding: boolean;
+
+  // real-time UI highlight
+  flash: "up" | "down" | null;
+};
+
+/* -------------------------------------
+   API RESPONSES
 ------------------------------------- */
 
 export interface RealizedRow {
@@ -120,11 +124,11 @@ export interface RealizedTodayResponse {
 export type DayPnlResponse = {
   realizedToday: number;
   unrealizedPnL: number;
-  dayPnL: number;
+  dayPnl: number;
 };
 
 /* -------------------------------------
-   App Global State (AppProvider)
+   APP GLOBAL STATE
 ------------------------------------- */
 
 export interface AppState {
@@ -136,53 +140,34 @@ export interface AppState {
 }
 
 /* -------------------------------------
-   Trading Actions (BUY / SELL)
+   Trading Actions
 ------------------------------------- */
 
 export type TradeAction = "buy" | "sell";
 
 /* -------------------------------------
-   Components: StockList / Table / Cards
+   StocksList / Table Props
 ------------------------------------- */
 
-export type EnrichedPrice = Price & {
-  change: number;
-  changePercent: number;
-  flash: "up" | "down" | null;
-
-
-  // holding fields
-  holdingQty: number;
-  avgPrice: number;
-  invested: number;
-  liveValue: number;
-  unrealized: number;
-};
-
 export type StocksListProps = {
-  // prices: Price[];
-  prices: EnrichedPrice[]; // now enriched
+  prices: EnrichedPrice[];
   flash: FlashState;
-  bySymbol?: (sym: string) => Price | null;
+  bySymbol?: (symbol: string) => Price | null;
+
   holdings?: Holding[];
   marketOpen: boolean;
   tradingSymbol: string | null;
 
-  // callbacks
   onBuy: (symbol: string, price: number) => void;
   onSell: (symbol: string, price: number) => void;
 
-  // hide buy/sell on /stocks page
   disableActions?: boolean;
 };
 
-/* -------------------------------------
-   Stock Filters / Sorting
-------------------------------------- */
 
-// -------------------------------------
-// Filters + Sorting Types
-// -------------------------------------
+/* -------------------------------------
+   Filters + Sorting
+------------------------------------- */
 
 export type SectorFilter =
   | "All"
@@ -196,18 +181,8 @@ export type SectorFilter =
 
 export type SortKey = "symbol" | "price" | "change" | "marketCap" | "pe";
 
-export interface StockFiltersProps {
-  selected: SectorFilter;
-  onSelect: (sector: SectorFilter) => void;
-}
-
-export interface StockSorterProps {
-  sortKey: SortKey;
-  onChange: (value: SortKey) => void;
-}
-
 /* -------------------------------------
-   Stock Card Props
+   Stock Components
 ------------------------------------- */
 
 export type StockCardProps = {
@@ -219,12 +194,12 @@ export type StockCardProps = {
   sparkline?: PricePoint[];
 };
 
-// Search types
-export type SearchQuery = string;
+/* -------------------------------------
+   Orders Page
+------------------------------------- */
 
-// Orders Filter 
 export type OrdersFilter = {
   setPage: (value: number) => void;
   setFilter: (value: string) => void;
   filter: number;
-}
+};

@@ -43,7 +43,7 @@ export default function Navbar() {
   }, []);
 
  return (
-    <nav className="fixed top-0 left-0  w-full z-50 bg-bg-elevated backdrop-blur-md border-b border-border shadow-xs">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-bg-elevated backdrop-blur-md border-b border-border shadow-xs">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         
         {/* Left side */}

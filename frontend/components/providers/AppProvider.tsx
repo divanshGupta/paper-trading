@@ -3,12 +3,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import type { AppState } from "@/types";
+import { toast } from "sonner";
 
 const AppContext = createContext<{
   state: AppState;
   refresh: () => Promise<void>;
   watchlist: string[];
   toggleWatchlist: (symbol: string) => Promise<void>;
+
+  tradeStock: (symbol: string, price: number, action: "buy" | "sell") => Promise<boolean>;
 }>(null as any);
 
 // PROVIDER
@@ -23,9 +26,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const [watchlist, setWatchlist] = useState<string[]>([]);
 
-  // -------------------------
-  // Fetch Watchlist Once
-  // -------------------------
+  // -----------------------------------------------------
+  //  Fetch Watchlist Once
+  // -----------------------------------------------------
   const fetchWatchlist = async () => {
     const { data } = await supabase.auth.getSession();
     const token = data.session?.access_token;
@@ -43,9 +46,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // -------------------------
-  // Toggle Watchlist (Optimistic)
-  // -------------------------
+  // -----------------------------------------------------
+  //  Toggle Watchlist (Optimistic)
+  // -----------------------------------------------------
   const toggleWatchlist = async (symbol: string) => {
     const { data } = await supabase.auth.getSession();
     const token = data.session?.access_token;
@@ -54,12 +57,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
     const currentlySaved = watchlist.includes(symbol);
 
-    // 1️⃣ Optimistic UI
+    // Optimistic UI
     setWatchlist((w) =>
       currentlySaved ? w.filter((s) => s !== symbol) : [...w, symbol]
     );
 
-    // 2️⃣ Backend Sync
+    // Backend update
     await fetch(
       `http://localhost:5500/api/v1/watchlist/${currentlySaved ? "remove" : "add"}`,
       {
@@ -73,10 +76,55 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // -------------------------
-  // Main Fetch (profile, holdings, realized PnL)
-  // -------------------------
-  const fetchAll = async () => {
+  // -----------------------------------------------------
+  //  UNIVERSAL TRADE FUNCTION (BUY / SELL)
+  // -----------------------------------------------------
+  const tradeStock = async (
+    symbol: string,
+    price: number,
+    action: "buy" | "sell"
+  ): Promise<boolean> => {
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+
+    if (!token) {
+      toast.error("Please log in to trade");
+      return false;
+    }
+
+    try {
+      const res = await fetch(
+        `http://localhost:5500/api/v1/trade/${action}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ symbol, quantity: 1, price }),
+        }
+      );
+
+      const payload = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        toast.error(payload.message || "Trade failed");
+        return false;
+      }
+
+      await refresh();
+      toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully`);
+      return true;
+    } catch (err) {
+      toast.error("Network error / server offline");
+      return false;
+    }
+  };
+
+  // -----------------------------------------------------
+  //  Main Fetch (Profile + Holdings + Realized PnL)
+  // -----------------------------------------------------
+  const refresh = async () => {
     setState((s) => ({ ...s, loading: true }));
 
     const {
@@ -118,7 +166,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         realizedRes.json(),
       ]);
 
-      // Update main state
       setState({
         profile: profileData.user ?? null,
         holdings: holdingsData.holdings ?? [],
@@ -127,7 +174,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         loading: false,
       });
 
-      // Load watchlist AFTER main data
+      // Load watchlist after
       fetchWatchlist();
     } catch (err) {
       console.error("AppProvider fetch error:", err);
@@ -135,21 +182,29 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // -------------------------
-  // Mount + Login/Logout Listener
-  // -------------------------
+  // -----------------------------------------------------
+  //  Mount + Auth Listener
+  // -----------------------------------------------------
   useEffect(() => {
-    fetchAll();
+    refresh();
 
     const { data: listener } = supabase.auth.onAuthStateChange(() => {
-      fetchAll();
+      refresh();
     });
 
     return () => listener.subscription.unsubscribe();
   }, []);
 
   return (
-    <AppContext.Provider value={{ state, refresh: fetchAll, watchlist, toggleWatchlist }}>
+    <AppContext.Provider
+      value={{
+        state,
+        refresh,
+        watchlist,
+        toggleWatchlist,
+        tradeStock, // 👈 exposed here
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

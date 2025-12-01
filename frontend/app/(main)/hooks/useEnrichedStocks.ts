@@ -1,61 +1,45 @@
 "use client";
 
-
 import { useMemo } from "react";
-import type { Price, FlashState, Holding, EnrichedPrice } from "@/types";
+import { useLivePrices } from "./useLivePrices";
+import { useApp } from "@/components/providers/AppProvider";
+import { EnrichedPrice, Price } from "@/types";
 
+export default function useEnrichedStocks() {
+  const { prices, flash, bySymbol } = useLivePrices();
+  const { state } = useApp();
+  const { holdings } = state;
 
-/**
-* Returns enriched stock objects (prices + live + holdings info)
-* prices: Price[] (from price engine / socket)
-* holdings: Holding[] (from AppProvider)
-* bySymbol: helper to lookup latest live price (optional)
-* flash: FlashState map
-*/
-export function useEnrichedStocks(
-  prices: Price[] = [],
-  holdings: Holding[] = [],
-  bySymbol?: (sym: string) => Price | undefined,
-  flash: FlashState = {}
-): EnrichedPrice[] {
-  return useMemo(() => {
-    const holdingMap: Record<string, Holding> = {};
-    for (const h of holdings || []) holdingMap[h.symbol] = h;
-
-
-    return (prices || []).map((p) => {
-      const live = bySymbol ? bySymbol(p.symbol) : p;
-      const price = live?.price ?? p.price ?? 0;
-      const previousClose = p.previousClose ?? price;
-      const change = price - previousClose;
-      const changePercent = previousClose ? (change / previousClose) * 100 : 0;
-
-
-      const h = holdingMap[p.symbol] ?? null;
-      const holdingQty = h?.quantity ?? 0;
-      const avgPrice = h?.avgPrice ?? 0;
-      const invested = holdingQty * avgPrice;
-      const liveValue = holdingQty * price;
-      const unrealized = liveValue - invested;
-
+  const enriched: EnrichedPrice[] = useMemo(() => {
+    return prices.map((s: Price) => {
+      const change = s.price - s.previousClose;
+      const changePercent = s.previousClose
+        ? (change / s.previousClose) * 100
+        : 0;
+      const holding = holdings.find((h) => h.symbol === s.symbol);
+      const holdingQty = holding?.quantity ?? 0;
+      const invested = holding ? holding.avgPrice * holding.quantity : 0;
+      const liveValue = s.price * holdingQty;
+     
 
       return {
-        ...p,
-        price,
-        previousClose,
+        ...s,
+
         change,
         changePercent,
-        sparkline: p.sparkline ?? p.intraday?.map(c => ({ time: c.tStart, value: c.close })) ?? [],
-        flash: flash[p.symbol] ?? null,
 
-
-        // holding enrichment
+        // portfolio
         holdingQty,
-        avgPrice,
         invested,
         liveValue,
-        unrealized,
-      } as EnrichedPrice;
+        unrealized: liveValue - invested,
+        isHolding: holdingQty > 0,
+
+        // FIX: ensure flash never becomes undefined
+        flash: flash[s.symbol] ?? null,
+      };
     });
-  }, [prices, holdings, bySymbol, flash]);
+  }, [prices, flash, holdings]);
+
+  return enriched;
 }

@@ -55,10 +55,11 @@
   --color-text-secondary: #9ca3af;
 
   /* ----- POSITIVE / NEGATIVE ----- */
-  --color-positive: #22e57f;
+  /* --color-positive: #22e57f; */
+  --color-positive: #04B488;
   --color-positive-soft: #073f26;
 
-  --color-negative: #ff5757;
+  --color-negative: #FF5E3B;
   --color-negative-soft: #3a1f1f;
 
   /* ----- BORDERS ----- */

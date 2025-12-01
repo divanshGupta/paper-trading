@@ -1,149 +1,91 @@
+// app/(main)/stocks/page.tsx
 "use client";
 
 import { useState, useMemo } from "react";
-import { useLivePrices } from "../hooks/useLivePrices";
+import useEnrichedStocks from "../hooks/useEnrichedStocks";
 import { getMarketStatusIST } from "@/utils/marketTime";
+import { useApp } from "@/components/providers/AppProvider";
 import StocksList from "@/components/stocks/StocksList";
 import StockFilters from "@/components/stocks/StockFilters";
 import StockSorter from "@/components/stocks/StockSorter";
-import type { SectorFilter, SortKey } from "@/types";
 import StockSearch from "@/components/stocks/StockSearch";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
+import type { SectorFilter, SortKey } from "@/types";
+
 
 export default function AllStocksPage() {
-
-
-  const { prices, flash, bySymbol } = useLivePrices();
+  const enriched = useEnrichedStocks();
+  const { tradeStock } = useApp();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
   const [search, setSearch] = useState("");
   const [sector, setSector] = useState<SectorFilter>("All");
   const [sortKey, setSortKey] = useState<SortKey>("symbol");
-
-// ----------- FILTER + SEARCH + GAINERS/LOSERS --------------
-const filtered = useMemo(() => {
-  let arr = prices.map((s) => ({
-    ...s,
-    changePercent:
-      s.previousClose > 0
-        ? ((s.price - s.previousClose) / s.previousClose) * 100
-        : 0,
-  }));
-
-  // 1) Sector filter
-  if (sector !== "All") {
-    arr = arr.filter((s) => s.sector === sector);
-  }
-
-  // 2) Search filter
-  if (search.trim().length > 0) {
-    const q = search.toLowerCase();
-    arr = arr.filter(
-      (s) =>
-        s.symbol.toLowerCase().includes(q) ||
-        s.name?.toLowerCase().includes(q)
-    );
-  }
-
-  // 3) Gainers / Losers filter
-if (filter === "gainers") {
-  arr = arr
-    .filter((s) => s.price > s.previousClose)
-    .sort((a, b) => b.changePercent - a.changePercent);
-}
-
-if (filter === "losers") {
-  arr = arr
-    .filter((s) => s.price < s.previousClose)
-    .sort((a, b) => a.changePercent - b.changePercent);
-}
-
-  return arr;
-}, [prices, sector, search, filter]);
-
-
-
-
-  // -----------  SORT -----------
-  const sorted = useMemo(() => {
-  const arr = [...filtered];
-
-  switch (sortKey) {
-    case "price":
-      return arr.sort((a, b) => b.price - a.price);
-
-    case "change":
-      return arr.sort(
-        (a, b) =>
-          (b.price - b.previousClose) / b.previousClose -
-          (a.price - a.previousClose) / a.previousClose
-      );
-
-    case "marketCap":
-      return arr.sort((a, b) => (b.marketCap ?? 0) - (a.marketCap ?? 0));
-
-    case "pe":
-      return arr.sort((a, b) => (a.pe ?? 999) - (b.pe ?? 999));
-
-    default:
-      return arr.sort((a, b) => a.symbol.localeCompare(b.symbol));
-  }
-}, [filtered, sortKey]);
-
-
   const { marketOpen } = getMarketStatusIST();
 
+  // Filter + search + gainer/loser
+  const filtered = useMemo(() => {
+    let arr = enriched.slice();
+
+    if (sector !== "All") arr = arr.filter((s) => s.sector === sector);
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      arr = arr.filter((s) => s.symbol.toLowerCase().includes(q) || (s.name || "").toLowerCase().includes(q));
+    }
+
+    if (filter === "gainers") {
+      arr = arr.filter((s) => s.price > s.previousClose).sort((a, b) => b.changePercent - a.changePercent);
+    }
+
+    if (filter === "losers") {
+      arr = arr.filter((s) => s.price < s.previousClose).sort((a, b) => a.changePercent - b.changePercent);
+    }
+
+    return arr;
+  }, [enriched, sector, search, filter]);
+
+  const sorted = useMemo(() => {
+    const arr = [...filtered];
+    switch (sortKey) {
+      case "price":
+        return arr.sort((a, b) => b.price - a.price);
+      case "change":
+        return arr.sort((a, b) => b.changePercent - a.changePercent);
+      case "marketCap":
+        return arr.sort((a, b) => (b.marketCap ?? 0) - (a.marketCap ?? 0));
+      case "pe":
+        return arr.sort((a, b) => (a.pe ?? 999) - (b.pe ?? 999));
+      default:
+        return arr.sort((a, b) => a.symbol.localeCompare(b.symbol));
+    }
+  }, [filtered, sortKey]);
+
   return (
-    <div className="pt-10 max-w-6xl mx-auto px-4  mb-4">
-      {/* Page Heading */}
+    <div className="pt-10 max-w-7xl mx-auto px-4 mb-4">
       <h1 className="text-2xl font-semibold mb-6">All Stocks</h1>
 
-      {/* FILTERS + SORT */}
       <div className="flex justify-between items-center flex-wrap gap-4 mb-6">
         <StockFilters selected={sector} onSelect={setSector} />
-        <StockSearch value={search} onChange={setSearch} fullList={prices}/>
+        <StockSearch value={search} onChange={setSearch} fullList={enriched} />
         <StockSorter sortKey={sortKey} onChange={setSortKey} />
       </div>
 
-      {/* <div className="flex gap-3 my-4">
-        {["all", "gainers", "losers"].map((t) => (
-          <button
-            key={t}
-            onClick={() => setFilter(t as "all" | "gainers" | "losers")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium
-              ${filter === t
-                ? "bg-bg-elevated text-text border border-border"
-                : "bg-bg-main text-text border border-border"}
-            `}
-          >
-            {t === "all" ? "All" : t === "gainers" ? "Top Gainers" : "Top Losers"}
-          </button>
-        ))}
-      </div> */}
+      <StockFilterTabs selected={filter} onSelect={setFilter} />
 
-      <StockFilterTabs
-       onSelect={setFilter}
-       selected={filter}
-      />
-
-
-      {/* Stocks List */}
       {sorted.length === 0 ? (
-        <div className="text-center py-20 text-text dark:text-text-secondary text-lg">
-          No Stocks Found!
-        </div>
+        <div className="text-center py-20 text-text-secondary text-lg">No Stocks Found!</div>
       ) : (
         <StocksList
           prices={sorted}
-          flash={flash}
-          bySymbol={bySymbol}
+          flash={Object.fromEntries(sorted.map(s => [s.symbol, s.flash]))}
+          bySymbol={(sym) => enriched.find(p => p.symbol === sym) ?? null}
           marketOpen={marketOpen}
           tradingSymbol={null}
-          onBuy={() => {}}
-          onSell={() => {}}
-          disableActions={true}
+          onBuy={(symbol, price) => tradeStock(symbol, price, "buy")}
+  onSell={(symbol, price) => tradeStock(symbol, price, "sell")}
+  disableActions={false}
         />
       )}
-      
     </div>
   );
 }

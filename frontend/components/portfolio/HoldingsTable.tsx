@@ -64,7 +64,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
                 {/* SELL BUTTON → opens modal */}
                 <td className="py-3 text-center">
                   <button
-                    className="px-3 py-1 bg-brand text-text rounded-lg hover:bg-brand-dark"
+                    className="px-3 py-1 bg-negative text-text rounded-lg hover:bg-red-700"
                     onClick={() => setActive({ symbol: h.symbol, holdingQty: h.quantity })}
                   >
                     Sell
@@ -99,7 +99,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
                         toast.error(json.message || "Failed");
                       }
                     }}
-                    className="px-3 py-1 bg-negative text-white rounded-lg hover:bg-red-700"
+                    className="px-3 py-1 bg-red-600 text-text rounded-lg hover:bg-red-700"
                   >
                     Exit
                   </button>
