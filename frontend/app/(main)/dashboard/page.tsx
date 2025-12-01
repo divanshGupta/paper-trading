@@ -1,18 +1,15 @@
 // app/(main)/dashboard/page.tsx
 "use client";
 
-import { supabase } from "@/utils/supabaseClient";
-import { useRouter } from "next/navigation";
 import useEnrichedStocks from "../hooks/useEnrichedStocks";
 import { useState, useMemo } from "react";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
-import { toast } from "sonner";
 import { getMarketStatusIST } from "@/utils/marketTime";
+import Link from "next/link";
 import Sidebar from "@/components/dashboard/Sidebar";
 import StockGrid from "@/components/dashboard/StockGrid";
 import StocksList from "@/components/stocks/StocksList";
-import Link from "next/link";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
 
 
@@ -21,13 +18,11 @@ export default function Dashboard() {
   const enriched = useEnrichedStocks();
 
   const { prices, bySymbol, flash } = useLivePrices();
-  const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
 
-  const { state, refresh } = useApp();
+  const { state, refresh, buyStock, sellStock, tradingSymbol } = useApp();
   const { profile, holdings, realizedToday } = state;
 
-  const router = useRouter();
   const { marketOpen } = getMarketStatusIST();
 
   // portfolio total value (live)
@@ -47,42 +42,6 @@ export default function Dashboard() {
   }, [holdings, prices]);
 
   const dayPnl = unrealizedPnL + (realizedToday ?? 0);
-
-  const tradeStock = async (symbol: string, price: number, action: "buy" | "sell") => {
-    setTradingSymbol(symbol);
-
-    const { data } = await supabase.auth.getSession();
-    const token = data.session?.access_token;
-    if (!token) {
-      setTradingSymbol(null);
-      return router.replace("/login");
-    }
-
-    try {
-      const endpoint = action === "buy" ? "buy" : "sell";
-      const res = await fetch(`http://localhost:5500/api/v1/trade/${endpoint}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ symbol, quantity: 1, price }),
-      });
-
-      const payload = await res.json().catch(() => ({}));
-
-      if (res.ok) {
-        await refresh();
-        toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully!`);
-      } else {
-        toast.error(payload.message || "Something went wrong");
-      }
-    } catch (err) {
-      toast.error("Network error / server offline");
-    } finally {
-      setTradingSymbol(null);
-    }
-  };
 
   const dashboardStocks = useMemo(() => {
     switch (filter) {
@@ -120,8 +79,9 @@ export default function Dashboard() {
             bySymbol={bySymbol}
             marketOpen={marketOpen}
             tradingSymbol={tradingSymbol}
-            onBuy={(symbol, price) => tradeStock(symbol, price, "buy")}
-            onSell={(symbol, price) => tradeStock(symbol, price, "sell")}
+            onBuy={buyStock}
+            onSell={sellStock}
+            disableActions={false}
           />
 
           <Link

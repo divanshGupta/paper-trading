@@ -6,6 +6,7 @@ import ProfileEditForm from "@/components/profile/ProfileEditForm";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthGuard from "../hooks/authGaurd";
+import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
 
 function ProfilePage() {
   const [profile, setProfile] = useState<any>(null);
@@ -36,7 +37,7 @@ function ProfilePage() {
   }, []);
 
   if (loading) return (
-    <div className="w-screen h-screen flex items-center justify-center">Loading your profile...</div>
+    <ProfileSkeleton />
   );
 
   if (!profile) return <div className="w-screen h-screen flex items-center justify-center">No profile data found.</div>;

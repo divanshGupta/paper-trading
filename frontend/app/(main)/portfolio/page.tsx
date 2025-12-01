@@ -7,6 +7,7 @@ import { useApp } from "@/components/providers/AppProvider";
 import PortfolioSummary from "@/components/portfolio/PortfolioSummary";
 import PortfolioInsights from "@/components/portfolio/PortfolioInsights";
 import HoldingsTable from "@/components/portfolio/HoldingsTable";
+import TableSkeleton from "@/components/skeletons/TableSkeleton";
 
 function PortfolioPage() {
 
@@ -78,11 +79,21 @@ function PortfolioPage() {
       <PortfolioInsights holdings={enrichedHoldings} />
 
       {/* Holdings Table */}
-      <HoldingsTable
+      {/* <HoldingsTable
         holdings={enrichedHoldings}
         flash={flash}
         onSuccess={refresh}
-      />
+      /> */}
+
+      {state.loading ? (
+        <TableSkeleton rows={8} cols={6} />
+      ) : (
+        <HoldingsTable
+          holdings={enrichedHoldings}
+          flash={flash}
+          onSuccess={refresh}
+        />
+      )}
     </div>
   );
 }

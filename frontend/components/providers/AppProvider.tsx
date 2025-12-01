@@ -10,8 +10,11 @@ const AppContext = createContext<{
   refresh: () => Promise<void>;
   watchlist: string[];
   toggleWatchlist: (symbol: string) => Promise<void>;
-
   tradeStock: (symbol: string, price: number, action: "buy" | "sell") => Promise<boolean>;
+  buyStock: (symbol: string, price: number) => Promise<boolean>;
+  sellStock: (symbol: string, price: number) => Promise<boolean>;
+  tradingSymbol: string | null;
+  errorSymbol: string | null;
 }>(null as any);
 
 // PROVIDER
@@ -23,6 +26,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     realizedToday: 0,
     loading: true,
   });
+
+  const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
+
+  const [errorSymbol, setErrorSymbol] = useState<string | null>(null);
 
   const [watchlist, setWatchlist] = useState<string[]>([]);
 
@@ -84,6 +91,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     price: number,
     action: "buy" | "sell"
   ): Promise<boolean> => {
+
     const { data } = await supabase.auth.getSession();
     const token = data.session?.access_token;
 
@@ -91,6 +99,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       toast.error("Please log in to trade");
       return false;
     }
+
+    setTradingSymbol(symbol); // ⬅️ mark this stock as being traded
 
     try {
       const res = await fetch(
@@ -117,8 +127,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       return true;
     } catch (err) {
       toast.error("Network error / server offline");
+      setErrorSymbol(symbol);
       return false;
+    } finally {
+      setTradingSymbol(null);
+      setErrorSymbol(null);
     }
+  };
+
+  // -----------------------------------------------------
+  //  UI-FRIENDLY WRAPPERS
+  // -----------------------------------------------------
+  const buyStock = async (symbol: string, price: number) => {
+    return tradeStock(symbol, price, "buy");
+  };
+
+  const sellStock = async (symbol: string, price: number) => {
+    return tradeStock(symbol, price, "sell");
   };
 
   // -----------------------------------------------------
@@ -202,7 +227,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         refresh,
         watchlist,
         toggleWatchlist,
-        tradeStock, // 👈 exposed here
+        tradeStock,
+        buyStock,
+        sellStock,
+        tradingSymbol,
+        errorSymbol,
       }}
     >
       {children}

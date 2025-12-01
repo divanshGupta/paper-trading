@@ -15,7 +15,7 @@ import type { SectorFilter, SortKey } from "@/types";
 
 export default function AllStocksPage() {
   const enriched = useEnrichedStocks();
-  const { tradeStock } = useApp();
+  const { sellStock, buyStock, tradingSymbol } = useApp();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
   const [search, setSearch] = useState("");
   const [sector, setSector] = useState<SectorFilter>("All");
@@ -80,10 +80,10 @@ export default function AllStocksPage() {
           flash={Object.fromEntries(sorted.map(s => [s.symbol, s.flash]))}
           bySymbol={(sym) => enriched.find(p => p.symbol === sym) ?? null}
           marketOpen={marketOpen}
-          tradingSymbol={null}
-          onBuy={(symbol, price) => tradeStock(symbol, price, "buy")}
-  onSell={(symbol, price) => tradeStock(symbol, price, "sell")}
-  disableActions={false}
+          tradingSymbol={tradingSymbol}
+          onBuy={buyStock}
+          onSell={sellStock}
+          disableActions={false}
         />
       )}
     </div>

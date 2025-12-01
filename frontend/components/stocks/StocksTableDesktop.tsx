@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { useApp } from "@/components/providers/AppProvider";
 import { StocksListProps } from "@/types";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import WatchlistButton from "./WatchlistButton";
+import TableSkeleton from "../skeletons/TableSkeleton";
 
 function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
   if (dir === "up") return <ArrowUp size={16} className="text-positive" />;
@@ -22,11 +22,14 @@ export default function StocksTableDesktop({
   onBuy,
   onSell,
 }: StocksListProps) {
-  const { state } = useApp();
   const router = useRouter();
 
+  if (!prices || prices.length === 0) {
+    return <TableSkeleton rows={6} cols={5} />;
+  }
+
   return (
-    <div className="hidden md:block overflow-hidden rounded-xl shadow-card">
+    <div className="hidden md:block w-full overflow-hidden rounded-xl shadow-card">
       <table className="w-full border border-border mb-3">
         <thead>
           <tr className="bg-bg-elevated text-sm text-left">
@@ -90,7 +93,11 @@ export default function StocksTableDesktop({
                         : "bg-positive"
                     }`}
                   >
-                    {tradingSymbol === s.symbol ? "Processing..." : "Buy"}
+                    {tradingSymbol === s.symbol ? (
+                      <span className="animate-pulse">Processing...</span>
+                    ) : (
+                      "Sell"
+                    )}
                   </button>
 
                   <button
@@ -105,9 +112,43 @@ export default function StocksTableDesktop({
                         : "bg-negative"
                     }`}
                   >
-                    {tradingSymbol === s.symbol ? "Processing..." : "Sell"}
+                    {tradingSymbol === s.symbol ? (
+                      <span className="animate-pulse">Processing...</span>
+                    ) : (
+                      "Buy"
+                    )}
                   </button>
                 </td>
+
+                {/* {s.symbol === errorSymbol && (
+                  <tr className="bg-red-950/40 text-red-300">
+                    <td colSpan={5} className="p-3 flex justify-between items-center">
+                      <span>Trade failed. Try again?</span>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onBuy(s.symbol, s.price);
+                          }}
+                          className="px-3 py-1 bg-positive text-sm rounded-md"
+                        >
+                          Retry Buy
+                        </button>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSell(s.symbol, s.price);
+                          }}
+                          className="px-3 py-1 bg-negative text-sm rounded-md"
+                        >
+                          Retry Sell
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                )} */}
+
               </tr>
             );
           })}

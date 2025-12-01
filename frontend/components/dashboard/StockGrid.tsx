@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import StockCard from "../dashboard/StockCard";
-import { StockCardSkeleton } from "../dashboard/StockCardSkeleton";
+import { StockCardSkeleton } from "../skeletons/StockCardSkeleton";
 import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
 
 export default function StockGrid() {
@@ -26,7 +26,8 @@ export default function StockGrid() {
       >
         {/* Skeletons while waiting */}
         {prices.length === 0 &&
-          featuredStocks.map((sym) => <StockCardSkeleton key={sym} />)}
+          featuredStocks.map((sym) => <StockCardSkeleton key={sym} />
+        )}
 
         {/* Live Stock Cards */}
         {featuredStocks.map((sym) => {
