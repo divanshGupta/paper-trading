@@ -162,6 +162,8 @@ export type StocksListProps = {
   onSell: (symbol: string, price: number) => void;
 
   disableActions?: boolean;
+
+  loading?: boolean; 
 };
 
 

@@ -1,26 +1,20 @@
-# Use Node 20 slim as base
-FROM node:20-slim
+# ---- Base Node image ----
+FROM node:20-alpine
 
-# Install openssl (required by Prisma)
-RUN apt-get update -y && apt-get install -y openssl
-
-# Set working directory
+# ---- Set working directory ----
 WORKDIR /app
 
-# Copy package files first for caching
+# ---- Copy package files ----
 COPY package*.json ./
 
-# Copy prisma folder early (needed for prisma generate in postinstall)
-COPY prisma ./prisma
+# ---- Install ONLY production dependencies ----
+RUN npm install --production
 
-# Install dependencies
-RUN npm install
-
-# Copy rest of the app
+# ---- Copy rest of the backend ----
 COPY . .
 
-# Expose your backend port (adjust if needed)
+# ---- Expose port Fly will route to ----
 EXPOSE 5500
 
-# Start the app with environment variables loaded
-CMD ["sh", "-c", "node -r dotenv/config src/server.js"]
+# ---- Run server (Fly injects env vars itself) ----
+CMD ["node", "src/server.js"]

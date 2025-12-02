@@ -1,23 +1,24 @@
+// components/providers/AppProvider.tsx
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { supabase } from "@/utils/supabaseClient";
+import { socket } from "@/utils/socket";
 import type { AppState } from "@/types";
 import { toast } from "sonner";
 
-const AppContext = createContext<{
-  state: AppState;
-  refresh: () => Promise<void>;
-  watchlist: string[];
-  toggleWatchlist: (symbol: string) => Promise<void>;
-  tradeStock: (symbol: string, price: number, action: "buy" | "sell") => Promise<boolean>;
-  buyStock: (symbol: string, price: number) => Promise<boolean>;
-  sellStock: (symbol: string, price: number) => Promise<boolean>;
-  tradingSymbol: string | null;
-  errorSymbol: string | null;
-}>(null as any);
+const AppContext = createContext<any>(null);
 
-// PROVIDER
+// Helper: safe JSON fetch wrapper
+async function apiFetch(url: string, token?: string, opts: RequestInit = {}) {
+  const headers = { ...(opts.headers || {}) } as Record<string, string>;
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  headers["Content-Type"] = headers["Content-Type"] ?? "application/json";
+  const res = await fetch(url, { ...opts, headers });
+  const json = await res.json().catch(() => ({}));
+  return { ok: res.ok, status: res.status, json };
+}
+
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<AppState>({
     profile: null,
@@ -28,168 +29,99 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   });
 
   const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
-
   const [errorSymbol, setErrorSymbol] = useState<string | null>(null);
-
   const [watchlist, setWatchlist] = useState<string[]>([]);
 
   // -----------------------------------------------------
-  //  Fetch Watchlist Once
+  //  Fetch Watchlist (robust)
   // -----------------------------------------------------
-  const fetchWatchlist = async () => {
-    const { data } = await supabase.auth.getSession();
-    const token = data.session?.access_token;
-    if (!token) return;
-
+  const fetchWatchlist = useCallback(async () => {
     try {
-      const res = await fetch("http://localhost:5500/api/v1/watchlist", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data: { session } = {} as any } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      if (!token) {
+        setWatchlist([]);
+        return;
+      }
 
-      const json = await res.json();
-      setWatchlist(json.watchlist ?? []);
+      const { ok, json, status } = await apiFetch("http://localhost:5500/api/v1/watchlist", token);
+      if (ok) {
+        setWatchlist(json.watchlist ?? []);
+      } else if (status === 401) {
+        // unauthorized - clear local watchlist
+        setWatchlist([]);
+      } else {
+        console.warn("Watchlist fetch failed:", json);
+      }
     } catch (err) {
       console.error("Watchlist fetch error:", err);
     }
-  };
+  }, []);
 
   // -----------------------------------------------------
-  //  Toggle Watchlist (Optimistic)
+  //  Toggle Watchlist (Optimistic with rollback)
   // -----------------------------------------------------
-  const toggleWatchlist = async (symbol: string) => {
-    const { data } = await supabase.auth.getSession();
-    const token = data.session?.access_token;
-
+  const toggleWatchlist = useCallback(async (symbol: string) => {
+    const { data: { session } = {} as any } = await supabase.auth.getSession();
+    const token = session?.access_token;
     if (!token) return;
 
     const currentlySaved = watchlist.includes(symbol);
-
-    // Optimistic UI
-    setWatchlist((w) =>
-      currentlySaved ? w.filter((s) => s !== symbol) : [...w, symbol]
-    );
-
-    // Backend update
-    await fetch(
-      `http://localhost:5500/api/v1/watchlist/${currentlySaved ? "remove" : "add"}`,
-      {
-        method: currentlySaved ? "DELETE" : "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ symbol }),
-      }
-    );
-  };
-
-  // -----------------------------------------------------
-  //  UNIVERSAL TRADE FUNCTION (BUY / SELL)
-  // -----------------------------------------------------
-  const tradeStock = async (
-    symbol: string,
-    price: number,
-    action: "buy" | "sell"
-  ): Promise<boolean> => {
-
-    const { data } = await supabase.auth.getSession();
-    const token = data.session?.access_token;
-
-    if (!token) {
-      toast.error("Please log in to trade");
-      return false;
-    }
-
-    setTradingSymbol(symbol); // ⬅️ mark this stock as being traded
+    // optimistic update
+    setWatchlist((w) => (currentlySaved ? w.filter((s) => s !== symbol) : [...w, symbol]));
 
     try {
-      const res = await fetch(
-        `http://localhost:5500/api/v1/trade/${action}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ symbol, quantity: 1, price }),
-        }
-      );
+      const url = `http://localhost:5500/api/v1/watchlist/${currentlySaved ? "remove" : "add"}`;
+      const method = currentlySaved ? "DELETE" : "POST";
+      const { ok } = await apiFetch(url, token, {
+        method,
+        body: JSON.stringify({ symbol }),
+      });
 
-      const payload = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        toast.error(payload.message || "Trade failed");
-        return false;
+      if (!ok) {
+        // rollback optimistic update
+        setWatchlist((w) => (currentlySaved ? [...w, symbol] : w.filter((s) => s !== symbol)));
+        toast.error("Failed to update watchlist");
       }
-
-      await refresh();
-      toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully`);
-      return true;
     } catch (err) {
-      toast.error("Network error / server offline");
-      setErrorSymbol(symbol);
-      return false;
-    } finally {
-      setTradingSymbol(null);
-      setErrorSymbol(null);
+      // rollback
+      setWatchlist((w) => (currentlySaved ? [...w, symbol] : w.filter((s) => s !== symbol)));
+      console.error("toggleWatchlist error:", err);
+      toast.error("Network error");
     }
-  };
-
-  // -----------------------------------------------------
-  //  UI-FRIENDLY WRAPPERS
-  // -----------------------------------------------------
-  const buyStock = async (symbol: string, price: number) => {
-    return tradeStock(symbol, price, "buy");
-  };
-
-  const sellStock = async (symbol: string, price: number) => {
-    return tradeStock(symbol, price, "sell");
-  };
+  }, [watchlist]);
 
   // -----------------------------------------------------
   //  Main Fetch (Profile + Holdings + Realized PnL)
+  //  Called on mount, reconnect, auth changes or manually
   // -----------------------------------------------------
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     setState((s) => ({ ...s, loading: true }));
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    const token = session?.access_token;
-
-    if (!token) {
-      setState({
-        profile: null,
-        holdings: [],
-        dayPnl: 0,
-        realizedToday: 0,
-        loading: false,
-      });
-      setWatchlist([]);
-      return;
-    }
-
     try {
+      const { data: { session } = {} as any } = await supabase.auth.getSession();
+      const token = session?.access_token;
+      if (!token) {
+        setState({
+          profile: null,
+          holdings: [],
+          dayPnl: 0,
+          realizedToday: 0,
+          loading: false,
+        });
+        setWatchlist([]);
+        return;
+      }
+
       const [profileRes, holdingsRes, realizedRes] = await Promise.all([
-        fetch("http://localhost:5500/api/v1/users/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
-
-        fetch("http://localhost:5500/api/v1/portfolio", {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
-
-        fetch("http://localhost:5500/api/v1/transactions/realized-today", {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
+        apiFetch("http://localhost:5500/api/v1/users/profile", token),
+        apiFetch("http://localhost:5500/api/v1/portfolio", token),
+        apiFetch("http://localhost:5500/api/v1/transactions/realized-today", token),
       ]);
 
-      const [profileData, holdingsData, realizedData] = await Promise.all([
-        profileRes.json(),
-        holdingsRes.json(),
-        realizedRes.json(),
-      ]);
+      const profileData = profileRes.json ?? {};
+      const holdingsData = holdingsRes.json ?? {};
+      const realizedData = realizedRes.json ?? {};
 
       setState({
         profile: profileData.user ?? null,
@@ -199,13 +131,78 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         loading: false,
       });
 
-      // Load watchlist after
+      // fetch watchlist after auth & profile
       fetchWatchlist();
     } catch (err) {
-      console.error("AppProvider fetch error:", err);
+      console.error("AppProvider refresh error:", err);
       setState((s) => ({ ...s, loading: false }));
     }
-  };
+  }, [fetchWatchlist]);
+
+  // -----------------------------------------------------
+  //  Real-time portfolio update handler (socket)
+  // -----------------------------------------------------
+  useEffect(() => {
+    const onPortfolioUpdate = (payload: any) => {
+      try {
+        // payload expected: { holdings, balance }
+        setState((prev) => {
+          const nextProfile = prev.profile ? { ...prev.profile } : null;
+          if (payload.balance != null && nextProfile) {
+            nextProfile.balance = payload.balance;
+          }
+          return {
+            ...prev,
+            holdings: payload.holdings ?? prev.holdings,
+            profile: nextProfile ?? prev.profile,
+          };
+        });
+      } catch (err) {
+        console.error("Error applying portfolio:update payload:", err);
+        // fallback to full refresh
+        refresh();
+      }
+    };
+
+    // Attach listener (socket may already be connected)
+    try {
+      socket.on("portfolio:update", onPortfolioUpdate);
+    } catch (err) {
+      console.warn("Socket attach failed (portfolio:update):", err);
+    }
+
+    return () => {
+      try {
+        socket.off("portfolio:update", onPortfolioUpdate);
+      } catch (err) {
+        // ignore
+      }
+    };
+  }, [refresh]);
+
+  // -----------------------------------------------------
+  //  Reconnect handler: re-sync state when socket connects
+  // -----------------------------------------------------
+  useEffect(() => {
+    const onConnect = () => {
+      // re-sync from server on reconnect; this solves race conditions
+      refresh();
+    };
+
+    try {
+      socket.on("connect", onConnect);
+    } catch (err) {
+      console.warn("Socket on(connect) attach failed:", err);
+    }
+
+    return () => {
+      try {
+        socket.off("connect", onConnect);
+      } catch (err) {
+        // ignore
+      }
+    };
+  }, [refresh]);
 
   // -----------------------------------------------------
   //  Mount + Auth Listener
@@ -213,12 +210,63 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     refresh();
 
-    const { data: listener } = supabase.auth.onAuthStateChange(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(() => {
       refresh();
     });
 
-    return () => listener.subscription.unsubscribe();
-  }, []);
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
+  }, [refresh]);
+
+  // -----------------------------------------------------
+  //  Trading helpers
+  // -----------------------------------------------------
+  const tradeStock = async (symbol: string, price: number, action: "buy" | "sell") => {
+    const { data: { session } = {} as any } = await supabase.auth.getSession();
+    const token = session?.access_token;
+    if (!token) {
+      toast.error("Please log in to trade");
+      return false;
+    }
+
+    setTradingSymbol(symbol);
+    try {
+      const url = `http://localhost:5500/api/v1/trade/${action}`;
+      const { ok, json } = await apiFetch(url, token, {
+        method: "POST",
+        body: JSON.stringify({ symbol, quantity: 1, price }),
+      });
+
+      if (!ok) {
+        toast.error(json?.message || "Trade failed");
+        return false;
+      }
+
+      // rely on socket 'portfolio:update' for instant UI update, but also do a full refresh
+      // as a fallback to ensure consistency
+      try {
+        // small delay to allow backend to emit; still call refresh to be safe
+        setTimeout(() => refresh(), 250);
+      } catch (e) {
+        refresh();
+      }
+
+      toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully`);
+      return true;
+    } catch (err) {
+      console.error("tradeStock error:", err);
+      toast.error("Network error / server offline");
+      setErrorSymbol(symbol);
+      return false;
+    } finally {
+      setTradingSymbol(null);
+      setErrorSymbol(null);
+    }
+  };
+
+  const buyStock = (symbol: string, price: number) => tradeStock(symbol, price, "buy");
+  const sellStock = (symbol: string, price: number) => tradeStock(symbol, price, "sell");
 
   return (
     <AppContext.Provider
@@ -239,5 +287,4 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Hook
 export const useApp = () => useContext(AppContext);

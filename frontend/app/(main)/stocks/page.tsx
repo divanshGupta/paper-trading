@@ -11,9 +11,10 @@ import StockSorter from "@/components/stocks/StockSorter";
 import StockSearch from "@/components/stocks/StockSearch";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
 import type { SectorFilter, SortKey } from "@/types";
-
+import { useLivePrices } from "../hooks/useLivePrices";
 
 export default function AllStocksPage() {
+  const { loading } = useLivePrices();
   const enriched = useEnrichedStocks();
   const { sellStock, buyStock, tradingSymbol } = useApp();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
@@ -84,6 +85,7 @@ export default function AllStocksPage() {
           onBuy={buyStock}
           onSell={sellStock}
           disableActions={false}
+          loading={loading}
         />
       )}
     </div>

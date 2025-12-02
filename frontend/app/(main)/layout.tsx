@@ -1,4 +1,5 @@
 import ToastProvider from "../../components/providers/ToastProvider";
+import SocketProvider from "@/components/providers/SocketProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { BalanceProvider } from "../../components/providers/BalanceProvider";
 import Footer from "@/components/navbar/Footer";
@@ -11,21 +12,23 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="">
-      <ToastProvider /> {/* global toast */ }
-      <ThemeProvider attribute="class" defaultTheme="system">
-        <BalanceProvider> 
-
-          <AppProvider>
-            <Navbar />
-            <main className="pt-[72px]"> {/* keeps content below fixed navbar */}
-              {children}
-            </main>
-            <Footer />
-          </AppProvider>
-
-        </BalanceProvider>
-      </ThemeProvider>
-    </div>
+    <html lang="en">
+      <body>
+        <SocketProvider>
+          <ThemeProvider attribute="class" defaultTheme="system">
+            <AppProvider>
+              <BalanceProvider>
+                <ToastProvider />
+                <Navbar />
+                  <main className="pt-[72px]">
+                    {children}
+                  </main>
+                <Footer />
+              </BalanceProvider>
+            </AppProvider>
+          </ThemeProvider>
+        </SocketProvider>
+      </body>
+    </html>
   );
-};
+}

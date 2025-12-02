@@ -1,144 +1,79 @@
+// src/app/(main)/hooks/useLivePrices.tsx OR src/hooks/useLivePrices.tsx
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import { supabase } from "@/utils/supabaseClient";
-import { EnrichedPrice, Candle, PricePoint, FlashState } from "@/types";
+import { useEffect, useMemo, useState } from "react";
+import { socket } from "@/utils/socket";
+import type { EnrichedPrice, Candle, FlashState } from "@/types";
 
 export function useLivePrices() {
   const [prices, setPrices] = useState<EnrichedPrice[]>([]);
+  const [loading, setLoading] = useState(true);
   const [flash, setFlash] = useState<FlashState>({});
-  const socketRef = useRef<Socket | null>(null);
 
-  // -----------------------------
-  // Helper: convert intraday OHLC → sparkline [{time, value}]
-  // -----------------------------
-  const buildSparkline = (intraday: Candle[], price: number) => {
-    const points = intraday.map((c) => ({
-      time: Math.floor(c.tStart / 1000),
-      value: c.close,
-    }));
-
-    // Add latest tick price as last “live point”
-    if (points.length > 0) {
-      points.push({
-        time: Math.floor(Date.now() / 1000),
-        value: price,
-      });
-    }
-
-    return points.slice(-120); // keep last 120 points
+  const buildSparkline = (intraday: Candle[] = [], price: number) => {
+    const pts = intraday.map((c) => ({ time: Math.floor(c.tStart / 1000), value: c.close }));
+    pts.push({ time: Math.floor(Date.now() / 1000), value: price });
+    return pts.slice(-120);
   };
 
-  // -----------------------------
-  // Quick map for O(log n) lookup
-  // -----------------------------
-  const map = useMemo(() => {
+  const byMap = useMemo(() => {
     const m = new Map<string, EnrichedPrice>();
-    for (const p of prices) m.set(p.symbol, p);
+    prices.forEach((p) => m.set(p.symbol, p));
     return m;
   }, [prices]);
 
-  // -----------------------------
-  // Socket Setup
-  // -----------------------------
   useEffect(() => {
-    let cancelled = false;
+    // wait until socket is connected
+    if (!socket || !socket.connected) return;
 
-    (async () => {
-      const session = await supabase.auth.getSession();
-      const token = session.data.session?.access_token;
-      if (!token) return;
+    console.info("useLivePrices: attaching listeners", socket.id);
 
-      const socket = io("http://localhost:5500", {
-        transports: ["websocket"],
-        auth: { token },
-      });
+    const onSnapshot = (snapshot: EnrichedPrice[]) => {
+      const enriched = snapshot.map((p) => ({ ...p, sparkline: buildSparkline(p.intraday ?? [], p.price) }));
+      const flashInit: FlashState = {};
+      snapshot.forEach((p) => (flashInit[p.symbol] = null));
+      setPrices(enriched);
+      setFlash(flashInit);
+      setLoading(false);
+    };
 
-      socketRef.current = socket;
-
-      socket.on("connect", () => {
-        console.log("socket connected", socket.id);
-      });
-
-      // -----------------------------
-      // INITIAL SNAPSHOT
-      // -----------------------------
-      socket.on("price:snapshot", (snapshot: EnrichedPrice[]) => {
-        if (cancelled) return;
-
-        console.log("📥 snapshot received", snapshot);
-
-        const flashInit: FlashState = {};
-        snapshot.forEach((p) => (flashInit[p.symbol] = null));
-
-        // attach sparkline
-        const enriched = snapshot.map((p) => ({
-          ...p,
-          sparkline: buildSparkline(p.intraday ?? [], p.price),
-        })) as any;
-
-        setFlash(flashInit);
-        setPrices(enriched);
-      });
-
-      // -----------------------------
-      // REAL-TIME TICKS
-      // -----------------------------
-      socket.on("price:ticks", (diffs) => {
-        if (cancelled) return;
-
-        setPrices((prev) => {
-          const updated = [...prev];
-
-          diffs.forEach((diff:any) => {
-            const idx = updated.findIndex((p) => p.symbol === diff.symbol);
-            if (idx === -1) return;
-
-            const before = updated[idx].price;
-            const after = diff.price;
-
-            // flash direction
-            let move: "up" | "down" | null = null;
-            if (after > before) move = "up";
-            else if (after < before) move = "down";
-
-            if (move) {
-              setFlash((f) => ({ ...f, [diff.symbol]: move }));
-              setTimeout(
-                () => setFlash((f) => ({ ...f, [diff.symbol]: null })),
-                300
-              );
-            }
-
-            // update object + sparkline
-            updated[idx] = {
-              ...updated[idx],
-              ...diff,
-              sparkline: buildSparkline(
-                updated[idx].intraday ?? [],
-                diff.price
-              ),
-            };
-          });
-
-          return updated;
+    const onTicks = (diffs: any[]) => {
+      setPrices((prev) => {
+        const copy = prev.slice();
+        diffs.forEach((d) => {
+          const idx = copy.findIndex((p) => p.symbol === d.symbol);
+          if (idx === -1) return;
+          const before = copy[idx].price;
+          const after = d.price;
+          let move: "up" | "down" | null = null;
+          if (after > before) move = "up";
+          else if (after < before) move = "down";
+          if (move) {
+            setFlash((f) => ({ ...f, [d.symbol]: move }));
+            setTimeout(() => setFlash((f) => ({ ...f, [d.symbol]: null })), 300);
+          }
+          copy[idx] = { ...copy[idx], ...d, sparkline: buildSparkline(copy[idx].intraday ?? [], d.price) };
         });
+        return copy;
       });
+    };
 
-      socket.on("disconnect", () => console.log("❌ socket disconnected"));
-    })();
+    socket.on("price:snapshot", onSnapshot);
+    socket.on("price:ticks", onTicks);
+
+    // request a resubscribe/snapshot in case server missed initial send
+    socket.emit("price:resubscribe");
 
     return () => {
-      cancelled = true;
-      socketRef.current?.disconnect();
-      socketRef.current = null;
+      socket.off("price:snapshot", onSnapshot);
+      socket.off("price:ticks", onTicks);
     };
-  }, []);
+  }, [socket.connected]); // re-run when socket.connect state changes
 
   return {
     prices,
     flash,
-    bySymbol: (sym: string) => map.get(sym) || null,
+    loading,
+    bySymbol: (sym: string) => byMap.get(sym) ?? null,
   };
 }

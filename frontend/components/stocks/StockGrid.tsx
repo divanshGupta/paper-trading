@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import StockCard from "../dashboard/StockCard";
+import StockCard from "./StockCard";
 import { StockCardSkeleton } from "../skeletons/StockCardSkeleton";
 import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
 
@@ -24,30 +24,25 @@ export default function StockGrid() {
           gap-4 mb-3
         "
       >
-        {/* Skeletons while waiting */}
-        {prices.length === 0 &&
-          featuredStocks.map((sym) => <StockCardSkeleton key={sym} />
+        {prices.length === 0 ? (
+          <StockCardSkeleton count={4} />
+        ) : (
+          featuredStocks.map((sym) => {
+            const p = bySymbol(sym);
+            if (!p) return null;
+            return (
+              <Link href={`/stocks/${p.symbol}`} key={p.symbol}>
+                <StockCard
+                  symbol={p.symbol}
+                  name={p.name || p.symbol}
+                  price={p.price}
+                  previousClose={p.previousClose ?? p.price}
+                  flash={flash[p.symbol]}
+                />
+              </Link>
+            );
+          })
         )}
-
-        {/* Live Stock Cards */}
-        {featuredStocks.map((sym) => {
-          const p = bySymbol(sym);
-          if (!p) return null;
-
-          return (
-            <Link href="/stocks/[symbol]" as={`/stocks/${p.symbol}`} key={p.symbol}>
-              <StockCard
-                key={p.symbol}
-                symbol={p.symbol}
-                name={p.name || p.symbol}
-                price={p.price}
-                previousClose={p.previousClose || p.price}
-                flash={flash[p.symbol]}
-                sparkline={p.sparkline ?? []}
-              />
-            </Link>
-          );
-        })}
       </div>
 
       <Link

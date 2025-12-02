@@ -7,7 +7,7 @@ import { useApp } from "@/components/providers/AppProvider";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import BuySellPanel from "@/components/trade/BuySellPanel";
 import WatchlistButton from "@/components/stocks/WatchlistButton";
-import StockCard from "@/components/dashboard/StockCard";
+import StockCard from "@/components/stocks/StockCard";
 import Sparkline from "@/components/chart/Sparkline";
 import TradeModal from "@/components/trade/TradeModal";
 

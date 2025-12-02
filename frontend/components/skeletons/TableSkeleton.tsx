@@ -8,7 +8,7 @@ export default function TableSkeleton({
   cols?: number;
 }) {
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-border bg-bg-surface animate-pulse">
+    <div className="w-full overflow-hidden rounded-xl border border-border bg-bg-surface skeleton-shimmer">
       <table className="w-full">
         <thead>
           <tr className="bg-bg-elevated">

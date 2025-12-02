@@ -24,10 +24,6 @@ export default function StocksTableDesktop({
 }: StocksListProps) {
   const router = useRouter();
 
-  if (!prices || prices.length === 0) {
-    return <TableSkeleton rows={6} cols={5} />;
-  }
-
   return (
     <div className="hidden md:block w-full overflow-hidden rounded-xl shadow-card">
       <table className="w-full border border-border mb-3">
@@ -96,7 +92,7 @@ export default function StocksTableDesktop({
                     {tradingSymbol === s.symbol ? (
                       <span className="animate-pulse">Processing...</span>
                     ) : (
-                      "Sell"
+                      "Buy"
                     )}
                   </button>
 
@@ -115,40 +111,10 @@ export default function StocksTableDesktop({
                     {tradingSymbol === s.symbol ? (
                       <span className="animate-pulse">Processing...</span>
                     ) : (
-                      "Buy"
+                      "Sell"
                     )}
                   </button>
                 </td>
-
-                {/* {s.symbol === errorSymbol && (
-                  <tr className="bg-red-950/40 text-red-300">
-                    <td colSpan={5} className="p-3 flex justify-between items-center">
-                      <span>Trade failed. Try again?</span>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onBuy(s.symbol, s.price);
-                          }}
-                          className="px-3 py-1 bg-positive text-sm rounded-md"
-                        >
-                          Retry Buy
-                        </button>
-
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onSell(s.symbol, s.price);
-                          }}
-                          className="px-3 py-1 bg-negative text-sm rounded-md"
-                        >
-                          Retry Sell
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                )} */}
-
               </tr>
             );
           })}

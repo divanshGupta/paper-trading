@@ -8,19 +8,18 @@ import { useApp } from "@/components/providers/AppProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import Link from "next/link";
 import Sidebar from "@/components/dashboard/Sidebar";
-import StockGrid from "@/components/dashboard/StockGrid";
+import StockGrid from "@/components/stocks/StockGrid";
 import StocksList from "@/components/stocks/StocksList";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
-
 
 export default function Dashboard() {
 
   const enriched = useEnrichedStocks();
 
-  const { prices, bySymbol, flash } = useLivePrices();
+  const { prices, bySymbol, flash, loading } = useLivePrices();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
 
-  const { state, refresh, buyStock, sellStock, tradingSymbol } = useApp();
+  const { state, buyStock, sellStock, tradingSymbol } = useApp();
   const { profile, holdings, realizedToday } = state;
 
   const { marketOpen } = getMarketStatusIST();
@@ -82,6 +81,7 @@ export default function Dashboard() {
             onBuy={buyStock}
             onSell={sellStock}
             disableActions={false}
+            loading={loading}
           />
 
           <Link

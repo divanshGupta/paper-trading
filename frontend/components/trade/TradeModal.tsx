@@ -67,15 +67,15 @@ export default function TradeModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-      <div className="bg-white dark:bg-dark-surface p-6 rounded-2xl w-full max-w-sm shadow-xl">
+    <div className="fixed inset-0 bg-bg-surface backdrop-blur-sm flex items-center justify-center z-50 px-4">
+      <div className="bg-bg-elevated p-6 rounded-2xl w-full max-w-sm shadow-xl">
 
         {/* HEADER */}
         <h2 className="text-lg font-bold mb-1">
           {isBuy ? "Buy" : "Sell"} {symbol}
         </h2>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+        <p className="text-sm text-text-secondary mb-3">
           {price ? (
             <>Market Price: <span className="font-semibold">₹{price}</span></>
           ) : (
@@ -85,11 +85,11 @@ export default function TradeModal({
 
         {/* INPUT */}
         <div className="mb-4">
-          <label className="text-sm text-gray-600 dark:text-gray-300">Quantity</label>
+          <label className="text-sm text-text-secondary">Quantity</label>
 
           <input
             type="number"
-            className="border dark:border-gray-700 dark:bg-gray-800 dark:text-white px-3 py-2 rounded-lg w-full mt-1"
+            className="border border-border bg-bg-surface outline-none text-text px-3 py-2 rounded-lg w-full mt-1"
             placeholder="Enter quantity"
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
@@ -98,7 +98,7 @@ export default function TradeModal({
 
         {/* BUY SECTION */}
         {isBuy && (
-          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-4 text-sm">
+          <div className="bg-bg-surface p-3 rounded-lg mb-4 text-sm">
             <div className="flex justify-between">
               <span>Available Balance:</span>
               <span className="font-semibold">₹{balance.toLocaleString()}</span>
@@ -111,7 +111,7 @@ export default function TradeModal({
 
             <div className="flex justify-between mt-1">
               <span>Balance After Buy:</span>
-              <span className={`${newBalance < 0 ? "text-red-600" : ""}`}>
+              <span className={`${newBalance < 0 ? "text-positive" : ""}`}>
                 ₹{newBalance.toLocaleString()}
               </span>
             </div>
@@ -120,7 +120,7 @@ export default function TradeModal({
 
         {/* SELL SECTION */}
         {isSell && (
-          <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-4 text-sm">
+          <div className="bg-bg-surface p-3 rounded-lg mb-4 text-sm">
             <div className="flex justify-between">
               <span>Your Holdings:</span>
               <span className="font-semibold">{holdingQty} shares</span>
@@ -138,7 +138,7 @@ export default function TradeModal({
           <button
             onClick={handleTrade}
             disabled={loading || !price}
-            className={`${isBuy ? "bg-green-600" : "bg-red-600"} text-white px-4 py-2 rounded-lg w-full font-semibold`}
+            className={`${isBuy ? "bg-positive" : "bg-negative"} text-text px-4 py-2 rounded-lg w-full font-semibold`}
           >
             {loading ? "Processing…" : isBuy ? "Buy" : "Sell"}
           </button>
@@ -146,7 +146,7 @@ export default function TradeModal({
           {isSell && (
             <button
               onClick={() => setQuantity(holdingQty)}
-              className="bg-gray-200 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded-lg"
+              className="bg-gray-200 dark:bg-gray-700 text-text px-4 py-2 rounded-lg"
             >
               Max
             </button>

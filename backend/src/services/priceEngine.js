@@ -1,6 +1,8 @@
 // backend/src/services/priceEngine.js
 import { isMarketOpen } from "../utils/marketTimes.js";
 import { loadPrices, savePrices } from "./priceStorage.js";
+import logger from "../utils/logger.js";
+import { DEFAULT_PRICES } from "../config/stocksData.js";
 
 /**
  * Advanced Fake Market Engine
@@ -32,261 +34,6 @@ const NEWS_EVENT_DURATION_TICKS = 6; // number of ticks the news event affects v
 const SAVE_ON_EACH_TICK = false; // set true for maximum safety; false to save at interval
 
 /* -------------------------
-   Default seed prices (used only if disk storage is empty)
-   ------------------------- */
-const DEFAULT_PRICES = [
-  // ---------------- IT Sector ----------------
-  {
-    symbol: "TCS",
-    name: "Tata Consultancy Services",
-    price: 3047, previousClose: 3047, todayOpen: 3047,
-    sector: "IT",
-    marketCap: 1400000,  // ₹14 lakh crore
-    pe: 32,
-    beta: 0.95,
-  },
-  {
-    symbol: "INFY",
-    name: "Infosys",
-    price: 1530, previousClose: 1530, todayOpen: 1530,
-    sector: "IT",
-    marketCap: 650000,
-    pe: 28,
-    beta: 0.90,
-  },
-  {
-    symbol: "WIPRO",
-    name: "Wipro Ltd",
-    price: 465, previousClose: 465, todayOpen: 465,
-    sector: "IT",
-    marketCap: 240000,
-    pe: 22,
-    beta: 0.85,
-  },
-  {
-    symbol: "HCLTECH",
-    name: "HCL Technologies",
-    price: 1180, previousClose: 1180, todayOpen: 1180,
-    sector: "IT",
-    marketCap: 350000,
-    pe: 25,
-    beta: 0.92,
-  },
-  {
-    symbol: "TECHM",
-    name: "Tech Mahindra",
-    price: 1280, previousClose: 1280, todayOpen: 1280,
-    sector: "IT",
-    marketCap: 120000,
-    pe: 20,
-    beta: 1.10,
-  },
-
-  // ---------------- Banks & Finance ----------------
-  {
-    symbol: "HDFCBANK",
-    name: "HDFC Bank",
-    price: 991, previousClose: 991, todayOpen: 991,
-    sector: "Banking",
-    marketCap: 1100000,
-    pe: 18,
-    beta: 1.05,
-  },
-  {
-    symbol: "ICICIBANK",
-    name: "ICICI Bank",
-    price: 1010, previousClose: 1010, todayOpen: 1010,
-    sector: "Banking",
-    marketCap: 750000,
-    pe: 20,
-    beta: 1.10,
-  },
-  {
-    symbol: "KOTAKBANK",
-    name: "Kotak Mahindra Bank",
-    price: 1680, previousClose: 1680, todayOpen: 1680,
-    sector: "Banking",
-    marketCap: 340000,
-    pe: 22,
-    beta: 1.08,
-  },
-  {
-    symbol: "AXISBANK",
-    name: "Axis Bank",
-    price: 1100, previousClose: 1100, todayOpen: 1100,
-    sector: "Banking",
-    marketCap: 350000,
-    pe: 16,
-    beta: 1.12,
-  },
-  {
-    symbol: "SBIN",
-    name: "State Bank of India",
-    price: 780, previousClose: 780, todayOpen: 780,
-    sector: "Banking",
-    marketCap: 720000,
-    pe: 14,
-    beta: 1.15,
-  },
-
-  // ---------------- Auto ----------------
-  {
-    symbol: "TATAMOTORS",
-    name: "Tata Motors",
-    price: 915, previousClose: 915, todayOpen: 915,
-    sector: "Auto",
-    marketCap: 350000,
-    pe: 18,
-    beta: 1.40,
-  },
-  {
-    symbol: "MARUTI",
-    name: "Maruti Suzuki",
-    price: 11800, previousClose: 11800, todayOpen: 11800,
-    sector: "Auto",
-    marketCap: 400000,
-    pe: 30,
-    beta: 1.05,
-  },
-  {
-    symbol: "M&M",
-    name: "Mahindra & Mahindra",
-    price: 1680, previousClose: 1680, todayOpen: 1680,
-    sector: "Auto",
-    marketCap: 270000,
-    pe: 26,
-    beta: 1.20,
-  },
-  {
-    symbol: "BAJAJ-AUTO",
-    name: "Bajaj Auto",
-    price: 7800, previousClose: 7800, todayOpen: 7800,
-    sector: "Auto",
-    marketCap: 240000,
-    pe: 24,
-    beta: 0.80,
-  },
-
-  // ---------------- Energy & Infra ----------------
-  {
-    symbol: "RELIANCE",
-    name: "Reliance Industries",
-    price: 1493, previousClose: 1493, todayOpen: 1493,
-    sector: "Energy",
-    marketCap: 1800000,
-    pe: 24,
-    beta: 1.00,
-  },
-  {
-    symbol: "ONGC",
-    name: "Oil & Natural Gas Corp",
-    price: 190, previousClose: 190, todayOpen: 190,
-    sector: "Energy",
-    marketCap: 220000,
-    pe: 9,
-    beta: 1.25,
-  },
-  {
-    symbol: "NTPC",
-    name: "NTPC Ltd",
-    price: 365, previousClose: 365, todayOpen: 365,
-    sector: "Power",
-    marketCap: 120000,
-    pe: 12,
-    beta: 0.95,
-  },
-  {
-    symbol: "POWERGRID",
-    name: "Power Grid Corporation",
-    price: 292, previousClose: 292, todayOpen: 292,
-    sector: "Power",
-    marketCap: 200000,
-    pe: 10,
-    beta: 0.90,
-  },
-  {
-    symbol: "TATAPOWER",
-    name: "Tata Power",
-    price: 410, previousClose: 410, todayOpen: 410,
-    sector: "Power",
-    marketCap: 80000,
-    pe: 15,
-    beta: 1.12,
-  },
-  {
-    symbol: "ADANI",
-    name: "Adani Enterprises",
-    price: 456, previousClose: 456, todayOpen: 456,
-    sector: "Infrastructure",
-    marketCap: 300000,
-    pe: 120,
-    beta: 1.70,
-  },
-  {
-    symbol: "BPCL",
-    name: "Bharat Petroleum LTD",
-    price: 256, previousClose: 256, todayOpen: 256,
-    sector: "Energy",
-    marketCap: 70000,
-    pe: 7,
-    beta: 1.05,
-  },
-
-  // ---------------- FMCG ----------------
-  {
-    symbol: "ITC",
-    name: "ITC Ltd",
-    price: 435, previousClose: 435, todayOpen: 435,
-    sector: "FMCG",
-    marketCap: 540000,
-    pe: 29,
-    beta: 0.65,
-  },
-  {
-    symbol: "HINDUNILVR",
-    name: "Hindustan Unilever",
-    price: 2400, previousClose: 2400, todayOpen: 2400,
-    sector: "FMCG",
-    marketCap: 560000,
-    pe: 60,
-    beta: 0.50,
-  },
-  {
-    symbol: "NESTLE",
-    name: "Nestle India",
-    price: 25500, previousClose: 25500, todayOpen: 25500,
-    sector: "FMCG",
-    marketCap: 250000,
-    pe: 90,
-    beta: 0.40,
-  },
-
-  // ---------------- Telecom ----------------
-  {
-    symbol: "BHARTIARTL",
-    name: "Bharti Airtel",
-    price: 1250, previousClose: 1250, todayOpen: 1250,
-    sector: "Telecom",
-    marketCap: 460000,
-    pe: 24,
-    beta: 0.95,
-  },
-
-  // ---------------- Pharma ----------------
-  {
-    symbol: "SUNPHARMA",
-    name: "Sun Pharma",
-    price: 1250, previousClose: 1250, todayOpen: 1250,
-    sector: "Pharma",
-    marketCap: 300000,
-    pe: 28,
-    beta: 0.70,
-  },
-];
-
-
-
-/* -------------------------
    Load persisted prices if present, otherwise seed defaults
    PRICES will be mutated by engine and saved back to disk periodically.
    Each symbol object shape in PRICES:
@@ -315,20 +62,24 @@ let lastTickTimestamp = Date.now();
    ------------------------- */
 function nowISO() {
   return new Date().toISOString();
-};
+}
 
 function initializePrices() {
   // try disk load first
-  const fromDisk = loadPrices?.();
-  if (fromDisk && Array.isArray(fromDisk) && fromDisk.length > 0) {
-    // ensure shape for older files
-    return fromDisk.map((s) => ({
-      ...s,
-      high: s.high ?? s.price,
-      low: s.low ?? s.price,
-      volume: s.volume ?? 0,
-      intraday: Array.isArray(s.intraday) ? s.intraday : [],
-    }));
+  try {
+    const fromDisk = loadPrices?.();
+    if (fromDisk && Array.isArray(fromDisk) && fromDisk.length > 0) {
+      // ensure shape for older files
+      return fromDisk.map((s) => ({
+        ...s,
+        high: s.high ?? s.price,
+        low: s.low ?? s.price,
+        volume: s.volume ?? 0,
+        intraday: Array.isArray(s.intraday) ? s.intraday : [],
+      }));
+    }
+  } catch (err) {
+    logger.warn(nowISO(), "Failed to load prices from disk — falling back to defaults", err);
   }
 
   // fallback to defaults
@@ -339,7 +90,7 @@ function initializePrices() {
     volume: 0,
     intraday: [],
   }));
-};
+}
 
 /* -------------------------
    Volatility profiles
@@ -348,8 +99,8 @@ function initializePrices() {
    ------------------------- */
 const VOL_PROFILES = {
   default: 0.005, // 0.5% typical tick amplitude
-  tech: 0.01,     // 1.0% for higher volatility
-  infra: 0.004,   // 0.4% lower volatility
+  tech: 0.01, // 1.0% for higher volatility
+  infra: 0.004, // 0.4% lower volatility
   largecap: 0.003,
 };
 
@@ -363,7 +114,7 @@ function profileForSymbol(symbol) {
   if (infra.includes(symbol)) return "infra";
   if (largecap.includes(symbol)) return "largecap";
   return "default";
-};
+}
 
 /* -------------------------
    Circuit breaker per-symbol
@@ -371,17 +122,17 @@ function profileForSymbol(symbol) {
    - we cap per-tick change to a configured percentage
    ------------------------- */
 const CIRCUIT_BREAKER_PCT = 0.1; // 10% max one-tick move
-const CIRCUIT_LOCK_MS = 10_000;   // if triggered, lock further movement for this symbol for 10s
-const circuitLocks = new Map();   // symbol -> unlockTimestamp
+const CIRCUIT_LOCK_MS = 10_000; // if triggered, lock further movement for this symbol for 10s
+const circuitLocks = new Map(); // symbol -> unlockTimestamp
 
 function isCircuitLocked(symbol) {
   const ts = circuitLocks.get(symbol);
   return ts && Date.now() < ts;
-};
+}
 
 function triggerCircuitLock(symbol) {
   circuitLocks.set(symbol, Date.now() + CIRCUIT_LOCK_MS);
-};
+}
 
 /* -------------------------
    News event simulation
@@ -401,10 +152,10 @@ function maybeSpawnNewsEvent() {
         volatilityMultiplier: 2 + Math.random() * 2, // 2x - 4x volatility
       };
       // small console clue
-      console.log(nowISO(), "news event:", sym, activeNewsEvents[sym]);
+      logger.info(nowISO(), "news event:", sym, activeNewsEvents[sym]);
     }
   }
-};
+}
 
 /*
    Core tick price update
@@ -415,10 +166,16 @@ function maybeSpawnNewsEvent() {
    - Appends to intraday per-minute bucket (handled separately)
 */
 function nextTickEnhanced(prices) {
-  const newPrices = prices.map((s) => {
-    // if the symbol is under circuit lock, skip changes
+  // We will mutate a new array referencing same objects where possible
+  const out = new Array(prices.length);
+
+  for (let i = 0; i < prices.length; i++) {
+    const s = prices[i];
+
+    // if the symbol is under circuit lock, keep unchanged
     if (isCircuitLocked(s.symbol)) {
-      return { ...s }; // unchanged
+      out[i] = { ...s };
+      continue;
     }
 
     // base volatility from profile
@@ -435,7 +192,7 @@ function nextTickEnhanced(prices) {
     const mm = now.getMinutes();
     const minutesSinceOpen = hh * 60 + mm;
     // if market just opened (9:15 - 9:30 IST), boost small volatility
-    const openBoost = (minutesSinceOpen >= 555 && minutesSinceOpen <= 570) ? 1.5 : 1;
+    const openBoost = minutesSinceOpen >= 555 && minutesSinceOpen <= 570 ? 1.5 : 1;
 
     // compute random percent change — gaussian-ish via two randoms
     const rand = (Math.random() - 0.5) + (Math.random() - 0.5);
@@ -445,7 +202,7 @@ function nextTickEnhanced(prices) {
     const rawNewPrice = Math.max(1, Math.round(s.price + s.price * pct));
 
     // enforce circuit breaker cap (no more than CIRCUIT_BREAKER_PCT per tick)
-    const maxDelta = Math.round(s.price * CIRCUIT_BREAKER_PCT);
+    const maxDelta = Math.max(1, Math.round(s.price * CIRCUIT_BREAKER_PCT));
     let newPrice = rawNewPrice;
     const delta = newPrice - s.price;
     if (Math.abs(delta) > maxDelta) {
@@ -453,7 +210,7 @@ function nextTickEnhanced(prices) {
       newPrice = s.price + Math.sign(delta) * maxDelta;
       // trigger lock if the cap was exceeded drastically
       triggerCircuitLock(s.symbol);
-      console.log(nowISO(), "circuit lock triggered on", s.symbol, "delta:", delta, "capped->", newPrice);
+      logger.info(nowISO(), "circuit lock triggered on", s.symbol, "delta:", delta, "capped->", newPrice);
     }
 
     // simulate volume: base + random
@@ -465,26 +222,27 @@ function nextTickEnhanced(prices) {
     const low = Math.min(s.low ?? s.price, newPrice);
     const volume = (s.volume ?? 0) + tickVolume;
 
-    return {
+    // create new object for this symbol
+    out[i] = {
       ...s,
       price: newPrice,
       high,
       low,
       volume,
     };
-  });
+  }
 
   // decrement news event counters and remove if finished
-  Object.keys(activeNewsEvents).forEach((sym) => {
+  for (const sym of Object.keys(activeNewsEvents)) {
     activeNewsEvents[sym].remainingTicks -= 1;
     if (activeNewsEvents[sym].remainingTicks <= 0) {
       delete activeNewsEvents[sym];
-      console.log(nowISO(), "news event ended:", sym);
+      logger.info(nowISO(), "news event ended:", sym);
     }
-  });
+  }
 
-  return newPrices;
-};
+  return out;
+}
 
 /* -------------------------
    Candle aggregator (intraday OHLC per minute)
@@ -515,7 +273,7 @@ function aggregateMinuteCandles() {
       updated.close = currentPrice;
       updated.high = Math.max(updated.high, currentPrice);
       updated.low = Math.min(updated.low, currentPrice);
-      // volume for the candle is already being incremented per tick via volume on s
+      // volume for the candle is already being incremented per tick via s.volume
       const arr = (s.intraday || []).slice(0, -1).concat(updated);
       return { ...s, intraday: arr };
     }
@@ -526,19 +284,37 @@ function aggregateMinuteCandles() {
    Save prices to disk (debounced by interval)
    - We write the PRICES array to disk so engine can resume after restart
    ------------------------- */
+let processExitHandlerRegistered = false;
 function startPeriodicSave() {
   if (saveIntervalHandle) return;
-  saveIntervalHandle = setInterval(() => {
+  saveIntervalHandle = setInterval(async () => {
     try {
-      savePrices(PRICES);
+      await Promise.resolve(savePrices(PRICES));
     } catch (err) {
-      console.error(nowISO(), "Error saving prices:", err);
+      logger.error(nowISO(), "Error saving prices:", err);
     }
   }, STORAGE_SAVE_INTERVAL_MS);
-  // also save on process exit
-  process.on("exit", () => {
-    try { savePrices(PRICES); } catch (e) {}
-  });
+
+  // register a single exit handler (guarded)
+  if (!processExitHandlerRegistered) {
+    const doSaveAndExit = () => {
+      try {
+        savePrices(PRICES);
+      } catch (e) {
+        // ignore
+      }
+    };
+    process.once("exit", doSaveAndExit);
+    process.once("SIGINT", () => {
+      doSaveAndExit();
+      process.exit(0);
+    });
+    process.once("SIGTERM", () => {
+      doSaveAndExit();
+      process.exit(0);
+    });
+    processExitHandlerRegistered = true;
+  }
 }
 
 /* -------------------------
@@ -549,7 +325,7 @@ function startPeriodicSave() {
      This runs once per market open (not on server restart)
    ------------------------- */
 function handleMarketOpenReset() {
-  console.log(nowISO(), "Market opened — performing daily reset");
+  logger.info(nowISO(), "Market opened — performing daily reset");
   PRICES = PRICES.map((s) => ({
     ...s,
     previousClose: s.price,
@@ -561,8 +337,12 @@ function handleMarketOpenReset() {
     volume: 0,
   }));
   // persist immediately
-  savePrices(PRICES);
-};
+  try {
+    savePrices(PRICES);
+  } catch (e) {
+    logger.warn(nowISO(), "Failed to persist prices on market open reset", e);
+  }
+}
 
 /* -------------------------
    Engine start/stop and main loop
@@ -570,14 +350,23 @@ function handleMarketOpenReset() {
 let ioEmitter = null; // will be set in startPriceEngine
 
 export function startPriceEngine(io) {
-  if (tickIntervalHandle) return; // already running
-  ioEmitter = io;
+  // idempotent start: if already started, simply return
+  if (tickIntervalHandle) {
+    // still ensure ioEmitter is set so other callers can emit through it
+    ioEmitter = io || ioEmitter;
+    return;
+  }
 
+  ioEmitter = io;
   // Start periodic persistence
   startPeriodicSave();
 
   // Immediately broadcast current snapshot (loaded from disk or defaults)
-  io.emit("price:snapshot", PRICES);
+  try {
+    io.emit("price:snapshot", PRICES);
+  } catch (err) {
+    logger.warn(nowISO(), "Failed to emit initial snapshot:", err);
+  }
 
   // Start market status broadcaster
   marketStatusIntervalHandle = setInterval(() => {
@@ -589,79 +378,114 @@ export function startPriceEngine(io) {
     }
     lastMarketOpenState = openNow;
 
-    io.emit("market:status", { open: openNow });
+    try {
+      io.emit("market:status", { open: openNow });
+    } catch (err) {
+      logger.warn(nowISO(), "Failed to emit market status:", err);
+    }
   }, MARKET_STATUS_BROADCAST_MS);
 
   // Minute candle aggregator (intraday)
   candleIntervalHandle = setInterval(() => {
     if (!isMarketOpen()) return;
     // possibly spawn news events once a minute
-    maybeSpawnNewsEvent();
-    aggregateMinuteCandles();
-    // emit intraday snapshot for charts optionally
-    // io.emit("price:intraday", PRICES.map(p => ({ symbol: p.symbol, intraday: p.intraday })));
+    try {
+      maybeSpawnNewsEvent();
+      aggregateMinuteCandles();
+    } catch (err) {
+      logger.error(nowISO(), "Error in minute aggregator:", err);
+    }
+    // optional intraday emitter left commented (can be enabled)
+    // try { io.emit("price:intraday", PRICES.map(p => ({ symbol: p.symbol, intraday: p.intraday }))); } catch {}
   }, INTRADAY_CANDLE_INTERVAL_MS);
 
   // MAIN TICK LOOP
   tickIntervalHandle = setInterval(() => {
+    // keep last tick timestamp
+    lastTickTimestamp = Date.now();
+
     if (!isMarketOpen()) return; // freeze when market closed
 
-    // produce new prices for this tick
-    const prevSnapshot = PRICES.map((p) => ({ ...p })); // shallow copy for diffs
-    PRICES = nextTickEnhanced(PRICES);
+    try {
+      // produce new prices for this tick
+      const prevSnapshot = PRICES; // reference to old array
+      const newSnapshot = nextTickEnhanced(prevSnapshot);
+      PRICES = newSnapshot;
 
-    // update minute candle volumes: each symbol's tick volume is reflected by difference in s.volume
-    // we already increase s.volume inside nextTickEnhanced; minute aggregator will use s.volume
-
-    // Build diffs (only changed symbols)
-    const diffs = PRICES
-      .map((s, i) => {
+      // Build diffs (only changed symbols)
+      const diffs = [];
+      for (let i = 0; i < PRICES.length; i++) {
         const prev = prevSnapshot[i];
-        if (!prev || s.price === prev.price) return null;
-        // include more metadata now: previousClose, todayOpen, high, low, volume, intraday last candle maybe
-        return {
-          symbol: s.symbol,
-          price: s.price,
-          previousClose: s.previousClose,
-          todayOpen: s.todayOpen,
-          high: s.high,
-          low: s.low,
-          volume: s.volume,
-          intradayLast: (s.intraday && s.intraday[s.intraday.length - 1]) || null,
-        };
-      })
-      .filter(Boolean);
+        const cur = PRICES[i];
+        if (!prev || cur.price === prev.price) continue;
+        diffs.push({
+          symbol: cur.symbol,
+          price: cur.price,
+          previousClose: cur.previousClose,
+          todayOpen: cur.todayOpen,
+          high: cur.high,
+          low: cur.low,
+          volume: cur.volume,
+          intradayLast: (cur.intraday && cur.intraday[cur.intraday.length - 1]) || null,
+        });
+      }
 
-    if (diffs.length > 0) {
-      io.emit("price:ticks", diffs);
-    }
+      if (diffs.length > 0) {
+        try {
+          io.emit("price:ticks", diffs);
+        } catch (err) {
+          logger.warn(nowISO(), "Failed to emit price ticks:", err);
+        }
+      }
 
-    // Save to disk either on each tick or rely on periodic saver
-    if (SAVE_ON_EACH_TICK) {
-      try { savePrices(PRICES); } catch (e) { console.error("save error", e); }
+      // Save to disk either on each tick or rely on periodic saver
+      if (SAVE_ON_EACH_TICK) {
+        try {
+          savePrices(PRICES);
+        } catch (e) {
+          logger.error(nowISO(), "Error saving prices on tick:", e);
+        }
+      }
+    } catch (err) {
+      logger.error(nowISO(), "Critical error in tick loop:", err);
     }
   }, TICK_INTERVAL_MS);
 
   // ensure storage saver is running
   startPeriodicSave();
-  console.log(nowISO(), "Price engine started. TICK interval:", TICK_INTERVAL_MS, "ms");
-};
+  logger.info(nowISO(), "Price engine started. TICK interval:", TICK_INTERVAL_MS, "ms");
+}
 
 /* stop engine safely (useful for tests) */
 export function stopPriceEngine() {
-  if (tickIntervalHandle) clearInterval(tickIntervalHandle);
-  if (saveIntervalHandle) clearInterval(saveIntervalHandle);
-  if (candleIntervalHandle) clearInterval(candleIntervalHandle);
-  if (marketStatusIntervalHandle) clearInterval(marketStatusIntervalHandle);
-  tickIntervalHandle = saveIntervalHandle = candleIntervalHandle = marketStatusIntervalHandle = null;
+  if (tickIntervalHandle) {
+    clearInterval(tickIntervalHandle);
+    tickIntervalHandle = null;
+  }
+  if (saveIntervalHandle) {
+    clearInterval(saveIntervalHandle);
+    saveIntervalHandle = null;
+  }
+  if (candleIntervalHandle) {
+    clearInterval(candleIntervalHandle);
+    candleIntervalHandle = null;
+  }
+  if (marketStatusIntervalHandle) {
+    clearInterval(marketStatusIntervalHandle);
+    marketStatusIntervalHandle = null;
+  }
   ioEmitter = null;
-  console.log(nowISO(), "Price engine stopped.");
-};
+  activeNewsEvents = {};
+  circuitLocks.clear();
+  logger.warn(nowISO(), "Price engine stopped.");
+}
 
 /* get full snapshot (API endpoints can call) */
 export function getSnapshot() {
-  return PRICES;
-};
+  // Return a shallow copy to avoid accidental external mutation of internal array
+  return PRICES.map((p) => ({ ...p }));
+}
+
 
 /*
 
