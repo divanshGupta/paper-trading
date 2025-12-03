@@ -2,7 +2,7 @@
   {
     "symbol": "TCS",
     "name": "Tata Consultancy Services",
-    "price": 1969,
+    "price": 1998,
     "previousClose": 3047,
     "todayOpen": 3047,
     "sector": "IT",
@@ -11,7 +11,7 @@
     "beta": 0.95,
     "high": 3726,
     "low": 961,
-    "volume": 4264144,
+    "volume": 4264407,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -978,7 +978,7 @@
   {
     "symbol": "INFY",
     "name": "Infosys",
-    "price": 3160,
+    "price": 3153,
     "previousClose": 1530,
     "todayOpen": 1530,
     "sector": "IT",
@@ -987,7 +987,7 @@
     "beta": 0.9,
     "high": 4043,
     "low": 902,
-    "volume": 5707384,
+    "volume": 5707823,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -1963,7 +1963,7 @@
     "beta": 0.85,
     "high": 530,
     "low": 101,
-    "volume": 557459,
+    "volume": 557473,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -2930,7 +2930,7 @@
   {
     "symbol": "HCLTECH",
     "name": "HCL Technologies",
-    "price": 2396,
+    "price": 2386,
     "previousClose": 1180,
     "todayOpen": 1180,
     "sector": "IT",
@@ -2939,7 +2939,7 @@
     "beta": 0.92,
     "high": 2508,
     "low": 895,
-    "volume": 3704486,
+    "volume": 3704728,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -3906,7 +3906,7 @@
   {
     "symbol": "TECHM",
     "name": "Tech Mahindra",
-    "price": 1446,
+    "price": 1452,
     "previousClose": 1280,
     "todayOpen": 1280,
     "sector": "IT",
@@ -3915,7 +3915,7 @@
     "beta": 1.1,
     "high": 1695,
     "low": 866,
-    "volume": 3266133,
+    "volume": 3266308,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -4882,7 +4882,7 @@
   {
     "symbol": "HDFCBANK",
     "name": "HDFC Bank",
-    "price": 698,
+    "price": 700,
     "previousClose": 991,
     "todayOpen": 991,
     "sector": "Banking",
@@ -4891,7 +4891,7 @@
     "beta": 1.05,
     "high": 1084,
     "low": 579,
-    "volume": 1901058,
+    "volume": 1901193,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -5858,7 +5858,7 @@
   {
     "symbol": "ICICIBANK",
     "name": "ICICI Bank",
-    "price": 926,
+    "price": 928,
     "previousClose": 1010,
     "todayOpen": 1010,
     "sector": "Banking",
@@ -5867,7 +5867,7 @@
     "beta": 1.1,
     "high": 1111,
     "low": 386,
-    "volume": 1759035,
+    "volume": 1759189,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -6834,7 +6834,7 @@
   {
     "symbol": "KOTAKBANK",
     "name": "Kotak Mahindra Bank",
-    "price": 1291,
+    "price": 1290,
     "previousClose": 1680,
     "todayOpen": 1680,
     "sector": "Banking",
@@ -6843,7 +6843,7 @@
     "beta": 1.08,
     "high": 2155,
     "low": 1129,
-    "volume": 4091265,
+    "volume": 4091471,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -7819,7 +7819,7 @@
     "beta": 1.12,
     "high": 1312,
     "low": 583,
-    "volume": 2368819,
+    "volume": 2368938,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -8786,7 +8786,7 @@
   {
     "symbol": "SBIN",
     "name": "State Bank of India",
-    "price": 1094,
+    "price": 1086,
     "previousClose": 780,
     "todayOpen": 780,
     "sector": "Banking",
@@ -8795,7 +8795,7 @@
     "beta": 1.15,
     "high": 1393,
     "low": 710,
-    "volume": 2448938,
+    "volume": 2449101,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -9762,7 +9762,7 @@
   {
     "symbol": "TATAMOTORS",
     "name": "Tata Motors",
-    "price": 885,
+    "price": 882,
     "previousClose": 915,
     "todayOpen": 915,
     "sector": "Auto",
@@ -9771,7 +9771,7 @@
     "beta": 1.4,
     "high": 1393,
     "low": 526,
-    "volume": 2084629,
+    "volume": 2084758,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -10738,7 +10738,7 @@
   {
     "symbol": "MARUTI",
     "name": "Maruti Suzuki",
-    "price": 8178,
+    "price": 8198,
     "previousClose": 11800,
     "todayOpen": 11800,
     "sector": "Auto",
@@ -10747,7 +10747,7 @@
     "beta": 1.05,
     "high": 13444,
     "low": 7407,
-    "volume": 24756381,
+    "volume": 24757624,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -11714,7 +11714,7 @@
   {
     "symbol": "M&M",
     "name": "Mahindra & Mahindra",
-    "price": 1723,
+    "price": 1737,
     "previousClose": 1680,
     "todayOpen": 1680,
     "sector": "Auto",
@@ -11723,7 +11723,7 @@
     "beta": 1.2,
     "high": 1931,
     "low": 1031,
-    "volume": 3756294,
+    "volume": 3756506,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -12690,7 +12690,7 @@
   {
     "symbol": "BAJAJ-AUTO",
     "name": "Bajaj Auto",
-    "price": 8532,
+    "price": 8562,
     "previousClose": 7800,
     "todayOpen": 7800,
     "sector": "Auto",
@@ -12699,7 +12699,7 @@
     "beta": 0.8,
     "high": 16464,
     "low": 6739,
-    "volume": 26254453,
+    "volume": 26256230,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -13666,7 +13666,7 @@
   {
     "symbol": "RELIANCE",
     "name": "Reliance Industries",
-    "price": 2596,
+    "price": 2591,
     "previousClose": 1493,
     "todayOpen": 1493,
     "sector": "Energy",
@@ -13675,7 +13675,7 @@
     "beta": 1,
     "high": 3279,
     "low": 1273,
-    "volume": 5202554,
+    "volume": 5202850,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -14651,7 +14651,7 @@
     "beta": 1.25,
     "high": 190,
     "low": 100,
-    "volume": 271054,
+    "volume": 271066,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -15618,7 +15618,7 @@
   {
     "symbol": "NTPC",
     "name": "NTPC Ltd",
-    "price": 750,
+    "price": 752,
     "previousClose": 365,
     "todayOpen": 365,
     "sector": "Power",
@@ -15627,7 +15627,7 @@
     "beta": 0.95,
     "high": 756,
     "low": 339,
-    "volume": 1204114,
+    "volume": 1204247,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -16594,7 +16594,7 @@
   {
     "symbol": "POWERGRID",
     "name": "Power Grid Corporation",
-    "price": 130,
+    "price": 129,
     "previousClose": 292,
     "todayOpen": 292,
     "sector": "Power",
@@ -16603,7 +16603,7 @@
     "beta": 0.9,
     "high": 391,
     "low": 120,
-    "volume": 509561,
+    "volume": 509570,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -17579,7 +17579,7 @@
     "beta": 1.12,
     "high": 464,
     "low": 233,
-    "volume": 836597,
+    "volume": 836648,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -18546,7 +18546,7 @@
   {
     "symbol": "ADANI",
     "name": "Adani Enterprises",
-    "price": 716,
+    "price": 713,
     "previousClose": 456,
     "todayOpen": 456,
     "sector": "Infrastructure",
@@ -18555,7 +18555,7 @@
     "beta": 1.7,
     "high": 757,
     "low": 430,
-    "volume": 1495763,
+    "volume": 1495879,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -19531,7 +19531,7 @@
     "beta": 1.05,
     "high": 256,
     "low": 135,
-    "volume": 370552,
+    "volume": 370564,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -20498,7 +20498,7 @@
   {
     "symbol": "ITC",
     "name": "ITC Ltd",
-    "price": 459,
+    "price": 458,
     "previousClose": 435,
     "todayOpen": 435,
     "sector": "FMCG",
@@ -20507,7 +20507,7 @@
     "beta": 0.65,
     "high": 613,
     "low": 341,
-    "volume": 1129035,
+    "volume": 1129101,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -21474,7 +21474,7 @@
   {
     "symbol": "HINDUNILVR",
     "name": "Hindustan Unilever",
-    "price": 1438,
+    "price": 1445,
     "previousClose": 2400,
     "todayOpen": 2400,
     "sector": "FMCG",
@@ -21483,7 +21483,7 @@
     "beta": 0.5,
     "high": 3245,
     "low": 1264,
-    "volume": 5165204,
+    "volume": 5165481,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -22450,7 +22450,7 @@
   {
     "symbol": "NESTLE",
     "name": "Nestle India",
-    "price": 6804,
+    "price": 6798,
     "previousClose": 25500,
     "todayOpen": 25500,
     "sector": "FMCG",
@@ -22459,7 +22459,7 @@
     "beta": 0.4,
     "high": 32965,
     "low": 5760,
-    "volume": 43629001,
+    "volume": 43629869,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -23426,7 +23426,7 @@
   {
     "symbol": "BHARTIARTL",
     "name": "Bharti Airtel",
-    "price": 2671,
+    "price": 2695,
     "previousClose": 1250,
     "todayOpen": 1250,
     "sector": "Telecom",
@@ -23435,7 +23435,7 @@
     "beta": 0.95,
     "high": 4414,
     "low": 1221,
-    "volume": 5545533,
+    "volume": 5545948,
     "intraday": [
       {
         "tStart": 1764679933403,
@@ -24402,7 +24402,7 @@
   {
     "symbol": "SUNPHARMA",
     "name": "Sun Pharma",
-    "price": 399,
+    "price": 396,
     "previousClose": 1250,
     "todayOpen": 1250,
     "sector": "Pharma",
@@ -24411,7 +24411,7 @@
     "beta": 0.7,
     "high": 1361,
     "low": 302,
-    "volume": 1824438,
+    "volume": 1824503,
     "intraday": [
       {
         "tStart": 1764679933403,
