@@ -4,8 +4,6 @@ import AuthGuard from "../hooks/authGaurd";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { RealizedRow } from "@/types";
-import { deflate } from "zlib";
-import { div } from "framer-motion/client";
 
 function RealizedPnLPage() {
   const [rows, setRows] = useState<RealizedRow[]>([]);

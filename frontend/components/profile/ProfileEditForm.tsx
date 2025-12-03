@@ -2,11 +2,22 @@
 
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import { toast } from "sonner";
+
+// Define the expected structure of the Profile data based on form usage
+interface Profile {
+  name: string | null;
+  phone: string | null;
+  gender: string | null;
+  address: string | null;
+  fatherName: string | null;
+  dob: string | null;
+  // Allows for other properties that exist on the profile object
+  [key: string]: any; 
+}
 
 interface ProfileEditFormProps {
-  profile: any;
-  onSave: (updated: any) => void;
+  profile: Profile;
+  onSave: (updated: Profile) => void;
   onCancel: () => void;
 }
 
@@ -21,7 +32,8 @@ export default function ProfileEditForm({
     gender: profile.gender || "",
     address: profile.address || "",
     fatherName: profile.fatherName || "",
-    dob: profile.dob ? profile.dob.substring(0, 10) : "",
+    // Ensure DOB is formatted for the input type="date"
+    dob: profile.dob ? profile.dob.substring(0, 10) : "", 
   });
 
   const [loading, setLoading] = useState(false);
@@ -53,7 +65,11 @@ export default function ProfileEditForm({
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
 
-      const res = await fetch("http://localhost:5500/api/v1/users/profile", {
+      // Note: In a real deployment, you must replace 'http://localhost:5500' 
+      // with your Fly.io backend URL (e.g., 'https://your-app-name.fly.dev/').
+      const BACKEND_URL = "http://localhost:5500"; 
+
+      const res = await fetch(`${BACKEND_URL}/api/v1/users/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +80,13 @@ export default function ProfileEditForm({
 
       const json = await res.json();
 
-      onSave(json.user);
+      if (res.ok) {
+        // Pass the updated user/profile data, now typed as Profile
+        onSave(json.user); 
+      } else {
+        // Handle API error messages
+        setError(json.message || "Failed to save profile.");
+      }
     } catch (err) {
       console.error(err);
       setError("Something went wrong");
@@ -89,7 +111,7 @@ export default function ProfileEditForm({
         {/* Name */}
         <Field
           label="Full Name"
-          value={form.name}
+          value={form.name || ""}
           onChange={(v) => handleChange("name", v)}
           required
           placeholder="Full Name"
@@ -98,7 +120,7 @@ export default function ProfileEditForm({
         {/* Phone */}
         <Field
           label="Phone"
-          value={form.phone}
+          value={form.phone || ""}
           onChange={(v) => handleChange("phone", v)}
           placeholder="10-digit number"
         />
@@ -107,7 +129,7 @@ export default function ProfileEditForm({
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-1">Gender</label>
           <select
-            value={form.gender}
+            value={form.gender || ""}
             onChange={(e) => handleChange("gender", e.target.value)}
             className="border border-border bg-bg-elevated rounded-lg px-3 py-2"
           >
@@ -122,7 +144,7 @@ export default function ProfileEditForm({
         <Field
           label="Date of Birth"
           type="date"
-          value={form.dob}
+          value={form.dob || ""}
           onChange={(v) => handleChange("dob", v)}
 
         />
@@ -131,7 +153,7 @@ export default function ProfileEditForm({
         <div className="md:col-span-2">
           <Field
             label="Address"
-            value={form.address}
+            value={form.address || ""}
             onChange={(v) => handleChange("address", v)}
             placeholder="Your Full Address"
           />
@@ -140,7 +162,7 @@ export default function ProfileEditForm({
         {/* Father's Name */}
         <Field
           label="Father's Name"
-          value={form.fatherName}
+          value={form.fatherName || ""}
           onChange={(v) => handleChange("fatherName", v)}
           placeholder="Your Father's Name"
         />
@@ -172,7 +194,7 @@ export default function ProfileEditForm({
 }
 
 /* ----------------------------------------
-   REUSABLE FIELD COMPONENT
+  REUSABLE FIELD COMPONENT
 ---------------------------------------- */
 function Field({
   label,

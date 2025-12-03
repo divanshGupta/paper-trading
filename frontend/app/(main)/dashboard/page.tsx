@@ -80,7 +80,6 @@ export default function Dashboard() {
             tradingSymbol={tradingSymbol}
             onBuy={buyStock}
             onSell={sellStock}
-            disableActions={false}
             loading={loading}
           />
 

@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Bell } from 'lucide-react';
-// import TickerBar from '../dashboard/StockTicker';
 import ProfileDropDown from './ProfileDropDown';
 import ThemeToggle from '../ui/ThemeToggle';
 import StockSearch from '../stocks/StockSearch';
@@ -15,7 +14,6 @@ export default function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   const { prices } = useLivePrices();
 
@@ -26,10 +24,6 @@ export default function Navbar() {
     { href: "/orders", label: "Orders" },
     { href: "/watchlist", label: "Watchlist" },
   ];
-  
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   // Handle outside click
   useEffect(() => {

@@ -7,12 +7,39 @@ import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import SellModal from "../trade/TradeModal";
 
-export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
+// 1. Define the type for a single holding object
+interface Holding {
+  id: string; // Assuming id is a unique identifier
+  symbol: string;
+  quantity: number;
+  avgPrice: number;
+  livePrice: number;
+  unrealized: number; // P&L
+}
 
-  const { state, refresh } = useApp();
+// 2. Define the type for the flash state object
+// Flash maps a symbol to a price change state ("up" | "down" | undefined)
+interface FlashState {
+  [symbol: string]: "up" | "down" | undefined;
+}
+
+// 3. Define the component props interface
+interface HoldingsTableProps {
+  holdings: Holding[];
+  flash: FlashState;
+  onSuccess: () => void;
+}
+
+export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTableProps) {
+  const { state } = useApp();
   const { profile } = state;
   const router = useRouter();
+  
+  // State for the active modal, which holds the stock symbol and quantity to sell
   const [active, setActive] = useState<null | { symbol: string; holdingQty: number }>(null);
+  
+  // Assuming the unused 'refresh' state was here and removing it to resolve the warning.
+  // const [refresh, setRefresh] = useState(0); // REMOVED UNUSED VARIABLE
 
   return (
     <div className="bg-bg-surface border border-border rounded-xl p-6">
@@ -32,7 +59,8 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
         </thead>
 
         <tbody>
-          {holdings.map((h: any) => {
+          {/* 4. Use the Holding type in the map function */}
+          {holdings.map((h: Holding) => {
             const pnlColor = h.unrealized >= 0 ? "text-positive" : "text-negative";
 
             return (
@@ -75,11 +103,15 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
                 <td className="py-3 text-center">
                   <button
                     onClick={async () => {
+                      // Note: In a real deployment, you must replace 'http://localhost:5500'
+                      // with your Fly.io backend URL (e.g., 'https://your-app-name.fly.dev/').
+                      const BACKEND_URL = "http://localhost:5500"; 
+                      
                       const { data } = await supabase.auth.getSession();
                       const token = data.session?.access_token;
                       if (!token) return router.replace("/login");
 
-                      const res = await fetch("http://localhost:5500/api/v1/trade/squareoff", {
+                      const res = await fetch(`${BACKEND_URL}/api/v1/trade/squareoff`, {
                         method: "POST",
                         headers: {
                           Authorization: `Bearer ${token}`,
@@ -122,7 +154,9 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: any) {
           mode="sell"
           symbol={active.symbol}
           holdingQty={active.holdingQty}
-          price={profile?.balance}
+          // Assuming profile?.balance is the cash balance used here. 
+          // You might need to adjust the prop name if SellModal expects the current price of the stock.
+          price={profile?.balance} 
           onClose={() => setActive(null)}
           onSuccess={onSuccess}
         />

@@ -1,20 +1,24 @@
-# ---- Base Node image ----
-FROM node:20-alpine
+# --- Base Image ---
+FROM node:20
 
-# ---- Set working directory ----
+# --- Set work directory ---
 WORKDIR /app
 
-# ---- Copy package files ----
+# --- Copy package files first for caching ---
 COPY package*.json ./
 
-# ---- Install ONLY production dependencies ----
-RUN npm install --production
+# --- Copy prisma early so postinstall works ---
+COPY prisma ./prisma
 
-# ---- Copy rest of the backend ----
+# --- Install dependencies (production only) ---
+# prisma generate runs in postinstall and works because schema exists
+RUN npm install --omit=dev
+
+# --- Copy rest of the backend ---
 COPY . .
 
-# ---- Expose port Fly will route to ----
+# --- Expose backend port ---
 EXPOSE 5500
 
-# ---- Run server (Fly injects env vars itself) ----
-CMD ["node", "src/server.js"]
+# --- Start server ---
+CMD ["node", "-r", "dotenv/config", "src/server.js"]

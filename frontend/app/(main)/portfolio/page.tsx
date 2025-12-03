@@ -1,7 +1,7 @@
 "use client";
 
 import AuthGuard from "../hooks/authGaurd";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import PortfolioSummary from "@/components/portfolio/PortfolioSummary";

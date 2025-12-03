@@ -8,7 +8,6 @@ export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<"login" | "signup">("login");
 
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,7 +22,7 @@ export default function LoginPage() {
       else setLoading(false);
     }
     check();
-  }, []);
+  }, [router]);
 
   if (loading) return null;
 

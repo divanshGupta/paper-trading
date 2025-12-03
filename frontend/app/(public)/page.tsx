@@ -1,47 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-// import { socket } from "@/utils/socket";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 import Link from "next/link";
-import Image from "next/image";
 
-// type StocksState = Record<string, StockData>;
 export const dynamic = "force-static"; // disables HMR for this page
 
 export default function Home() {
-  // const [stocks, setStocks] = useState<StocksState>({});
-
-  // useEffect(() => {
-  //   if (typeof window === "undefined") return;
-
-  //   if (!socket) return;
-
-    // Handle live stock updates
-  //   const handleStockUpdate = (data: StockData) => {
-  //     setStocks((prev) => ({
-  //       ...prev,
-  //       [data.symbol]: data,
-  //     }));
-  //   };
-
-  //   socket.on("stock:update", handleStockUpdate);
-
-  //   socket.on("connect", () => {
-  //     console.log("✅ Connected to socket:", socket.id);
-  //   });
-
-  //   socket.on("connect_error", (err: Error) => {
-  //     console.error("❌ Socket connection error:", err.message);
-  //   });
-
-  //   // 5️⃣ Cleanup
-  //   return () => {
-  //     socket.off("stock:update", handleStockUpdate);
-  //     socket.disconnect();
-  //   };
-  // }, []);
 
   const router = useRouter()
 
@@ -52,7 +18,7 @@ export default function Home() {
         router.push("/dashboard")
       }
     })
-  }, [])
+  }, [router])
 
 
   return (

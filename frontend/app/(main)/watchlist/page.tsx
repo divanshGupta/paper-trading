@@ -6,7 +6,7 @@ import StocksList from "@/components/stocks/StocksList";
 import { useLivePrices } from "../hooks/useLivePrices";
 
 export default function WatchlistPage() {
-  const { state, watchlist, buyStock, sellStock, tradingSymbol } = useApp();
+  const { watchlist, buyStock, sellStock, tradingSymbol } = useApp();
   const { flash, loading } = useLivePrices();
 
   // ✅ enriched prices instead of raw live prices

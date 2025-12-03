@@ -18,7 +18,6 @@ export default function StocksList(props: StocksListProps) {
     tradingSymbol,
     onBuy,
     onSell,
-    disableActions,
     loading = false,
   } = props;
 

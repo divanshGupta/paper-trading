@@ -6,15 +6,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useApp } from "@/components/providers/AppProvider";
 import ThemeToggle from "../ui/ThemeToggle";
-import { ArrowLeft, ChevronRight, Settings } from "lucide-react";
+import { ChevronRight, Settings } from "lucide-react";
 
 export default function ProfileMenu() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const { state, refresh } = useApp();
-  const { profile, loading } = state;
+  const { state } = useApp();
+  const { profile } = state;
   const name = profile?.name || "User";
   const email = profile?.email || "";
   

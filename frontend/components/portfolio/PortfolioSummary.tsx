@@ -4,7 +4,6 @@ export default function PortfolioSummary({
   current,
   unrealized,
   dayPnl,
-  realizedToday,
   roi,
 }: {
   balance: number;
