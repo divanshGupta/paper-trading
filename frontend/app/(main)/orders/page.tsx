@@ -1,7 +1,7 @@
 "use client";
 
 import AuthGuard from "../hooks/authGaurd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Transaction, OrderFilterValue } from "@/types";
@@ -18,7 +18,7 @@ function TransactionsPage() {
 
   const router = useRouter();
 
-  const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(async () => {
     try {
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
@@ -45,7 +45,7 @@ function TransactionsPage() {
     } catch (err) {
       console.error("Failed to fetch transactions:", err);
     }
-  };
+  }, [page, filter]);
 
   useEffect(() => {
     fetchTransactions();

@@ -4,6 +4,7 @@ import { useApp } from "@/components/providers/AppProvider";
 import useEnrichedStocks from "../hooks/useEnrichedStocks";
 import StocksList from "@/components/stocks/StocksList";
 import { useLivePrices } from "../hooks/useLivePrices";
+import { getMarketStatusIST } from "@/utils/marketTime";
 
 export default function WatchlistPage() {
   const { watchlist, buyStock, sellStock, tradingSymbol } = useApp();
@@ -11,6 +12,7 @@ export default function WatchlistPage() {
 
   // ✅ enriched prices instead of raw live prices
   const enriched = useEnrichedStocks();
+  const { marketOpen } = getMarketStatusIST();
 
   // dictionary for bySymbol
   const bySymbol = (symbol: string) =>
@@ -31,7 +33,7 @@ export default function WatchlistPage() {
             prices={filtered}
             flash={flash}
             bySymbol={bySymbol}
-            marketOpen={true}
+            marketOpen={marketOpen}
             tradingSymbol={tradingSymbol}
             onBuy={buyStock}
             onSell={sellStock}

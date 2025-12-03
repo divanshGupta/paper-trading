@@ -240,6 +240,7 @@ useEffect(() => {
     price: number,
     action: "buy" | "sell"
   ): Promise<boolean> => {
+
     const { data } = await supabase.auth.getSession();
     const token = data.session?.access_token;
 
@@ -250,22 +251,30 @@ useEffect(() => {
 
     setTradingSymbol(symbol);
 
-    const url = `http://localhost:5500/api/v1/trade/${action}`;
+    try {
+      const url = `http://localhost:5500/api/v1/trade/${action}`;
 
-    const { ok, json } = await apiFetch<TradeError>(url, token, {
-      method: "POST",
-      body: JSON.stringify({ symbol, price, quantity: 1 }),
-    });
+      const { ok, json } = await apiFetch<TradeError>(url, token, {
+        method: "POST",
+        body: JSON.stringify({ symbol, price, quantity: 1 }),
+      });
 
-    if (!ok) {
-      toast.error(json.message ?? "Trade failed");
+      if (!ok) {
+        toast.error(json.message ?? "Trade failed");
+        return false;
+      }
+
+      setTimeout(() => refresh(), 250);
+      toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully`);
+
+      return true;
+    } catch (error) {
+      toast.error("Network Error");
       return false;
+    } finally {
+      // always executes even if api fails
+      setTradingSymbol(null);
     }
-
-    setTimeout(() => refresh(), 250);
-    toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully`);
-
-    return true;
   };
 
   const buyStock = (symbol: string, price: number) =>

@@ -63,7 +63,7 @@ export default function StockInfoPage() {
   const dayChangePct = (dayChange / (stock.previousClose ?? stock.price)) * 100;
   const dayColor = dayChange >= 0 ? "text-green-600" : "text-red-600";
 
-  function Stat({ label, value }: { label: string; value: any }) {
+  function Stat({ label, value }: { label: string; value: string | number | null | undefined }) {
     return (
       <div className="p-4 rounded-lg bg-bg-surface border border-border">
         <p className="text-xs text-text-secondary">{label}</p>
@@ -191,7 +191,6 @@ export default function StockInfoPage() {
           mode={tradeMode}
           symbol={stock.symbol}
           holdingQty={holdingQty}
-          avgPrice={avgPrice}
           balance={profile?.balance}
           onClose={() => setTradeMode(null)}
           onSuccess={refresh}

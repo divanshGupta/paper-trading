@@ -12,11 +12,15 @@ export default function StockSorter({ sortKey, onChange }: StockSorterProps) {
   return (
     <select
       value={sortKey}
-      onChange={(e) => onChange(e.target.value as SortKey)}   // << FIX
+      onChange={(e) => onChange(e.target.value as SortKey)}
       className="px-4 py-2 rounded-lg border border-border bg-bg-main"
     >
       {sortKeys.map((opt) => (
-        <option className="border border-border rounded-lg" key={opt.value} value={opt.value}>
+        <option
+          key={opt.value}
+          value={opt.value}
+          className="border border-border rounded-lg"
+        >
           {opt.label}
         </option>
       ))}

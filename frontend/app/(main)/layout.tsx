@@ -12,10 +12,15 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-bg-main text-text antialiased" suppressHydrationWarning>
         <SocketProvider>
-          <ThemeProvider attribute="class" defaultTheme="system">
+          <ThemeProvider 
+            attribute="class" 
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
             <AppProvider>
               <BalanceProvider>
                 <ToastProvider />

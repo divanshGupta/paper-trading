@@ -253,6 +253,15 @@ export type OrderFilterValue = "ALL" | "BUY" | "SELL";
 // gainer and loser type
 export type StockFilterValue = "all" | "gainers" | "losers";
 
+export interface StockFiltersProps {
+  selected: SectorFilter;
+  onSelect: (value: SectorFilter) => void;
+}
+
+export interface StockSorterProps {
+  sortKey: SortKey;
+  onChange: (value: SortKey) => void;
+}
 
 // trade modal type
 export type TradeModalProps = {

@@ -7,6 +7,7 @@ import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import { EnrichedHolding, FlashState } from "@/types";
 import SellModal from "../trade/TradeModal";
+import { getMarketStatusIST } from "@/utils/marketTime";
 
 
 // 2. Define the type for the flash state object
@@ -23,6 +24,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
   const { state } = useApp();
   const { profile } = state;
   const router = useRouter();
+  const { marketOpen } = getMarketStatusIST();
   
   // State for the active modal, which holds the stock symbol and quantity to sell
   const [active, setActive] = useState<null | { symbol: string; holdingQty: number }>(null);
@@ -81,21 +83,29 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                 {/* SELL BUTTON → opens modal */}
                 <td className="py-3 text-center">
                   <button
-                    className="px-3 py-1 bg-negative text-text rounded-lg hover:bg-red-700"
-                    onClick={() => setActive({ symbol: h.symbol, holdingQty: h.quantity })}
+                    disabled={!marketOpen}
+                    className={`px-3 py-1 rounded-lg text-text
+                      ${marketOpen ? "bg-negative hover:bg-red-700" : "bg-bg-elevated cursor-not-allowed border border-border"}
+                    `}
+                    onClick={() => {
+                      if (!marketOpen) return;
+                      setActive({ symbol: h.symbol, holdingQty: h.quantity });
+                    }}
                   >
-                    Sell
+                    {marketOpen ? "Sell" : "Closed"}
                   </button>
                 </td>
 
                 {/* EXIT BUTTON */}
                 <td className="py-3 text-center">
                   <button
+                    disabled={!marketOpen}
+                    className={`px-3 py-1 rounded-lg text-text
+                      ${marketOpen ? "bg-red-600 hover:bg-red-700" : "bg-bg-elevated cursor-not-allowed border border-border"}
+                    `}
                     onClick={async () => {
-                      // Note: In a real deployment, you must replace 'http://localhost:5500'
-                      // with your Fly.io backend URL (e.g., 'https://your-app-name.fly.dev/').
-                      const BACKEND_URL = "http://localhost:5500"; 
-                      
+                      if (!marketOpen) return;
+                      const BACKEND_URL = "http://localhost:5500";
                       const { data } = await supabase.auth.getSession();
                       const token = data.session?.access_token;
                       if (!token) return router.replace("/login");
@@ -106,10 +116,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                           Authorization: `Bearer ${token}`,
                           "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({
-                          symbol: h.symbol,
-                          price: h.livePrice,
-                        }),
+                        body: JSON.stringify({ symbol: h.symbol, price: h.livePrice }),
                       });
 
                       const json = await res.json();
@@ -120,10 +127,10 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                         toast.error(json.message || "Failed");
                       }
                     }}
-                    className="px-3 py-1 bg-red-600 text-text rounded-lg hover:bg-red-700"
                   >
-                    Exit
+                    {marketOpen ? "Exit" : "Closed"}
                   </button>
+
                 </td>
               </tr>
             );

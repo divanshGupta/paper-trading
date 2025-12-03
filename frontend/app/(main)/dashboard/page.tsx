@@ -1,8 +1,7 @@
-// app/(main)/dashboard/page.tsx
 "use client";
 
 import useEnrichedStocks from "../hooks/useEnrichedStocks";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useLivePrices } from "../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
@@ -14,52 +13,53 @@ import StockFilterTabs from "@/components/stocks/StockFilterTab";
 import { Holding, StockFilterValue } from "@/types";
 
 export default function Dashboard() {
-
   const enriched = useEnrichedStocks();
-
   const { prices, bySymbol, flash, loading } = useLivePrices();
   const [filter, setFilter] = useState<StockFilterValue>("all");
 
   const { state, buyStock, sellStock, tradingSymbol } = useApp();
   const { profile, holdings, realizedToday } = state;
 
-  const { marketOpen } = getMarketStatusIST();
+  // Market open state must only run on the client
+  const [marketOpen, setMarketOpen] = useState(false);
+  useEffect(() => {
+    setMarketOpen(getMarketStatusIST().marketOpen);
+  }, []);
 
-  // portfolio total value (live)
+  // Portfolio Value
   const totalValue = holdings.reduce((acc: number, h: Holding) => {
     const p = bySymbol(h.symbol)?.price ?? 0;
     return acc + p * h.quantity;
   }, 0);
 
-  // unrealized PnL (quick)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Unrealized P&L
   const unrealizedPnL = useMemo(() => {
     return holdings.reduce((acc: number, h: Holding) => {
       const p = bySymbol(h.symbol);
       if (!p) return acc;
-      const diff = p.price - p.previousClose;
-      return acc + diff * h.quantity;
+      return acc + (p.price - p.previousClose) * h.quantity;
     }, 0);
-  }, [holdings, prices]);
+  }, [holdings, prices, bySymbol]);
 
   const dayPnl = unrealizedPnL + (realizedToday ?? 0);
 
+  // Dashboard stocks
   const dashboardStocks = useMemo(() => {
     switch (filter) {
       case "gainers":
         return enriched
-          .filter(s => s.price > s.previousClose)
-          .sort((a,b)=> b.changePercent - a.changePercent)
-          .slice(0,6);
+          .filter((s) => s.price > s.previousClose)
+          .sort((a, b) => b.changePercent - a.changePercent)
+          .slice(0, 6);
 
       case "losers":
         return enriched
-          .filter(s => s.price < s.previousClose)
-          .sort((a,b)=> a.changePercent - b.changePercent)
-          .slice(0,6);
+          .filter((s) => s.price < s.previousClose)
+          .sort((a, b) => a.changePercent - b.changePercent)
+          .slice(0, 6);
 
       default:
-        return enriched.slice(0,6);
+        return enriched.slice(0, 6);
     }
   }, [enriched, filter]);
 
@@ -94,9 +94,13 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        {/* RIGHT • SIDEBAR */}
+        {/* RIGHT SIDEBAR */}
         <aside className="w-[340px] hidden lg:block">
-          <Sidebar balance={profile?.balance ?? 0} totalValue={totalValue} dayPnl={dayPnl} />
+          <Sidebar
+            balance={profile?.balance ?? 0}
+            totalValue={totalValue}
+            dayPnl={dayPnl}
+          />
         </aside>
       </div>
     </div>

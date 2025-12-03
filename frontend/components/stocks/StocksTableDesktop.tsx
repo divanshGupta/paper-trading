@@ -88,6 +88,8 @@ export default function StocksTableDesktop({
                   >
                     {tradingSymbol === s.symbol ? (
                       <span className="animate-pulse">Processing...</span>
+                    ) : !marketOpen ? (
+                      "Closed"
                     ) : (
                       "Buy"
                     )}
@@ -107,6 +109,8 @@ export default function StocksTableDesktop({
                   >
                     {tradingSymbol === s.symbol ? (
                       <span className="animate-pulse">Processing...</span>
+                    ) : !marketOpen ? (
+                      "Closed"
                     ) : (
                       "Sell"
                     )}

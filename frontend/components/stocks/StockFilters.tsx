@@ -17,9 +17,11 @@ export default function StockFilters({ selected, onSelect }: StockFiltersProps) 
       {sectors.map((sec) => (
         <button
           key={sec}
-          onClick={() => onSelect(sec)}   // << NO TYPE ERROR NOW
+          onClick={() => onSelect(sec)} 
           className={`px-4 py-2 rounded-lg ${
-            selected === sec ? "bg-bg-elevated text-text border border-border" : "bg-bg-main text-text border border-border"
+            selected === sec
+              ? "bg-bg-elevated text-text border border-border"
+              : "bg-bg-main text-text border border-border"
           }`}
         >
           {sec}
