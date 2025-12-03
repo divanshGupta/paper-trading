@@ -1,18 +1,5 @@
 import React from "react";
-
-// --- 1. Define Types ---
-
-interface Transaction {
-  id: number | string; 
-  symbol: string;
-  type: "BUY" | "SELL";
-  quantity: number;
-  // Use 'string | number' if the source data isn't guaranteed to be a number
-  price: number | string; 
-  total: number | string; 
-  realizedPnl: number | string | null;
-  createdAt: string | Date; 
-}
+import { Transaction } from "@/types";
 
 interface TransactionTableProps {
   transactions: Transaction[];

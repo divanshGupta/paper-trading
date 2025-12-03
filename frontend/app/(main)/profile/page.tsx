@@ -7,9 +7,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthGuard from "../hooks/authGaurd";
 import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
+import { UserProfile } from "@/types";
 
 function ProfilePage() {
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
 
@@ -87,7 +88,7 @@ function ProfilePage() {
           // Inline edit form — stays inside the card
           <ProfileEditForm
             profile={profile}
-            onSave={(updated: any) => {
+            onSave={(updated: UserProfile) => {
               setProfile(updated);
               setEditing(false);
             }}
@@ -128,7 +129,15 @@ function ProfilePage() {
   );
 }
 
-function Detail({ label, value, colSpan = 1 }: { label: string; value: any; colSpan?: number }) {
+function Detail({
+  label,
+  value,
+  colSpan = 1,
+}: {
+  label: string;
+  value: string | number | null | undefined;
+  colSpan?: number;
+}) {
   return (
     <div className={` flex flex-col ${colSpan === 2 ? "col-span-2" : ""} border-b pb-3`}>
       <span className="text-sm text-gray-600 dark:text-gray-400">{label}</span>

@@ -2,7 +2,7 @@
   {
     "symbol": "TCS",
     "name": "Tata Consultancy Services",
-    "price": 1693,
+    "price": 1803,
     "previousClose": 3047,
     "todayOpen": 3047,
     "sector": "IT",
@@ -11,120 +11,8 @@
     "beta": 0.95,
     "high": 3726,
     "low": 961,
-    "volume": 4175828,
+    "volume": 4198743,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1439,
-        "high": 1439,
-        "low": 1439,
-        "close": 1439,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1438,
-        "high": 1438,
-        "low": 1438,
-        "close": 1438,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1479,
-        "high": 1479,
-        "low": 1479,
-        "close": 1479,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1501,
-        "high": 1501,
-        "low": 1501,
-        "close": 1501,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1479,
-        "high": 1479,
-        "low": 1479,
-        "close": 1479,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1500,
-        "high": 1500,
-        "low": 1500,
-        "close": 1500,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1498,
-        "high": 1498,
-        "low": 1480,
-        "close": 1480,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1542,
-        "high": 1542,
-        "low": 1542,
-        "close": 1542,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1547,
-        "high": 1547,
-        "low": 1547,
-        "close": 1547,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 1590,
-        "high": 1590,
-        "low": 1590,
-        "close": 1590,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 1635,
-        "high": 1635,
-        "low": 1635,
-        "close": 1635,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 1655,
-        "high": 1655,
-        "low": 1655,
-        "close": 1655,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1632,
-        "high": 1632,
-        "low": 1632,
-        "close": 1632,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1618,
-        "high": 1618,
-        "low": 1618,
-        "close": 1618,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1561,
@@ -972,13 +860,125 @@
         "low": 1663,
         "close": 1663,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1714,
+        "high": 1714,
+        "low": 1714,
+        "close": 1714,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1737,
+        "high": 1737,
+        "low": 1737,
+        "close": 1737,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1719,
+        "high": 1719,
+        "low": 1719,
+        "close": 1719,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 1724,
+        "high": 1724,
+        "low": 1724,
+        "close": 1724,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 1738,
+        "high": 1738,
+        "low": 1738,
+        "close": 1738,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1735,
+        "high": 1735,
+        "low": 1735,
+        "close": 1735,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 1683,
+        "high": 1683,
+        "low": 1683,
+        "close": 1683,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 1702,
+        "high": 1702,
+        "low": 1702,
+        "close": 1702,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1666,
+        "high": 1666,
+        "low": 1666,
+        "close": 1666,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 1693,
+        "high": 1693,
+        "low": 1693,
+        "close": 1693,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 1742,
+        "high": 1742,
+        "low": 1742,
+        "close": 1742,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 1790,
+        "high": 1790,
+        "low": 1790,
+        "close": 1790,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 1817,
+        "high": 1817,
+        "low": 1817,
+        "close": 1817,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 1839,
+        "high": 1839,
+        "low": 1839,
+        "close": 1839,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "INFY",
     "name": "Infosys",
-    "price": 3479,
+    "price": 3478,
     "previousClose": 1530,
     "todayOpen": 1530,
     "sector": "IT",
@@ -987,120 +987,8 @@
     "beta": 0.9,
     "high": 4043,
     "low": 902,
-    "volume": 5545120,
+    "volume": 5589554,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 3324,
-        "high": 3324,
-        "low": 3324,
-        "close": 3324,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 3293,
-        "high": 3293,
-        "low": 3293,
-        "close": 3293,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 3249,
-        "high": 3249,
-        "low": 3249,
-        "close": 3249,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 3217,
-        "high": 3217,
-        "low": 3217,
-        "close": 3217,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 3229,
-        "high": 3229,
-        "low": 3229,
-        "close": 3229,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 3313,
-        "high": 3313,
-        "low": 3313,
-        "close": 3313,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 3418,
-        "high": 3484,
-        "low": 3418,
-        "close": 3484,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 3493,
-        "high": 3493,
-        "low": 3493,
-        "close": 3493,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 3649,
-        "high": 3649,
-        "low": 3649,
-        "close": 3649,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 3673,
-        "high": 3673,
-        "low": 3673,
-        "close": 3673,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 3586,
-        "high": 3586,
-        "low": 3586,
-        "close": 3586,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 3427,
-        "high": 3427,
-        "low": 3427,
-        "close": 3427,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 3358,
-        "high": 3358,
-        "low": 3358,
-        "close": 3358,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 3420,
-        "high": 3420,
-        "low": 3420,
-        "close": 3420,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 3356,
@@ -1948,6 +1836,118 @@
         "low": 3512,
         "close": 3512,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 3516,
+        "high": 3516,
+        "low": 3516,
+        "close": 3516,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 3572,
+        "high": 3572,
+        "low": 3572,
+        "close": 3572,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 3597,
+        "high": 3597,
+        "low": 3597,
+        "close": 3597,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 3665,
+        "high": 3665,
+        "low": 3665,
+        "close": 3665,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 3614,
+        "high": 3614,
+        "low": 3614,
+        "close": 3614,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 3495,
+        "high": 3495,
+        "low": 3495,
+        "close": 3495,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 3450,
+        "high": 3450,
+        "low": 3450,
+        "close": 3450,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 3348,
+        "high": 3348,
+        "low": 3348,
+        "close": 3348,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 3301,
+        "high": 3301,
+        "low": 3301,
+        "close": 3301,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 3346,
+        "high": 3346,
+        "low": 3346,
+        "close": 3346,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 3404,
+        "high": 3404,
+        "low": 3404,
+        "close": 3404,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 3335,
+        "high": 3335,
+        "low": 3335,
+        "close": 3335,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 3466,
+        "high": 3466,
+        "low": 3466,
+        "close": 3466,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 3512,
+        "high": 3512,
+        "low": 3512,
+        "close": 3512,
+        "volume": 0
       }
     ]
   },
@@ -1963,120 +1963,8 @@
     "beta": 0.85,
     "high": 530,
     "low": 101,
-    "volume": 552600,
+    "volume": 553904,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 103,
-        "high": 103,
-        "low": 103,
-        "close": 103,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 103,
@@ -2924,13 +2812,125 @@
         "low": 101,
         "close": 101,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 101,
+        "high": 101,
+        "low": 101,
+        "close": 101,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "HCLTECH",
     "name": "HCL Technologies",
-    "price": 2203,
+    "price": 2371,
     "previousClose": 1180,
     "todayOpen": 1180,
     "sector": "IT",
@@ -2939,120 +2939,8 @@
     "beta": 0.92,
     "high": 2436,
     "low": 895,
-    "volume": 3589907,
+    "volume": 3618865,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 2232,
-        "high": 2232,
-        "low": 2232,
-        "close": 2232,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 2258,
-        "high": 2258,
-        "low": 2258,
-        "close": 2258,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 2221,
-        "high": 2221,
-        "low": 2221,
-        "close": 2221,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 2248,
-        "high": 2248,
-        "low": 2248,
-        "close": 2248,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 2269,
-        "high": 2269,
-        "low": 2269,
-        "close": 2269,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 2292,
-        "high": 2292,
-        "low": 2292,
-        "close": 2292,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 2288,
-        "high": 2288,
-        "low": 2270,
-        "close": 2270,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 2283,
-        "high": 2283,
-        "low": 2283,
-        "close": 2283,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 2316,
-        "high": 2316,
-        "low": 2316,
-        "close": 2316,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 2328,
-        "high": 2328,
-        "low": 2328,
-        "close": 2328,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 2326,
-        "high": 2326,
-        "low": 2326,
-        "close": 2326,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 2357,
-        "high": 2357,
-        "low": 2357,
-        "close": 2357,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 2333,
-        "high": 2333,
-        "low": 2333,
-        "close": 2333,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 2343,
-        "high": 2343,
-        "low": 2343,
-        "close": 2343,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 2349,
@@ -3900,13 +3788,125 @@
         "low": 2214,
         "close": 2214,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 2203,
+        "high": 2203,
+        "low": 2203,
+        "close": 2203,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 2221,
+        "high": 2221,
+        "low": 2221,
+        "close": 2221,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 2229,
+        "high": 2229,
+        "low": 2229,
+        "close": 2229,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 2239,
+        "high": 2239,
+        "low": 2239,
+        "close": 2239,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 2252,
+        "high": 2252,
+        "low": 2252,
+        "close": 2252,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 2245,
+        "high": 2245,
+        "low": 2245,
+        "close": 2245,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 2219,
+        "high": 2219,
+        "low": 2219,
+        "close": 2219,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 2180,
+        "high": 2180,
+        "low": 2180,
+        "close": 2180,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 2265,
+        "high": 2265,
+        "low": 2265,
+        "close": 2265,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 2280,
+        "high": 2280,
+        "low": 2280,
+        "close": 2280,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 2277,
+        "high": 2277,
+        "low": 2277,
+        "close": 2277,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 2282,
+        "high": 2282,
+        "low": 2282,
+        "close": 2282,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 2345,
+        "high": 2345,
+        "low": 2345,
+        "close": 2345,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 2352,
+        "high": 2352,
+        "low": 2352,
+        "close": 2352,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "TECHM",
     "name": "Tech Mahindra",
-    "price": 1487,
+    "price": 1420,
     "previousClose": 1280,
     "todayOpen": 1280,
     "sector": "IT",
@@ -3915,120 +3915,8 @@
     "beta": 1.1,
     "high": 1695,
     "low": 866,
-    "volume": 3195006,
+    "volume": 3214802,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1247,
-        "high": 1247,
-        "low": 1247,
-        "close": 1247,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1279,
-        "high": 1279,
-        "low": 1279,
-        "close": 1279,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1268,
-        "high": 1268,
-        "low": 1268,
-        "close": 1268,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1251,
-        "high": 1251,
-        "low": 1251,
-        "close": 1251,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1236,
-        "high": 1236,
-        "low": 1236,
-        "close": 1236,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1227,
-        "high": 1227,
-        "low": 1227,
-        "close": 1227,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1221,
-        "high": 1223,
-        "low": 1221,
-        "close": 1223,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1235,
-        "high": 1235,
-        "low": 1235,
-        "close": 1235,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1263,
-        "high": 1263,
-        "low": 1263,
-        "close": 1263,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 1249,
-        "high": 1249,
-        "low": 1249,
-        "close": 1249,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 1247,
-        "high": 1247,
-        "low": 1247,
-        "close": 1247,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 1246,
-        "high": 1246,
-        "low": 1246,
-        "close": 1246,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1294,
-        "high": 1294,
-        "low": 1294,
-        "close": 1294,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1296,
-        "high": 1296,
-        "low": 1296,
-        "close": 1296,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1307,
@@ -4876,13 +4764,125 @@
         "low": 1475,
         "close": 1475,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1489,
+        "high": 1489,
+        "low": 1489,
+        "close": 1489,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1484,
+        "high": 1484,
+        "low": 1484,
+        "close": 1484,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1454,
+        "high": 1454,
+        "low": 1454,
+        "close": 1454,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 1478,
+        "high": 1478,
+        "low": 1478,
+        "close": 1478,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 1497,
+        "high": 1497,
+        "low": 1497,
+        "close": 1497,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1494,
+        "high": 1494,
+        "low": 1494,
+        "close": 1494,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 1506,
+        "high": 1506,
+        "low": 1506,
+        "close": 1506,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 1487,
+        "high": 1487,
+        "low": 1487,
+        "close": 1487,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1483,
+        "high": 1483,
+        "low": 1483,
+        "close": 1483,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 1484,
+        "high": 1484,
+        "low": 1484,
+        "close": 1484,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 1460,
+        "high": 1460,
+        "low": 1460,
+        "close": 1460,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 1453,
+        "high": 1453,
+        "low": 1453,
+        "close": 1453,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 1425,
+        "high": 1425,
+        "low": 1425,
+        "close": 1425,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 1442,
+        "high": 1442,
+        "low": 1442,
+        "close": 1442,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "HDFCBANK",
     "name": "HDFC Bank",
-    "price": 670,
+    "price": 710,
     "previousClose": 991,
     "todayOpen": 991,
     "sector": "Banking",
@@ -4891,120 +4891,8 @@
     "beta": 1.05,
     "high": 1084,
     "low": 579,
-    "volume": 1867256,
+    "volume": 1876280,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 695,
-        "high": 695,
-        "low": 695,
-        "close": 695,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 698,
-        "high": 698,
-        "low": 698,
-        "close": 698,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 702,
-        "high": 702,
-        "low": 702,
-        "close": 702,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 703,
-        "high": 703,
-        "low": 703,
-        "close": 703,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 699,
-        "high": 699,
-        "low": 699,
-        "close": 699,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 704,
-        "high": 704,
-        "low": 704,
-        "close": 704,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 705,
-        "high": 705,
-        "low": 703,
-        "close": 703,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 701,
-        "high": 701,
-        "low": 701,
-        "close": 701,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 700,
-        "high": 700,
-        "low": 700,
-        "close": 700,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 700,
-        "high": 700,
-        "low": 700,
-        "close": 700,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 699,
-        "high": 699,
-        "low": 699,
-        "close": 699,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 699,
-        "high": 699,
-        "low": 699,
-        "close": 699,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 700,
-        "high": 700,
-        "low": 700,
-        "close": 700,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 700,
-        "high": 700,
-        "low": 700,
-        "close": 700,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 696,
@@ -5852,13 +5740,125 @@
         "low": 669,
         "close": 669,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 667,
+        "high": 667,
+        "low": 667,
+        "close": 667,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 664,
+        "high": 664,
+        "low": 664,
+        "close": 664,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 674,
+        "high": 674,
+        "low": 674,
+        "close": 674,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 685,
+        "high": 685,
+        "low": 685,
+        "close": 685,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 689,
+        "high": 689,
+        "low": 689,
+        "close": 689,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 689,
+        "high": 689,
+        "low": 689,
+        "close": 689,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 703,
+        "high": 703,
+        "low": 703,
+        "close": 703,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 711,
+        "high": 711,
+        "low": 711,
+        "close": 711,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 704,
+        "high": 704,
+        "low": 704,
+        "close": 704,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 698,
+        "high": 698,
+        "low": 698,
+        "close": 698,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 700,
+        "high": 700,
+        "low": 700,
+        "close": 700,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 701,
+        "high": 701,
+        "low": 701,
+        "close": 701,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 704,
+        "high": 704,
+        "low": 704,
+        "close": 704,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 703,
+        "high": 703,
+        "low": 703,
+        "close": 703,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ICICIBANK",
     "name": "ICICI Bank",
-    "price": 1030,
+    "price": 997,
     "previousClose": 1010,
     "todayOpen": 1010,
     "sector": "Banking",
@@ -5867,120 +5867,8 @@
     "beta": 1.1,
     "high": 1111,
     "low": 386,
-    "volume": 1710400,
+    "volume": 1723501,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1022,
-        "high": 1022,
-        "low": 1022,
-        "close": 1022,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1009,
-        "high": 1009,
-        "low": 1009,
-        "close": 1009,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1012,
-        "high": 1012,
-        "low": 1012,
-        "close": 1012,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1003,
-        "high": 1003,
-        "low": 1003,
-        "close": 1003,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1009,
-        "high": 1009,
-        "low": 1009,
-        "close": 1009,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1012,
-        "high": 1012,
-        "low": 1012,
-        "close": 1012,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1005,
-        "high": 1015,
-        "low": 1005,
-        "close": 1015,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1030,
-        "high": 1030,
-        "low": 1030,
-        "close": 1030,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1024,
-        "high": 1024,
-        "low": 1024,
-        "close": 1024,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 997,
-        "high": 997,
-        "low": 997,
-        "close": 997,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 984,
-        "high": 984,
-        "low": 984,
-        "close": 984,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 996,
-        "high": 996,
-        "low": 996,
-        "close": 996,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1001,
-        "high": 1001,
-        "low": 1001,
-        "close": 1001,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1006,
-        "high": 1006,
-        "low": 1006,
-        "close": 1006,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1012,
@@ -6828,13 +6716,125 @@
         "low": 1033,
         "close": 1033,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1021,
+        "high": 1021,
+        "low": 1021,
+        "close": 1021,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1013,
+        "high": 1013,
+        "low": 1013,
+        "close": 1013,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1006,
+        "high": 1006,
+        "low": 1006,
+        "close": 1006,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 994,
+        "high": 994,
+        "low": 994,
+        "close": 994,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 987,
+        "high": 987,
+        "low": 987,
+        "close": 987,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1002,
+        "high": 1002,
+        "low": 1002,
+        "close": 1002,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 992,
+        "high": 992,
+        "low": 992,
+        "close": 992,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 987,
+        "high": 987,
+        "low": 987,
+        "close": 987,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1001,
+        "high": 1001,
+        "low": 1001,
+        "close": 1001,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 991,
+        "high": 991,
+        "low": 991,
+        "close": 991,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 983,
+        "high": 983,
+        "low": 983,
+        "close": 983,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 989,
+        "high": 989,
+        "low": 989,
+        "close": 989,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 999,
+        "high": 999,
+        "low": 999,
+        "close": 999,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 990,
+        "high": 990,
+        "low": 990,
+        "close": 990,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "KOTAKBANK",
     "name": "Kotak Mahindra Bank",
-    "price": 1263,
+    "price": 1218,
     "previousClose": 1680,
     "todayOpen": 1680,
     "sector": "Banking",
@@ -6843,120 +6843,8 @@
     "beta": 1.08,
     "high": 2155,
     "low": 1129,
-    "volume": 4031370,
+    "volume": 4046976,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1271,
-        "high": 1271,
-        "low": 1271,
-        "close": 1271,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1275,
-        "high": 1275,
-        "low": 1275,
-        "close": 1275,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1268,
-        "high": 1268,
-        "low": 1268,
-        "close": 1268,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1258,
-        "high": 1258,
-        "low": 1258,
-        "close": 1258,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1231,
-        "high": 1231,
-        "low": 1231,
-        "close": 1231,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1241,
-        "high": 1241,
-        "low": 1241,
-        "close": 1241,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1223,
-        "high": 1223,
-        "low": 1215,
-        "close": 1215,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1192,
-        "high": 1192,
-        "low": 1192,
-        "close": 1192,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1198,
-        "high": 1198,
-        "low": 1198,
-        "close": 1198,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 1217,
-        "high": 1217,
-        "low": 1217,
-        "close": 1217,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 1236,
-        "high": 1236,
-        "low": 1236,
-        "close": 1236,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 1221,
-        "high": 1221,
-        "low": 1221,
-        "close": 1221,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1206,
-        "high": 1206,
-        "low": 1206,
-        "close": 1206,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1188,
-        "high": 1188,
-        "low": 1188,
-        "close": 1188,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1208,
@@ -7804,13 +7692,125 @@
         "low": 1254,
         "close": 1254,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1247,
+        "high": 1247,
+        "low": 1247,
+        "close": 1247,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1233,
+        "high": 1233,
+        "low": 1233,
+        "close": 1233,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1229,
+        "high": 1229,
+        "low": 1229,
+        "close": 1229,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 1228,
+        "high": 1228,
+        "low": 1228,
+        "close": 1228,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 1241,
+        "high": 1241,
+        "low": 1241,
+        "close": 1241,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1248,
+        "high": 1248,
+        "low": 1248,
+        "close": 1248,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 1232,
+        "high": 1232,
+        "low": 1232,
+        "close": 1232,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 1225,
+        "high": 1225,
+        "low": 1225,
+        "close": 1225,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1252,
+        "high": 1252,
+        "low": 1252,
+        "close": 1252,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 1248,
+        "high": 1248,
+        "low": 1248,
+        "close": 1248,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 1235,
+        "high": 1235,
+        "low": 1235,
+        "close": 1235,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 1221,
+        "high": 1221,
+        "low": 1221,
+        "close": 1221,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 1223,
+        "high": 1223,
+        "low": 1223,
+        "close": 1223,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 1214,
+        "high": 1214,
+        "low": 1214,
+        "close": 1214,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "AXISBANK",
     "name": "Axis Bank",
-    "price": 750,
+    "price": 715,
     "previousClose": 1100,
     "todayOpen": 1100,
     "sector": "Banking",
@@ -7819,120 +7819,8 @@
     "beta": 1.12,
     "high": 1312,
     "low": 583,
-    "volume": 2335432,
+    "volume": 2344638,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 606,
-        "high": 606,
-        "low": 606,
-        "close": 606,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 606,
-        "high": 606,
-        "low": 606,
-        "close": 606,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 611,
-        "high": 611,
-        "low": 611,
-        "close": 611,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 620,
-        "high": 620,
-        "low": 620,
-        "close": 620,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 607,
-        "high": 607,
-        "low": 607,
-        "close": 607,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 603,
-        "high": 603,
-        "low": 603,
-        "close": 603,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 608,
-        "high": 608,
-        "low": 604,
-        "close": 604,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 611,
-        "high": 611,
-        "low": 611,
-        "close": 611,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 618,
-        "high": 618,
-        "low": 618,
-        "close": 618,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 618,
-        "high": 618,
-        "low": 618,
-        "close": 618,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 623,
-        "high": 623,
-        "low": 623,
-        "close": 623,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 635,
-        "high": 635,
-        "low": 635,
-        "close": 635,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 647,
-        "high": 647,
-        "low": 647,
-        "close": 647,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 646,
-        "high": 646,
-        "low": 646,
-        "close": 646,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 645,
@@ -8780,13 +8668,125 @@
         "low": 740,
         "close": 740,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 732,
+        "high": 732,
+        "low": 732,
+        "close": 732,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 737,
+        "high": 737,
+        "low": 737,
+        "close": 737,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 729,
+        "high": 729,
+        "low": 729,
+        "close": 729,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 725,
+        "high": 725,
+        "low": 725,
+        "close": 725,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 734,
+        "high": 734,
+        "low": 734,
+        "close": 734,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 747,
+        "high": 747,
+        "low": 747,
+        "close": 747,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 751,
+        "high": 751,
+        "low": 751,
+        "close": 751,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 749,
+        "high": 749,
+        "low": 749,
+        "close": 749,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 744,
+        "high": 744,
+        "low": 744,
+        "close": 744,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 743,
+        "high": 743,
+        "low": 743,
+        "close": 743,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 722,
+        "high": 722,
+        "low": 722,
+        "close": 722,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 723,
+        "high": 723,
+        "low": 723,
+        "close": 723,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 723,
+        "high": 723,
+        "low": 723,
+        "close": 723,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 714,
+        "high": 714,
+        "low": 714,
+        "close": 714,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "SBIN",
     "name": "State Bank of India",
-    "price": 1136,
+    "price": 1069,
     "previousClose": 780,
     "todayOpen": 780,
     "sector": "Banking",
@@ -8795,120 +8795,8 @@
     "beta": 1.15,
     "high": 1393,
     "low": 710,
-    "volume": 2394365,
+    "volume": 2408983,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1317,
-        "high": 1317,
-        "low": 1317,
-        "close": 1317,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1293,
-        "high": 1293,
-        "low": 1293,
-        "close": 1293,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1293,
-        "high": 1293,
-        "low": 1293,
-        "close": 1293,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1296,
-        "high": 1296,
-        "low": 1296,
-        "close": 1296,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1293,
-        "high": 1293,
-        "low": 1293,
-        "close": 1293,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1300,
-        "high": 1300,
-        "low": 1300,
-        "close": 1300,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1308,
-        "high": 1308,
-        "low": 1284,
-        "close": 1284,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1291,
-        "high": 1291,
-        "low": 1291,
-        "close": 1291,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1288,
-        "high": 1288,
-        "low": 1288,
-        "close": 1288,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 1280,
-        "high": 1280,
-        "low": 1280,
-        "close": 1280,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 1292,
-        "high": 1292,
-        "low": 1292,
-        "close": 1292,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 1276,
-        "high": 1276,
-        "low": 1276,
-        "close": 1276,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1262,
-        "high": 1262,
-        "low": 1262,
-        "close": 1262,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1256,
-        "high": 1256,
-        "low": 1256,
-        "close": 1256,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1251,
@@ -9756,13 +9644,125 @@
         "low": 1129,
         "close": 1129,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1138,
+        "high": 1138,
+        "low": 1138,
+        "close": 1138,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1124,
+        "high": 1124,
+        "low": 1124,
+        "close": 1124,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1114,
+        "high": 1114,
+        "low": 1114,
+        "close": 1114,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 1116,
+        "high": 1116,
+        "low": 1116,
+        "close": 1116,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 1129,
+        "high": 1129,
+        "low": 1129,
+        "close": 1129,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1134,
+        "high": 1134,
+        "low": 1134,
+        "close": 1134,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 1120,
+        "high": 1120,
+        "low": 1120,
+        "close": 1120,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 1096,
+        "high": 1096,
+        "low": 1096,
+        "close": 1096,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1108,
+        "high": 1108,
+        "low": 1108,
+        "close": 1108,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 1117,
+        "high": 1117,
+        "low": 1117,
+        "close": 1117,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 1121,
+        "high": 1121,
+        "low": 1121,
+        "close": 1121,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 1090,
+        "high": 1090,
+        "low": 1090,
+        "close": 1090,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 1087,
+        "high": 1087,
+        "low": 1087,
+        "close": 1087,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 1074,
+        "high": 1074,
+        "low": 1074,
+        "close": 1074,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "TATAMOTORS",
     "name": "Tata Motors",
-    "price": 870,
+    "price": 899,
     "previousClose": 915,
     "todayOpen": 915,
     "sector": "Auto",
@@ -9771,120 +9771,8 @@
     "beta": 1.4,
     "high": 1393,
     "low": 526,
-    "volume": 2039086,
+    "volume": 2051012,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 825,
-        "high": 825,
-        "low": 825,
-        "close": 825,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 847,
-        "high": 847,
-        "low": 847,
-        "close": 847,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 862,
-        "high": 862,
-        "low": 862,
-        "close": 862,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 866,
-        "high": 866,
-        "low": 866,
-        "close": 866,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 852,
-        "high": 852,
-        "low": 852,
-        "close": 852,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 848,
-        "high": 848,
-        "low": 848,
-        "close": 848,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 869,
-        "high": 882,
-        "low": 869,
-        "close": 882,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 893,
-        "high": 893,
-        "low": 893,
-        "close": 893,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 895,
-        "high": 895,
-        "low": 895,
-        "close": 895,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 896,
-        "high": 896,
-        "low": 896,
-        "close": 896,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 885,
-        "high": 885,
-        "low": 885,
-        "close": 885,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 886,
-        "high": 886,
-        "low": 886,
-        "close": 886,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 894,
-        "high": 894,
-        "low": 894,
-        "close": 894,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 905,
-        "high": 905,
-        "low": 905,
-        "close": 905,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 897,
@@ -10732,13 +10620,125 @@
         "low": 865,
         "close": 865,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 863,
+        "high": 863,
+        "low": 863,
+        "close": 863,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 870,
+        "high": 870,
+        "low": 870,
+        "close": 870,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 856,
+        "high": 856,
+        "low": 856,
+        "close": 856,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 852,
+        "high": 852,
+        "low": 852,
+        "close": 852,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 855,
+        "high": 855,
+        "low": 855,
+        "close": 855,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 860,
+        "high": 860,
+        "low": 860,
+        "close": 860,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 853,
+        "high": 853,
+        "low": 853,
+        "close": 853,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 855,
+        "high": 855,
+        "low": 855,
+        "close": 855,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 868,
+        "high": 868,
+        "low": 868,
+        "close": 868,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 868,
+        "high": 868,
+        "low": 868,
+        "close": 868,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 875,
+        "high": 875,
+        "low": 875,
+        "close": 875,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 873,
+        "high": 873,
+        "low": 873,
+        "close": 873,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 895,
+        "high": 895,
+        "low": 895,
+        "close": 895,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 890,
+        "high": 890,
+        "low": 890,
+        "close": 890,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "MARUTI",
     "name": "Maruti Suzuki",
-    "price": 8362,
+    "price": 8508,
     "previousClose": 11800,
     "todayOpen": 11800,
     "sector": "Auto",
@@ -10747,120 +10747,8 @@
     "beta": 1.05,
     "high": 13444,
     "low": 7407,
-    "volume": 24340790,
+    "volume": 24449929,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 9504,
-        "high": 9504,
-        "low": 9504,
-        "close": 9504,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 9415,
-        "high": 9415,
-        "low": 9415,
-        "close": 9415,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 9405,
-        "high": 9405,
-        "low": 9405,
-        "close": 9405,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 9312,
-        "high": 9312,
-        "low": 9312,
-        "close": 9312,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 9228,
-        "high": 9228,
-        "low": 9228,
-        "close": 9228,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 9082,
-        "high": 9082,
-        "low": 9082,
-        "close": 9082,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 9087,
-        "high": 9096,
-        "low": 9087,
-        "close": 9096,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 9077,
-        "high": 9077,
-        "low": 9077,
-        "close": 9077,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 9197,
-        "high": 9197,
-        "low": 9197,
-        "close": 9197,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 9346,
-        "high": 9346,
-        "low": 9346,
-        "close": 9346,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 9404,
-        "high": 9404,
-        "low": 9404,
-        "close": 9404,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 9333,
-        "high": 9333,
-        "low": 9333,
-        "close": 9333,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 9324,
-        "high": 9324,
-        "low": 9324,
-        "close": 9324,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 9282,
-        "high": 9282,
-        "low": 9282,
-        "close": 9282,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 9184,
@@ -11708,13 +11596,125 @@
         "low": 8337,
         "close": 8337,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 8309,
+        "high": 8309,
+        "low": 8309,
+        "close": 8309,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 8295,
+        "high": 8295,
+        "low": 8295,
+        "close": 8295,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 8301,
+        "high": 8301,
+        "low": 8301,
+        "close": 8301,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 8296,
+        "high": 8296,
+        "low": 8296,
+        "close": 8296,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 8325,
+        "high": 8325,
+        "low": 8325,
+        "close": 8325,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 8315,
+        "high": 8315,
+        "low": 8315,
+        "close": 8315,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 8371,
+        "high": 8371,
+        "low": 8371,
+        "close": 8371,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 8352,
+        "high": 8352,
+        "low": 8352,
+        "close": 8352,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 8303,
+        "high": 8303,
+        "low": 8303,
+        "close": 8303,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 8361,
+        "high": 8361,
+        "low": 8361,
+        "close": 8361,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 8376,
+        "high": 8376,
+        "low": 8376,
+        "close": 8376,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 8411,
+        "high": 8411,
+        "low": 8411,
+        "close": 8411,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 8478,
+        "high": 8478,
+        "low": 8478,
+        "close": 8478,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 8451,
+        "high": 8451,
+        "low": 8451,
+        "close": 8451,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "M&M",
     "name": "Mahindra & Mahindra",
-    "price": 1782,
+    "price": 1724,
     "previousClose": 1680,
     "todayOpen": 1680,
     "sector": "Auto",
@@ -11723,120 +11723,8 @@
     "beta": 1.2,
     "high": 1931,
     "low": 1031,
-    "volume": 3673155,
+    "volume": 3695055,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1632,
-        "high": 1632,
-        "low": 1632,
-        "close": 1632,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1627,
-        "high": 1627,
-        "low": 1627,
-        "close": 1627,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1638,
-        "high": 1638,
-        "low": 1638,
-        "close": 1638,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1664,
-        "high": 1664,
-        "low": 1664,
-        "close": 1664,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1672,
-        "high": 1672,
-        "low": 1672,
-        "close": 1672,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1668,
-        "high": 1668,
-        "low": 1668,
-        "close": 1668,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1664,
-        "high": 1664,
-        "low": 1641,
-        "close": 1641,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1630,
-        "high": 1630,
-        "low": 1630,
-        "close": 1630,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1618,
-        "high": 1618,
-        "low": 1618,
-        "close": 1618,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 1635,
-        "high": 1635,
-        "low": 1635,
-        "close": 1635,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 1641,
-        "high": 1641,
-        "low": 1641,
-        "close": 1641,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 1659,
-        "high": 1659,
-        "low": 1659,
-        "close": 1659,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1662,
-        "high": 1662,
-        "low": 1662,
-        "close": 1662,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1660,
-        "high": 1660,
-        "low": 1660,
-        "close": 1660,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1650,
@@ -12684,13 +12572,125 @@
         "low": 1777,
         "close": 1777,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1730,
+        "high": 1730,
+        "low": 1730,
+        "close": 1730,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1752,
+        "high": 1752,
+        "low": 1752,
+        "close": 1752,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1733,
+        "high": 1733,
+        "low": 1733,
+        "close": 1733,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 1721,
+        "high": 1721,
+        "low": 1721,
+        "close": 1721,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 1702,
+        "high": 1702,
+        "low": 1702,
+        "close": 1702,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1721,
+        "high": 1721,
+        "low": 1721,
+        "close": 1721,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 1747,
+        "high": 1747,
+        "low": 1747,
+        "close": 1747,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 1735,
+        "high": 1735,
+        "low": 1735,
+        "close": 1735,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1706,
+        "high": 1706,
+        "low": 1706,
+        "close": 1706,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 1694,
+        "high": 1694,
+        "low": 1694,
+        "close": 1694,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 1681,
+        "high": 1681,
+        "low": 1681,
+        "close": 1681,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 1693,
+        "high": 1693,
+        "low": 1693,
+        "close": 1693,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 1703,
+        "high": 1703,
+        "low": 1703,
+        "close": 1703,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 1709,
+        "high": 1709,
+        "low": 1709,
+        "close": 1709,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "BAJAJ-AUTO",
     "name": "Bajaj Auto",
-    "price": 7186,
+    "price": 7789,
     "previousClose": 7800,
     "todayOpen": 7800,
     "sector": "Auto",
@@ -12699,120 +12699,8 @@
     "beta": 0.8,
     "high": 16464,
     "low": 6739,
-    "volume": 25878815,
+    "volume": 25973770,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 8556,
-        "high": 8556,
-        "low": 8556,
-        "close": 8556,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 8461,
-        "high": 8461,
-        "low": 8461,
-        "close": 8461,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 8482,
-        "high": 8482,
-        "low": 8482,
-        "close": 8482,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 8603,
-        "high": 8603,
-        "low": 8603,
-        "close": 8603,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 8581,
-        "high": 8581,
-        "low": 8581,
-        "close": 8581,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 8535,
-        "high": 8535,
-        "low": 8535,
-        "close": 8535,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 8554,
-        "high": 8563,
-        "low": 8554,
-        "close": 8563,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 8500,
-        "high": 8500,
-        "low": 8500,
-        "close": 8500,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 8563,
-        "high": 8563,
-        "low": 8563,
-        "close": 8563,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 8428,
-        "high": 8428,
-        "low": 8428,
-        "close": 8428,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 8290,
-        "high": 8290,
-        "low": 8290,
-        "close": 8290,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 8318,
-        "high": 8318,
-        "low": 8318,
-        "close": 8318,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 8357,
-        "high": 8357,
-        "low": 8357,
-        "close": 8357,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 8342,
-        "high": 8342,
-        "low": 8342,
-        "close": 8342,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 8402,
@@ -13660,13 +13548,125 @@
         "low": 7169,
         "close": 7169,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 7227,
+        "high": 7227,
+        "low": 7227,
+        "close": 7227,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 7336,
+        "high": 7336,
+        "low": 7336,
+        "close": 7336,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 7302,
+        "high": 7302,
+        "low": 7302,
+        "close": 7302,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 7532,
+        "high": 7532,
+        "low": 7532,
+        "close": 7532,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 7627,
+        "high": 7627,
+        "low": 7627,
+        "close": 7627,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 7860,
+        "high": 7860,
+        "low": 7860,
+        "close": 7860,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 7799,
+        "high": 7799,
+        "low": 7799,
+        "close": 7799,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 7699,
+        "high": 7699,
+        "low": 7699,
+        "close": 7699,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 7888,
+        "high": 7888,
+        "low": 7888,
+        "close": 7888,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 7810,
+        "high": 7810,
+        "low": 7810,
+        "close": 7810,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 7740,
+        "high": 7740,
+        "low": 7740,
+        "close": 7740,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 7887,
+        "high": 7887,
+        "low": 7887,
+        "close": 7887,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 7779,
+        "high": 7779,
+        "low": 7779,
+        "close": 7779,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 7726,
+        "high": 7726,
+        "low": 7726,
+        "close": 7726,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "RELIANCE",
     "name": "Reliance Industries",
-    "price": 2696,
+    "price": 2588,
     "previousClose": 1493,
     "todayOpen": 1493,
     "sector": "Energy",
@@ -13675,120 +13675,8 @@
     "beta": 1,
     "high": 3279,
     "low": 1273,
-    "volume": 5075813,
+    "volume": 5111051,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 2992,
-        "high": 2992,
-        "low": 2992,
-        "close": 2992,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 2980,
-        "high": 2980,
-        "low": 2980,
-        "close": 2980,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 3004,
-        "high": 3004,
-        "low": 3004,
-        "close": 3004,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 3028,
-        "high": 3028,
-        "low": 3028,
-        "close": 3028,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 3018,
-        "high": 3018,
-        "low": 3018,
-        "close": 3018,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 3022,
-        "high": 3022,
-        "low": 3022,
-        "close": 3022,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 3021,
-        "high": 3021,
-        "low": 3003,
-        "close": 3003,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 3000,
-        "high": 3000,
-        "low": 3000,
-        "close": 3000,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 3020,
-        "high": 3020,
-        "low": 3020,
-        "close": 3020,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 3026,
-        "high": 3026,
-        "low": 3026,
-        "close": 3026,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 3005,
-        "high": 3005,
-        "low": 3005,
-        "close": 3005,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 3023,
-        "high": 3023,
-        "low": 3023,
-        "close": 3023,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 2985,
-        "high": 2985,
-        "low": 2985,
-        "close": 2985,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 2956,
-        "high": 2956,
-        "low": 2956,
-        "close": 2956,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 2967,
@@ -14636,6 +14524,118 @@
         "low": 2701,
         "close": 2701,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 2696,
+        "high": 2696,
+        "low": 2696,
+        "close": 2696,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 2716,
+        "high": 2716,
+        "low": 2716,
+        "close": 2716,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 2705,
+        "high": 2705,
+        "low": 2705,
+        "close": 2705,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 2710,
+        "high": 2710,
+        "low": 2710,
+        "close": 2710,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 2676,
+        "high": 2676,
+        "low": 2676,
+        "close": 2676,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 2684,
+        "high": 2684,
+        "low": 2684,
+        "close": 2684,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 2680,
+        "high": 2680,
+        "low": 2680,
+        "close": 2680,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 2671,
+        "high": 2671,
+        "low": 2671,
+        "close": 2671,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 2664,
+        "high": 2664,
+        "low": 2664,
+        "close": 2664,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 2636,
+        "high": 2636,
+        "low": 2636,
+        "close": 2636,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 2653,
+        "high": 2653,
+        "low": 2653,
+        "close": 2653,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 2648,
+        "high": 2648,
+        "low": 2648,
+        "close": 2648,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 2622,
+        "high": 2622,
+        "low": 2622,
+        "close": 2622,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 2599,
+        "high": 2599,
+        "low": 2599,
+        "close": 2599,
+        "volume": 0
       }
     ]
   },
@@ -14651,120 +14651,8 @@
     "beta": 1.25,
     "high": 190,
     "low": 100,
-    "volume": 266224,
+    "volume": 267506,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 101,
-        "high": 101,
-        "low": 101,
-        "close": 101,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 101,
@@ -15612,13 +15500,125 @@
         "low": 102,
         "close": 102,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 102,
+        "high": 102,
+        "low": 102,
+        "close": 102,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "NTPC",
     "name": "NTPC Ltd",
-    "price": 647,
+    "price": 664,
     "previousClose": 365,
     "todayOpen": 365,
     "sector": "Power",
@@ -15627,120 +15627,8 @@
     "beta": 0.95,
     "high": 733,
     "low": 339,
-    "volume": 1170741,
+    "volume": 1178973,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 644,
-        "high": 644,
-        "low": 644,
-        "close": 644,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 638,
-        "high": 638,
-        "low": 638,
-        "close": 638,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 648,
-        "high": 648,
-        "low": 648,
-        "close": 648,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 635,
-        "high": 635,
-        "low": 635,
-        "close": 635,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 628,
-        "high": 628,
-        "low": 628,
-        "close": 628,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 630,
-        "high": 630,
-        "low": 630,
-        "close": 630,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 629,
-        "high": 629,
-        "low": 626,
-        "close": 626,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 625,
-        "high": 625,
-        "low": 625,
-        "close": 625,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 629,
-        "high": 629,
-        "low": 629,
-        "close": 629,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 637,
-        "high": 637,
-        "low": 637,
-        "close": 637,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 635,
-        "high": 635,
-        "low": 635,
-        "close": 635,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 643,
-        "high": 643,
-        "low": 643,
-        "close": 643,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 650,
-        "high": 650,
-        "low": 650,
-        "close": 650,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 646,
-        "high": 646,
-        "low": 646,
-        "close": 646,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 667,
@@ -16588,13 +16476,125 @@
         "low": 642,
         "close": 642,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 645,
+        "high": 645,
+        "low": 645,
+        "close": 645,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 643,
+        "high": 643,
+        "low": 643,
+        "close": 643,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 648,
+        "high": 648,
+        "low": 648,
+        "close": 648,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 646,
+        "high": 646,
+        "low": 646,
+        "close": 646,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 646,
+        "high": 646,
+        "low": 646,
+        "close": 646,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 638,
+        "high": 638,
+        "low": 638,
+        "close": 638,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 652,
+        "high": 652,
+        "low": 652,
+        "close": 652,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 639,
+        "high": 639,
+        "low": 639,
+        "close": 639,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 642,
+        "high": 642,
+        "low": 642,
+        "close": 642,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 641,
+        "high": 641,
+        "low": 641,
+        "close": 641,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 647,
+        "high": 647,
+        "low": 647,
+        "close": 647,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 636,
+        "high": 636,
+        "low": 636,
+        "close": 636,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 653,
+        "high": 653,
+        "low": 653,
+        "close": 653,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 662,
+        "high": 662,
+        "low": 662,
+        "close": 662,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "POWERGRID",
     "name": "Power Grid Corporation",
-    "price": 135,
+    "price": 151,
     "previousClose": 292,
     "todayOpen": 292,
     "sector": "Power",
@@ -16603,120 +16603,8 @@
     "beta": 0.9,
     "high": 391,
     "low": 120,
-    "volume": 504257,
+    "volume": 505547,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 140,
-        "high": 140,
-        "low": 140,
-        "close": 140,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 140,
-        "high": 140,
-        "low": 140,
-        "close": 140,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 139,
-        "high": 139,
-        "low": 139,
-        "close": 139,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 139,
-        "high": 139,
-        "low": 139,
-        "close": 139,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 140,
-        "high": 140,
-        "low": 140,
-        "close": 140,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 140,
-        "high": 140,
-        "low": 140,
-        "close": 140,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 142,
-        "high": 142,
-        "low": 139,
-        "close": 139,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 137,
-        "high": 137,
-        "low": 137,
-        "close": 137,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 137,
-        "high": 137,
-        "low": 137,
-        "close": 137,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 137,
-        "high": 137,
-        "low": 137,
-        "close": 137,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 135,
-        "high": 135,
-        "low": 135,
-        "close": 135,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 135,
-        "high": 135,
-        "low": 135,
-        "close": 135,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 135,
-        "high": 135,
-        "low": 135,
-        "close": 135,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 135,
-        "high": 135,
-        "low": 135,
-        "close": 135,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 132,
@@ -17564,13 +17452,125 @@
         "low": 135,
         "close": 135,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 136,
+        "high": 136,
+        "low": 136,
+        "close": 136,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 138,
+        "high": 138,
+        "low": 138,
+        "close": 138,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 139,
+        "high": 139,
+        "low": 139,
+        "close": 139,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 139,
+        "high": 139,
+        "low": 139,
+        "close": 139,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 139,
+        "high": 139,
+        "low": 139,
+        "close": 139,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 141,
+        "high": 141,
+        "low": 141,
+        "close": 141,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 141,
+        "high": 141,
+        "low": 141,
+        "close": 141,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 143,
+        "high": 143,
+        "low": 143,
+        "close": 143,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 145,
+        "high": 145,
+        "low": 145,
+        "close": 145,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 146,
+        "high": 146,
+        "low": 146,
+        "close": 146,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 147,
+        "high": 147,
+        "low": 147,
+        "close": 147,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 148,
+        "high": 148,
+        "low": 148,
+        "close": 148,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 146,
+        "high": 146,
+        "low": 146,
+        "close": 146,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 149,
+        "high": 149,
+        "low": 149,
+        "close": 149,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "TATAPOWER",
     "name": "Tata Power",
-    "price": 366,
+    "price": 338,
     "previousClose": 410,
     "todayOpen": 410,
     "sector": "Power",
@@ -17579,120 +17579,8 @@
     "beta": 1.12,
     "high": 464,
     "low": 233,
-    "volume": 821232,
+    "volume": 825777,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 399,
-        "high": 399,
-        "low": 399,
-        "close": 399,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 394,
-        "high": 394,
-        "low": 394,
-        "close": 394,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 396,
-        "high": 396,
-        "low": 396,
-        "close": 396,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 397,
-        "high": 397,
-        "low": 397,
-        "close": 397,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 399,
-        "high": 399,
-        "low": 399,
-        "close": 399,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 399,
-        "high": 399,
-        "low": 399,
-        "close": 399,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 407,
-        "high": 407,
-        "low": 402,
-        "close": 402,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 395,
-        "high": 395,
-        "low": 395,
-        "close": 395,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 402,
-        "high": 402,
-        "low": 402,
-        "close": 402,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 411,
-        "high": 411,
-        "low": 411,
-        "close": 411,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 410,
-        "high": 410,
-        "low": 410,
-        "close": 410,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 404,
-        "high": 404,
-        "low": 404,
-        "close": 404,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 398,
-        "high": 398,
-        "low": 398,
-        "close": 398,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 393,
-        "high": 393,
-        "low": 393,
-        "close": 393,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 397,
@@ -18540,13 +18428,125 @@
         "low": 366,
         "close": 366,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 365,
+        "high": 365,
+        "low": 365,
+        "close": 365,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 359,
+        "high": 359,
+        "low": 359,
+        "close": 359,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 357,
+        "high": 357,
+        "low": 357,
+        "close": 357,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 354,
+        "high": 354,
+        "low": 354,
+        "close": 354,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 351,
+        "high": 351,
+        "low": 351,
+        "close": 351,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 355,
+        "high": 355,
+        "low": 355,
+        "close": 355,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 358,
+        "high": 358,
+        "low": 358,
+        "close": 358,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 356,
+        "high": 356,
+        "low": 356,
+        "close": 356,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 352,
+        "high": 352,
+        "low": 352,
+        "close": 352,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 348,
+        "high": 348,
+        "low": 348,
+        "close": 348,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 345,
+        "high": 345,
+        "low": 345,
+        "close": 345,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 342,
+        "high": 342,
+        "low": 342,
+        "close": 342,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 333,
+        "high": 333,
+        "low": 333,
+        "close": 333,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 330,
+        "high": 330,
+        "low": 330,
+        "close": 330,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ADANI",
     "name": "Adani Enterprises",
-    "price": 717,
+    "price": 673,
     "previousClose": 456,
     "todayOpen": 456,
     "sector": "Infrastructure",
@@ -18555,120 +18555,8 @@
     "beta": 1.7,
     "high": 757,
     "low": 430,
-    "volume": 1462291,
+    "volume": 1471498,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 562,
-        "high": 562,
-        "low": 562,
-        "close": 562,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 564,
-        "high": 564,
-        "low": 564,
-        "close": 564,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 561,
-        "high": 561,
-        "low": 561,
-        "close": 561,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 559,
-        "high": 559,
-        "low": 559,
-        "close": 559,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 555,
-        "high": 555,
-        "low": 555,
-        "close": 555,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 556,
-        "high": 556,
-        "low": 556,
-        "close": 556,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 551,
-        "high": 551,
-        "low": 549,
-        "close": 549,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 551,
-        "high": 551,
-        "low": 551,
-        "close": 551,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 561,
-        "high": 561,
-        "low": 561,
-        "close": 561,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 571,
-        "high": 571,
-        "low": 571,
-        "close": 571,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 574,
-        "high": 574,
-        "low": 574,
-        "close": 574,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 579,
-        "high": 579,
-        "low": 579,
-        "close": 579,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 586,
-        "high": 586,
-        "low": 586,
-        "close": 586,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 592,
-        "high": 592,
-        "low": 592,
-        "close": 592,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 588,
@@ -19516,6 +19404,118 @@
         "low": 718,
         "close": 718,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 710,
+        "high": 710,
+        "low": 710,
+        "close": 710,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 700,
+        "high": 700,
+        "low": 700,
+        "close": 700,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 691,
+        "high": 691,
+        "low": 691,
+        "close": 691,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 678,
+        "high": 678,
+        "low": 678,
+        "close": 678,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 688,
+        "high": 688,
+        "low": 688,
+        "close": 688,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 690,
+        "high": 690,
+        "low": 690,
+        "close": 690,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 691,
+        "high": 691,
+        "low": 691,
+        "close": 691,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 690,
+        "high": 690,
+        "low": 690,
+        "close": 690,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 698,
+        "high": 698,
+        "low": 698,
+        "close": 698,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 689,
+        "high": 689,
+        "low": 689,
+        "close": 689,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 692,
+        "high": 692,
+        "low": 692,
+        "close": 692,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 690,
+        "high": 690,
+        "low": 690,
+        "close": 690,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 685,
+        "high": 685,
+        "low": 685,
+        "close": 685,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 677,
+        "high": 677,
+        "low": 677,
+        "close": 677,
+        "volume": 0
       }
     ]
   },
@@ -19531,120 +19531,8 @@
     "beta": 1.05,
     "high": 256,
     "low": 135,
-    "volume": 364892,
+    "volume": 366991,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 140,
-        "high": 140,
-        "low": 140,
-        "close": 140,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 141,
-        "high": 141,
-        "low": 141,
-        "close": 141,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 142,
-        "high": 142,
-        "low": 142,
-        "close": 142,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 144,
-        "high": 144,
-        "low": 144,
-        "close": 144,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 142,
-        "high": 142,
-        "low": 142,
-        "close": 142,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 143,
-        "high": 143,
-        "low": 143,
-        "close": 143,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 143,
@@ -20492,13 +20380,125 @@
         "low": 147,
         "close": 147,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 149,
+        "high": 149,
+        "low": 149,
+        "close": 149,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 150,
+        "high": 150,
+        "low": 150,
+        "close": 150,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 151,
+        "high": 151,
+        "low": 151,
+        "close": 151,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 151,
+        "high": 151,
+        "low": 151,
+        "close": 151,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 151,
+        "high": 151,
+        "low": 151,
+        "close": 151,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 151,
+        "high": 151,
+        "low": 151,
+        "close": 151,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 150,
+        "high": 150,
+        "low": 150,
+        "close": 150,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 150,
+        "high": 150,
+        "low": 150,
+        "close": 150,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 150,
+        "high": 150,
+        "low": 150,
+        "close": 150,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 151,
+        "high": 151,
+        "low": 151,
+        "close": 151,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 150,
+        "high": 150,
+        "low": 150,
+        "close": 150,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 148,
+        "high": 148,
+        "low": 148,
+        "close": 148,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 147,
+        "high": 147,
+        "low": 147,
+        "close": 147,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 147,
+        "high": 147,
+        "low": 147,
+        "close": 147,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ITC",
     "name": "ITC Ltd",
-    "price": 482,
+    "price": 483,
     "previousClose": 435,
     "todayOpen": 435,
     "sector": "FMCG",
@@ -20507,120 +20507,8 @@
     "beta": 0.65,
     "high": 613,
     "low": 341,
-    "volume": 1105314,
+    "volume": 1111920,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 486,
-        "high": 486,
-        "low": 486,
-        "close": 486,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 478,
-        "high": 478,
-        "low": 478,
-        "close": 478,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 492,
-        "high": 492,
-        "low": 492,
-        "close": 492,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 503,
-        "high": 503,
-        "low": 503,
-        "close": 503,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 501,
-        "high": 501,
-        "low": 501,
-        "close": 501,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 499,
-        "high": 499,
-        "low": 499,
-        "close": 499,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 497,
-        "high": 497,
-        "low": 492,
-        "close": 492,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 482,
-        "high": 482,
-        "low": 482,
-        "close": 482,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 486,
-        "high": 486,
-        "low": 486,
-        "close": 486,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 484,
-        "high": 484,
-        "low": 484,
-        "close": 484,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 480,
-        "high": 480,
-        "low": 480,
-        "close": 480,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 482,
-        "high": 482,
-        "low": 482,
-        "close": 482,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 480,
-        "high": 480,
-        "low": 480,
-        "close": 480,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 471,
-        "high": 471,
-        "low": 471,
-        "close": 471,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 474,
@@ -21468,13 +21356,125 @@
         "low": 478,
         "close": 478,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 476,
+        "high": 476,
+        "low": 476,
+        "close": 476,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 474,
+        "high": 474,
+        "low": 474,
+        "close": 474,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 486,
+        "high": 486,
+        "low": 486,
+        "close": 486,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 484,
+        "high": 484,
+        "low": 484,
+        "close": 484,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 483,
+        "high": 483,
+        "low": 483,
+        "close": 483,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 485,
+        "high": 485,
+        "low": 485,
+        "close": 485,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 485,
+        "high": 485,
+        "low": 485,
+        "close": 485,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 487,
+        "high": 487,
+        "low": 487,
+        "close": 487,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 487,
+        "high": 487,
+        "low": 487,
+        "close": 487,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 481,
+        "high": 481,
+        "low": 481,
+        "close": 481,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 486,
+        "high": 486,
+        "low": 486,
+        "close": 486,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 480,
+        "high": 480,
+        "low": 480,
+        "close": 480,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 484,
+        "high": 484,
+        "low": 484,
+        "close": 484,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 483,
+        "high": 483,
+        "low": 483,
+        "close": 483,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "HINDUNILVR",
     "name": "Hindustan Unilever",
-    "price": 1429,
+    "price": 1394,
     "previousClose": 2400,
     "todayOpen": 2400,
     "sector": "FMCG",
@@ -21483,120 +21483,8 @@
     "beta": 0.5,
     "high": 3245,
     "low": 1264,
-    "volume": 5097955,
+    "volume": 5116259,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 1405,
-        "high": 1405,
-        "low": 1405,
-        "close": 1405,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 1411,
-        "high": 1411,
-        "low": 1411,
-        "close": 1411,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 1405,
-        "high": 1405,
-        "low": 1405,
-        "close": 1405,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 1399,
-        "high": 1399,
-        "low": 1399,
-        "close": 1399,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 1418,
-        "high": 1418,
-        "low": 1418,
-        "close": 1418,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 1428,
-        "high": 1428,
-        "low": 1428,
-        "close": 1428,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 1415,
-        "high": 1416,
-        "low": 1415,
-        "close": 1416,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 1409,
-        "high": 1409,
-        "low": 1409,
-        "close": 1409,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 1430,
-        "high": 1430,
-        "low": 1430,
-        "close": 1430,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 1423,
-        "high": 1423,
-        "low": 1423,
-        "close": 1423,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 1426,
-        "high": 1426,
-        "low": 1426,
-        "close": 1426,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 1427,
-        "high": 1427,
-        "low": 1427,
-        "close": 1427,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 1455,
-        "high": 1455,
-        "low": 1455,
-        "close": 1455,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 1468,
-        "high": 1468,
-        "low": 1468,
-        "close": 1468,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 1451,
@@ -22444,13 +22332,125 @@
         "low": 1430,
         "close": 1430,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 1408,
+        "high": 1408,
+        "low": 1408,
+        "close": 1408,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 1397,
+        "high": 1397,
+        "low": 1397,
+        "close": 1397,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 1408,
+        "high": 1408,
+        "low": 1408,
+        "close": 1408,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 1411,
+        "high": 1411,
+        "low": 1411,
+        "close": 1411,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 1424,
+        "high": 1424,
+        "low": 1424,
+        "close": 1424,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 1432,
+        "high": 1432,
+        "low": 1432,
+        "close": 1432,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 1429,
+        "high": 1429,
+        "low": 1429,
+        "close": 1429,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 1415,
+        "high": 1415,
+        "low": 1415,
+        "close": 1415,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 1382,
+        "high": 1382,
+        "low": 1382,
+        "close": 1382,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 1372,
+        "high": 1372,
+        "low": 1372,
+        "close": 1372,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 1385,
+        "high": 1385,
+        "low": 1385,
+        "close": 1385,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 1407,
+        "high": 1407,
+        "low": 1407,
+        "close": 1407,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 1399,
+        "high": 1399,
+        "low": 1399,
+        "close": 1399,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 1393,
+        "high": 1393,
+        "low": 1393,
+        "close": 1393,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "NESTLE",
     "name": "Nestle India",
-    "price": 7337,
+    "price": 7099,
     "previousClose": 25500,
     "todayOpen": 25500,
     "sector": "FMCG",
@@ -22459,120 +22459,8 @@
     "beta": 0.4,
     "high": 32965,
     "low": 5760,
-    "volume": 43279409,
+    "volume": 43371276,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 7089,
-        "high": 7089,
-        "low": 7089,
-        "close": 7089,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 7100,
-        "high": 7100,
-        "low": 7100,
-        "close": 7100,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 7011,
-        "high": 7011,
-        "low": 7011,
-        "close": 7011,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 6895,
-        "high": 6895,
-        "low": 6895,
-        "close": 6895,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 6832,
-        "high": 6832,
-        "low": 6832,
-        "close": 6832,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 6951,
-        "high": 6951,
-        "low": 6951,
-        "close": 6951,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 6832,
-        "high": 6963,
-        "low": 6832,
-        "close": 6963,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 6914,
-        "high": 6914,
-        "low": 6914,
-        "close": 6914,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 6875,
-        "high": 6875,
-        "low": 6875,
-        "close": 6875,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 6752,
-        "high": 6752,
-        "low": 6752,
-        "close": 6752,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 6778,
-        "high": 6778,
-        "low": 6778,
-        "close": 6778,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 6731,
-        "high": 6731,
-        "low": 6731,
-        "close": 6731,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 6780,
-        "high": 6780,
-        "low": 6780,
-        "close": 6780,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 6689,
-        "high": 6689,
-        "low": 6689,
-        "close": 6689,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 6594,
@@ -23420,13 +23308,125 @@
         "low": 7323,
         "close": 7323,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 7279,
+        "high": 7279,
+        "low": 7279,
+        "close": 7279,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 7353,
+        "high": 7353,
+        "low": 7353,
+        "close": 7353,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 7376,
+        "high": 7376,
+        "low": 7376,
+        "close": 7376,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 7324,
+        "high": 7324,
+        "low": 7324,
+        "close": 7324,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 7358,
+        "high": 7358,
+        "low": 7358,
+        "close": 7358,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 7389,
+        "high": 7389,
+        "low": 7389,
+        "close": 7389,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 7260,
+        "high": 7260,
+        "low": 7260,
+        "close": 7260,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 7220,
+        "high": 7220,
+        "low": 7220,
+        "close": 7220,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 7176,
+        "high": 7176,
+        "low": 7176,
+        "close": 7176,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 7119,
+        "high": 7119,
+        "low": 7119,
+        "close": 7119,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 7176,
+        "high": 7176,
+        "low": 7176,
+        "close": 7176,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 7118,
+        "high": 7118,
+        "low": 7118,
+        "close": 7118,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 7122,
+        "high": 7122,
+        "low": 7122,
+        "close": 7122,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 7133,
+        "high": 7133,
+        "low": 7133,
+        "close": 7133,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "BHARTIARTL",
     "name": "Bharti Airtel",
-    "price": 2836,
+    "price": 2959,
     "previousClose": 1250,
     "todayOpen": 1250,
     "sector": "Telecom",
@@ -23435,120 +23435,8 @@
     "beta": 0.95,
     "high": 4414,
     "low": 1221,
-    "volume": 5404739,
+    "volume": 5443533,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 2958,
-        "high": 2958,
-        "low": 2958,
-        "close": 2958,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 3000,
-        "high": 3000,
-        "low": 3000,
-        "close": 3000,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 3021,
-        "high": 3021,
-        "low": 3021,
-        "close": 3021,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 2998,
-        "high": 2998,
-        "low": 2998,
-        "close": 2998,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 2988,
-        "high": 2988,
-        "low": 2988,
-        "close": 2988,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 3005,
-        "high": 3005,
-        "low": 3005,
-        "close": 3005,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 2999,
-        "high": 2999,
-        "low": 2993,
-        "close": 2993,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 3007,
-        "high": 3007,
-        "low": 3007,
-        "close": 3007,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 2969,
-        "high": 2969,
-        "low": 2969,
-        "close": 2969,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 2914,
-        "high": 2914,
-        "low": 2914,
-        "close": 2914,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 2951,
-        "high": 2951,
-        "low": 2951,
-        "close": 2951,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 2943,
-        "high": 2943,
-        "low": 2943,
-        "close": 2943,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 2993,
-        "high": 2993,
-        "low": 2993,
-        "close": 2993,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 2995,
-        "high": 2995,
-        "low": 2995,
-        "close": 2995,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 2931,
@@ -24396,13 +24284,125 @@
         "low": 2864,
         "close": 2864,
         "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 2816,
+        "high": 2816,
+        "low": 2816,
+        "close": 2816,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 2880,
+        "high": 2880,
+        "low": 2880,
+        "close": 2880,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 2905,
+        "high": 2905,
+        "low": 2905,
+        "close": 2905,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 2898,
+        "high": 2898,
+        "low": 2898,
+        "close": 2898,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 2918,
+        "high": 2918,
+        "low": 2918,
+        "close": 2918,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 2955,
+        "high": 2955,
+        "low": 2955,
+        "close": 2955,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 2904,
+        "high": 2904,
+        "low": 2904,
+        "close": 2904,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 2869,
+        "high": 2869,
+        "low": 2869,
+        "close": 2869,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 2897,
+        "high": 2897,
+        "low": 2897,
+        "close": 2897,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 2882,
+        "high": 2882,
+        "low": 2882,
+        "close": 2882,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 2901,
+        "high": 2901,
+        "low": 2901,
+        "close": 2901,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 2875,
+        "high": 2875,
+        "low": 2875,
+        "close": 2875,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 2905,
+        "high": 2905,
+        "low": 2905,
+        "close": 2905,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 2944,
+        "high": 2944,
+        "low": 2944,
+        "close": 2944,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "SUNPHARMA",
     "name": "Sun Pharma",
-    "price": 398,
+    "price": 410,
     "previousClose": 1250,
     "todayOpen": 1250,
     "sector": "Pharma",
@@ -24411,120 +24411,8 @@
     "beta": 0.7,
     "high": 1361,
     "low": 302,
-    "volume": 1805097,
+    "volume": 1810367,
     "intraday": [
-      {
-        "tStart": 1764676186505,
-        "open": 392,
-        "high": 392,
-        "low": 392,
-        "close": 392,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676246509,
-        "open": 386,
-        "high": 386,
-        "low": 386,
-        "close": 386,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676306516,
-        "open": 380,
-        "high": 380,
-        "low": 380,
-        "close": 380,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676366530,
-        "open": 390,
-        "high": 390,
-        "low": 390,
-        "close": 390,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676426538,
-        "open": 397,
-        "high": 397,
-        "low": 397,
-        "close": 397,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676486548,
-        "open": 392,
-        "high": 392,
-        "low": 392,
-        "close": 392,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676546551,
-        "open": 393,
-        "high": 393,
-        "low": 392,
-        "close": 392,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676666553,
-        "open": 388,
-        "high": 388,
-        "low": 388,
-        "close": 388,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676726566,
-        "open": 385,
-        "high": 385,
-        "low": 385,
-        "close": 385,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676830121,
-        "open": 390,
-        "high": 390,
-        "low": 390,
-        "close": 390,
-        "volume": 0
-      },
-      {
-        "tStart": 1764676890135,
-        "open": 385,
-        "high": 385,
-        "low": 385,
-        "close": 385,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677293099,
-        "open": 386,
-        "high": 386,
-        "low": 386,
-        "close": 386,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677353112,
-        "open": 379,
-        "high": 379,
-        "low": 379,
-        "close": 379,
-        "volume": 0
-      },
-      {
-        "tStart": 1764677413113,
-        "open": 380,
-        "high": 380,
-        "low": 380,
-        "close": 380,
-        "volume": 0
-      },
       {
         "tStart": 1764677473120,
         "open": 390,
@@ -25371,6 +25259,118 @@
         "high": 398,
         "low": 398,
         "close": 398,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783040248,
+        "open": 396,
+        "high": 396,
+        "low": 396,
+        "close": 396,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783100251,
+        "open": 397,
+        "high": 397,
+        "low": 397,
+        "close": 397,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783160264,
+        "open": 397,
+        "high": 397,
+        "low": 397,
+        "close": 397,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783220280,
+        "open": 401,
+        "high": 401,
+        "low": 401,
+        "close": 401,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783280285,
+        "open": 403,
+        "high": 403,
+        "low": 403,
+        "close": 403,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783340306,
+        "open": 403,
+        "high": 403,
+        "low": 403,
+        "close": 403,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783400316,
+        "open": 405,
+        "high": 405,
+        "low": 405,
+        "close": 405,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783460329,
+        "open": 405,
+        "high": 405,
+        "low": 405,
+        "close": 405,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783520330,
+        "open": 399,
+        "high": 399,
+        "low": 399,
+        "close": 399,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783580335,
+        "open": 404,
+        "high": 404,
+        "low": 404,
+        "close": 404,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783640346,
+        "open": 412,
+        "high": 412,
+        "low": 412,
+        "close": 412,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783700350,
+        "open": 403,
+        "high": 403,
+        "low": 403,
+        "close": 403,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783760359,
+        "open": 402,
+        "high": 402,
+        "low": 402,
+        "close": 402,
+        "volume": 0
+      },
+      {
+        "tStart": 1764783820363,
+        "open": 407,
+        "high": 407,
+        "low": 407,
+        "close": 407,
         "volume": 0
       }
     ]

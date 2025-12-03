@@ -1,9 +1,8 @@
 "use client";
 
 import React from 'react'
+import { OrderFilterValue } from '@/types';
 
-// 1. Define a strict type for the possible filter values
-type OrderFilterValue = "ALL" | "BUY" | "SELL";
 
 // 2. Define the interface for the component props
 interface OrdersFilterProps {

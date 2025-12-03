@@ -4,15 +4,16 @@ import AuthGuard from "../hooks/authGaurd";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
+import { Transaction, OrderFilterValue } from "@/types";
 import TransactionTable from "@/components/orders/TransactionTable";
 import Pagination from "@/components/ui/Pagination";
 import OrdersFilter from "@/components/orders/OrdersFilter";
 
 function TransactionsPage() {
-  const [transactions, setTransactions] = useState<any[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [filter, setFilter] = useState("ALL"); // 👈 NEW
+  const [filter, setFilter] = useState<OrderFilterValue>("ALL"); // 👈 NEW
   const limit = 10;
 
   const router = useRouter();

@@ -5,6 +5,12 @@ import { useEffect, useMemo, useState } from "react";
 import { socket } from "@/utils/socket";
 import type { EnrichedPrice, Candle, FlashState } from "@/types";
 
+interface TickUpdate {
+  symbol: string;
+  price: number;
+  [key: string]: unknown;
+}
+
 export function useLivePrices() {
   const [prices, setPrices] = useState<EnrichedPrice[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +43,7 @@ export function useLivePrices() {
       setLoading(false);
     };
 
-    const onTicks = (diffs: any[]) => {
+    const onTicks = (diffs: TickUpdate[]) => {
       setPrices((prev) => {
         const copy = prev.slice();
         diffs.forEach((d) => {
@@ -68,7 +74,7 @@ export function useLivePrices() {
       socket.off("price:snapshot", onSnapshot);
       socket.off("price:ticks", onTicks);
     };
-  }, [socket.connected]); // re-run when socket.connect state changes
+  }, []); // re-run when socket.connect state changes
 
   return {
     prices,

@@ -5,7 +5,6 @@ import { StocksListProps } from "@/types";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import WatchlistButton from "./WatchlistButton";
-import TableSkeleton from "../skeletons/TableSkeleton";
 
 function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
   if (dir === "up") return <ArrowUp size={16} className="text-positive" />;

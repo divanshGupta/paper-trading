@@ -5,27 +5,16 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
+import { EnrichedHolding, FlashState } from "@/types";
 import SellModal from "../trade/TradeModal";
 
-// 1. Define the type for a single holding object
-interface Holding {
-  id: string; // Assuming id is a unique identifier
-  symbol: string;
-  quantity: number;
-  avgPrice: number;
-  livePrice: number;
-  unrealized: number; // P&L
-}
 
 // 2. Define the type for the flash state object
 // Flash maps a symbol to a price change state ("up" | "down" | undefined)
-interface FlashState {
-  [symbol: string]: "up" | "down" | undefined;
-}
 
 // 3. Define the component props interface
 interface HoldingsTableProps {
-  holdings: Holding[];
+  holdings: EnrichedHolding[];
   flash: FlashState;
   onSuccess: () => void;
 }
@@ -60,7 +49,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
 
         <tbody>
           {/* 4. Use the Holding type in the map function */}
-          {holdings.map((h: Holding) => {
+          {holdings.map((h: EnrichedHolding) => {
             const pnlColor = h.unrealized >= 0 ? "text-positive" : "text-negative";
 
             return (
@@ -156,7 +145,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
           holdingQty={active.holdingQty}
           // Assuming profile?.balance is the cash balance used here. 
           // You might need to adjust the prop name if SellModal expects the current price of the stock.
-          price={profile?.balance} 
+          balance={profile?.balance} 
           onClose={() => setActive(null)}
           onSuccess={onSuccess}
         />

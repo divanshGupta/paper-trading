@@ -3,21 +3,22 @@
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { toast } from "sonner";
-import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";   // <-- WebSocket price feed
+import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
+import { TradeModalProps } from "@/types";
 
 export default function TradeModal({
-  mode,             // "buy" | "sell"
+  mode,
   symbol,
-  holdingQty = 0,   // Sell mode
-  balance = 0,      // Buy mode
-  avgPrice,         // Optional for future P/L display
+  holdingQty = 0,
+  balance = 0,
+  avgPrice,
   onClose,
-  onSuccess
-}: any) {
+  onSuccess,
+}: TradeModalProps) {
 
-  const { bySymbol } = useLivePrices();     // <-- global WebSocket feed
+  const { bySymbol } = useLivePrices(); // live WebSocket feed
   const liveStock = bySymbol(symbol);
-  const price = liveStock?.price ?? null;   // <-- REAL TIME PRICE
+  const price = liveStock?.price ?? null;
 
   const [quantity, setQuantity] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,6 @@ export default function TradeModal({
   const handleTrade = async () => {
     if (!price) return toast.error("Unable to read live price");
     if (quantity <= 0) return toast.error("Enter a valid quantity");
-
     if (isSell && quantity > holdingQty)
       return toast.error("You don't have that many shares");
 
@@ -50,10 +50,7 @@ export default function TradeModal({
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        symbol,
-        quantity
-      }),
+      body: JSON.stringify({ symbol, quantity }),
     });
 
     setLoading(false);
@@ -62,15 +59,15 @@ export default function TradeModal({
     if (!res.ok) return toast.error(json.message);
 
     toast.success(`${isBuy ? "Bought" : "Sold"} ${quantity} shares of ${symbol}`);
+
     onSuccess?.();
-    onClose?.();
+    onClose();
   };
 
   return (
     <div className="fixed inset-0 bg-bg-surface backdrop-blur-sm flex items-center justify-center z-50 px-4">
       <div className="bg-bg-elevated p-6 rounded-2xl w-full max-w-sm shadow-xl">
-
-        {/* HEADER */}
+        
         <h2 className="text-lg font-bold mb-1">
           {isBuy ? "Buy" : "Sell"} {symbol}
         </h2>
@@ -83,16 +80,15 @@ export default function TradeModal({
           )}
         </p>
 
-        {/* INPUT */}
+        {/* QUANTITY INPUT */}
         <div className="mb-4">
           <label className="text-sm text-text-secondary">Quantity</label>
-
           <input
             type="number"
-            className="border border-border bg-bg-surface outline-none text-text px-3 py-2 rounded-lg w-full mt-1"
-            placeholder="Enter quantity"
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
+            className="border border-border bg-bg-surface outline-none text-text px-3 py-2 rounded-lg w-full mt-1"
+            placeholder="Enter quantity"
           />
         </div>
 
@@ -111,7 +107,7 @@ export default function TradeModal({
 
             <div className="flex justify-between mt-1">
               <span>Balance After Buy:</span>
-              <span className={`${newBalance < 0 ? "text-positive" : ""}`}>
+              <span className={`${newBalance < 0 ? "text-negative" : ""}`}>
                 ₹{newBalance.toLocaleString()}
               </span>
             </div>
@@ -125,7 +121,6 @@ export default function TradeModal({
               <span>Your Holdings:</span>
               <span className="font-semibold">{holdingQty} shares</span>
             </div>
-
             <div className="flex justify-between mt-1">
               <span>Value:</span>
               <span className="font-semibold">₹{total.toLocaleString()}</span>
@@ -133,7 +128,6 @@ export default function TradeModal({
           </div>
         )}
 
-        {/* BUTTONS */}
         <div className="flex gap-2">
           <button
             onClick={handleTrade}

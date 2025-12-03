@@ -2,22 +2,11 @@
 
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-
-// Define the expected structure of the Profile data based on form usage
-interface Profile {
-  name: string | null;
-  phone: string | null;
-  gender: string | null;
-  address: string | null;
-  fatherName: string | null;
-  dob: string | null;
-  // Allows for other properties that exist on the profile object
-  [key: string]: any; 
-}
+import { UserProfile } from "@/types";
 
 interface ProfileEditFormProps {
-  profile: Profile;
-  onSave: (updated: Profile) => void;
+  profile: UserProfile;
+  onSave: (updated: UserProfile) => void;
   onCancel: () => void;
 }
 
@@ -27,19 +16,18 @@ export default function ProfileEditForm({
   onCancel,
 }: ProfileEditFormProps) {
   const [form, setForm] = useState({
-    name: profile.name || "",
-    phone: profile.phone || "",
-    gender: profile.gender || "",
-    address: profile.address || "",
-    fatherName: profile.fatherName || "",
-    // Ensure DOB is formatted for the input type="date"
-    dob: profile.dob ? profile.dob.substring(0, 10) : "", 
+    name: profile.name ?? "",
+    phone: profile.phone ?? "",
+    gender: profile.gender ?? "",
+    address: profile.address ?? "",
+    fatherName: profile.fatherName ?? "",
+    dob: profile.dob ? profile.dob.substring(0, 10) : "",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (field: string, value: string) => {
+  const handleChange = (field: keyof typeof form, value: string) => {
     setForm({ ...form, [field]: value });
   };
 
@@ -48,15 +36,14 @@ export default function ProfileEditForm({
     setError("");
 
     try {
-      const { name, phone } = form;
-
-      if (!name.trim()) {
+      // Basic validation
+      if (!form.name.trim()) {
         setError("Name cannot be empty");
         setLoading(false);
         return;
       }
 
-      if (phone && phone.length !== 10) {
+      if (form.phone && form.phone.length !== 10) {
         setError("Phone number must be 10 digits");
         setLoading(false);
         return;
@@ -65,9 +52,7 @@ export default function ProfileEditForm({
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
 
-      // Note: In a real deployment, you must replace 'http://localhost:5500' 
-      // with your Fly.io backend URL (e.g., 'https://your-app-name.fly.dev/').
-      const BACKEND_URL = "http://localhost:5500"; 
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5500";
 
       const res = await fetch(`${BACKEND_URL}/api/v1/users/profile`, {
         method: "PUT",
@@ -81,15 +66,13 @@ export default function ProfileEditForm({
       const json = await res.json();
 
       if (res.ok) {
-        // Pass the updated user/profile data, now typed as Profile
-        onSave(json.user); 
+        onSave(json.user as UserProfile);
       } else {
-        // Handle API error messages
         setError(json.message || "Failed to save profile.");
       }
     } catch (err) {
       console.error(err);
-      setError("Something went wrong");
+      setError("Something went wrong.");
     } finally {
       setLoading(false);
     }
@@ -99,7 +82,6 @@ export default function ProfileEditForm({
     <div>
       <h2 className="text-text text-xl font-semibold mb-4">Edit Profile</h2>
 
-      {/* Error message */}
       {error && (
         <div className="mb-3 p-2 rounded bg-red-100 text-red-700 text-sm">
           {error}
@@ -108,28 +90,25 @@ export default function ProfileEditForm({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
 
-        {/* Name */}
         <Field
           label="Full Name"
-          value={form.name || ""}
+          value={form.name}
           onChange={(v) => handleChange("name", v)}
           required
           placeholder="Full Name"
         />
 
-        {/* Phone */}
         <Field
           label="Phone"
-          value={form.phone || ""}
+          value={form.phone}
           onChange={(v) => handleChange("phone", v)}
           placeholder="10-digit number"
         />
 
-        {/* Gender */}
         <div className="flex flex-col">
           <label className="text-sm font-medium mb-1">Gender</label>
           <select
-            value={form.gender || ""}
+            value={form.gender}
             onChange={(e) => handleChange("gender", e.target.value)}
             className="border border-border bg-bg-elevated rounded-lg px-3 py-2"
           >
@@ -140,35 +119,30 @@ export default function ProfileEditForm({
           </select>
         </div>
 
-        {/* DOB */}
         <Field
           label="Date of Birth"
           type="date"
-          value={form.dob || ""}
+          value={form.dob}
           onChange={(v) => handleChange("dob", v)}
-
         />
 
-        {/* Address (full width) */}
         <div className="md:col-span-2">
           <Field
             label="Address"
-            value={form.address || ""}
+            value={form.address}
             onChange={(v) => handleChange("address", v)}
             placeholder="Your Full Address"
           />
         </div>
 
-        {/* Father's Name */}
         <Field
           label="Father's Name"
-          value={form.fatherName || ""}
+          value={form.fatherName}
           onChange={(v) => handleChange("fatherName", v)}
           placeholder="Your Father's Name"
         />
       </div>
 
-      {/* Buttons */}
       <div className="flex justify-end gap-3 mt-4">
         <button
           onClick={onCancel}
@@ -181,9 +155,7 @@ export default function ProfileEditForm({
           onClick={handleSubmit}
           disabled={loading}
           className={`px-5 py-2 rounded-lg text-text border border-border font-semibold ${
-            loading
-              ? "bg-bg-surface"
-              : "bg-bg-surface hover:bg-bg-elevated"
+            loading ? "bg-bg-surface" : "bg-bg-surface hover:bg-bg-elevated"
           }`}
         >
           {loading ? "Saving..." : "Save Changes"}
@@ -216,6 +188,7 @@ function Field({
       <label className="text-sm font-medium mb-1">
         {label} {required && <span className="text-red-500">*</span>}
       </label>
+
       <input
         type={type}
         value={value}

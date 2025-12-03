@@ -1,11 +1,16 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { supabase } from "@/utils/supabaseClient";
 
-const BalanceContext = createContext<any>(null);
+interface BalanceContextValue {
+  balance: number | null;
+  refreshBalance: () => Promise<void>;
+}
 
-export function BalanceProvider({ children }: { children: React.ReactNode }) {
+const BalanceContext = createContext<BalanceContextValue | null>(null);
+
+export function BalanceProvider({ children }: { children: ReactNode }) {
   const [balance, setBalance] = useState<number | null>(null);
 
   const refreshBalance = async () => {
@@ -14,8 +19,8 @@ export function BalanceProvider({ children }: { children: React.ReactNode }) {
     if (!token) return;
 
     const res = await fetch("http://localhost:5500/api/v1/users/balance", {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     const json = await res.json();
@@ -33,4 +38,10 @@ export function BalanceProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const useBalance = () => useContext(BalanceContext);
+export const useBalance = () => {
+  const ctx = useContext(BalanceContext);
+  if (!ctx) {
+    throw new Error("useBalance must be used inside <BalanceProvider>");
+  }
+  return ctx;
+};

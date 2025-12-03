@@ -11,13 +11,14 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import StockGrid from "@/components/stocks/StockGrid";
 import StocksList from "@/components/stocks/StocksList";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
+import { Holding, StockFilterValue } from "@/types";
 
 export default function Dashboard() {
 
   const enriched = useEnrichedStocks();
 
   const { prices, bySymbol, flash, loading } = useLivePrices();
-  const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
+  const [filter, setFilter] = useState<StockFilterValue>("all");
 
   const { state, buyStock, sellStock, tradingSymbol } = useApp();
   const { profile, holdings, realizedToday } = state;
@@ -25,14 +26,15 @@ export default function Dashboard() {
   const { marketOpen } = getMarketStatusIST();
 
   // portfolio total value (live)
-  const totalValue = holdings.reduce((acc: number, h: any) => {
+  const totalValue = holdings.reduce((acc: number, h: Holding) => {
     const p = bySymbol(h.symbol)?.price ?? 0;
     return acc + p * h.quantity;
   }, 0);
 
   // unrealized PnL (quick)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const unrealizedPnL = useMemo(() => {
-    return holdings.reduce((acc: number, h: any) => {
+    return holdings.reduce((acc: number, h: Holding) => {
       const p = bySymbol(h.symbol);
       if (!p) return acc;
       const diff = p.price - p.previousClose;
@@ -69,7 +71,7 @@ export default function Dashboard() {
           <StockGrid />
 
           <div className="mt-4 mb-3">
-            <StockFilterTabs select={filter} onSelect={setFilter} />
+            <StockFilterTabs selected={filter} onSelect={setFilter} />
           </div>
 
           <StocksList

@@ -18,12 +18,12 @@ export type UserProfile = {
   id: string;
   email: string;
   name: string | null;
-  phone: string | null;
-  dob: string | null;
-  gender: string | null;
-  address: string | null;
-  fatherName: string | null;
   balance: number;
+  phone?: string | null;
+  dob?: string | null;
+  gender?: string | null;
+  address?: string | null;
+  fatherName?: string | null;
 };
 
 /* -------------------------------------
@@ -35,7 +35,19 @@ export type Holding = {
   symbol: string;
   quantity: number;
   avgPrice: number;
+  livePrice?: number;
+  unrealized?: number;
 };
+
+
+export interface EnrichedHolding extends Holding {
+  livePrice: number;
+  value: number;
+  invested: number;
+  unrealized: number;
+  flash: "up" | "down" | null;
+  sector?: string | null;
+}
 
 /* -------------------------------------
    Live Price Engine — Base Price Type
@@ -127,6 +139,23 @@ export type DayPnlResponse = {
   dayPnl: number;
 };
 
+export interface PortfolioResponse {
+  holdings: Holding[];
+}
+
+export interface ProfileResponse {
+  user: UserProfile | null;
+}
+
+export interface WatchlistResponse {
+  watchlist: string[];
+}
+
+export interface PortfolioUpdatePayload {
+  holdings?: Holding[];
+  balance?: number;
+}
+
 /* -------------------------------------
    APP GLOBAL STATE
 ------------------------------------- */
@@ -151,7 +180,7 @@ export type TradeAction = "buy" | "sell";
 
 export type StocksListProps = {
   prices: EnrichedPrice[];
-  flash: FlashState;
+  flash?: FlashState;
   bySymbol?: (symbol: string) => Price | null;
 
   holdings?: Holding[];
@@ -205,3 +234,34 @@ export type OrdersFilter = {
   setFilter: (value: string) => void;
   filter: number;
 };
+
+export type Transaction = {
+  id: number | string; 
+  symbol: string;
+  type: "BUY" | "SELL";
+  quantity: number;
+  // Use 'string | number' if the source data isn't guaranteed to be a number
+  price: number | string; 
+  total: number | string; 
+  realizedPnl: number | string | null;
+  createdAt: string | Date; 
+}
+
+// 1. Define a strict type for the possible order filter values
+export type OrderFilterValue = "ALL" | "BUY" | "SELL";
+
+// gainer and loser type
+export type StockFilterValue = "all" | "gainers" | "losers";
+
+
+// trade modal type
+export type TradeModalProps = {
+  mode: "buy" | "sell";
+  symbol: string;
+  holdingQty?: number;
+  balance?: number;
+  avgPrice?: number;
+  onClose: () => void;
+  onSuccess?: () => void;
+}
+

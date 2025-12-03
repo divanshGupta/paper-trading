@@ -3,10 +3,10 @@
 import { useMemo } from "react";
 import { useLivePrices } from "./useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
-import { EnrichedPrice, Price } from "@/types";
+import { EnrichedPrice, Holding, Price } from "@/types";
 
 export default function useEnrichedStocks() {
-  const { prices, flash, bySymbol } = useLivePrices();
+  const { prices, flash } = useLivePrices();
   const { state } = useApp();
   const { holdings } = state;
 
@@ -16,7 +16,7 @@ export default function useEnrichedStocks() {
       const changePercent = s.previousClose
         ? (change / s.previousClose) * 100
         : 0;
-      const holding = holdings.find((h) => h.symbol === s.symbol);
+      const holding = holdings.find((h: Holding) => h.symbol === s.symbol);
       const holdingQty = holding?.quantity ?? 0;
       const invested = holding ? holding.avgPrice * holding.quantity : 0;
       const liveValue = s.price * holdingQty;

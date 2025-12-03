@@ -1,17 +1,11 @@
 "use client";
 
+import { EnrichedHolding } from '@/types';
 import React from 'react';
-
-// Define the required properties for a holding object used in this component.
-// We assume it includes 'sector' for grouping and 'value' (market value of the holding).
-interface InsightHolding {
-  sector: string | null | undefined;
-  value: number; // The current market value of the holding (Qty * Live Price)
-}
 
 // Define the component props interface
 interface PortfolioInsightsProps {
-    holdings: InsightHolding[];
+    holdings: EnrichedHolding[];
 }
 
 export default function PortfolioInsights({ holdings }: PortfolioInsightsProps) {

@@ -10,6 +10,7 @@ import WatchlistButton from "@/components/stocks/WatchlistButton";
 import StockCard from "@/components/stocks/StockCard";
 import Sparkline from "@/components/chart/Sparkline";
 import TradeModal from "@/components/trade/TradeModal";
+import { Holding, TradeAction } from "@/types";
 
 export default function StockInfoPage() {
   const { state, refresh } = useApp();
@@ -18,13 +19,13 @@ export default function StockInfoPage() {
   const { symbol } = useParams() as { symbol: string };
   const { prices, bySymbol, flash } = useLivePrices();
 
-  const [tradeMode, setTradeMode] = useState<"buy" | "sell" | null>(null);
+  const [tradeMode, setTradeMode] = useState<TradeAction | null>(null);
 
   // ---------------------------------------
   // 🔥 ENRICHED HOLDINGS (REAL-TIME DATA)
   // ---------------------------------------
   const enrichedHoldings = useMemo(() => {
-    return holdings.map((h) => {
+    return holdings.map((h: Holding) => {
       const live = bySymbol(h.symbol);
       const livePrice = live?.price ?? 0;
       const value = livePrice * h.quantity;
@@ -54,7 +55,7 @@ export default function StockInfoPage() {
   }
 
   // Get live holding for the opened stock
-  const holding = enrichedHoldings.find((h) => h.symbol === symbol);
+  const holding = enrichedHoldings.find((h: Holding) => h.symbol === symbol);
   const holdingQty = holding?.quantity ?? 0;
   const avgPrice = holding?.avgPrice ?? null;
 
