@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
+
+  "plugins": ["@typescript-eslint", "unused-imports"],
+
+  "rules": {
+    /* ------------------------------
+     * React & Hooks
+     * ------------------------------ */
+    "react-hooks/exhaustive-deps": "off",
+    "react/display-name": "off",
+
+    /* ------------------------------
+     * TypeScript
+     * ------------------------------ */
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    /* Remove unused imports automatically */
+    "unused-imports/no-unused-imports": "warn",
+
+    /* ------------------------------
+     * Next.js
+     * ------------------------------ */
+    "@next/next/no-img-element": "off", // allow <img> tags
+
+    /* ------------------------------
+     * Style / Code Quality
+     * ------------------------------ */
+    "no-console": "off",
+    "no-debugger": "warn"
+  },
+
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/",
+    "dist/",
+    "build/"
+  ]
+}

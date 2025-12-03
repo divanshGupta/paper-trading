@@ -57,7 +57,7 @@ export default function StockInfoPage() {
   // Get live holding for the opened stock
   const holding = enrichedHoldings.find((h: Holding) => h.symbol === symbol);
   const holdingQty = holding?.quantity ?? 0;
-  const avgPrice = holding?.avgPrice ?? null;
+  // const avgPrice = holding?.avgPrice ?? null;
 
   const dayChange = stock.price - (stock.previousClose ?? stock.price);
   const dayChangePct = (dayChange / (stock.previousClose ?? stock.price)) * 100;

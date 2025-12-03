@@ -14,7 +14,7 @@ import { Holding, StockFilterValue } from "@/types";
 
 export default function Dashboard() {
   const enriched = useEnrichedStocks();
-  const { prices, bySymbol, flash, loading } = useLivePrices();
+  const { bySymbol, flash, loading } = useLivePrices();
   const [filter, setFilter] = useState<StockFilterValue>("all");
 
   const { state, buyStock, sellStock, tradingSymbol } = useApp();
@@ -39,7 +39,7 @@ export default function Dashboard() {
       if (!p) return acc;
       return acc + (p.price - p.previousClose) * h.quantity;
     }, 0);
-  }, [holdings, prices, bySymbol]);
+  }, [holdings, bySymbol]);
 
   const dayPnl = unrealizedPnL + (realizedToday ?? 0);
 

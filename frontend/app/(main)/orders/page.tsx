@@ -45,11 +45,11 @@ function TransactionsPage() {
     } catch (err) {
       console.error("Failed to fetch transactions:", err);
     }
-  }, [page, filter]);
+  }, [page, filter, router]);
 
   useEffect(() => {
     fetchTransactions();
-  }, [page, filter]); // 👈 refetch when page or filter changes
+  }, [fetchTransactions]); // 👈 refetch when page or filter changes
 
   return (
     <div className="p-8 pt-10 mb-10 h-screen max-w-7xl mx-auto">

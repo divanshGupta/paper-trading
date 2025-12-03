@@ -12,8 +12,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-bg-main text-text antialiased" suppressHydrationWarning>
+    <>
         <SocketProvider>
           <ThemeProvider 
             attribute="class" 
@@ -33,7 +32,6 @@ export default function MainLayout({
             </AppProvider>
           </ThemeProvider>
         </SocketProvider>
-      </body>
-    </html>
+    </>
   );
 }

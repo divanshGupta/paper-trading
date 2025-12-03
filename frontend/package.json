@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
@@ -22,7 +22,8 @@
     "react-redux": "^9.2.0",
     "recharts": "^3.4.1",
     "socket.io-client": "^4.8.1",
-    "sonner": "^2.0.7"
+    "sonner": "^2.0.7",
+    "webpack": "^5.103.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -32,7 +33,9 @@
     "autoprefixer": "^10.4.22",
     "eslint": "^9",
     "eslint-config-next": "15.5.5",
+    "eslint-plugin-unused-imports": "^4.3.0",
     "postcss": "^8.5.6",
+    "prettier": "^3.7.4",
     "tailwindcss": "^3.4.18",
     "typescript": "^5"
   }

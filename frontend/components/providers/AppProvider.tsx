@@ -268,7 +268,7 @@ useEffect(() => {
       toast.success(`${action === "buy" ? "Bought" : "Sold"} successfully`);
 
       return true;
-    } catch (error) {
+    } catch {
       toast.error("Network Error");
       return false;
     } finally {
