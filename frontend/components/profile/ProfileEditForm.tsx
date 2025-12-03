@@ -52,7 +52,7 @@ export default function ProfileEditForm({
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
 
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5500";
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
 
       const res = await fetch(`${BACKEND_URL}/api/v1/users/profile`, {
         method: "PUT",

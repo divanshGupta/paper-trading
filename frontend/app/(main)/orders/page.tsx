@@ -15,6 +15,7 @@ function TransactionsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [filter, setFilter] = useState<OrderFilterValue>("ALL"); // 👈 NEW
   const limit = 10;
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   const router = useRouter();
 
@@ -33,7 +34,7 @@ function TransactionsPage() {
       if (filter !== "ALL") queryParams.append("type", filter);
 
       const res = await fetch(
-        `http://localhost:5500/api/v1/transactions/orders?${queryParams}`,
+        `${BACKEND_URL}/api/v1/transactions/orders?${queryParams}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

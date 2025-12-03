@@ -14,6 +14,7 @@ export default function BuySellPanel({ symbol, price }: PanelProps) {
   const [tab, setTab] = useState<"BUY" | "SELL">("BUY");
   const [qty, setQty] = useState("");
   const { refresh } = useApp();
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   const handleSubmit = async () => {
     const quantity = Number(qty);
@@ -38,8 +39,8 @@ export default function BuySellPanel({ symbol, price }: PanelProps) {
 
     const endpoint =
       tab === "BUY"
-        ? "http://localhost:5500/api/v1/trade/buy"
-        : "http://localhost:5500/api/v1/trade/sell";
+        ? `${BACKEND_URL}/api/v1/trade/buy`
+        : `${BACKEND_URL}/api/v1/trade/sell`;
 
     const res = await fetch(endpoint, {
       method: "POST",

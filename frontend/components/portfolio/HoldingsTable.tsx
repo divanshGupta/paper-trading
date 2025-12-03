@@ -10,10 +10,7 @@ import SellModal from "../trade/TradeModal";
 import { getMarketStatusIST } from "@/utils/marketTime";
 
 
-// 2. Define the type for the flash state object
-// Flash maps a symbol to a price change state ("up" | "down" | undefined)
-
-// 3. Define the component props interface
+// Define the component props interface
 interface HoldingsTableProps {
   holdings: EnrichedHolding[];
   flash: FlashState;
@@ -105,7 +102,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                     `}
                     onClick={async () => {
                       if (!marketOpen) return;
-                      const BACKEND_URL = "http://localhost:5500";
+                      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
                       const { data } = await supabase.auth.getSession();
                       const token = data.session?.access_token;
                       if (!token) return router.replace("/login");

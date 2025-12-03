@@ -12,13 +12,15 @@ const BalanceContext = createContext<BalanceContextValue | null>(null);
 
 export function BalanceProvider({ children }: { children: ReactNode }) {
   const [balance, setBalance] = useState<number | null>(null);
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
+
 
   const refreshBalance = async () => {
     const session = await supabase.auth.getSession();
     const token = session.data.session?.access_token;
     if (!token) return;
 
-    const res = await fetch("http://localhost:5500/api/v1/users/balance", {
+    const res = await fetch(`${BACKEND_URL}/api/v1/users/balance`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

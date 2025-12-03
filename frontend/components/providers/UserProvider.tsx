@@ -19,6 +19,7 @@ const UserContext = createContext<UserContextType>({
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   // Fetch user profile from backend
   const refreshUser = async () => {
@@ -32,7 +33,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:5500/api/v1/user/profile", {
+      const res = await fetch(`${BACKEND_URL}/api/v1/user/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

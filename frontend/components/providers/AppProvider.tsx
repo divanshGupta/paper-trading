@@ -80,6 +80,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [watchlist, setWatchlist] = useState<string[]>([]);
   const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
   const [errorSymbol] = useState<string | null>(null);
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL;
 
   /* ----------------------------------------
      Fetch Watchlist
@@ -91,7 +92,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (!token) return setWatchlist([]);
 
     const { ok, json } = await apiFetch<WatchlistResponse>(
-      "http://localhost:5500/api/v1/watchlist",
+      `${BACKEND_URL}/api/v1/watchlist`,
       token
     );
 
@@ -115,7 +116,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         exists ? w.filter((s) => s !== symbol) : [...w, symbol]
       );
 
-      const url = `http://localhost:5500/api/v1/watchlist/${exists ? "remove" : "add"}`;
+      const url = `${BACKEND_URL}/api/v1/watchlist/${exists ? "remove" : "add"}`;
       const method = exists ? "DELETE" : "POST";
 
       const { ok } = await apiFetch(url, token, {
@@ -155,10 +156,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
 
     const [profileRes, holdingsRes, realizedRes] = await Promise.all([
-      apiFetch<ProfileResponse>("http://localhost:5500/api/v1/users/profile", token),
-      apiFetch<PortfolioResponse>("http://localhost:5500/api/v1/portfolio", token),
+      apiFetch<ProfileResponse>(`${BACKEND_URL}/api/v1/users/profile`, token),
+      apiFetch<PortfolioResponse>(`${BACKEND_URL}/api/v1/portfolio`, token),
       apiFetch<RealizedTodayResponse>(
-        "http://localhost:5500/api/v1/transactions/realized-today",
+        `${BACKEND_URL}/api/v1/transactions/realized-today`,
         token
       ),
     ]);
@@ -252,7 +253,7 @@ useEffect(() => {
     setTradingSymbol(symbol);
 
     try {
-      const url = `http://localhost:5500/api/v1/trade/${action}`;
+      const url = `${BACKEND_URL}/api/v1/trade/${action}`;
 
       const { ok, json } = await apiFetch<TradeError>(url, token, {
         method: "POST",

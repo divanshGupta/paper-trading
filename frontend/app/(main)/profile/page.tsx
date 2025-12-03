@@ -13,6 +13,7 @@ function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   const router = useRouter();
 
@@ -23,7 +24,7 @@ function ProfilePage() {
         const token = data.session?.access_token;
         if (!token) return;
 
-        const res = await fetch("http://localhost:5500/api/v1/users/profile", {
+        const res = await fetch(`${BACKEND_URL}/api/v1/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

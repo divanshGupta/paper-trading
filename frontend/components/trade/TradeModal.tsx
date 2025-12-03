@@ -18,6 +18,7 @@ export default function TradeModal({
   const { bySymbol } = useLivePrices(); // live WebSocket feed
   const liveStock = bySymbol(symbol);
   const price = liveStock?.price ?? null;
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   const [quantity, setQuantity] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -40,8 +41,8 @@ export default function TradeModal({
     const token = data.session?.access_token;
 
     const url = isBuy
-      ? "http://localhost:5500/api/v1/trade/buy"
-      : "http://localhost:5500/api/v1/trade/sell";
+      ? `${BACKEND_URL}/api/v1/trade/buy`
+      : `${BACKEND_URL}/api/v1/trade/sell`;
 
     const res = await fetch(url, {
       method: "POST",

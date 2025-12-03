@@ -7,12 +7,13 @@ import { RealizedRow } from "@/types";
 
 function RealizedPnLPage() {
   const [rows, setRows] = useState<RealizedRow[]>([]);
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   useEffect(() => {
     const fetchPnL = async () => {
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
-      const res = await fetch("http://localhost:5500/api/v1/transactions/realized-pnl", {
+      const res = await fetch(`${BACKEND_URL}/api/v1/transactions/realized-pnl`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const json = await res.json();

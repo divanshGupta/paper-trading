@@ -1,7 +1,7 @@
 // src/utils/socket.ts
 import { io, Socket } from "socket.io-client";
 
-const URL = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:5500";
+const URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 export const socket: Socket = io(URL, {
   transports: ["websocket"],
