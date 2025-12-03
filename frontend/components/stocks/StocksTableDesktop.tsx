@@ -14,8 +14,6 @@ function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
 
 export default function StocksTableDesktop({
   prices,
-  flash,
-  bySymbol,
   marketOpen,
   tradingSymbol,
   onBuy,

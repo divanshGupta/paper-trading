@@ -15,14 +15,17 @@ import { toast } from "sonner";
 
 import type {
   AppState,
-  Holding,
   PortfolioResponse,
   ProfileResponse,
   PortfolioUpdatePayload,
   RealizedTodayResponse,
   WatchlistResponse,
-  UserProfile,
 } from "@/types";
+
+interface TradeError {
+  message?: string;
+}
+
 
 /* ----------------------------------------
    Safe typed fetch
@@ -76,7 +79,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const [watchlist, setWatchlist] = useState<string[]>([]);
   const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
-  const [errorSymbol, setErrorSymbol] = useState<string | null>(null);
+  const [errorSymbol] = useState<string | null>(null);
 
   /* ----------------------------------------
      Fetch Watchlist
@@ -248,13 +251,14 @@ useEffect(() => {
     setTradingSymbol(symbol);
 
     const url = `http://localhost:5500/api/v1/trade/${action}`;
-    const { ok, json } = await apiFetch(url, token, {
+
+    const { ok, json } = await apiFetch<TradeError>(url, token, {
       method: "POST",
       body: JSON.stringify({ symbol, price, quantity: 1 }),
     });
 
     if (!ok) {
-      toast.error((json as any)?.message ?? "Trade failed");
+      toast.error(json.message ?? "Trade failed");
       return false;
     }
 

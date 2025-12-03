@@ -11,7 +11,6 @@ export default function TradeModal({
   symbol,
   holdingQty = 0,
   balance = 0,
-  avgPrice,
   onClose,
   onSuccess,
 }: TradeModalProps) {
