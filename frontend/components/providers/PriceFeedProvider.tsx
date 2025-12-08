@@ -9,12 +9,41 @@ import {
   useState,
 } from "react";
 import { socket } from "@/lib/socket";
-import type { EnrichedPrice, FlashState, Candle } from "@/types";
-
-const PriceContext = createContext<any>(null);
+import type { EnrichedPrice, FlashState, Candle, Price } from "@/types";
 
 // ---------------------------------------------
-// Utility: Build sparkline
+// Backend payload types
+// ---------------------------------------------
+export interface SnapshotPrice {
+  symbol: string;
+  price: number;
+  previousClose: number;
+  intraday: Candle[];
+  sector?: string;
+}
+
+export interface TickUpdate {
+  symbol: string;
+  price: number;
+  previousClose?: number;
+  sector?: string;
+  [key: string]: unknown;
+}
+
+// ---------------------------------------------
+// Context type
+// ---------------------------------------------
+interface PriceFeedContextValue {
+  prices: EnrichedPrice[];
+  flash: FlashState;
+  loading: boolean;
+  bySymbol: (sym: string) => EnrichedPrice | null;
+}
+
+const PriceContext = createContext<PriceFeedContextValue | null>(null);
+
+// ---------------------------------------------
+// Sparkline utility
 // ---------------------------------------------
 function buildSparkline(intraday: Candle[] = [], price: number) {
   const pts = intraday.map((c) => ({
@@ -25,102 +54,144 @@ function buildSparkline(intraday: Candle[] = [], price: number) {
   return pts.slice(-120);
 }
 
+// ---------------------------------------------
+// Provider
+// ---------------------------------------------
 export function PriceFeedProvider({ children }: { children: React.ReactNode }) {
   const [prices, setPrices] = useState<EnrichedPrice[]>([]);
   const [flash, setFlash] = useState<FlashState>({});
   const [loading, setLoading] = useState(true);
 
-  // prevent duplicate listeners
   const initialized = useRef(false);
 
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
 
-    console.log("🔥 PriceFeedProvider: initialized");
+    console.log("🔥 PriceFeedProvider initialized");
 
-    // -----------------------------
-    // Snapshot
-    // -----------------------------
-    const onSnapshot = (snapshot: EnrichedPrice[]) => {
-      console.log("📥 SNAPSHOT:", snapshot.length, "symbols");
+    // ---------------------------
+    // Snapshot handler
+    // ---------------------------
+    const onSnapshot = (snapshot: Price[]) => {
+        console.log("📥 SNAPSHOT:", snapshot.length, "symbols");
 
-      const enriched = snapshot.map((p) => ({
-        ...p,
-        sparkline: buildSparkline(p.intraday ?? [], p.price),
-      }));
+        const enriched: EnrichedPrice[] = snapshot.map((p) => {
+            const change = p.price - p.previousClose;
+            const changePercent = p.previousClose
+            ? (change / p.previousClose) * 100
+            : 0;
 
-      const flashInit: FlashState = {};
-      enriched.forEach((p) => (flashInit[p.symbol] = null));
+            return {
+            ...p,
 
-      setPrices(enriched);
-      setFlash(flashInit);
-      setLoading(false);
-    };
+            // override/build sparkline
+            sparkline: buildSparkline(p.intraday ?? [], p.price),
 
-    // -----------------------------
-    // Ticks (diff updates)
-    // -----------------------------
-    const onTicks = (diffs: any[]) => {
-      setPrices((prev) => {
-        const arr = [...prev];
+            // computed price properties
+            change,
+            changePercent,
 
-        diffs.forEach((u) => {
-          const idx = arr.findIndex((x) => x.symbol === u.symbol);
-          if (idx < 0) return;
+            // portfolio defaults (user-specific later overrides)
+            holdingQty: 0,
+            invested: 0,
+            liveValue: 0,
+            unrealized: 0,
+            isHolding: false,
 
-          const before = arr[idx].price;
-          const after = u.price;
-
-          const movement =
-            after > before ? "up" : after < before ? "down" : null;
-
-          if (movement) {
-            setFlash((f) => ({ ...f, [u.symbol]: movement }));
-            setTimeout(() => {
-              setFlash((f) => ({ ...f, [u.symbol]: null }));
-            }, 300);
-          }
-
-          arr[idx] = {
-            ...arr[idx],
-            ...u,
-            sparkline: buildSparkline(arr[idx].intraday ?? [], u.price),
-          };
+            flash: null,
+            };
         });
 
-        return arr;
-      });
-    };
+        setPrices(enriched);
 
-    // Attach listeners ONCE
+        // Initialize flash states
+        const flashInit: FlashState = {};
+        enriched.forEach((p) => (flashInit[p.symbol] = null));
+        setFlash(flashInit);
+
+        setLoading(false);
+        };
+
+
+    // ---------------------------
+    // Tick handler
+    // ---------------------------
+    const onTicks = (diffs: TickUpdate[]) => {
+        setPrices((prev) => {
+            const arr = [...prev];
+
+            diffs.forEach((u) => {
+            const idx = arr.findIndex((x) => x.symbol === u.symbol);
+            if (idx < 0) return;
+
+            const before = arr[idx].price;
+            const after = u.price;
+            const movement =
+                after > before ? "up" : after < before ? "down" : null;
+
+            if (movement) {
+                setFlash((f) => ({ ...f, [u.symbol]: movement }));
+                setTimeout(() => {
+                setFlash((f) => ({ ...f, [u.symbol]: null }));
+                }, 300);
+            }
+
+            const updated = {
+                ...arr[idx],
+                ...u,
+                sparkline: buildSparkline(arr[idx].intraday ?? [], after),
+
+                // KEEP portfolio fields
+                holdingQty: arr[idx].holdingQty,
+                invested: arr[idx].invested,
+                liveValue: after * arr[idx].holdingQty,
+                unrealized: after * arr[idx].holdingQty - arr[idx].invested,
+                isHolding: arr[idx].holdingQty > 0,
+            };
+
+            arr[idx] = updated;
+            });
+
+            return arr;
+        });
+        };
+
+
+    // Attach listeners
     socket.on("price:snapshot", onSnapshot);
     socket.on("price:ticks", onTicks);
 
-    // subscribe immediately if connected
-    if (socket.connected) socket.emit("price:subscribe");
-
-    // resubscribe after reconnect
-    socket.on("connect", () => {
-      console.log("🔄 Reconnected → resubscribe to price feed");
+    // Subscribe ONCE
+    const subscribeOnce = () => {
+      console.log("📡 Subscribing to price feed");
       socket.emit("price:subscribe");
-    });
+    };
+
+    socket.once("connect", subscribeOnce);
+
+    if (socket.connected) subscribeOnce();
+
+    // Cleanup
+    return () => {
+      socket.off("price:snapshot", onSnapshot);
+      socket.off("price:ticks", onTicks);
+      socket.off("connect", subscribeOnce);
+    };
   }, []);
 
-  // ---------------------------------------------
   // Lookup map
-  // ---------------------------------------------
   const byMap = useMemo(() => {
-    const map = new Map<string, EnrichedPrice>();
-    prices.forEach((p) => map.set(p.symbol, p));
-    return map;
+    const m = new Map<string, EnrichedPrice>();
+    prices.forEach((p) => m.set(p.symbol, p));
+    return m;
   }, [prices]);
 
-  const value = {
+  const value: PriceFeedContextValue = {
     prices,
     flash,
     loading,
-    bySymbol: (sym: string) => byMap.get(sym) ?? null,
+    bySymbol: (sym) => byMap.get(sym) ?? null,
   };
 
   return <PriceContext.Provider value={value}>{children}</PriceContext.Provider>;

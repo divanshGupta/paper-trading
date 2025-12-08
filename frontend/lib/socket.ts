@@ -1,16 +1,15 @@
-// frontend/lib/socket.ts
-import { io, Socket } from "socket.io-client";
+// socket.ts
+import { io } from "socket.io-client";
 
-/**
- * IMPORTANT:
- * - No "use client"
- * - No imports from /app or /components
- * - This file is evaluated ONCE globally
- */
-export const socket: Socket = io(
-  process.env.NEXT_PUBLIC_SOCKET_URL!,
-  {
-    autoConnect: false,
-    transports: ["websocket"],
-  }
-);
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL!;
+
+export const socket = io(SOCKET_URL, {
+  transports: ["websocket"],
+  path: "/socket.io",
+  autoConnect: true, // allow FE to manage subscription manually
+});
+
+// IMPORTANT: prevent duplicate listeners
+socket.on("connect", () => {
+  console.log("⚡ Connected:", socket.id);
+});
