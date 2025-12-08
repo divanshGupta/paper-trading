@@ -1,67 +1,52 @@
+// frontend/components/providers/SocketProvider.tsx
 "use client";
 
-import { useEffect, useState, ReactNode } from "react";
-import { socket } from "@/utils/socket";
+import { useEffect, useRef, ReactNode } from "react";
+import { socket } from "@/lib/socket";
 import { supabase } from "@/utils/supabaseClient";
 
-interface SocketConnectError {
-  message?: string;
-}
-
 export default function SocketProvider({ children }: { children: ReactNode }) {
-  const [connected, setConnected] = useState(false);
+  // Prevent multiple initializations
+  const initialized = useRef(false);
 
   useEffect(() => {
-    let active = true;
+    if (initialized.current) return; // 🔥 Prevent re-running on navigation
+    initialized.current = true;
 
-    const initSocket = async () => {
+    console.log("🚀 SocketProvider initialized once");
+
+    const setup = async () => {
       const { data } = await supabase.auth.getSession();
-      const token = data.session?.access_token ?? null;
+      const token = data.session?.access_token;
 
-      if (!token) {
-        console.log("[SocketProvider] no auth token → socket not connected");
-        return;
+      if (token) {
+        socket.auth = { token };
       }
 
-      // Attach listeners BEFORE connecting
-      const onConnect = () => {
-        if (!active) return;
-        console.log("[SocketProvider] connected:", socket.id);
-        setConnected(true);
-      };
+      socket.on("connect", () => {
+        console.log("🟢 socket connected:", socket.id);
+      });
 
-      const onConnectError = (err: SocketConnectError) => {
-        if (!active) return;
-        console.warn("[SocketProvider] connect error:", err?.message ?? err);
-        setConnected(false);
-      };
+      socket.on("disconnect", (reason) => {
+        console.log("🔴 socket disconnected:", reason);
+      });
 
-      const onDisconnect = (reason: string) => {
-        if (!active) return;
-        console.warn("[SocketProvider] disconnected:", reason);
-        setConnected(false);
-      };
+      socket.on("connect_error", (err) => {
+        console.log("⚠️ socket connect_error:", err.message);
+      });
 
-      socket.on("connect", onConnect);
-      socket.on("connect_error", onConnectError);
-      socket.on("disconnect", onDisconnect);
-
-      socket.auth = { token };
-      if (!socket.connected) socket.connect();
+      socket.connect();
     };
 
-    initSocket();
+    setup();
 
-    /* ------------------------------------------
-       React to Supabase auth changes
-    ------------------------------------------ */
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+    // Supabase auth changes
+    const { data: authSub } = supabase.auth.onAuthStateChange(
+      (_evt, session) => {
         const token = session?.access_token ?? null;
 
         if (!token) {
           socket.disconnect();
-          setConnected(false);
           return;
         }
 
@@ -71,17 +56,10 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
     );
 
     return () => {
-      active = false;
-      socket.off("connect");
-      socket.off("connect_error");
-      socket.off("disconnect");
-
-      try {
-        authListener.subscription.unsubscribe();
-      } catch {}
+      // NEVER detach socket listeners here (provider persists across app lifecycle)
+      authSub.subscription.unsubscribe();
     };
   }, []);
 
-  // IMPORTANT: do NOT block rendering
   return <>{children}</>;
 }

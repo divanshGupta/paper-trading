@@ -9,8 +9,7 @@ import { EnrichedHolding, FlashState } from "@/types";
 import SellModal from "../trade/TradeModal";
 import { getMarketStatusIST } from "@/utils/marketTime";
 
-
-// Define the component props interface
+// Props
 interface HoldingsTableProps {
   holdings: EnrichedHolding[];
   flash: FlashState;
@@ -20,14 +19,12 @@ interface HoldingsTableProps {
 export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTableProps) {
   const { state } = useApp();
   const { profile } = state;
+
   const router = useRouter();
   const { marketOpen } = getMarketStatusIST();
-  
-  // State for the active modal, which holds the stock symbol and quantity to sell
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
+
   const [active, setActive] = useState<null | { symbol: string; holdingQty: number }>(null);
-  
-  // Assuming the unused 'refresh' state was here and removing it to resolve the warning.
-  // const [refresh, setRefresh] = useState(0); // REMOVED UNUSED VARIABLE
 
   return (
     <div className="bg-bg-surface border border-border rounded-xl p-6">
@@ -47,15 +44,11 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
         </thead>
 
         <tbody>
-          {/* 4. Use the Holding type in the map function */}
-          {holdings.map((h: EnrichedHolding) => {
+          {holdings.map((h) => {
             const pnlColor = h.unrealized >= 0 ? "text-positive" : "text-negative";
 
             return (
-              <tr
-                key={h.id}
-                className="border-b border-border hover:bg-bg-elevated transition"
-              >
+              <tr key={h.id} className="border-b border-border hover:bg-bg-elevated transition">
                 <td className="py-3 font-semibold">{h.symbol}</td>
                 <td className="py-3">{h.quantity}</td>
                 <td className="py-3">₹{h.avgPrice}</td>
@@ -77,7 +70,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                   {h.unrealized.toFixed(2)}
                 </td>
 
-                {/* SELL BUTTON → opens modal */}
+                {/* SELL MODAL BUTTON */}
                 <td className="py-3 text-center">
                   <button
                     disabled={!marketOpen}
@@ -102,7 +95,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                     `}
                     onClick={async () => {
                       if (!marketOpen) return;
-                      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
+
                       const { data } = await supabase.auth.getSession();
                       const token = data.session?.access_token;
                       if (!token) return router.replace("/login");
@@ -127,7 +120,6 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                   >
                     {marketOpen ? "Exit" : "Closed"}
                   </button>
-
                 </td>
               </tr>
             );
@@ -135,21 +127,20 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
         </tbody>
       </table>
 
+      {/* NO HOLDINGS */}
       {holdings.length === 0 && (
         <p className="text-center text-text-secondary py-6">
           You have no holdings yet.
         </p>
       )}
 
-      {/* MODAL HERE */}
+      {/* SELL MODAL */}
       {active && (
         <SellModal
           mode="sell"
           symbol={active.symbol}
           holdingQty={active.holdingQty}
-          // Assuming profile?.balance is the cash balance used here. 
-          // You might need to adjust the prop name if SellModal expects the current price of the stock.
-          balance={profile?.balance} 
+          balance={profile?.balance ?? 0}
           onClose={() => setActive(null)}
           onSuccess={onSuccess}
         />

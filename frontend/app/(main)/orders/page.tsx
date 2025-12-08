@@ -1,6 +1,6 @@
 "use client";
 
-import AuthGuard from "../hooks/authGaurd";
+import AuthGuard from "../../../hooks/authGaurd";
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
@@ -13,19 +13,19 @@ function TransactionsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [filter, setFilter] = useState<OrderFilterValue>("ALL"); // 👈 NEW
-  const limit = 10;
-  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
+  const [filter, setFilter] = useState<OrderFilterValue>("ALL");
 
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
+  const limit = 10;
   const router = useRouter();
 
   const fetchTransactions = useCallback(async () => {
     try {
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
+
       if (!token) return router.push("/login");
 
-      // Construct the query
       const queryParams = new URLSearchParams({
         page: page.toString(),
         limit: limit.toString(),
@@ -39,18 +39,18 @@ function TransactionsPage() {
       );
 
       const json = await res.json();
-      console.log("API response:", json);
 
       setTransactions(json.data || []);
       setTotalPages(json.pagination?.totalPages || 1);
     } catch (err) {
       console.error("Failed to fetch transactions:", err);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter, router]);
 
   useEffect(() => {
     fetchTransactions();
-  }, [fetchTransactions]); // 👈 refetch when page or filter changes
+  }, [fetchTransactions]);
 
   return (
     <div className="mb-10 h-screen max-w-7xl mx-auto px-4">
@@ -60,17 +60,14 @@ function TransactionsPage() {
       {transactions.length === 0 ? (
         <p>No {filter === "ALL" ? "" : filter.toLowerCase()} orders found.</p>
       ) : (
-        
-          <TransactionTable transactions={transactions}  />
-      
-        )}
+        <TransactionTable transactions={transactions} />
+      )}
 
       <Pagination
         page={page}
         totalPages={totalPages}
         onPageChange={(newPage) => setPage(newPage)}
       />
-
     </div>
   );
 }

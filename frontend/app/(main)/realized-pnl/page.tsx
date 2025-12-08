@@ -1,32 +1,53 @@
 "use client";
 
-import AuthGuard from "../hooks/authGaurd";
+import AuthGuard from "../../../hooks/authGaurd";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { RealizedRow } from "@/types";
 
 function RealizedPnLPage() {
   const [rows, setRows] = useState<RealizedRow[]>([]);
-  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL!;
+
+  // Freeze the env var so it's not considered a dependency
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
   useEffect(() => {
+    let mounted = true;
+
     const fetchPnL = async () => {
-      const { data } = await supabase.auth.getSession();
-      const token = data.session?.access_token;
-      const res = await fetch(`${BACKEND_URL}/api/v1/transactions/realized-pnl`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const json = await res.json();
-      setRows(json.realizedPnL || []);
+      try {
+        const { data } = await supabase.auth.getSession();
+        const token = data.session?.access_token;
+
+        if (!token) return;
+
+        const res = await fetch(`${BACKEND_URL}/api/v1/transactions/realized-pnl`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const json = await res.json();
+
+        if (mounted) {
+          setRows(json.realizedPnL || []);
+        }
+      } catch (err) {
+        console.error("Realized PnL fetch error:", err);
+      }
     };
+
     fetchPnL();
+
+    return () => {
+      mounted = false;
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const totalPnL = rows.reduce((sum, r) => sum + (r.realizedPnL), 0);
+  const totalPnL = rows.reduce((sum, r) => sum + r.realizedPnL, 0);
 
   return (
     <div className="p-6 h-screen max-w-7xl mx-auto px-4">
-
       {rows.length === 0 ? (
         <p>No realized trades yet.</p>
       ) : (
@@ -56,6 +77,7 @@ function RealizedPnLPage() {
                 <th className="py-3 text-left">PnL %</th>
               </tr>
             </thead>
+
             <tbody>
               {rows.map((r) => (
                 <tr key={r.symbol} className="border-b border-border hover:bg-bg-elevated transition">
@@ -64,20 +86,17 @@ function RealizedPnLPage() {
                   <td className="py-3">{r.sellQty}</td>
                   <td className="py-3">₹{r.avgBuy}</td>
                   <td className="py-3">₹{r.avgSell}</td>
-                  <td
-                    className={`p-3 font-bold ${(r.realizedPnL) >= 0 ? "text-green-600" : "text-red-600"}`}
-                  >
+                  <td className={`p-3 font-bold ${r.realizedPnL >= 0 ? "text-green-600" : "text-red-600"}`}>
                     ₹{r.realizedPnL}
                   </td>
-                  <td
-                    className={`p-3 font-bold ${(r.pnlPercent) >= 0 ? "text-green-600" : "text-red-600"}`}
-                  >
+                  <td className={`p-3 font-bold ${r.pnlPercent >= 0 ? "text-green-600" : "text-red-600"}`}>
                     {r.pnlPercent}%
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
         </div>
       )}
     </div>
@@ -88,6 +107,6 @@ const ProtectedPnlPage = () => (
   <AuthGuard>
     <RealizedPnLPage />
   </AuthGuard>
-)
+);
 
 export default ProtectedPnlPage;

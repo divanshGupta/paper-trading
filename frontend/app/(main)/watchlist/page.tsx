@@ -1,9 +1,9 @@
 "use client";
 
 import { useApp } from "@/components/providers/AppProvider";
-import useEnrichedStocks from "../hooks/useEnrichedStocks";
+import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
 import StocksList from "@/components/stocks/StocksList";
-import { useLivePrices } from "../hooks/useLivePrices";
+import { useLivePrices } from "../../../hooks/useLivePrices";
 import { getMarketStatusIST } from "@/utils/marketTime";
 
 export default function WatchlistPage() {

@@ -7,10 +7,11 @@ import {
   useEffect,
   useState,
   ReactNode,
+  useMemo,
 } from "react";
 
 import { supabase } from "@/utils/supabaseClient";
-import { socket } from "@/utils/socket";
+import { socket } from "@/lib/socket";
 import { toast } from "sonner";
 
 import type {
@@ -26,9 +27,9 @@ interface TradeError {
   message?: string;
 }
 
-/* ----------------------------------------
+/* -------------------------------------------------------
    Typed Fetch Wrapper
----------------------------------------- */
+------------------------------------------------------- */
 async function apiFetch<T>(
   url: string,
   token?: string,
@@ -47,9 +48,9 @@ async function apiFetch<T>(
   return { ok: res.ok, status: res.status, json };
 }
 
-/* ----------------------------------------
+/* -------------------------------------------------------
    Context Types
----------------------------------------- */
+------------------------------------------------------- */
 interface AppContextValue {
   state: AppState;
   refresh: () => Promise<void>;
@@ -68,9 +69,9 @@ interface AppContextValue {
 
 const AppContext = createContext<AppContextValue | null>(null);
 
-/* ----------------------------------------
-   Provider
----------------------------------------- */
+/* -------------------------------------------------------
+   PROVIDER
+------------------------------------------------------- */
 export function AppProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AppState>({
     profile: null,
@@ -84,42 +85,58 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [tradingSymbol, setTradingSymbol] = useState<string | null>(null);
   const [errorSymbol] = useState<string | null>(null);
 
-  // Ensure we do not call refresh until Supabase has restored session from storage
+  /* -------------------------------------------------------
+     CRITICAL: We must wait BOTH:
+     1. supabase session restored
+     2. socket fully authenticated & ready
+  ------------------------------------------------------- */
   const [sessionReady, setSessionReady] = useState(false);
+  const [socketReady, setSocketReady] = useState(false);
 
-  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
+  /* expose these to children once fully ready */
+  const fullyReady = sessionReady && socketReady;
 
-  /* ----------------------------------------
-     Step 1: Hydrate Supabase session FIRST
-     - This prevents refresh() running with a null token on hard reload.
-  ---------------------------------------- */
+  const BACKEND_URL = useMemo(
+    () => process.env.NEXT_PUBLIC_API_URL ?? "",
+    []
+  );
+
+  /* -------------------------------------------------------
+     Step 1 — Restore supabase session FIRST
+  ------------------------------------------------------- */
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      try {
-        await supabase.auth.getSession(); // ensures session is read from storage
-      } catch (e) {
-        // ignore - we'll still mark ready so app functions
-      } finally {
-        if (mounted) setSessionReady(true);
-      }
-    })();
+    supabase.auth.getSession().finally(() => setSessionReady(true));
+  }, []);
+
+  /* -------------------------------------------------------
+     Detect socket readiness ONCE (no loops)
+  ------------------------------------------------------- */
+  useEffect(() => {
+    const markReady = () => setSocketReady(true);
+    const markDown = () => setSocketReady(false);
+
+    socket.on("connect", markReady);
+    socket.on("disconnect", markDown);
+
+    if (socket.connected) markReady();
+
     return () => {
-      mounted = false;
+      socket.off("connect", markReady);
+      socket.off("disconnect", markDown);
     };
   }, []);
 
-  /* ----------------------------------------
-     Safe Token Getter (stable)
-  ---------------------------------------- */
+  /* -------------------------------------------------------
+     Safe Token Getter
+  ------------------------------------------------------- */
   const getToken = useCallback(async () => {
     const { data } = await supabase.auth.getSession();
     return data.session?.access_token ?? null;
   }, []);
 
-  /* ----------------------------------------
+  /* -------------------------------------------------------
      Fetch Watchlist
-  ---------------------------------------- */
+  ------------------------------------------------------- */
   const fetchWatchlist = useCallback(async () => {
     const token = await getToken();
     if (!token) return setWatchlist([]);
@@ -132,9 +149,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (ok) setWatchlist(json.watchlist ?? []);
   }, [BACKEND_URL, getToken]);
 
-  /* ----------------------------------------
-     Toggle Watchlist (optimistic update)
-  ---------------------------------------- */
+  /* -------------------------------------------------------
+     Toggle Watchlist
+  ------------------------------------------------------- */
   const toggleWatchlist = useCallback(
     async (symbol: string) => {
       const token = await getToken();
@@ -147,16 +164,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
         exists ? prev.filter((s) => s !== symbol) : [...prev, symbol]
       );
 
-      const url = `${BACKEND_URL}/api/v1/watchlist/${exists ? "remove" : "add"}`;
-      const method = exists ? "DELETE" : "POST";
-
-      const { ok } = await apiFetch(url, token, {
-        method,
-        body: JSON.stringify({ symbol }),
-      });
+      const { ok } = await apiFetch(
+        `${BACKEND_URL}/api/v1/watchlist/${exists ? "remove" : "add"}`,
+        token,
+        {
+          method: exists ? "DELETE" : "POST",
+          body: JSON.stringify({ symbol }),
+        }
+      );
 
       if (!ok) {
-        // rollback on failure
+        // rollback
         setWatchlist((prev) =>
           exists ? [...prev, symbol] : prev.filter((s) => s !== symbol)
         );
@@ -166,16 +184,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [watchlist, BACKEND_URL, getToken]
   );
 
-  /* ----------------------------------------
-     Step 2: Main Refresh — only after sessionReady is true
-     - loads profile, holdings and realized PnL in parallel
-  ---------------------------------------- */
+  /* -------------------------------------------------------
+     MAIN REFRESH — ONLY when both ready
+  ------------------------------------------------------- */
   const refresh = useCallback(async () => {
-    if (!sessionReady) return;
+    if (!fullyReady) return;
 
     const token = await getToken();
     if (!token) {
-      // logged out → reset state (do not leave 'loading' true)
       setState({
         profile: null,
         holdings: [],
@@ -187,7 +203,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    // show loading while fetching
     setState((s) => ({ ...s, loading: true }));
 
     try {
@@ -208,99 +223,90 @@ export function AppProvider({ children }: { children: ReactNode }) {
         dayPnl: 0,
       });
     } catch (err) {
-      // on network / parsing errors, don't leave UI in permanent loading
       console.error("refresh error:", err);
       setState((s) => ({ ...s, loading: false }));
-    } finally {
-      // fetch watchlist after main refresh (non-blocking)
-      fetchWatchlist();
     }
-  }, [sessionReady, BACKEND_URL, fetchWatchlist, getToken]);
 
-  /* ----------------------------------------
-     Step 3: Socket portfolio:update
-     - attach listener only when sessionReady
-     - TS-safe no-op cleanup when not ready
-  ---------------------------------------- */
-  const handlePortfolioUpdate = useCallback((payload: PortfolioUpdatePayload) => {
-    setState((prev) => {
-      const newProfile = prev.profile
-        ? { ...prev.profile, balance: payload.balance ?? prev.profile.balance }
-        : null;
+    fetchWatchlist();
+  }, [fullyReady, BACKEND_URL, fetchWatchlist, getToken]);
 
-      return {
+  /* -------------------------------------------------------
+     portfolio:update listener
+  ------------------------------------------------------- */
+  const handlePortfolioUpdate = useCallback(
+    (payload: PortfolioUpdatePayload) => {
+      setState((prev) => ({
         ...prev,
-        profile: newProfile,
+        profile: prev.profile
+          ? {
+              ...prev.profile,
+              balance: payload.balance ?? prev.profile.balance,
+            }
+          : null,
         holdings: payload.holdings ?? prev.holdings,
-      };
-    });
-  }, []);
+      }));
+    },
+    []
+  );
 
+  /* attach update listener only when fully ready */
   useEffect(() => {
-    if (!sessionReady) return () => {};
+  if (!sessionReady) return; // <-- do NOT return a cleanup here
 
-    const listener = (payload: PortfolioUpdatePayload) => handlePortfolioUpdate(payload);
+  const listener = (payload: PortfolioUpdatePayload) =>
+    handlePortfolioUpdate(payload);
 
-    socket.on("portfolio:update", listener);
-    return () => {
-      socket.off("portfolio:update", listener);
-    };
-  }, [sessionReady, handlePortfolioUpdate]);
+  socket.on("portfolio:update", listener);
 
-  /* ----------------------------------------
-     Step 4: Socket connect → refresh
-     - When socket reconnects, refresh state (only if sessionReady)
-  ---------------------------------------- */
+  return () => {
+    socket.off("portfolio:update", listener);
+  };
+}, [sessionReady, handlePortfolioUpdate]);
+
+
+  /* -------------------------------------------------------
+     Socket reconnect → refresh ONLY once
+  ------------------------------------------------------- */
   const handleConnect = useCallback(() => {
-    if (sessionReady) refresh();
-  }, [sessionReady, refresh]);
+  if (!sessionReady) return;
+  refresh(); // refresh app state when socket reconnects
+}, [sessionReady, refresh]);
 
+useEffect(() => {
+  if (!sessionReady) return;
+
+  const listener = () => handleConnect();
+
+  socket.on("connect", listener);
+
+  return () => {
+    socket.off("connect", listener);
+  };
+}, [sessionReady, handleConnect]);
+
+
+  /* -------------------------------------------------------
+     Auth change → refresh
+  ------------------------------------------------------- */
   useEffect(() => {
-    if (!sessionReady) return () => {};
+    if (!sessionReady) return;
 
-    const listener = () => handleConnect();
-    socket.on("connect", listener);
+    const sub = supabase.auth.onAuthStateChange(() => refresh());
 
     return () => {
-      socket.off("connect", listener);
-    };
-  }, [sessionReady, handleConnect]);
-
-  /* ----------------------------------------
-     Step 5: Initial Load + Auth Change
-     - run refresh after sessionReady is true
-     - subscribe to auth changes and refresh accordingly
-     - unsubscribe defensively (supports different supabase return shapes)
-  ---------------------------------------- */
-  useEffect(() => {
-    if (sessionReady) refresh();
-
-    const sub = supabase.auth.onAuthStateChange(() => {
-      // when auth changes (login/logout), re-run refresh
-      refresh();
-    });
-
-    return () => {
-      try {
-        // supabase v2: sub.data.subscription.unsubscribe()
-        // older shapes: if sub is a function, call it
-        // we handle both shapes defensively
-        // @ts-ignore
-        if (sub?.data?.subscription?.unsubscribe) sub.data.subscription.unsubscribe();
-        // @ts-ignore
-        else if (typeof sub === "function") sub();
-      } catch (e) {
-        // ignore cleanup errors
-      }
+      sub?.data?.subscription?.unsubscribe?.();
     };
   }, [sessionReady, refresh]);
 
-  /* ----------------------------------------
-     Trading helpers (buy/sell)
-     - uses the same apiFetch helper
-  ---------------------------------------- */
+  /* -------------------------------------------------------
+     Trading
+  ------------------------------------------------------- */
   const tradeStock = useCallback(
-    async (symbol: string, price: number, action: "buy" | "sell") => {
+    async (
+    symbol: string,
+    price: number,
+    action: "buy" | "sell"
+  ): Promise<boolean> => {
       const token = await getToken();
       if (!token) {
         toast.error("Please log in to trade");
@@ -310,25 +316,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setTradingSymbol(symbol);
 
       try {
-        const url = `${BACKEND_URL}/api/v1/trade/${action}`;
-        const { ok, json } = await apiFetch<TradeError>(url, token, {
-          method: "POST",
-          body: JSON.stringify({ symbol, price, quantity: 1 }),
-        });
+        const { ok, json } = await apiFetch<TradeError>(
+          `${BACKEND_URL}/api/v1/trade/${action}`,
+          token,
+          {
+            method: "POST",
+            body: JSON.stringify({ symbol, price, quantity: 1 }),
+          }
+        );
 
         if (!ok) {
           toast.error(json.message ?? "Trade failed");
           return false;
         }
 
-        // small delay to allow backend to persist then refresh
-        setTimeout(() => refresh(), 220);
-
+        setTimeout(() => refresh(), 200);
         toast.success(action === "buy" ? "Bought" : "Sold");
 
         return true;
       } catch (err) {
-        console.error("tradeStock error:", err);
         toast.error("Network Error");
         return false;
       } finally {
@@ -348,9 +354,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     [tradeStock]
   );
 
-  /* ----------------------------------------
-     Provider Value
-  ---------------------------------------- */
+  /* -------------------------------------------------------
+     PROVIDER VALUE
+  ------------------------------------------------------- */
   const value: AppContextValue = {
     state,
     refresh,
@@ -366,9 +372,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
-/* ----------------------------------------
-   Hook
----------------------------------------- */
 export const useApp = () => {
   const ctx = useContext(AppContext);
   if (!ctx) throw new Error("useApp must be inside <AppProvider>");

@@ -1,12 +1,14 @@
+// frontend/hooks/useEnrichedStocks.tsx
 "use client";
 
 import { useMemo } from "react";
-import { useLivePrices } from "./useLivePrices";
+// import { useLivePrices } from "./useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import { EnrichedPrice, Holding, Price } from "@/types";
+import { usePriceFeed } from "@/components/providers/PriceFeedProvider";
 
 export default function useEnrichedStocks() {
-  const { prices, flash } = useLivePrices();
+  const { prices, flash } = usePriceFeed();
   const { state } = useApp();
   const { holdings } = state;
 

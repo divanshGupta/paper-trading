@@ -7,7 +7,7 @@ import { Menu, X, Bell } from 'lucide-react';
 import ProfileDropDown from './ProfileDropDown';
 import ThemeToggle from '../ui/ThemeToggle';
 import StockSearch from '../stocks/StockSearch';
-import { useLivePrices } from '@/app/(main)/hooks/useLivePrices';
+import { useLivePrices } from '@/hooks/useLivePrices';
 
 export default function Navbar() {
   const [search, setSearch] = useState("");

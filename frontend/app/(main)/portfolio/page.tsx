@@ -1,8 +1,8 @@
 "use client";
 
-import AuthGuard from "../hooks/authGaurd";
+import AuthGuard from "../../../hooks/authGaurd";
 import { useMemo } from "react";
-import { useLivePrices } from "../hooks/useLivePrices";
+import { useLivePrices } from "../../../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import PortfolioSummary from "@/components/portfolio/PortfolioSummary";
 import PortfolioInsights from "@/components/portfolio/PortfolioInsights";
@@ -12,19 +12,10 @@ import { EnrichedHolding, Holding } from "@/types";
 
 function PortfolioPage() {
   const { state, refresh } = useApp();
-  const { profile, holdings = [], loading, realizedToday } = state;
+  const { profile, holdings = [], realizedToday } = state;
   const { bySymbol, flash } = useLivePrices();
 
-  // WAIT for real data
   const isDataReady = profile && holdings.length > 0;
-
-  if (!isDataReady) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 pb-20">
-        <TableSkeleton rows={8} cols={6} />
-      </div>
-    );
-  }
 
   const enrichedHoldings: EnrichedHolding[] = useMemo(() => {
     return holdings.map((h: Holding): EnrichedHolding => {
@@ -54,12 +45,19 @@ function PortfolioPage() {
     const dayPnl = enrichedHoldings.reduce((acc, h) => {
       const live = bySymbol(h.symbol);
       if (!live) return acc;
-      const diff = live.price - live.previousClose;
-      return acc + diff * h.quantity;
+      return acc + (live.price - live.previousClose) * h.quantity;
     }, 0);
 
     return { invested, current, unrealized, roi, dayPnl };
   }, [enrichedHoldings, bySymbol]);
+
+  if (!isDataReady) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 pb-20">
+        <TableSkeleton rows={8} cols={6} />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 pb-20">

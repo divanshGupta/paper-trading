@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
+import { useLivePrices } from "@/hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import BuySellPanel from "@/components/trade/BuySellPanel";

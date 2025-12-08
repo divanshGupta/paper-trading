@@ -3,7 +3,7 @@
 import Link from "next/link";
 import StockCard from "./StockCard";
 import { StockCardSkeleton } from "../skeletons/StockCardSkeleton";
-import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
+import { useLivePrices } from "@/hooks/useLivePrices";
 
 export default function StockGrid() {
   const { prices, bySymbol, flash } = useLivePrices();

@@ -1,6 +1,12 @@
+// frontend/app/layout.tsx
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import SocketProvider from "@/components/providers/SocketProvider";
+import { BalanceProvider } from "@/components/providers/BalanceProvider";
+import { AppProvider } from "@/components/providers/AppProvider";
+import ToastProvider from "@/components/providers/ToastProvider";
 import "./globals.css";
+import { PriceFeedProvider } from "@/components/providers/PriceFeedProvider";
 
 export const metadata: Metadata = {
   title: "SimTrading - Trading Simulator",
@@ -23,7 +29,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SocketProvider>
+            <PriceFeedProvider>
+              <AppProvider>
+                <BalanceProvider>
+                  <ToastProvider />
+                  {children}
+                </BalanceProvider>
+              </AppProvider>
+            </PriceFeedProvider>
+          </SocketProvider>
         </ThemeProvider>
       </body>
     </html>

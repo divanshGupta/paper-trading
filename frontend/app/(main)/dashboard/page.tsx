@@ -1,8 +1,8 @@
 "use client";
 
-import useEnrichedStocks from "../hooks/useEnrichedStocks";
+import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
 import { useState, useMemo, useEffect } from "react";
-import { useLivePrices } from "../hooks/useLivePrices";
+import { useLivePrices } from "../../../hooks/useLivePrices";
 import { useApp } from "@/components/providers/AppProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import Link from "next/link";
@@ -16,34 +16,33 @@ export default function Dashboard() {
   const enriched = useEnrichedStocks();
   const { bySymbol, flash, loading } = useLivePrices();
   const [filter, setFilter] = useState<StockFilterValue>("all");
-
   const { state, buyStock, sellStock, tradingSymbol } = useApp();
   const { profile, holdings, realizedToday } = state;
-
-  // Market open state must only run on the client
   const [marketOpen, setMarketOpen] = useState(false);
+
   useEffect(() => {
     setMarketOpen(getMarketStatusIST().marketOpen);
   }, []);
 
-  // Portfolio Value
-  const totalValue = holdings.reduce((acc: number, h: Holding) => {
-    const p = bySymbol(h.symbol)?.price ?? 0;
-    return acc + p * h.quantity;
-  }, 0);
+  // Portfolio Value memoized
+  const totalValue = useMemo(() => {
+    return holdings.reduce((acc: number, h: Holding) => {
+      const live = bySymbol(h.symbol);
+      return acc + (live?.price ?? 0) * h.quantity;
+    }, 0);
+  }, [holdings, bySymbol]);
 
   // Unrealized P&L
   const unrealizedPnL = useMemo(() => {
     return holdings.reduce((acc: number, h: Holding) => {
-      const p = bySymbol(h.symbol);
-      if (!p) return acc;
-      return acc + (p.price - p.previousClose) * h.quantity;
+      const live = bySymbol(h.symbol);
+      if (!live) return acc;
+      return acc + (live.price - live.previousClose) * h.quantity;
     }, 0);
   }, [holdings, bySymbol]);
 
   const dayPnl = unrealizedPnL + (realizedToday ?? 0);
 
-  // Dashboard stocks
   const dashboardStocks = useMemo(() => {
     switch (filter) {
       case "gainers":
@@ -66,7 +65,8 @@ export default function Dashboard() {
   return (
     <div className="bg-bg-main text-text min-h-screen">
       <div className="max-w-7xl mx-auto flex gap-6 px-4">
-        {/* LEFT */}
+
+        {/* MAIN LEFT */}
         <div className="flex-1">
           <StockGrid />
 
@@ -94,7 +94,7 @@ export default function Dashboard() {
           </Link>
         </div>
 
-        {/* RIGHT SIDEBAR */}
+        {/* SIDEBAR */}
         <aside className="w-[340px] hidden lg:block">
           <Sidebar
             balance={profile?.balance ?? 0}

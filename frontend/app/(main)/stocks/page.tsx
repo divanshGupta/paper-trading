@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import useEnrichedStocks from "../hooks/useEnrichedStocks";
+import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import { useApp } from "@/components/providers/AppProvider";
 import StocksList from "@/components/stocks/StocksList";
@@ -11,7 +11,7 @@ import StockSorter from "@/components/stocks/StockSorter";
 import StockSearch from "@/components/stocks/StockSearch";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
 import type { SectorFilter, SortKey } from "@/types";
-import { useLivePrices } from "../hooks/useLivePrices";
+import { useLivePrices } from "../../../hooks/useLivePrices";
 
 export default function AllStocksPage() {
   const { loading } = useLivePrices();

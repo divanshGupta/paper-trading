@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { toast } from "sonner";
-import { useLivePrices } from "@/app/(main)/hooks/useLivePrices";
+import { useLivePrices } from "@/hooks/useLivePrices";
 import { TradeModalProps } from "@/types";
 
 export default function TradeModal({
