@@ -1,4 +1,3 @@
-// app.js (refactored for production)
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";

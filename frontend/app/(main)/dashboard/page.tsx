@@ -64,7 +64,7 @@ export default function Dashboard() {
   }, [enriched, filter]);
 
   return (
-    <div className="pt-6 md:pt-10 bg-bg-main text-text min-h-screen">
+    <div className="bg-bg-main text-text min-h-screen">
       <div className="max-w-7xl mx-auto flex gap-6 px-4">
         {/* LEFT */}
         <div className="flex-1">

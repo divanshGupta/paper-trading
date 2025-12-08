@@ -53,7 +53,7 @@ function TransactionsPage() {
   }, [fetchTransactions]); // 👈 refetch when page or filter changes
 
   return (
-    <div className="p-8 pt-10 mb-10 h-screen max-w-7xl mx-auto">
+    <div className="mb-10 h-screen max-w-7xl mx-auto px-4">
 
       <OrdersFilter filter={filter} setFilter={setFilter} setPage={setPage} />
 

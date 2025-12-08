@@ -1,11 +1,11 @@
-// websocket/stockTicker.js
+// backend/src/websocket/stockTicker.js
 import { startPriceEngine, getSnapshot } from "../services/priceEngine.js";
 
 let engineStarted = false;
 
 export function registerStockHandlers(io, socket) {
   // -------------------------
-  // ⭐ START PRICE ENGINE ONCE
+  // ⭐ Start Engine Once
   // -------------------------
   if (!engineStarted) {
     startPriceEngine(io);
@@ -14,18 +14,22 @@ export function registerStockHandlers(io, socket) {
   }
 
   // -------------------------
-  // ⭐ SEND INITIAL SNAPSHOT
+  // ⭐ Client-controlled subscription
+  // Frontend ALWAYS calls socket.emit("price:subscribe")
+  // after attaching listeners — guaranteed no missed snapshot
   // -------------------------
-  socket.emit("price:snapshot", getSnapshot());
+  socket.on("price:subscribe", () => {
+    console.log("📡 Sending fresh snapshot to", socket.id);
+    socket.emit("price:snapshot", getSnapshot());
+  });
 
   // -------------------------
-  // ⭐ OPTIONAL RESUBSCRIBE
+  // ⭐ Optional re-subscribe (manual refresh)
   // -------------------------
   socket.on("price:resubscribe", () => {
     socket.emit("price:snapshot", getSnapshot());
   });
 }
-
 
 // 1. startPriceEngine runs ONCE globally
 // No more:

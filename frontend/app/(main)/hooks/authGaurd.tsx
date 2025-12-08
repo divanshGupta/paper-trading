@@ -1,33 +1,34 @@
 "use client";
 
-import { useApp } from '@/components/providers/AppProvider';
-import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { useApp } from "@/components/providers/AppProvider";
+import { useRouter } from "next/navigation";
+import { ReactNode, useEffect } from "react";
 
-interface AuthGuardProps {
-  children: ReactNode;
-}
-
-const AuthGuard = ({ children }: AuthGuardProps) => {
-
+export default function AuthGuard({ children }: { children: ReactNode }) {
   const { state } = useApp();
   const { profile, loading } = state;
   const router = useRouter();
 
-  useEffect(() => {
-    // Only redirect once loading is false and there is no profile
-    if (!loading && !profile) {
-      router.push('/login');
-    }
-  }, [loading, profile, router]);
+  const isRedirecting = !loading && !profile;
 
-  // While loading, or if the redirect is about to happen, show a loading indicator
-  if (loading || (!profile && !loading)) {
-    return <div className='w-screen h-screen flex items-center justify-center'></div>;
+  useEffect(() => {
+    if (isRedirecting) {
+      router.replace("/login"); // use replace to prevent going back
+    }
+  }, [isRedirecting, router]);
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
 
-  // If the user is authenticated (profile exists), render the children
-  return <>{children}</>;
-};
+  // Don't render anything while redirecting (avoids "stuck" blank page)
+  if (isRedirecting) {
+    return null;
+  }
 
-export default AuthGuard;
+  return <>{children}</>;
+}

@@ -358,12 +358,14 @@ export function startPriceEngine(io) {
   }
 
   ioEmitter = io;
+  
   // Start periodic persistence
   startPeriodicSave();
 
   // Immediately broadcast current snapshot (loaded from disk or defaults)
   try {
-    io.emit("price:snapshot", PRICES);
+    // ❌ Removed initial broadcast — frontend controls when to request snapshots.
+    // io.emit("price:snapshot", PRICES);
   } catch (err) {
     logger.warn(nowISO(), "Failed to emit initial snapshot:", err);
   }

@@ -73,7 +73,7 @@ export default function StockInfoPage() {
   }
 
   return (
-    <div className="pt-4 md:pt-10 max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-6 mb-8 px-3 sm:px-4">
+    <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-6 mb-8 px-3 sm:px-4">
 
       {/* LEFT AREA */}
       <div className="flex-1">

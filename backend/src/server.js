@@ -2,7 +2,6 @@
 import http from 'http';
 import { app } from './app.js';
 import { initSocket } from './config/socket.js';
-import { PORT } from './config/env.js';
 import logger from './utils/logger.js';
 
 // Create HTTP server
@@ -10,6 +9,8 @@ const server = http.createServer(app);
 
 // Initialize Socket.IO
 initSocket(server);
+
+const PORT = process.env.PORT || 8080;
 
 // Listen
 server.listen(PORT, () => {

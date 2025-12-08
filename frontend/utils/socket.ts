@@ -1,17 +1,18 @@
 // src/utils/socket.ts
 import { io, Socket } from "socket.io-client";
 
-const URL = process.env.NEXT_PUBLIC_SOCKET_URL;
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || "";
 
-export const socket: Socket = io(URL, {
+export const socket: Socket = io(SOCKET_URL, {
+  path: "/socket.io",
   transports: ["websocket"],
   autoConnect: false,
-  reconnection: true,
-  reconnectionAttempts: Infinity,
-  reconnectionDelayMax: 5000,
+  withCredentials: true,
+  // keep reconnection defaults; no infinite spam in UI
 });
 
-// expose in browser only (for debugging)
+// expose for debugging (dev only)
 if (typeof window !== "undefined") {
-  window.socket = socket; // << fully typed, no "any"
+  // @ts-ignore
+  window.socket = socket;
 }

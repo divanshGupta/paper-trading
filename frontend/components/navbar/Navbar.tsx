@@ -37,8 +37,8 @@ export default function Navbar() {
   }, []);
 
  return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-bg-elevated backdrop-blur-md border-b border-border shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-border shadow-xs">
+      <div className="max-w-7xl mx-auto px-4 py-3 md:py-5 flex items-center justify-between">
         
         {/* Left side */}
         <div className="flex items-center gap-10">
@@ -46,7 +46,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/dashboard" className="flex items-center gap-2 ">
             <div className="w-7 h-7 rounded-full bg-brand" />
-            <span className="font-semibold text-xl">TradeSim</span>
+            <span className="font-semibold text-xl">SimTrading</span>
           </Link>
 
           {/* Desktop nav */}
@@ -57,8 +57,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-md font-medium transition-colors pb-1 ${
                   pathname === link.href
-                    ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-500"
-                    : "text-gray-600 hover:text-teal-600 dark:text-gray-300 dark:hover:text-white"
+                    ? "text-teal-600 border-b-2 border-teal-500"
+                    : "text-gray-600 hover:text-teal-600"
                 }`}
               >
                 {link.label}
@@ -81,7 +81,7 @@ export default function Navbar() {
           {/* Notifications */}
           <button className="hidden md:block p-2 rounded-full hover:bg-bg-surface transition relative">
             <Bell size={20} />
-            <span className="absolute -top-1 -right-1 bg-red-500 text-text text-xs rounded-full px-[5px] py-[1px]">
+            <span className="absolute -top-1 -right-1 bg-negative text-text text-xs rounded-full px-[5px] py-[1px]">
               5
             </span>
           </button>
@@ -104,7 +104,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div ref={menuRef} className="md:hidden border-t bg-bg-main px-4 py-3">
+        <div ref={menuRef} className="md:hidden border-t border-border bg-bg-main px-4 py-3">
           {navLinks.map((link) => (
             <Link
               key={link.href}

@@ -62,7 +62,7 @@ export default function AllStocksPage() {
   }, [filtered, sortKey]);
 
   return (
-    <div className="pt-10 max-w-7xl mx-auto px-4 mb-4">
+    <div className="max-w-7xl mx-auto px-4 mb-4">
       <h1 className="text-2xl font-semibold mb-6">All Stocks</h1>
 
       <div className="flex justify-between items-center flex-wrap gap-4 mb-6">

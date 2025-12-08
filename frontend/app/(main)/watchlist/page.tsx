@@ -24,10 +24,10 @@ export default function WatchlistPage() {
   if(!filtered) return <p>No stocks in the watchlist</p>
 
   return (
-    <div className="pt-10 md:pt-20 max-w-7xl mx-auto min-h-screen px-4">
+    <div className="max-w-7xl mx-auto min-h-screen px-4">
       <h1 className="text-2xl font-semibold mb-6">My Watchlist</h1>
         {filtered.length === 0 ? (
-          <p className="text-gray-400">Nothing in your watchlist yet.</p>
+          <p className="text-text-secondary">Nothing in your watchlist yet.</p>
         ) : (
           <StocksList
             prices={filtered}

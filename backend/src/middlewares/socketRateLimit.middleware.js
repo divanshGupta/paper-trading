@@ -1,79 +1,80 @@
+// src/middlewares/socketRateLimit.middleware.js
 import logger from "../utils/logger.js";
 
-const MESSAGE_LIMIT = 10;       // max messages in 1 second
-const RECONNECT_LIMIT = 10;     // max reconnect attempts in 1 minute
-const BAN_TIME = 60 * 1000;     // ban user for 60 seconds
+// Limits and buckets (tune to your usage)
+const MESSAGE_LIMIT = 20; // max user messages per second (user actions)
+const BUCKET_WINDOW_MS = 1000; // reset window
 
-// Track message frequency per user
+// In-memory stores (fine for single-instance or small scale; use redis for multiple instances)
 const messageBuckets = new Map();
 
-// Track reconnect attempts
-const reconnectTracker = new Map();
+// Events that we consider "user actions" and should be rate-limited.
+// Add your domain-specific event names here.
+const USER_EVENTS = new Set([
+  "buy",
+  "sell",
+  "place_order",
+  "cancel_order",
+  "update_profile",
+  "add_watch",
+  "remove_watch",
+  // add any other user-initiated events
+]);
 
-// Track banned users
-const bannedUsers = new Map();
-
+/**
+ * socketRateLimiter - called during connection to attach a lightweight key
+ * This should not ban reconnects; simply set a key for message tracking.
+ */
 export const socketRateLimiter = (socket, next) => {
   const userId = socket?.user?.id;
   const ip = socket.handshake.address;
-  const key = userId || ip;
+  const key = userId || ip || socket.id;
 
-  // 🚫 Check ban
-  const bannedUntil = bannedUsers.get(key);
-  if (bannedUntil && Date.now() < bannedUntil) {
-    logger.warn(`🚫 Socket blocked due to ban: ${key}`);
-    return next(new Error("Too many requests. Try again later."));
-  }
+  // attach key for later use
+  socket._rateKey = key;
 
-  // Track reconnect attempts
-  const now = Date.now();
-  const reconnectData = reconnectTracker.get(key) || { count: 0, last: now };
-
-  if (now - reconnectData.last < 60 * 1000) {
-    reconnectData.count++;
-  } else {
-    reconnectData.count = 1;
-  }
-
-  reconnectData.last = now;
-  reconnectTracker.set(key, reconnectData);
-
-  if (reconnectData.count > RECONNECT_LIMIT) {
-    bannedUsers.set(key, now + BAN_TIME);
-    logger.warn(`⛔ Reconnect flood detected. User banned: ${key}`);
-    return next(new Error("Reconnect spam detected."));
-  }
-
-  // Initialize message bucket
+  // ensure a bucket exists
   if (!messageBuckets.has(key)) {
-    messageBuckets.set(key, {
-      count: 0,
-      lastReset: now,
-    });
+    messageBuckets.set(key, { count: 0, lastReset: Date.now() });
   }
 
-  socket._rateKey = key; // Store for message handler
+  // Allow connection to continue (do not ban on connect)
   return next();
 };
 
-export const socketMessageLimiter = (socket) => {
-    console.log("Limiter triggered for socket:", socket._rateKey); // ← TEST LOG
-  const key = socket._rateKey;
-  const bucket = messageBuckets.get(key);
-  const now = Date.now();
+/**
+ * socketMessageLimiter - called per event
+ * Only rate-limits events classified as USER_EVENTS. Ignores system events.
+ */
+export const socketMessageLimiter = (socket, eventName) => {
+  try {
+    // ignore internal engine/socket events
+    if (!eventName || !USER_EVENTS.has(eventName)) return;
 
-  // reset bucket every second
-  if (now - bucket.lastReset > 1000) {
-    bucket.count = 0;
-    bucket.lastReset = now;
-  }
+    const key = socket._rateKey || socket.id;
+    let bucket = messageBuckets.get(key);
 
-  bucket.count++;
+    const now = Date.now();
+    if (!bucket) {
+      bucket = { count: 0, lastReset: now };
+      messageBuckets.set(key, bucket);
+    }
 
-  if (bucket.count > MESSAGE_LIMIT) {
-    logger.warn(`⚠️ Spam detected: ${key} sent too many socket messages.`);
-    socket.emit("rate-limit", { message: "You're sending too many messages." });
+    // reset window
+    if (now - bucket.lastReset > BUCKET_WINDOW_MS) {
+      bucket.count = 0;
+      bucket.lastReset = now;
+    }
+
+    bucket.count += 1;
+
+    if (bucket.count > MESSAGE_LIMIT) {
+      logger.warn(`⚠️ Rate limit: ${key} sent ${bucket.count} '${eventName}' events in ${BUCKET_WINDOW_MS}ms`);
+      // Inform the client politely but do NOT disconnect (avoids silent failures)
+      socket.emit("rate-limit", { message: "Too many actions. Slow down a bit." });
+    }
+  } catch (err) {
+    // never throw from limiter
+    logger.error("socketMessageLimiter error:", err);
   }
 };
-
-

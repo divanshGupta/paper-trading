@@ -1,6 +1,14 @@
+// src/config/corsConfig.js
 export const allowedOrigins = [
-  'http://localhost:3000',   // Local development
-  'http://frontend:3000',    // Docker internal network
-  'http://127.0.0.1:3000',    // Alternative local access
-    process.env.FRONTEND_URL,    // Vercel frontend URL
-].filter(Boolean); // removes undefined
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "http://frontend:3000",
+
+  // Optional: set via Fly secrets
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL_2,
+
+  // Backend domain (required for some Fly upgrade flows)
+  "https://backend-proud-haze-8547.fly.dev",
+  "http://backend-proud-haze-8547.fly.dev",
+].filter(Boolean);

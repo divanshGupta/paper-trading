@@ -17,7 +17,7 @@ export default function MainLayout({
           <BalanceProvider>
             <ToastProvider />
             <Navbar />
-              <main className="pt-[72px]">
+              <main className="pt-20 md:pt-24">
                 {children}
               </main>
             <Footer />

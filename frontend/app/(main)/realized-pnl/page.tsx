@@ -25,7 +25,7 @@ function RealizedPnLPage() {
   const totalPnL = rows.reduce((sum, r) => sum + (r.realizedPnL), 0);
 
   return (
-    <div className="p-8 pt-10 h-screen max-w-7xl mx-auto">
+    <div className="p-6 h-screen max-w-7xl mx-auto px-4">
 
       {rows.length === 0 ? (
         <p>No realized trades yet.</p>

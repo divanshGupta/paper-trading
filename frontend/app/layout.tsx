@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tradesim - Trading Simulator",
+  title: "SimTrading - Trading Simulator",
   description: "Practice intraday & delivery trading with live market data",
   keywords: ["Trade", "Paper Trading", "Trading Simulator", "Trading Learning", "Stock Trading", "Stock Game", "Stock Market Learning"],
   authors: [{name: "Divyansh Gupta"}],

@@ -8,15 +8,24 @@ import PortfolioSummary from "@/components/portfolio/PortfolioSummary";
 import PortfolioInsights from "@/components/portfolio/PortfolioInsights";
 import HoldingsTable from "@/components/portfolio/HoldingsTable";
 import TableSkeleton from "@/components/skeletons/TableSkeleton";
-import { EnrichedHolding, Holding} from "@/types";
+import { EnrichedHolding, Holding } from "@/types";
 
 function PortfolioPage() {
-
   const { state, refresh } = useApp();
   const { profile, holdings = [], loading, realizedToday } = state;
   const { bySymbol, flash } = useLivePrices();
 
-  // SUMMARIES
+  // WAIT for real data
+  const isDataReady = profile && holdings.length > 0;
+
+  if (!isDataReady) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 pb-20">
+        <TableSkeleton rows={8} cols={6} />
+      </div>
+    );
+  }
+
   const enrichedHoldings: EnrichedHolding[] = useMemo(() => {
     return holdings.map((h: Holding): EnrichedHolding => {
       const live = bySymbol(h.symbol);
@@ -36,37 +45,24 @@ function PortfolioPage() {
     });
   }, [holdings, bySymbol, flash]);
 
-
   const totals = useMemo(() => {
-    const invested = enrichedHoldings.reduce((acc: number, h: EnrichedHolding) => acc + h.invested, 0);
-    const current = enrichedHoldings.reduce((acc:number, h: EnrichedHolding) => acc + h.value, 0);
+    const invested = enrichedHoldings.reduce((acc, h) => acc + h.invested, 0);
+    const current = enrichedHoldings.reduce((acc, h) => acc + h.value, 0);
     const unrealized = current - invested;
     const roi = invested > 0 ? (unrealized / invested) * 100 : 0;
-    
-    const dayPnl = enrichedHoldings.reduce((acc: number, h: EnrichedHolding) => {
+
+    const dayPnl = enrichedHoldings.reduce((acc, h) => {
       const live = bySymbol(h.symbol);
       if (!live) return acc;
       const diff = live.price - live.previousClose;
       return acc + diff * h.quantity;
     }, 0);
 
-    return {
-      invested,
-      current,
-      unrealized,
-      roi,
-      dayPnl,
-    };
+    return { invested, current, unrealized, roi, dayPnl };
   }, [enrichedHoldings, bySymbol]);
 
-  if (loading) {
-    return <div className="text-center p-10 text-text-secondary">Loading Portfolio…</div>;
-  }
-
   return (
-    <div className="max-w-7xl mx-auto pt-10 px-4 pb-20">
-
-      {/* Summary */}
+    <div className="max-w-7xl mx-auto px-4 pb-20">
       <PortfolioSummary
         balance={profile?.balance ?? 0}
         invested={totals.invested}
@@ -77,33 +73,21 @@ function PortfolioPage() {
         roi={totals.roi}
       />
 
-      {/* Insights */}
       <PortfolioInsights holdings={enrichedHoldings} />
 
-      {/* Holdings Table */}
-      {/* <HoldingsTable
+      <HoldingsTable
         holdings={enrichedHoldings}
         flash={flash}
         onSuccess={refresh}
-      /> */}
-
-      {state.loading ? (
-        <TableSkeleton rows={8} cols={6} />
-      ) : (
-        <HoldingsTable
-          holdings={enrichedHoldings}
-          flash={flash}
-          onSuccess={refresh}
-        />
-      )}
+      />
     </div>
   );
 }
 
 const ProtectedPortfolioPage = () => (
-    <AuthGuard>
-      <PortfolioPage />
-    </AuthGuard>
+  <AuthGuard>
+    <PortfolioPage />
+  </AuthGuard>
 );
 
 export default ProtectedPortfolioPage;

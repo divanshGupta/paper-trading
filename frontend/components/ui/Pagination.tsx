@@ -21,7 +21,7 @@ export default function Pagination({ page, totalPages, onPageChange }: Paginatio
         ← Prev
       </button>
 
-      <span className="text-sm text-gray-700">
+      <span className="text-sm text-gray-600">
         Page <span className="font-semibold">{page}</span> of{" "}
         <span className="font-semibold">{totalPages}</span>
       </span>
