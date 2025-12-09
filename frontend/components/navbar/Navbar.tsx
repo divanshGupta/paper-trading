@@ -8,6 +8,7 @@ import ProfileDropDown from './ProfileDropDown';
 import ThemeToggle from '../ui/ThemeToggle';
 import StockSearch from '../stocks/StockSearch';
 import { useLivePrices } from '@/hooks/useLivePrices';
+import MobileMenu from './MobileMenu';
 
 export default function Navbar() {
   const [search, setSearch] = useState("");
@@ -21,8 +22,9 @@ export default function Navbar() {
     { href: "/stocks", label: "Explore" },
     { href: "/portfolio", label: "Portfolio" },
     { href: "/realized-pnl", label: "Realized P&L" },
-    { href: "/orders", label: "Orders" },
     { href: "/watchlist", label: "Watchlist" },
+    { href: "/orders", label: "Orders" },
+
   ];
 
   // Handle outside click
@@ -37,6 +39,7 @@ export default function Navbar() {
   }, []);
 
  return (
+    <>
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b border-border shadow-xs">
       <div className="max-w-7xl mx-auto px-4 py-3 md:py-5 flex items-center justify-between">
         
@@ -102,25 +105,14 @@ export default function Navbar() {
       {/* we will implement ticker bar when real market data feed arrive */}
       {/* <TickerBar /> */}
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div ref={menuRef} className="md:hidden border-t border-border bg-bg-main px-4 py-3">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className={`block py-2 text-sm ${
-                pathname === link.href
-                  ? "text-teal-600 dark:text-teal-400"
-                  : "text-gray-700 dark:text-gray-300"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      )}
+      
     </nav>
+    {/* Mobile Menu */}
+    {mobileOpen && (
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    )}
+
+    {/* Market Status Banner */}
+    </>
   );
 }

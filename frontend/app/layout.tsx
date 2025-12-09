@@ -1,11 +1,11 @@
 // frontend/app/layout.tsx
+import "./globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import SocketProvider from "@/components/providers/SocketProvider";
 import { BalanceProvider } from "@/components/providers/BalanceProvider";
 import { AppProvider } from "@/components/providers/AppProvider";
 import ToastProvider from "@/components/providers/ToastProvider";
-import "./globals.css";
 import { PriceFeedProvider } from "@/components/providers/PriceFeedProvider";
 
 export const metadata: Metadata = {

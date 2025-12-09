@@ -5,13 +5,30 @@
 @import "./theme.css";
 
 /* optional: smooth transitions */
-html {
+html, body {
   @apply transition-colors duration-300;
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 @keyframes shimmer {
   0% { background-position: -1000px 0; }
   100% { background-position: 1000px 0; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
 }
 
 .skeleton-shimmer {

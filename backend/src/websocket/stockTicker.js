@@ -1,35 +1,66 @@
 // backend/src/websocket/stockTicker.js
 import { startPriceEngine, getSnapshot } from "../services/priceEngine.js";
 
+/**
+ * Ensures market engine starts only once
+ */
 let engineStarted = false;
 
+/**
+ * Track which sockets already subscribed to snapshot
+ * Prevents duplicate snapshot spam caused by FE re-renders / multiple emits
+ */
+const subscribedSockets = new Set();
+
+/**
+ * Register all stock price socket handlers
+ */
 export function registerStockHandlers(io, socket) {
-  // -------------------------
-  // ⭐ Start Engine Once
-  // -------------------------
+  console.log("⚡ Client connected:", socket.id);
+
+  // -----------------------------------------------
+  // ⭐ 1. Start Engine Once Globally
+  // -----------------------------------------------
   if (!engineStarted) {
     startPriceEngine(io);
     engineStarted = true;
-    console.log("📈 Market price engine started.");
+    console.log("📈 Price engine started.");
   }
 
-  // -------------------------
-  // ⭐ Client-controlled subscription
-  // Frontend ALWAYS calls socket.emit("price:subscribe")
-  // after attaching listeners — guaranteed no missed snapshot
-  // -------------------------
+  // -----------------------------------------------
+  // ⭐ 2. Handle Subscription (Prevent Duplicates)
+  // -----------------------------------------------
   socket.on("price:subscribe", () => {
-    console.log("📡 Sending fresh snapshot to", socket.id);
+    // CASE: Already subscribed → DO NOTHING
+    if (subscribedSockets.has(socket.id)) {
+      console.log("⏭  Duplicate subscription ignored:", socket.id);
+      return;
+    }
+
+    // CASE: First time subscription → send snapshot
+    subscribedSockets.add(socket.id);
+
+    console.log("📡 Sending snapshot →", socket.id);
     socket.emit("price:snapshot", getSnapshot());
   });
 
-  // -------------------------
-  // ⭐ Optional re-subscribe (manual refresh)
-  // -------------------------
+  // -----------------------------------------------
+  // ⭐ 3. Manual Re-subscribe (Optional)
+  // -----------------------------------------------
   socket.on("price:resubscribe", () => {
+    console.log("🔄 Manual resubscribe → snapshot sent to", socket.id);
     socket.emit("price:snapshot", getSnapshot());
   });
+
+  // -----------------------------------------------
+  // ⭐ 4. Clean Up When Client Disconnects
+  // -----------------------------------------------
+  socket.on("disconnect", () => {
+    console.log("🔌 Client disconnected:", socket.id);
+    subscribedSockets.delete(socket.id);
+  });
 }
+
 
 // 1. startPriceEngine runs ONCE globally
 // No more:

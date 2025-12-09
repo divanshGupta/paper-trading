@@ -15,7 +15,7 @@ function PortfolioPage() {
   const { profile, holdings = [], realizedToday } = state;
   const { bySymbol, flash } = useLivePrices();
 
-  const isDataReady = profile && holdings.length > 0;
+  const isLoading = state.loading;
 
   const enrichedHoldings: EnrichedHolding[] = useMemo(() => {
     return holdings.map((h: Holding): EnrichedHolding => {
@@ -51,16 +51,29 @@ function PortfolioPage() {
     return { invested, current, unrealized, roi, dayPnl };
   }, [enrichedHoldings, bySymbol]);
 
-  if (!isDataReady) {
+  if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="w-full max-w-7xl mx-auto px-4 pb-20 overflow-x-hidden">
         <TableSkeleton rows={8} cols={6} />
       </div>
     );
   }
 
+  if (!isLoading && holdings.length === 0) {
+    return (
+      <div className="w-full max-w-7xl mx-auto px-4 pb-20 text-center">
+        <p className="text-xl font-semibold mt-6">No stocks in your portfolio</p>
+        <p className="text-text-secondary mt-1">
+          Buy your first stock to see it appear here.
+        </p>
+      </div>
+    );
+  }
+
+
   return (
-    <div className="max-w-7xl mx-auto px-4 pb-20">
+    <div className="w-full max-w-7xl mx-auto px-4 pb-20 overflow-x-hidden">
+
       <PortfolioSummary
         balance={profile?.balance ?? 0}
         invested={totals.invested}
@@ -82,10 +95,10 @@ function PortfolioPage() {
   );
 }
 
-const ProtectedPortfolioPage = () => (
-  <AuthGuard>
-    <PortfolioPage />
-  </AuthGuard>
-);
-
-export default ProtectedPortfolioPage;
+export default function ProtectedPortfolioPage() {
+  return (
+    <AuthGuard>
+      <PortfolioPage />
+    </AuthGuard>
+  );
+}

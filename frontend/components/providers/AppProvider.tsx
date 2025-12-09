@@ -188,47 +188,51 @@ export function AppProvider({ children }: { children: ReactNode }) {
      MAIN REFRESH — ONLY when both ready
   ------------------------------------------------------- */
   const refresh = useCallback(async () => {
-    if (!fullyReady) return;
+  const token = await getToken();
 
-    const token = await getToken();
-    if (!token) {
-      setState({
-        profile: null,
-        holdings: [],
-        loading: false,
-        realizedToday: 0,
-        dayPnl: 0,
-      });
-      setWatchlist([]);
-      return;
-    }
+  // no session → stop loading immediately
+  if (!token) {
+    setState({
+      profile: null,
+      holdings: [],
+      realizedToday: 0,
+      dayPnl: 0,
+      loading: false,
+    });
+    setWatchlist([]);
+    return;
+  }
 
-    setState((s) => ({ ...s, loading: true }));
+  // start loading
+  setState((prev) => ({ ...prev, loading: true }));
 
-    try {
-      const [profileRes, holdingsRes, realizedRes] = await Promise.all([
-        apiFetch<ProfileResponse>(`${BACKEND_URL}/api/v1/users/profile`, token),
-        apiFetch<PortfolioResponse>(`${BACKEND_URL}/api/v1/portfolio`, token),
-        apiFetch<RealizedTodayResponse>(
-          `${BACKEND_URL}/api/v1/transactions/realized-today`,
-          token
-        ),
-      ]);
+  try {
+    const [profileRes, holdingsRes, realizedRes] = await Promise.all([
+      apiFetch<ProfileResponse>(`${BACKEND_URL}/api/v1/users/profile`, token),
+      apiFetch<PortfolioResponse>(`${BACKEND_URL}/api/v1/portfolio`, token),
+      apiFetch<RealizedTodayResponse>(
+        `${BACKEND_URL}/api/v1/transactions/realized-today`,
+        token
+      ),
+    ]);
 
-      setState({
-        profile: profileRes.json.user ?? null,
-        holdings: holdingsRes.json.holdings ?? [],
-        realizedToday: realizedRes.json.realizedToday ?? 0,
-        loading: false,
-        dayPnl: 0,
-      });
-    } catch (err) {
-      console.error("refresh error:", err);
-      setState((s) => ({ ...s, loading: false }));
-    }
+    setState({
+      profile: profileRes.json.user ?? null,
+      holdings: holdingsRes.json.holdings ?? [], // empty array is valid
+      realizedToday: realizedRes.json.realizedToday ?? 0,
+      dayPnl: 0,
+      loading: false, // IMPORTANT FIX
+    });
+  } catch (err) {
+    console.error("Refresh error:", err);
 
-    fetchWatchlist();
-  }, [fullyReady, BACKEND_URL, fetchWatchlist, getToken]);
+    // even on error → stop showing skeleton
+    setState((prev) => ({ ...prev, loading: false }));
+  }
+
+  fetchWatchlist();
+}, [BACKEND_URL, getToken, fetchWatchlist]);
+
 
   /* -------------------------------------------------------
      portfolio:update listener

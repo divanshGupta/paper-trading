@@ -1,34 +1,50 @@
 "use client";
 
-import { useApp } from "@/components/providers/AppProvider";
+import { useEffect, useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
-import { ReactNode, useEffect } from "react";
 
-export default function AuthGuard({ children }: { children: ReactNode }) {
-  const { state } = useApp();
-  const { profile, loading } = state;
+export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-
-  const isRedirecting = !loading && !profile;
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (isRedirecting) {
-      router.replace("/login"); // use replace to prevent going back
+    let mounted = true;
+
+    async function verify() {
+      const { data } = await supabase.auth.getSession();
+      const session = data.session;
+
+      if (!session) {
+        if (mounted) setChecked(false); // reset
+        router.replace("/login");
+        return;
+      }
+
+      if (mounted) setChecked(true);
     }
-  }, [isRedirecting, router]);
 
-  if (loading) {
-    return (
-      <div className="w-screen h-screen flex items-center justify-center">
-        Loading...
-      </div>
+    verify();
+
+    // listen to login/logout events
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        if (!session) {
+          setChecked(false); // mark protected content as unavailable
+          router.replace("/login");
+        } else {
+          setChecked(true);
+        }
+      }
     );
-  }
 
-  // Don't render anything while redirecting (avoids "stuck" blank page)
-  if (isRedirecting) {
-    return null;
-  }
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
+  }, [router]);
+
+  if (!checked) return null; // do not render protected content
 
   return <>{children}</>;
 }

@@ -5,9 +5,10 @@ export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   {
     auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true, // <-- important
+      persistSession: true,          // MUST be TRUE for browser apps
+      autoRefreshToken: true,        // refresh expired tokens silently
+      detectSessionInUrl: true,
+      storage: typeof window !== "undefined" ? localStorage : undefined,
     },
   }
 );

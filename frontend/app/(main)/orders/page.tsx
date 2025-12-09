@@ -5,9 +5,10 @@ import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Transaction, OrderFilterValue } from "@/types";
-import TransactionTable from "@/components/orders/TransactionTable";
-import Pagination from "@/components/ui/Pagination";
+import OrdersCard from "@/components/orders/OrdersCard";
 import OrdersFilter from "@/components/orders/OrdersFilter";
+import Pagination from "@/components/ui/Pagination";
+import TransactionTable from "@/components/orders/TransactionTable";
 
 function TransactionsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -42,10 +43,10 @@ function TransactionsPage() {
 
       setTransactions(json.data || []);
       setTotalPages(json.pagination?.totalPages || 1);
+
     } catch (err) {
       console.error("Failed to fetch transactions:", err);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, filter, router]);
 
   useEffect(() => {
@@ -53,16 +54,33 @@ function TransactionsPage() {
   }, [fetchTransactions]);
 
   return (
-    <div className="mb-10 h-screen max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4 pb-10">
 
+      {/* Filter Bar */}
       <OrdersFilter filter={filter} setFilter={setFilter} setPage={setPage} />
 
+      {/* Empty State */}
       {transactions.length === 0 ? (
-        <p>No {filter === "ALL" ? "" : filter.toLowerCase()} orders found.</p>
+        <p className="text-center text-text-secondary py-10">
+          No {filter === "ALL" ? "" : filter.toLowerCase()} orders found.
+        </p>
       ) : (
-        <TransactionTable transactions={transactions} />
+        <>
+          {/* MOBILE — Cards */}
+          <div className="md:hidden space-y-4 mt-4">
+            {transactions.map((tx) => (
+              <OrdersCard key={String(tx.id)} order={tx} />
+            ))}
+          </div>
+
+          {/* DESKTOP — Table */}
+          <div className="hidden md:block">
+            <TransactionTable transactions={transactions} />
+          </div>
+        </>
       )}
 
+      {/* Pagination */}
       <Pagination
         page={page}
         totalPages={totalPages}
