@@ -214,7 +214,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
       {/* EMPTY STATE */}
       {holdings.length === 0 && (
         <div className="text-center py-10">
-          <p className="text-text-secondary text-lg">You don't have any holdings yet.</p>
+          <p className="text-text-secondary text-lg">You don&apos;t have any holdings yet.</p>
           <p className="text-text-secondary text-sm mt-1">
             Buy a stock to see it appear here.
           </p>

@@ -3,7 +3,7 @@
 
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { socket } from "@/lib/socket";
-import type { Candle, EnrichedPrice, FlashState } from "@/types";
+import type { Candle, EnrichedPrice, FlashState, Price } from "@/types";
 
 /** Types coming from your backend shape */
 export interface SnapshotPrice {
@@ -20,8 +20,11 @@ export interface TickUpdate {
   symbol: string;
   price: number;
   previousClose?: number;
-  [k: string]: unknown;
+
+  // allow partial updates for the rest
+  [key: string]: unknown;
 }
+
 
 /** Provider value type */
 interface PriceFeedContextValue {
@@ -30,6 +33,12 @@ interface PriceFeedContextValue {
   loading: boolean;
   bySymbol: (sym: string) => EnrichedPrice | null;
 }
+
+export interface SnapshotPrice extends Price {
+  // backend may send intraday candles; frontend turns them into sparkline
+  intraday?: Candle[];
+}
+
 
 const PriceContext = createContext<PriceFeedContextValue | null>(null);
 
@@ -68,42 +77,42 @@ export function PriceFeedProvider({ children }: { children: React.ReactNode }) {
     const onSnapshot = (snapshot: SnapshotPrice[]) => {
       // Map backend snapshot into EnrichedPrice (include defaults required by your EnrichedPrice type)
       const enriched = snapshot.map((p) => {
-        const change = (p.price ?? 0) - (p.previousClose ?? 0);
+        const change = p.price - p.previousClose;
         const changePercent = p.previousClose ? (change / p.previousClose) * 100 : 0;
 
-        const sparkline = buildSparkline(p.intraday ?? [], p.price ?? 0);
+        const sparkline = buildSparkline(p.intraday ?? [], p.price);
 
         const base: EnrichedPrice = {
           symbol: p.symbol,
-          name: (p as any).name,
-          price: p.price ?? 0,
-          previousClose: p.previousClose ?? 0,
-          todayOpen: (p as any).todayOpen,
-          high: (p as any).high,
-          low: (p as any).low,
-          volume: (p as any).volume,
-          intraday: [], // drop heavy intraday after building sparkline to save memory
+          name: p.name,
+          price: p.price,
+          previousClose: p.previousClose,
+          todayOpen: p.todayOpen,
+          high: p.high,
+          low: p.low,
+          volume: p.volume,
+          intraday: [], // drop heavy data
           sparkline,
-          sector: p.sector ?? undefined,
-          marketCap: (p as any).marketCap,
-          pe: (p as any).pe,
+          sector: p.sector,
+          marketCap: p.marketCap,
+          pe: p.pe,
 
-          // computed fields
+          // computed
           change,
           changePercent,
 
-          // portfolio defaults (frontend will overwrite these from user state)
+          // portfolio defaults
           holdingQty: 0,
           invested: 0,
           liveValue: 0,
           unrealized: 0,
           isHolding: false,
-
           flash: null,
         };
 
         return base;
       });
+
 
       // set state once
       setPrices(enriched);
