@@ -22,20 +22,20 @@ export default function MobileMenu({
 }) {
 
     // 🔥 Disable scroll when menu is open
-  useEffect(() => {
-    if (open) {
-      // Prevent scrolling
-      document.body.style.overflow = "hidden";
-    } else {
-      // Restore scrolling
-      document.body.style.overflow = "";
-    }
+  // useEffect(() => {
+  //   if (open) {
+  //     // Prevent scrolling
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     // Restore scrolling
+  //     document.body.style.overflow = "";
+  //   }
 
-    // Cleanup when component unmounts
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+  //   // Cleanup when component unmounts
+  //   return () => {
+  //     document.body.style.overflow = "";
+  //   };
+  // }, [open]);
 
   
 
