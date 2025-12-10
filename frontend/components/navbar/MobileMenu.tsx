@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
@@ -8,9 +7,7 @@ import {
   BarChart3,
   List,
   Star,
-  User,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function MobileMenu({
@@ -20,8 +17,7 @@ export default function MobileMenu({
   open: boolean;
   onClose: () => void;
 }) {
-
-    // 🔥 Disable scroll when menu is open
+  // 🔥 Disable scroll when menu is open
   // useEffect(() => {
   //   if (open) {
   //     // Prevent scrolling
@@ -36,9 +32,6 @@ export default function MobileMenu({
   //     document.body.style.overflow = "";
   //   };
   // }, [open]);
-
-  
-
   return (
     <AnimatePresence>
       {open && (
