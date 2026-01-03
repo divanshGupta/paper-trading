@@ -1,9 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 import Link from "next/link";
+
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,6 +16,8 @@ const fadeUp = {
 export const dynamic = "force-static"; // disables HMR for this page
 
 export default function Home() {
+
+  const shouldReduce = useReducedMotion();
 
   const router = useRouter()
 
@@ -40,7 +45,7 @@ export default function Home() {
                   rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 
                   px-6 py-3 flex items-center justify-between"
       >
-        <span className="font-bold text-lg">TradeSim</span>
+        <span className="font-bold text-lg">SimTrading</span>
 
         <div className="hidden md:flex gap-6 text-sm text-[var(--color-text-secondary)]">
           <a href="#">How it works</a>
@@ -57,12 +62,12 @@ export default function Home() {
       </motion.nav>
 
       {/* ================= HERO ================= */}
-      <section className="min-h-screen flex items-center justify-center px-6 pt-28 md:pt-40">
+      <section className="min-h-screen flex items-center justify-center px-6 pt-24">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          transition={{ duration: 0.7 }}
+          transition={shouldReduce ? { duration: 0 } : { duration: 0.7 }}
           className="max-w-5xl text-center"
         >
           <div className="inline-flex items-center gap-2 px-2 py-1 md:px-6 md:py-2 rounded-full 
