@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/utils/supabaseClient";
 import Link from "next/link";
 
-
-
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 }

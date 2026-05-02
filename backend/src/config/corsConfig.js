@@ -4,6 +4,8 @@ export const allowedOrigins = [
   "http://127.0.0.1:3000",
   "http://frontend:3000",
 
+  "http://localhost:3001",
+  "http://127.0.0.1:3001",
   // Optional: set via Fly secrets
   process.env.FRONTEND_URL,
   process.env.FRONTEND_URL_2,
