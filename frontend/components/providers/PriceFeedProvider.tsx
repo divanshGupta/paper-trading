@@ -1,4 +1,4 @@
-// src/components/providers/PriceFeedProvider.tsx
+// frontend/components/providers/PriceFeedProvider.tsx
 "use client";
 
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";

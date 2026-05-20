@@ -9,6 +9,7 @@ import OrdersCard from "@/components/orders/OrdersCard";
 import OrdersFilter from "@/components/orders/OrdersFilter";
 import Pagination from "@/components/ui/Pagination";
 import TransactionTable from "@/components/orders/TransactionTable";
+import TableSkeleton from "@/components/skeletons/TableSkeleton";
 
 function TransactionsPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -61,9 +62,7 @@ function TransactionsPage() {
 
       {/* Empty State */}
       {transactions.length === 0 ? (
-        <p className="text-center text-text-secondary py-10">
-          No {filter === "ALL" ? "" : filter.toLowerCase()} orders found.
-        </p>
+         <TableSkeleton rows={5} cols={4} />
       ) : (
         <>
           {/* MOBILE — Cards */}

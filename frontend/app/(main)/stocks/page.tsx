@@ -3,25 +3,19 @@
 
 import { useState, useMemo } from "react";
 import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
-import { getMarketStatusIST } from "@/utils/marketTime";
-import { useApp } from "@/components/providers/AppProvider";
 import StocksList from "@/components/stocks/StocksList";
 import StockFilters from "@/components/stocks/StockFilters";
 import StockSorter from "@/components/stocks/StockSorter";
 import StockSearch from "@/components/stocks/StockSearch";
 import StockFilterTabs from "@/components/stocks/StockFilterTab";
 import type { SectorFilter, SortKey } from "@/types";
-import { useLivePrices } from "../../../hooks/useLivePrices";
 
 export default function AllStocksPage() {
-  const { loading } = useLivePrices();
   const enriched = useEnrichedStocks();
-  const { sellStock, buyStock, tradingSymbol } = useApp();
   const [filter, setFilter] = useState<"all" | "gainers" | "losers">("all");
   const [search, setSearch] = useState("");
   const [sector, setSector] = useState<SectorFilter>("All");
   const [sortKey, setSortKey] = useState<SortKey>("symbol");
-  const { marketOpen } = getMarketStatusIST();
 
   // Filter + search + gainer/loser
   const filtered = useMemo(() => {
@@ -77,15 +71,7 @@ export default function AllStocksPage() {
         <div className="text-center py-20 text-text-secondary text-lg">No Stocks Found!</div>
       ) : (
         <StocksList
-          prices={sorted}
-          flash={Object.fromEntries(sorted.map(s => [s.symbol, s.flash]))}
-          bySymbol={(sym) => enriched.find(p => p.symbol === sym) ?? null}
-          marketOpen={marketOpen}
-          tradingSymbol={tradingSymbol}
-          onBuy={buyStock}
-          onSell={sellStock}
-          disableActions={false}
-          loading={loading}
+          symbols={sorted.map((s) => s.symbol)}
         />
       )}
     </div>

@@ -1,13 +1,9 @@
 // frontend/app/layout.tsx
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import SocketProvider from "@/components/providers/SocketProvider";
-import { BalanceProvider } from "@/components/providers/BalanceProvider";
-import { AppProvider } from "@/components/providers/AppProvider";
-import ToastProvider from "@/components/providers/ToastProvider";
-import { PriceFeedProvider } from "@/components/providers/PriceFeedProvider";
+import ClientProviders from "@/components/providers/ClientProviders"
 
 export const metadata: Metadata = {
   title: "SimTrading - Learn Stock Trading Without Losing Money",
@@ -70,26 +66,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-bg-main text-text antialiased">
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SocketProvider>
-            <PriceFeedProvider>
-              <AppProvider>
-                <BalanceProvider>
-                  <ToastProvider />
-                  {children}
-                </BalanceProvider>
-              </AppProvider>
-            </PriceFeedProvider>
-          </SocketProvider>
-        </ThemeProvider>
+      <body className={`${inter.className} bg-bg-main text-text antialiased`}>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

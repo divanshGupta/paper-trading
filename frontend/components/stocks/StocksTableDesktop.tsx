@@ -1,9 +1,14 @@
-"use client";
+// frontend/components/stocks/StocksTableDesktop.tsx
 
-import React from "react";
-import { StocksListProps } from "@/types";
+"use client";
+import React, { useEffect, useState} from "react";
 import { ArrowUp, ArrowDown } from "lucide-react";
 import { useRouter } from "next/navigation";
+
+import useEnrichedStocks from "@/hooks/useEnrichedStocks";
+import { useApp } from "../providers/AppProvider";
+import { getMarketStatusIST } from "@/utils/marketTime";
+
 import WatchlistButton from "./WatchlistButton";
 
 function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
@@ -12,14 +17,23 @@ function MovementArrow({ dir }: { dir: "up" | "down" | null }) {
   return null;
 }
 
-export default function StocksTableDesktop({
-  prices,
-  marketOpen,
-  tradingSymbol,
-  onBuy,
-  onSell,
-}: StocksListProps) {
+// only receive filter + slice config - no prices
+type Props = {
+  symbols?: string[];
+}
+
+export default function StocksTableDesktop({ symbols }: Props) {
   const router = useRouter();
+  const enriched = useEnrichedStocks();
+  const { buyStock, sellStock, tradingSymbol } = useApp();
+  const [marketOpen, setMarketOpen] = useState(false);
+
+  useEffect(() => {
+    setMarketOpen(getMarketStatusIST().marketOpen);
+  }, [])
+
+  // if symbols list privded, filter to those only 
+  const prices = symbols ? enriched.filter((s) => symbols.includes(s.symbol)) : enriched;
 
   return (
     <div className="hidden md:block w-full overflow-hidden rounded-xl shadow-card">
@@ -78,7 +92,7 @@ export default function StocksTableDesktop({
                     disabled={tradingSymbol === s.symbol || !marketOpen}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onBuy(s.symbol, s.price);
+                      buyStock(s.symbol, s.price);
                     }}
                     className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
                       !marketOpen || tradingSymbol === s.symbol
@@ -99,7 +113,7 @@ export default function StocksTableDesktop({
                     disabled={tradingSymbol === s.symbol || !marketOpen}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onSell(s.symbol, s.price);
+                      sellStock(s.symbol, s.price);
                     }}
                     className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
                       !marketOpen || tradingSymbol === s.symbol

@@ -1,5 +1,3 @@
-// global.d.ts
-
 import type { Socket } from "socket.io-client";
 
 declare global {
@@ -7,5 +5,7 @@ declare global {
     socket?: Socket;
   }
 }
+
+declare module "*.css";
 
 export {};

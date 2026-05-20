@@ -1,3 +1,4 @@
+//frontend/components/providers/SocketProvider.tsx
 "use client";
 
 import { useEffect, useRef, ReactNode } from "react";
@@ -31,7 +32,7 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
         console.log("🟢 socket connected:", socket.id);
       });
 
-      socket.on("disconnect", (reason) => {
+      socket.on("disconnect", (reason: string) => {
         console.log("🔴 socket disconnected:", reason);
       });
 
