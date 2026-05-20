@@ -5,7 +5,7 @@ import { verifyAuth } from '../middlewares/auth.middleware.js';
 const userRouter = Router();
 
 // fetch all users
-userRouter.get('/', getAllUsers);
+userRouter.get('/', verifyAuth, getAllUsers);
 
 // fetch user balance
 userRouter.get('/balance', verifyAuth, fetchBalance);

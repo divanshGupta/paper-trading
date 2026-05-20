@@ -1,14 +1,6 @@
 import { prisma } from "../utils/db.js";
 
-// Get all users
-export const getAllUsers = async (req, res) => {
-    try {
-        const users = await prisma.user.findMany(); 
-        res.status(200).json(users);
-    } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
-    }       
-};
+// Get all users api is deprecated as of 20-05-26
 
 // fetch balance for individual user
 export const fetchBalance = async (req, res) => {
