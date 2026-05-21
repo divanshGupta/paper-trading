@@ -221,6 +221,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
           ? { ...prev.profile, balance: payload.balance ?? prev.profile.balance }
           : null,
         holdings: payload.holdings ?? prev.holdings,
+        // Update realizedToday if backend sent it
+        realizedToday: payload.realizedToday ?? prev.realizedToday,
       }));
     };
 

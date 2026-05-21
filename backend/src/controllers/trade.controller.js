@@ -1,26 +1,10 @@
-// controllers/trade.controller.js
+// backend/src/controllers/portfolio.controller.js
 import { prisma } from "../utils/db.js";
 import { getIO } from "../config/socket.js"; // safe getter (throws if socket not inited)
 import { PRICES } from "../services/priceEngine.js"; // live price array from engine
 import { isMarketOpen } from "../utils/marketTimes.js";
 import logger from "../utils/logger.js";
-
-/**
- * Helper — find a live stock by symbol (case-insensitive)
- */
-function findLiveStock(symbol) {
-  if (!symbol) return null;
-  return PRICES.find(
-    (s) => s.symbol && s.symbol.toUpperCase() === String(symbol).toUpperCase()
-  );
-}
-
-/**
- * Round to 2 decimals and return number
- */
-function round2(v) {
-  return Math.round(Number(v) * 100) / 100;
-}
+import { findLiveStock, round2 } from "../utils/stockUtils.js";
 
 // BUY stock
 export const buyStock = async (req, res) => {
@@ -240,10 +224,32 @@ export const sellStock = async (req, res) => {
         where: { supabaseId: userId },
       });
 
+      // adding realizedToday to the socket emit - 21-05-26
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+
+      const todaySells = await prisma.transaction.findMany({
+        where: {
+          userId,
+          type: "SELL",
+          createdAt: { gte: todayStart },
+        },
+        select: { realizedPnl: true },
+      });
+
+      const realizedToday = todaySells.reduce(
+        (acc, tx) => acc + Number(tx.realizedPnl ?? 0),
+        0
+      );
+
       io.to(userId).emit("portfolio:update", {
         holdings: updatedPortfolio,
-        balance: updatedUser ? updatedUser.balance : newBalance,
+        balance: updatedUser?.balance ?? null,
+        realizedToday: Number(realizedToday.toFixed(2)),
       });
+
+      // end of new change - 21-05-26
+      
     } catch (emitErr) {
       logger.warn("Socket emit failed (sellStock):", emitErr.message || emitErr);
     }
@@ -267,11 +273,19 @@ export const squaredOffPosition = async (req, res) => {
       return res.status(403).json({ message: "Market is closed." });
     }
 
-    const { symbol, price } = req.body;
+    // const { symbol, price } = req.body;
     const userId = req.user.id;
 
-    if (!symbol || !price || price <= 0) {
-      return res.status(400).json({ message: "Valid symbol & price required" });
+    if (!symbol) {
+      return res.status(400).json({ message: "Valid symbol required" });
+    }
+
+    const stock = findLiveStock(symbol);
+    if (!stock) return res.status(404).json({ message: "Stock not found" });
+
+    const price = Number(stock.price);
+    if (!Number.isFinite(price) || price <= 0) {
+      return res.status(500).json({ message: "Invalid live price" });
     }
 
     await prisma.$transaction(async (tx) => {
@@ -319,10 +333,32 @@ export const squaredOffPosition = async (req, res) => {
         where: { supabaseId: req.user.id },
       });
 
+      // adding realizedToday to the socket emit - 21-05-26
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+
+      const todaySells = await prisma.transaction.findMany({
+        where: {
+          userId,
+          type: "SELL",
+          createdAt: { gte: todayStart },
+        },
+        select: { realizedPnl: true },
+      });
+
+      const realizedToday = todaySells.reduce(
+        (acc, tx) => acc + Number(tx.realizedPnl ?? 0),
+        0
+      );
+
       io.to(userId).emit("portfolio:update", {
         holdings: updatedPortfolio,
-        balance: updatedUser ? updatedUser.balance : null,
+        balance: updatedUser?.balance ?? null,
+        realizedToday: Number(realizedToday.toFixed(2)),
       });
+
+      // end of new change - 21-05-26
+
     } catch (emitErr) {
       logger.warn("Socket emit failed (squaredOffPosition):", emitErr.message || emitErr);
     }
