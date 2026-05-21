@@ -32,6 +32,10 @@ const MAX_INTRADAY_POINTS = 120; // keep last N per symbol (for sparklines)
 const NEWS_EVENT_PROBABILITY = 0.01; // per minute probability of a news event
 const NEWS_EVENT_DURATION_TICKS = 6; // number of ticks the news event affects volatility
 const SAVE_ON_EACH_TICK = false; // set true for maximum safety; false to save at interval
+const MEAN_REVERSION_STRENGTH = 0.02; // how strongly price pulls back to fair value
+// In DEFAULT_PRICES, add fairValue to each stock
+// This is the "true" price the stock gravitates toward
+// e.g. TCS fairValue: 3047 (starting price)
 
 /* -------------------------
    Load persisted prices if present, otherwise seed defaults

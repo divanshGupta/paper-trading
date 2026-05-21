@@ -33,7 +33,7 @@ export default function ProfileMenu() {
   const logout = useAuthStore((s) => s.logout);
 
   async function handleLogout() {
-    await logout(); // signOut + clears store
+    logout(); // signOut + clears store
     router.replace("/login");
   }
 

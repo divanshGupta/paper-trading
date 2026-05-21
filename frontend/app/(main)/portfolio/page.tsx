@@ -1,5 +1,4 @@
 "use client";
-
 import AuthGuard from "../../../hooks/authGaurd";
 import { useMemo } from "react";
 import { useLivePrices } from "../../../hooks/useLivePrices";
@@ -72,7 +71,7 @@ function PortfolioPage() {
 
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 pb-20 overflow-x-hidden">
+    <div className="bg-bg w-full max-w-7xl mx-auto px-4 pb-20 overflow-x-hidden">
 
       <PortfolioSummary
         balance={profile?.balance ?? 0}

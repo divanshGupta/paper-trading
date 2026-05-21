@@ -36,9 +36,14 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   logout: async () => {
+    // Clear local state immediately — don't wait for Supabase
+    set({ token: null, userId: null });
+    
+    // Disconnect socket immediately
     socket.auth = {};
     socket.disconnect();
-    await supabase.auth.signOut();
-    set({ token: null, userId: null });
+
+    // Fire signOut in background — we don't need to await it
+    supabase.auth.signOut();
   },
 }));

@@ -46,7 +46,6 @@ async function apiFetch<T>(
 
   const res = await fetch(url, { ...opts, headers, cache: "no-store" });
   const json = (await res.json().catch(() => ({}))) as T;
-
   return { ok: res.ok, status: res.status, json };
 }
 
@@ -161,7 +160,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const refresh = useCallback(async () => {
     const t = getToken();
 
-    // Not logged in — clear state immediately, don't hang on loading
     if (!t) {
       setState({ profile: null, holdings: [], realizedToday: 0, dayPnl: 0, loading: false });
       setWatchlist([]);
@@ -171,12 +169,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setState((prev) => ({ ...prev, loading: true }));
 
     try {
-      // Fire all three requests in parallel — much faster than sequential
       const [profileRes, holdingsRes, realizedRes] = await Promise.all([
         apiFetch<ProfileResponse>(`${BACKEND_URL}/api/v1/users/profile`, t),
         apiFetch<PortfolioResponse>(`${BACKEND_URL}/api/v1/portfolio`, t),
         apiFetch<RealizedTodayResponse>(`${BACKEND_URL}/api/v1/transactions/realized-today`, t),
       ]);
+
+      // status 0 means network error — backend unreachable
+      if (profileRes.status === 0) {
+        toast.error("Server is unreachable. Please try again later.");
+        setState((prev) => ({ ...prev, loading: false }));
+        return;
+      }
 
       setState({
         profile: profileRes.json.user ?? null,
@@ -190,7 +194,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setState((prev) => ({ ...prev, loading: false }));
     }
 
-    // Watchlist fetched separately — doesn't block main state
     fetchWatchlist();
   }, [BACKEND_URL, getToken, fetchWatchlist]);
 
@@ -232,10 +235,18 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isReady) return;
 
-    const handleReconnect = () => refresh();
+    let debounceTimer: ReturnType<typeof setTimeout>;
+
+    const handleReconnect = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => refresh(), 1000);
+    };
 
     socket.on("connect", handleReconnect);
-    return () => { socket.off("connect", handleReconnect); };
+    return () => {
+      socket.off("connect", handleReconnect);
+      clearTimeout(debounceTimer);
+    };
   }, [isReady, refresh]);
 
   /* -------------------------------------------------------
@@ -247,7 +258,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isReady) return;
 
-    const { data: sub } = supabase.auth.onAuthStateChange(() => refresh());
+    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
+      // Only refresh on actual login/logout
+      // Ignore TOKEN_REFRESHED, USER_UPDATED, INITIAL_SESSION
+      if (event === "SIGNED_IN" || event === "SIGNED_OUT") {
+        refresh();
+      }
+    });
+
     return () => { sub.subscription.unsubscribe(); };
   }, [isReady, refresh]);
 
