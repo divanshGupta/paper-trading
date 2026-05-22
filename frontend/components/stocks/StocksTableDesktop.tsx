@@ -2,7 +2,7 @@
 
 "use client";
 import React, { useEffect, useState} from "react";
-import { ArrowUp, ArrowDown } from "lucide-react";
+import { ArrowUp, ArrowDown, Clock } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import useEnrichedStocks from "@/hooks/useEnrichedStocks";
@@ -86,48 +86,54 @@ export default function StocksTableDesktop({ symbols }: Props) {
                   </span>
                 </td>
 
-                <td className="p-3 flex items-start gap-6">
-                  <button
-                    disabled={tradingSymbol === s.symbol || !marketOpen}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      buyStock(s.symbol, s.price);
-                    }}
-                    className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
-                      !marketOpen || tradingSymbol === s.symbol
-                        ? "bg-bg-elevated border border-border cursor-not-allowed"
-                        : "bg-positive"
-                    }`}
-                  >
-                    {tradingSymbol === s.symbol ? (
-                      <span className="animate-pulse">Processing...</span>
-                    ) : !marketOpen ? (
-                      "Closed"
-                    ) : (
-                      "Buy"
-                    )}
-                  </button>
+                <td className="p-3" onClick={(e) => e.stopPropagation()}>
+                  {!marketOpen ? (
+                    <div
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-elevated border border-border text-text-secondary text-xs font-semibold select-none cursor-help shadow-sm w-fit"
+                      title="Market is closed. Trading hours: 9:15 AM - 3:30 PM IST (Mon-Fri)"
+                    >
+                      <Clock size={14} className="text-text-secondary opacity-70" />
+                      <span>Market Closed</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-start gap-6">
+                      <button
+                        disabled={tradingSymbol === s.symbol}
+                        onClick={() => {
+                          buyStock(s.symbol, s.price);
+                        }}
+                        className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
+                          tradingSymbol === s.symbol
+                            ? "bg-bg-elevated border border-border cursor-not-allowed"
+                            : "bg-positive"
+                        }`}
+                      >
+                        {tradingSymbol === s.symbol ? (
+                          <span className="animate-pulse">Processing...</span>
+                        ) : (
+                          "Buy"
+                        )}
+                      </button>
 
-                  <button
-                    disabled={tradingSymbol === s.symbol || !marketOpen}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      sellStock(s.symbol, s.price);
-                    }}
-                    className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
-                      !marketOpen || tradingSymbol === s.symbol
-                        ? "bg-bg-elevated border border-border cursor-not-allowed"
-                        : "bg-negative"
-                    }`}
-                  >
-                    {tradingSymbol === s.symbol ? (
-                      <span className="animate-pulse">Processing...</span>
-                    ) : !marketOpen ? (
-                      "Closed"
-                    ) : (
-                      "Sell"
-                    )}
-                  </button>
+                      <button
+                        disabled={tradingSymbol === s.symbol}
+                        onClick={() => {
+                          sellStock(s.symbol, s.price);
+                        }}
+                        className={`px-4 py-2 rounded-md text-text text-sm font-medium transition ${
+                          tradingSymbol === s.symbol
+                            ? "bg-bg-elevated border border-border cursor-not-allowed"
+                            : "bg-negative"
+                        }`}
+                      >
+                        {tradingSymbol === s.symbol ? (
+                          <span className="animate-pulse">Processing...</span>
+                        ) : (
+                          "Sell"
+                        )}
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             );
