@@ -69,20 +69,19 @@ export default function StocksTableDesktop({ symbols }: Props) {
                 <td className="p-3 text-text-secondary">{s.name}</td>
 
                 <td
-                  className={`p-3 font-medium ${
-                    isUp
-                      ? "text-positive"
-                      : isDown
-                      ? "text-negative"
-                      : "text-text-secondary"
-                  }`}
+                  className={`p-3 font-medium text-text-secondary`}
                 >
                   ₹{s.price}
                 </td>
-                <td className="p-3 text-sm gap-2">
+                <td className={`p-3 text-sm gap-2 ${
+                  isUp
+                  ? "text-positive"
+                  : "text-negative"
+              
+                }`}>
                   <MovementArrow dir={isUp ? "up" : isDown ? "down" : null} />
                   <span>{s.change.toFixed(2)}</span>
-                  <span className="text-xs text-text-secondary">
+                  <span className="text-xs">
                     ({s.changePercent.toFixed(2)}%)
                   </span>
                 </td>
