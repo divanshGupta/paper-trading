@@ -19,3 +19,4 @@ yarn-error.log*
 .next/
 out/
 public/build/
+claude.md
