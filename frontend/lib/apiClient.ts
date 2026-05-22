@@ -24,32 +24,16 @@ apiClient.interceptors.request.use((config) => {
 
 // Handle token expiry globally
 apiClient.interceptors.response.use(
-  (response) => {
-    // Backend working again
-    useServerErrorStore.getState().setServerError(false);
-
-    return response;
-  },
+  (response) => response,
 
   (error) => {
-  console.log("INTERCEPTOR ERROR:", error);
+    if (error.response?.status === 400) {
+      localStorage.removeItem("sb_token");
+      window.location.href = "/login";
+    }
 
-  if (
-    !error.response ||
-    error.code === "ECONNABORTED" ||
-    error.response.status >= 500
-  ) {
-    console.log("SETTING SERVER ERROR TRUE");
-
-    useServerErrorStore
-      .getState()
-      .setServerError(true);
+    return Promise.reject(error);
   }
-
-  return Promise.reject(error);
-}
-
-  
 );
 
 export default apiClient;

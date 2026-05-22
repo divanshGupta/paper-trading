@@ -4,8 +4,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ClientProviders from "@/components/providers/ClientProviders"
-import { useServerErrorStore } from "@/stores/useServerErrorStore";
-import ServerErrorPage from "@/components/ui/ServerErrorPage";
 
 export const metadata: Metadata = {
   title: "SimTrading - Learn Stock Trading Without Losing Money",

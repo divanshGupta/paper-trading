@@ -5,13 +5,43 @@ import { useEffect, useRef, ReactNode } from "react";
 import { socket } from "@/lib/socket";
 import { supabase } from "@/utils/supabaseClient";
 import { useServerErrorStore } from "@/stores/useServerErrorStore";
+import { verifyBackendHealth } from "@/lib/healthCheck";
 
 export default function SocketProvider({ children }: { children: ReactNode }) {
   const initialized = useRef(false);
 
+  const disconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
+
+    const handleConnect = () => {
+        console.log("🟢 socket connected");
+        
+        if (disconnectTimeoutRef.current) {
+          clearTimeout(disconnectTimeoutRef.current);
+        }
+
+        // backend healthy
+        useServerErrorStore.getState().setServerError(false);
+    }
+
+      const handleDisconnect = () => {
+
+        disconnectTimeoutRef.current = setTimeout(() => {
+  
+          verifyBackendHealth();
+        }, 5000);
+    }
+
+      const handleConnectError = (err: Error) => {
+
+        console.log("⚠️ socket connect_error:", err.message);
+  
+        // backend unreachable
+        useServerErrorStore.getState().setServerError(true);
+    }
 
     console.log("🚀 SocketProvider initialized once");
 
@@ -29,26 +59,9 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
       socket.auth = { token };
       socket.connect();
 
-      socket.on("connect", () => {
-        console.log("🟢 socket connected:", socket.id);
-
-        // backend healthy
-        useServerErrorStore.getState().setServerError(false);
-      });
-
-      socket.on("disconnect", (reason: string) => {
-        console.log("🔴 socket disconnected:", reason);
-
-        // backend/socket unhealthy
-        useServerErrorStore.getState().setServerError(true);
-      });
-
-      socket.on("connect_error", (err) => {
-        console.log("⚠️ socket connect_error:", err.message);
-
-        // backend unreachable
-        useServerErrorStore.getState().setServerError(true);
-      });
+      socket.on("connect", handleConnect);
+      socket.on("disconnect", handleDisconnect);
+      socket.on("connect_error", handleConnectError);
     };
 
     setup();
@@ -75,6 +88,15 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
     );
 
     return () => {
+      // cleanup 
+      if (disconnectTimeoutRef.current) {
+        clearTimeout(disconnectTimeoutRef.current);
+      }
+
+      socket.off("connect", handleConnect);
+      socket.off("disconnect", handleDisconnect);
+      socket.off("connect_error", handleConnectError);
+
       authSub.subscription.unsubscribe();
     };
   }, []);

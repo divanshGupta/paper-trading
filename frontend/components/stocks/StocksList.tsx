@@ -4,7 +4,6 @@
 import React from "react";
 
 import { usePriceFeed } from "../providers/PriceFeedProvider";
-import { useApp } from "../providers/AppProvider";
 import useEnrichedStocks from "@/hooks/useEnrichedStocks";
 
 import StocksTableDesktop from "./StocksTableDesktop";

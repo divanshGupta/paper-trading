@@ -18,11 +18,6 @@ export default function Dashboard() {
   const [filter, setFilter] = useState<StockFilterValue>("all");
   const { state } = useApp();
   const { profile, holdings, realizedToday } = state;
-  const [marketOpen, setMarketOpen] = useState(false);
-
-  useEffect(() => {
-    setMarketOpen(getMarketStatusIST().marketOpen);
-  }, []);
 
   // Portfolio Value memoized
   const totalValue = useMemo(() => {

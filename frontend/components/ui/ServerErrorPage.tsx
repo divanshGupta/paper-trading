@@ -9,7 +9,7 @@ export default function ServerErrorPage() {
         </h1>
 
         <p className="text-gray-400 mb-6">
-          We're having trouble connecting to the server.
+          We&apos;re having trouble connecting to the server.
         </p>
 
         <button

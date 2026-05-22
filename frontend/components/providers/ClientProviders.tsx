@@ -17,17 +17,13 @@ export default function ClientProviders({ children }: { children: React.ReactNod
     initialize();
   }, []);
 
-  const serverError = useServerErrorStore(
-      (state: any) => state.serverError
-    )
+  const serverError = useServerErrorStore((state) => state.serverError)
   
     if (serverError) {
       return <ServerErrorPage /> 
     }
 
   return (
-
-    
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <SocketProvider>
         <PriceFeedProvider>
