@@ -1,9 +1,7 @@
 import { create } from "zustand";
 import { socket } from "@/lib/socket";
 
-
 // Types
-
 export type StockPrice = {
   symbol: string;
   price: number;

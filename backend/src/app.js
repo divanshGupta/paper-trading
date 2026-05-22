@@ -106,7 +106,7 @@ app.use("/api/order", tradeLimiter);
 // ----------------------
 // Health & readiness
 // ----------------------
-app.get("/healthz", (_req, res) => res.status(200).json({ status: "ok" }));
+app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 app.get("/ready", (_req, res) => res.status(200).send("ready"));
 
 // ----------------------

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useServerErrorStore } from "@/stores/useServerErrorStore";
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
@@ -10,24 +11,45 @@ const apiClient = axios.create({
 
 // Attach token to every request automatically
 apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem("sb_token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("sb_token");
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
   }
+
   return config;
 });
 
 // Handle token expiry globally
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Backend working again
+    useServerErrorStore.getState().setServerError(false);
+
+    return response;
+  },
+
   (error) => {
-    if (error.response?.status === 401) {
-      // Token expired or invalid — clear everything
-      localStorage.removeItem("sb_token");
-      window.location.href = "/login";
-    }
-    return Promise.reject(error);
+  console.log("INTERCEPTOR ERROR:", error);
+
+  if (
+    !error.response ||
+    error.code === "ECONNABORTED" ||
+    error.response.status >= 500
+  ) {
+    console.log("SETTING SERVER ERROR TRUE");
+
+    useServerErrorStore
+      .getState()
+      .setServerError(true);
   }
+
+  return Promise.reject(error);
+}
+
+  
 );
 
 export default apiClient;

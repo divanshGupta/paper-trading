@@ -4,6 +4,7 @@
 import { useEffect, useRef, ReactNode } from "react";
 import { socket } from "@/lib/socket";
 import { supabase } from "@/utils/supabaseClient";
+import { useServerErrorStore } from "@/stores/useServerErrorStore";
 
 export default function SocketProvider({ children }: { children: ReactNode }) {
   const initialized = useRef(false);
@@ -30,14 +31,23 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
 
       socket.on("connect", () => {
         console.log("🟢 socket connected:", socket.id);
+
+        // backend healthy
+        useServerErrorStore.getState().setServerError(false);
       });
 
       socket.on("disconnect", (reason: string) => {
         console.log("🔴 socket disconnected:", reason);
+
+        // backend/socket unhealthy
+        useServerErrorStore.getState().setServerError(true);
       });
 
       socket.on("connect_error", (err) => {
         console.log("⚠️ socket connect_error:", err.message);
+
+        // backend unreachable
+        useServerErrorStore.getState().setServerError(true);
       });
     };
 
