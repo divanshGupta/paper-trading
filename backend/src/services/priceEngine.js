@@ -81,6 +81,30 @@ function initializePrices() {
         volume: s.volume ?? 0,
         intraday: Array.isArray(s.intraday) ? s.intraday : [],
       }));
+
+      // ✅ FIX: If market is already open on startup and todayOpen date
+      // doesn't match today, treat current price as the open
+      if (isMarketOpen()) {
+        const today = new Date().toDateString();
+        return loaded.map((s) => {
+          const openDate = s.todayOpenDate; // we'll store this (see fix 2)
+          if (openDate !== today) {
+            return {
+              ...s,
+              previousClose: s.price,
+              todayOpen: s.price,
+              todayOpenDate: today,
+              intraday: [],
+              high: s.price,
+              low: s.price,
+              volume: 0,
+            };
+          }
+          return s;
+        })
+      }
+
+      return loaded;
     }
   } catch (err) {
     logger.warn(nowISO(), "Failed to load prices from disk — falling back to defaults", err);
@@ -330,11 +354,12 @@ function startPeriodicSave() {
    ------------------------- */
 function handleMarketOpenReset() {
   logger.info(nowISO(), "Market opened — performing daily reset");
+  const today = new Date().toDateString(); // e.g. "sat may 23 2026"
   PRICES = PRICES.map((s) => ({
     ...s,
     previousClose: s.price,
     todayOpen: s.price,
-    // reset intraday arrays for the new day
+    todayOpenDate: today,
     intraday: [],
     high: s.price,
     low: s.price,

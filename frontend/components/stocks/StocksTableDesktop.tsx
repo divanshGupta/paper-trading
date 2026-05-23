@@ -109,7 +109,7 @@ export default function StocksTableDesktop({ symbols }: Props) {
                         }`}
                       >
                         {tradingSymbol === s.symbol ? (
-                          <span className="animate-pulse">Processing...</span>
+                          <span className="animate-pulse">....</span>
                         ) : (
                           "Buy"
                         )}
@@ -127,7 +127,7 @@ export default function StocksTableDesktop({ symbols }: Props) {
                         }`}
                       >
                         {tradingSymbol === s.symbol ? (
-                          <span className="animate-pulse">Processing...</span>
+                          <span className="animate-pulse">....</span>
                         ) : (
                           "Sell"
                         )}

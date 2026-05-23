@@ -11,6 +11,13 @@ const config: Config = {
 
   theme: {
     extend: {
+       boxShadow: {
+        'brand-glow': '0 0 20px var(--color-brand-glow)',
+        'purple-glow': '0 0 20px rgba(139, 92, 246, 0.25)',
+      },
+      backgroundImage: {
+        'brand-gradient': 'linear-gradient(135deg, var(--color-brand) 0%, var(--color-purple) 100%)',
+      },
       colors: {
         brand: "var(--color-brand)",
         "brand-dark": "var(--color-brand-dark)",

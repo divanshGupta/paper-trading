@@ -1,71 +1,70 @@
 /* TRADESIM VIBRANT THEME (LIGHT MODE) */
 
 :root {
-  /* ----- BRAND COLORS ----- */
-  --color-brand: #00d09c;         /* Main Brand Teal */
-  --color-brand-dark: #009f79;
-  --color-brand-light: #5ef7d0;
-  --color-brand-glow: rgba(0, 208, 156, 0.55);
+  /* ----- BRAND IDENTITY ----- */
+  --color-brand: #00C292;          /* Solid Mint Teal */
+  --color-brand-dark: #009A73;
+  --color-brand-light: #E6FFF9;
+  --color-brand-glow: rgba(0, 194, 146, 0.1);
 
-  /* ----- BACKGROUND ----- */
-  --color-bg: #f6f7f9;
-  --color-bg-surface: #ffffff;
-  --color-bg-elevated: #f0f2f5;
+  /* ----- BACKGROUNDS (Warm Off-White/Slate) ----- */
+  --color-bg: #F8FAFC;             /* Slate 50 */
+  --color-bg-surface: #FFFFFF;
+  --color-bg-elevated: #F1F5F9;    /* Slate 100 */
 
   /* ----- TEXT ----- */
-  --color-text: #1f2937;
-  --color-text-secondary: #6b7280;
+  --color-text: #0F172A;           /* Slate 900 */
+  --color-text-secondary: #64748B; /* Slate 500 */
 
-  /* ----- POSITIVE / NEGATIVE ----- */
-  --color-positive: #22c55e;
-  --color-positive-soft: #dcfce7;
+  /* ----- FINANCIAL FEEDBACK ----- */
+  --color-positive: #10B981;
+  --color-positive-soft: #D1FAE5;
 
-  --color-negative: #ef4444;
-  --color-negative-soft: #fee2e2;
+  --color-negative: #EF4444;
+  --color-negative-soft: #FEE2E2;
 
   /* ----- BORDERS ----- */
-  --color-border: #C4C4C4;
+  --color-border: #E2E8F0;         /* Slate 200 */
 
-
-  /* ----- ACCENTS ----- */
-  --color-blue: #60a5fa;
-  --color-yellow: #facc15;
-  --color-purple: #c084fc;
+  /* ----- GAMIFIED ACCENTS ----- */
+  --color-blue: #2563EB;
+  --color-yellow: #EA580C;
+  --color-purple: #7C3AED;
 }
 
 
 /* =========================================================
    TRADESIM DARK MODE (VIBRANT)
    ========================================================= */
+/* Proposed theme.css Changes */
 .dark {
-  /* ----- BRAND COLORS ----- */
-  --color-brand: #00e6b3;
-  --color-brand-dark: #009c75;
-  --color-brand-light: #77ffdd;
-  --color-brand-glow: rgba(0, 230, 179, 0.45);
+  /* ----- BRAND IDENTITY ----- */
+  --color-brand: #00F5B4;          /* Vibrant Neon Mint (glowing, game-like) */
+  --color-brand-dark: #00B887;     
+  --color-brand-light: #80FFE1;    
+  --color-brand-glow: rgba(0, 245, 180, 0.15);
 
-  /* ----- BACKGROUND ----- */
-  --color-bg: #0d1117;
-  --color-bg-surface: #161b22;
-  --color-bg-elevated: #1d232b;
+  /* ----- BACKGROUNDS (Rich Midnight Navy) ----- */
+  --color-bg: #080C14;             /* Atmospheric dark canvas */
+  --color-bg-surface: #0E1626;     /* Card surface with a deep blue-purple tint */
+  --color-bg-elevated: #151F33;    /* Hover states and dropdowns */
 
   /* ----- TEXT ----- */
-  --color-text: #e5e7eb;
-  --color-text-secondary: #9ca3af;
+  --color-text: #F1F5F9;           /* Slate 50 (soft white) */
+  --color-text-secondary: #94A3B8; /* Slate 400 */
 
-  /* ----- POSITIVE / NEGATIVE ----- */
-  /* --color-positive: #22e57f; */
-  --color-positive: #04B488;
-  --color-positive-soft: #073f26;
+  /* ----- FINANCIAL FEEDBACK ----- */
+  --color-positive: #10B981;       /* Emerald Green (pure, vibrant bullish state) */
+  --color-positive-soft: rgba(16, 185, 129, 0.1);
 
-  --color-negative: #FF5E3B;
-  --color-negative-soft: #3a1f1f;
+  --color-negative: #FF3B62;       /* Vibrant Coral/Crimson (energetic bearish state) */
+  --color-negative-soft: rgba(255, 59, 98, 0.1);
 
   /* ----- BORDERS ----- */
-  --color-border: #4A4A4A;
+  --color-border: rgba(255, 255, 255, 0.06); /* Seamless, high-end feel */
 
-  /* ----- ACCENTS ----- */
-  --color-blue: #87b7ff;
-  --color-yellow: #ffe066;
-  --color-purple: #d8a8ff;
+  /* ----- GAMIFIED ACCENTS ----- */
+  --color-blue: #3B82F6;           /* Lessons & Learning modules */
+  --color-yellow: #FF8A00;         /* Daily Streaks (Electric Flame Orange) */
+  --color-purple: #8B5CF6;         /* XP, Levels, and Leaderboards (Amethyst) */
 }

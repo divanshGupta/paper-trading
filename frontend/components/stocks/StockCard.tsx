@@ -24,7 +24,7 @@ export default function StockCard({
     <div
       className={`
         bg-bg-surface text-text border rounded-xl shadow-card 
-        transition-all hover:shadow-sm ${flashBorder}
+        transition-all hover:shadow-sm hover:bg-bg-elevated ${flashBorder}
         p-4 h-40 flex flex-col justify-between 
         relative group
       `}

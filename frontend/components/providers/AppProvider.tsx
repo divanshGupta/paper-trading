@@ -157,7 +157,19 @@ export function AppProvider({ children }: { children: ReactNode }) {
      Main refresh — fetches all user data in parallel
      Called on: initial load, socket reconnect, auth change, post-trade
   ------------------------------------------------------- */
-  const refresh = useCallback(async () => {
+
+  // The idea — only refetch if data is older than 5 minutes
+  const CACHE_DURATION_MS = 5 * 60 * 1000;
+  let lastFetched = 0;
+
+  const refresh = useCallback(async (force = false) => {
+    const now = Date.now();
+
+    // Skip if data is fresh and not forced
+    if (!force && lastFetched && (now - lastFetched) < CACHE_DURATION_MS) {
+      return;
+    }
+
     const t = getToken();
 
     if (!t) {
@@ -195,6 +207,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
 
     fetchWatchlist();
+
+    lastFetched = now;
   }, [BACKEND_URL, getToken, fetchWatchlist]);
 
   /* -------------------------------------------------------
