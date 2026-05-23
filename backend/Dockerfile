@@ -1,24 +1,24 @@
-# --- Base Image ---
-FROM node:20
+FROM node:20-alpine
 
-# --- Set work directory ---
 WORKDIR /app
 
-# --- Copy package files first for caching ---
+# Copy package files
 COPY package*.json ./
 
-# --- Copy prisma early so postinstall works ---
+# Copy prisma schema early for postinstall
 COPY prisma ./prisma
 
-# --- Install dependencies (production only) ---
-# prisma generate runs in postinstall and works because schema exists
-RUN npm install --omit=dev
+# Install all dependencies (need dev for prisma CLI)
+RUN npm install
 
-# --- Copy rest of the backend ---
+# Copy rest of source
 COPY . .
 
-# --- Expose backend port ---
-EXPOSE 5500
+# Generate prisma client
+RUN npx prisma generate
 
-# --- Start server ---
-CMD ["node", "-r", "dotenv/config", "src/server.js"]
+# Expose correct port
+EXPOSE 8080
+
+# Start server
+CMD ["node", "src/server.js"]

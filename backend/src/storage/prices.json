@@ -2,7 +2,7 @@
   {
     "symbol": "TCS",
     "name": "Tata Consultancy Services",
-    "price": 2102,
+    "price": 1959,
     "previousClose": 2848,
     "todayOpen": 2848,
     "fairValue": 3047,
@@ -11,41 +11,9 @@
     "pe": 32,
     "beta": 0.95,
     "high": 3253,
-    "low": 2094,
-    "volume": 546490,
+    "low": 1959,
+    "volume": 553979,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 2831,
-        "high": 2831,
-        "low": 2831,
-        "close": 2831,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 2772,
-        "high": 2772,
-        "low": 2772,
-        "close": 2772,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 2790,
-        "high": 2790,
-        "low": 2790,
-        "close": 2790,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 2709,
-        "high": 2709,
-        "low": 2709,
-        "close": 2709,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 2761,
@@ -973,6 +941,38 @@
         "low": 2106,
         "close": 2106,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 2111,
+        "high": 2111,
+        "low": 2111,
+        "close": 2111,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 2068,
+        "high": 2068,
+        "low": 2068,
+        "close": 2068,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 2027,
+        "high": 2027,
+        "low": 2027,
+        "close": 2027,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 2016,
+        "high": 2016,
+        "low": 2016,
+        "close": 2016,
+        "volume": 0
       }
     ]
   },
@@ -989,40 +989,8 @@
     "beta": 0.9,
     "high": 1961,
     "low": 1341,
-    "volume": 343008,
+    "volume": 349548,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1360,
-        "high": 1360,
-        "low": 1360,
-        "close": 1360,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1384,
-        "high": 1384,
-        "low": 1384,
-        "close": 1384,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1365,
-        "high": 1365,
-        "low": 1365,
-        "close": 1365,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1398,
-        "high": 1398,
-        "low": 1398,
-        "close": 1398,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1420,
@@ -1950,13 +1918,45 @@
         "low": 1808,
         "close": 1808,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1799,
+        "high": 1799,
+        "low": 1799,
+        "close": 1799,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1801,
+        "high": 1801,
+        "low": 1801,
+        "close": 1801,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1835,
+        "high": 1835,
+        "low": 1835,
+        "close": 1835,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1812,
+        "high": 1812,
+        "low": 1812,
+        "close": 1812,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "WIPRO",
     "name": "Wipro Ltd",
-    "price": 396,
+    "price": 386,
     "previousClose": 454,
     "todayOpen": 454,
     "fairValue": 465,
@@ -1966,40 +1966,8 @@
     "beta": 0.85,
     "high": 457,
     "low": 322,
-    "volume": 79715,
+    "volume": 81141,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 373,
-        "high": 373,
-        "low": 373,
-        "close": 373,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 380,
-        "high": 380,
-        "low": 380,
-        "close": 380,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 384,
-        "high": 384,
-        "low": 384,
-        "close": 384,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 374,
-        "high": 374,
-        "low": 374,
-        "close": 374,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 371,
@@ -2927,13 +2895,45 @@
         "low": 394,
         "close": 394,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 394,
+        "high": 394,
+        "low": 394,
+        "close": 394,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 386,
+        "high": 386,
+        "low": 386,
+        "close": 386,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 384,
+        "high": 384,
+        "low": 384,
+        "close": 384,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 385,
+        "high": 385,
+        "low": 385,
+        "close": 385,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "HCLTECH",
     "name": "HCL Technologies",
-    "price": 1066,
+    "price": 1086,
     "previousClose": 1121,
     "todayOpen": 1121,
     "fairValue": 1180,
@@ -2943,40 +2943,8 @@
     "beta": 0.92,
     "high": 1337,
     "low": 945,
-    "volume": 227527,
+    "volume": 231560,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1101,
-        "high": 1101,
-        "low": 1101,
-        "close": 1101,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1086,
-        "high": 1086,
-        "low": 1086,
-        "close": 1086,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1096,
-        "high": 1096,
-        "low": 1096,
-        "close": 1096,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1095,
-        "high": 1095,
-        "low": 1095,
-        "close": 1095,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1081,
@@ -3904,13 +3872,45 @@
         "low": 1060,
         "close": 1060,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1052,
+        "high": 1052,
+        "low": 1052,
+        "close": 1052,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1048,
+        "high": 1048,
+        "low": 1048,
+        "close": 1048,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1087,
+        "high": 1087,
+        "low": 1087,
+        "close": 1087,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1088,
+        "high": 1088,
+        "low": 1088,
+        "close": 1088,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "TECHM",
     "name": "Tech Mahindra",
-    "price": 846,
+    "price": 874,
     "previousClose": 1076,
     "todayOpen": 1076,
     "fairValue": 1280,
@@ -3920,40 +3920,8 @@
     "beta": 1.1,
     "high": 1117,
     "low": 761,
-    "volume": 189320,
+    "volume": 192808,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 850,
-        "high": 850,
-        "low": 850,
-        "close": 850,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 847,
-        "high": 847,
-        "low": 847,
-        "close": 847,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 841,
-        "high": 841,
-        "low": 841,
-        "close": 841,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 834,
-        "high": 834,
-        "low": 834,
-        "close": 834,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 832,
@@ -4881,13 +4849,45 @@
         "low": 848,
         "close": 848,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 851,
+        "high": 851,
+        "low": 851,
+        "close": 851,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 854,
+        "high": 854,
+        "low": 854,
+        "close": 854,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 872,
+        "high": 872,
+        "low": 872,
+        "close": 872,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 875,
+        "high": 875,
+        "low": 875,
+        "close": 875,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "HDFCBANK",
     "name": "HDFC Bank",
-    "price": 954,
+    "price": 961,
     "previousClose": 931,
     "todayOpen": 931,
     "fairValue": 991,
@@ -4897,40 +4897,8 @@
     "beta": 1.05,
     "high": 1011,
     "low": 878,
-    "volume": 201738,
+    "volume": 205313,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 994,
-        "high": 994,
-        "low": 994,
-        "close": 994,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1000,
-        "high": 1000,
-        "low": 1000,
-        "close": 1000,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 991,
-        "high": 991,
-        "low": 991,
-        "close": 991,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 996,
-        "high": 996,
-        "low": 996,
-        "close": 996,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 988,
@@ -5858,13 +5826,45 @@
         "low": 955,
         "close": 955,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 948,
+        "high": 948,
+        "low": 948,
+        "close": 948,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 954,
+        "high": 954,
+        "low": 954,
+        "close": 954,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 956,
+        "high": 956,
+        "low": 956,
+        "close": 956,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 962,
+        "high": 962,
+        "low": 962,
+        "close": 962,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ICICIBANK",
     "name": "ICICI Bank",
-    "price": 1036,
+    "price": 1050,
     "previousClose": 793,
     "todayOpen": 793,
     "fairValue": 1010,
@@ -5872,42 +5872,10 @@
     "marketCap": 750000,
     "pe": 20,
     "beta": 1.1,
-    "high": 1050,
+    "high": 1071,
     "low": 755,
-    "volume": 173757,
+    "volume": 177759,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 796,
-        "high": 796,
-        "low": 796,
-        "close": 796,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 788,
-        "high": 788,
-        "low": 788,
-        "close": 788,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 791,
-        "high": 791,
-        "low": 791,
-        "close": 791,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 803,
-        "high": 803,
-        "low": 803,
-        "close": 803,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 804,
@@ -6835,13 +6803,45 @@
         "low": 1040,
         "close": 1040,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1046,
+        "high": 1046,
+        "low": 1046,
+        "close": 1046,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1065,
+        "high": 1065,
+        "low": 1065,
+        "close": 1065,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1065,
+        "high": 1065,
+        "low": 1065,
+        "close": 1065,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1054,
+        "high": 1054,
+        "low": 1054,
+        "close": 1054,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "KOTAKBANK",
     "name": "Kotak Mahindra Bank",
-    "price": 1588,
+    "price": 1599,
     "previousClose": 1551,
     "todayOpen": 1551,
     "fairValue": 1680,
@@ -6851,40 +6851,8 @@
     "beta": 1.08,
     "high": 1652,
     "low": 1399,
-    "volume": 314157,
+    "volume": 320632,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1532,
-        "high": 1532,
-        "low": 1532,
-        "close": 1532,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1558,
-        "high": 1558,
-        "low": 1558,
-        "close": 1558,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1571,
-        "high": 1571,
-        "low": 1571,
-        "close": 1571,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1571,
-        "high": 1571,
-        "low": 1571,
-        "close": 1571,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1576,
@@ -7812,13 +7780,45 @@
         "low": 1597,
         "close": 1597,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1591,
+        "high": 1591,
+        "low": 1591,
+        "close": 1591,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1592,
+        "high": 1592,
+        "low": 1592,
+        "close": 1592,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1605,
+        "high": 1605,
+        "low": 1605,
+        "close": 1605,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1593,
+        "high": 1593,
+        "low": 1593,
+        "close": 1593,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "AXISBANK",
     "name": "Axis Bank",
-    "price": 1030,
+    "price": 1015,
     "previousClose": 1055,
     "todayOpen": 1055,
     "fairValue": 1100,
@@ -7828,40 +7828,8 @@
     "beta": 1.12,
     "high": 1080,
     "low": 839,
-    "volume": 198672,
+    "volume": 202224,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1030,
-        "high": 1030,
-        "low": 1030,
-        "close": 1030,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1023,
-        "high": 1023,
-        "low": 1023,
-        "close": 1023,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1018,
-        "high": 1018,
-        "low": 1018,
-        "close": 1018,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 999,
-        "high": 999,
-        "low": 999,
-        "close": 999,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1008,
@@ -8789,13 +8757,45 @@
         "low": 1025,
         "close": 1025,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1024,
+        "high": 1024,
+        "low": 1024,
+        "close": 1024,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1008,
+        "high": 1008,
+        "low": 1008,
+        "close": 1008,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1012,
+        "high": 1012,
+        "low": 1012,
+        "close": 1012,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1020,
+        "high": 1020,
+        "low": 1020,
+        "close": 1020,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "SBIN",
     "name": "State Bank of India",
-    "price": 863,
+    "price": 844,
     "previousClose": 729,
     "todayOpen": 729,
     "fairValue": 780,
@@ -8805,40 +8805,8 @@
     "beta": 1.15,
     "high": 892,
     "low": 718,
-    "volume": 165648,
+    "volume": 168960,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 829,
-        "high": 829,
-        "low": 829,
-        "close": 829,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 832,
-        "high": 832,
-        "low": 832,
-        "close": 832,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 827,
-        "high": 827,
-        "low": 827,
-        "close": 827,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 844,
-        "high": 844,
-        "low": 844,
-        "close": 844,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 862,
@@ -9766,13 +9734,45 @@
         "low": 859,
         "close": 859,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 862,
+        "high": 862,
+        "low": 862,
+        "close": 862,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 872,
+        "high": 872,
+        "low": 872,
+        "close": 872,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 863,
+        "high": 863,
+        "low": 863,
+        "close": 863,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 842,
+        "high": 842,
+        "low": 842,
+        "close": 842,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "TATAMOTORS",
     "name": "Tata Motors",
-    "price": 816,
+    "price": 811,
     "previousClose": 842,
     "todayOpen": 842,
     "fairValue": 915,
@@ -9782,40 +9782,8 @@
     "beta": 1.4,
     "high": 908,
     "low": 755,
-    "volume": 168251,
+    "volume": 171221,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 830,
-        "high": 830,
-        "low": 830,
-        "close": 830,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 816,
-        "high": 816,
-        "low": 816,
-        "close": 816,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 806,
-        "high": 806,
-        "low": 806,
-        "close": 806,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 803,
-        "high": 803,
-        "low": 803,
-        "close": 803,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 799,
@@ -10743,13 +10711,45 @@
         "low": 820,
         "close": 820,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 812,
+        "high": 812,
+        "low": 812,
+        "close": 812,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 810,
+        "high": 810,
+        "low": 810,
+        "close": 810,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 808,
+        "high": 808,
+        "low": 808,
+        "close": 808,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 817,
+        "high": 817,
+        "low": 817,
+        "close": 817,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "MARUTI",
     "name": "Maruti Suzuki",
-    "price": 9913,
+    "price": 9919,
     "previousClose": 11315,
     "todayOpen": 11315,
     "fairValue": 11800,
@@ -10759,40 +10759,8 @@
     "beta": 1.05,
     "high": 11318,
     "low": 9518,
-    "volume": 2102389,
+    "volume": 2140194,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 10052,
-        "high": 10052,
-        "low": 10052,
-        "close": 10052,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 10063,
-        "high": 10063,
-        "low": 10063,
-        "close": 10063,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 10135,
-        "high": 10135,
-        "low": 10135,
-        "close": 10135,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 10165,
-        "high": 10165,
-        "low": 10165,
-        "close": 10165,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 10056,
@@ -11720,13 +11688,45 @@
         "low": 9921,
         "close": 9921,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 9896,
+        "high": 9896,
+        "low": 9896,
+        "close": 9896,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 9916,
+        "high": 9916,
+        "low": 9916,
+        "close": 9916,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 9856,
+        "high": 9856,
+        "low": 9856,
+        "close": 9856,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 9872,
+        "high": 9872,
+        "low": 9872,
+        "close": 9872,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "M&M",
     "name": "Mahindra & Mahindra",
-    "price": 1893,
+    "price": 1833,
     "previousClose": 1721,
     "todayOpen": 1721,
     "fairValue": 1680,
@@ -11736,40 +11736,8 @@
     "beta": 1.2,
     "high": 2075,
     "low": 1573,
-    "volume": 377857,
+    "volume": 384800,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1923,
-        "high": 1923,
-        "low": 1923,
-        "close": 1923,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1942,
-        "high": 1942,
-        "low": 1942,
-        "close": 1942,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1953,
-        "high": 1953,
-        "low": 1953,
-        "close": 1953,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1913,
-        "high": 1913,
-        "low": 1913,
-        "close": 1913,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1904,
@@ -12697,13 +12665,45 @@
         "low": 1907,
         "close": 1907,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1873,
+        "high": 1873,
+        "low": 1873,
+        "close": 1873,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1881,
+        "high": 1881,
+        "low": 1881,
+        "close": 1881,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1824,
+        "high": 1824,
+        "low": 1824,
+        "close": 1824,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1832,
+        "high": 1832,
+        "low": 1832,
+        "close": 1832,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "BAJAJ-AUTO",
     "name": "Bajaj Auto",
-    "price": 5684,
+    "price": 5754,
     "previousClose": 7987,
     "todayOpen": 7987,
     "fairValue": 7800,
@@ -12712,41 +12712,9 @@
     "pe": 24,
     "beta": 0.8,
     "high": 8330,
-    "low": 5637,
-    "volume": 1515945,
+    "low": 5537,
+    "volume": 1536486,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 7545,
-        "high": 7545,
-        "low": 7545,
-        "close": 7545,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 7482,
-        "high": 7482,
-        "low": 7482,
-        "close": 7482,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 7453,
-        "high": 7453,
-        "low": 7453,
-        "close": 7453,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 7552,
-        "high": 7552,
-        "low": 7552,
-        "close": 7552,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 7373,
@@ -13674,13 +13642,45 @@
         "low": 5653,
         "close": 5653,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 5661,
+        "high": 5661,
+        "low": 5661,
+        "close": 5661,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 5553,
+        "high": 5553,
+        "low": 5553,
+        "close": 5553,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 5622,
+        "high": 5622,
+        "low": 5622,
+        "close": 5622,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 5727,
+        "high": 5727,
+        "low": 5727,
+        "close": 5727,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "RELIANCE",
     "name": "Reliance Industries",
-    "price": 1282,
+    "price": 1260,
     "previousClose": 1453,
     "todayOpen": 1453,
     "fairValue": 1493,
@@ -13689,41 +13689,9 @@
     "pe": 24,
     "beta": 1,
     "high": 1498,
-    "low": 1271,
-    "volume": 284594,
+    "low": 1254,
+    "volume": 289274,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1406,
-        "high": 1406,
-        "low": 1406,
-        "close": 1406,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1402,
-        "high": 1402,
-        "low": 1402,
-        "close": 1402,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1401,
-        "high": 1401,
-        "low": 1401,
-        "close": 1401,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1400,
-        "high": 1400,
-        "low": 1400,
-        "close": 1400,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1417,
@@ -14651,13 +14619,45 @@
         "low": 1281,
         "close": 1281,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1272,
+        "high": 1272,
+        "low": 1272,
+        "close": 1272,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1278,
+        "high": 1278,
+        "low": 1278,
+        "close": 1278,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1266,
+        "high": 1266,
+        "low": 1266,
+        "close": 1266,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1261,
+        "high": 1261,
+        "low": 1261,
+        "close": 1261,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ONGC",
     "name": "Oil & Natural Gas Corp",
-    "price": 223,
+    "price": 233,
     "previousClose": 195,
     "todayOpen": 195,
     "fairValue": 190,
@@ -14667,40 +14667,8 @@
     "beta": 1.25,
     "high": 241,
     "low": 171,
-    "volume": 40772,
+    "volume": 41529,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 179,
-        "high": 179,
-        "low": 179,
-        "close": 179,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 180,
-        "high": 180,
-        "low": 180,
-        "close": 180,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 178,
-        "high": 178,
-        "low": 178,
-        "close": 178,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 180,
-        "high": 180,
-        "low": 180,
-        "close": 180,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 179,
@@ -15628,13 +15596,45 @@
         "low": 224,
         "close": 224,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 223,
+        "high": 223,
+        "low": 223,
+        "close": 223,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 226,
+        "high": 226,
+        "low": 226,
+        "close": 226,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 233,
+        "high": 233,
+        "low": 233,
+        "close": 233,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 233,
+        "high": 233,
+        "low": 233,
+        "close": 233,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "NTPC",
     "name": "NTPC Ltd",
-    "price": 245,
+    "price": 242,
     "previousClose": 271,
     "todayOpen": 271,
     "fairValue": 365,
@@ -15644,40 +15644,8 @@
     "beta": 0.95,
     "high": 288,
     "low": 233,
-    "volume": 58902,
+    "volume": 59634,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 250,
-        "high": 250,
-        "low": 250,
-        "close": 250,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 252,
-        "high": 252,
-        "low": 252,
-        "close": 252,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 245,
-        "high": 245,
-        "low": 245,
-        "close": 245,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 241,
-        "high": 241,
-        "low": 241,
-        "close": 241,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 236,
@@ -16605,13 +16573,45 @@
         "low": 245,
         "close": 245,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 245,
+        "high": 245,
+        "low": 245,
+        "close": 245,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 248,
+        "high": 248,
+        "low": 248,
+        "close": 248,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 243,
+        "high": 243,
+        "low": 243,
+        "close": 243,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 242,
+        "high": 242,
+        "low": 242,
+        "close": 242,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "POWERGRID",
     "name": "Power Grid Corporation",
-    "price": 260,
+    "price": 263,
     "previousClose": 289,
     "todayOpen": 289,
     "fairValue": 292,
@@ -16621,40 +16621,8 @@
     "beta": 0.9,
     "high": 293,
     "low": 233,
-    "volume": 57286,
+    "volume": 58404,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 266,
-        "high": 266,
-        "low": 266,
-        "close": 266,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 262,
-        "high": 262,
-        "low": 262,
-        "close": 262,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 261,
-        "high": 261,
-        "low": 261,
-        "close": 261,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 260,
-        "high": 260,
-        "low": 260,
-        "close": 260,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 265,
@@ -17582,13 +17550,45 @@
         "low": 260,
         "close": 260,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 258,
+        "high": 258,
+        "low": 258,
+        "close": 258,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 262,
+        "high": 262,
+        "low": 262,
+        "close": 262,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 262,
+        "high": 262,
+        "low": 262,
+        "close": 262,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 264,
+        "high": 264,
+        "low": 264,
+        "close": 264,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "TATAPOWER",
     "name": "Tata Power",
-    "price": 513,
+    "price": 499,
     "previousClose": 408,
     "todayOpen": 408,
     "fairValue": 410,
@@ -17598,40 +17598,8 @@
     "beta": 1.12,
     "high": 537,
     "low": 392,
-    "volume": 97029,
+    "volume": 98918,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 495,
-        "high": 495,
-        "low": 495,
-        "close": 495,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 501,
-        "high": 501,
-        "low": 501,
-        "close": 501,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 498,
-        "high": 498,
-        "low": 498,
-        "close": 498,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 507,
-        "high": 507,
-        "low": 507,
-        "close": 507,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 497,
@@ -18559,13 +18527,45 @@
         "low": 514,
         "close": 514,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 506,
+        "high": 506,
+        "low": 506,
+        "close": 506,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 505,
+        "high": 505,
+        "low": 505,
+        "close": 505,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 501,
+        "high": 501,
+        "low": 501,
+        "close": 501,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 498,
+        "high": 498,
+        "low": 498,
+        "close": 498,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ADANI",
     "name": "Adani Enterprises",
-    "price": 428,
+    "price": 431,
     "previousClose": 383,
     "todayOpen": 383,
     "fairValue": 456,
@@ -18575,40 +18575,8 @@
     "beta": 1.7,
     "high": 448,
     "low": 342,
-    "volume": 81006,
+    "volume": 82459,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 404,
-        "high": 404,
-        "low": 404,
-        "close": 404,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 405,
-        "high": 405,
-        "low": 405,
-        "close": 405,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 398,
-        "high": 398,
-        "low": 398,
-        "close": 398,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 388,
-        "high": 388,
-        "low": 388,
-        "close": 388,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 387,
@@ -19536,13 +19504,45 @@
         "low": 427,
         "close": 427,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 430,
+        "high": 430,
+        "low": 430,
+        "close": 430,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 432,
+        "high": 432,
+        "low": 432,
+        "close": 432,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 435,
+        "high": 435,
+        "low": 435,
+        "close": 435,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 431,
+        "high": 431,
+        "low": 431,
+        "close": 431,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "BPCL",
     "name": "Bharat Petroleum LTD",
-    "price": 285,
+    "price": 279,
     "previousClose": 227,
     "todayOpen": 227,
     "fairValue": 256,
@@ -19552,40 +19552,8 @@
     "beta": 1.05,
     "high": 316,
     "low": 216,
-    "volume": 54792,
+    "volume": 55840,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 280,
-        "high": 280,
-        "low": 280,
-        "close": 280,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 280,
-        "high": 280,
-        "low": 280,
-        "close": 280,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 278,
-        "high": 278,
-        "low": 278,
-        "close": 278,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 271,
-        "high": 271,
-        "low": 271,
-        "close": 271,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 271,
@@ -20513,13 +20481,45 @@
         "low": 286,
         "close": 286,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 284,
+        "high": 284,
+        "low": 284,
+        "close": 284,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 282,
+        "high": 282,
+        "low": 282,
+        "close": 282,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 283,
+        "high": 283,
+        "low": 283,
+        "close": 283,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 282,
+        "high": 282,
+        "low": 282,
+        "close": 282,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "ITC",
     "name": "ITC Ltd",
-    "price": 387,
+    "price": 379,
     "previousClose": 556,
     "todayOpen": 556,
     "fairValue": 435,
@@ -20528,41 +20528,9 @@
     "pe": 29,
     "beta": 0.65,
     "high": 569,
-    "low": 387,
-    "volume": 99348,
+    "low": 377,
+    "volume": 100879,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 511,
-        "high": 511,
-        "low": 511,
-        "close": 511,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 519,
-        "high": 519,
-        "low": 519,
-        "close": 519,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 528,
-        "high": 528,
-        "low": 528,
-        "close": 528,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 527,
-        "high": 527,
-        "low": 527,
-        "close": 527,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 512,
@@ -21490,13 +21458,45 @@
         "low": 390,
         "close": 390,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 389,
+        "high": 389,
+        "low": 389,
+        "close": 389,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 382,
+        "high": 382,
+        "low": 382,
+        "close": 382,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 380,
+        "high": 380,
+        "low": 380,
+        "close": 380,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 380,
+        "high": 380,
+        "low": 380,
+        "close": 380,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "HINDUNILVR",
     "name": "Hindustan Unilever",
-    "price": 2059,
+    "price": 2082,
     "previousClose": 2340,
     "todayOpen": 2340,
     "fairValue": 2400,
@@ -21506,40 +21506,8 @@
     "beta": 0.5,
     "high": 2341,
     "low": 1762,
-    "volume": 411147,
+    "volume": 419216,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 2127,
-        "high": 2127,
-        "low": 2127,
-        "close": 2127,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 2105,
-        "high": 2105,
-        "low": 2105,
-        "close": 2105,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 2116,
-        "high": 2116,
-        "low": 2116,
-        "close": 2116,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 2094,
-        "high": 2094,
-        "low": 2094,
-        "close": 2094,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 2072,
@@ -22467,13 +22435,45 @@
         "low": 2060,
         "close": 2060,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 2037,
+        "high": 2037,
+        "low": 2037,
+        "close": 2037,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 2028,
+        "high": 2028,
+        "low": 2028,
+        "close": 2028,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 2056,
+        "high": 2056,
+        "low": 2056,
+        "close": 2056,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 2071,
+        "high": 2071,
+        "low": 2071,
+        "close": 2071,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "NESTLE",
     "name": "Nestle India",
-    "price": 26226,
+    "price": 25401,
     "previousClose": 26327,
     "todayOpen": 26327,
     "fairValue": 25500,
@@ -22483,40 +22483,8 @@
     "beta": 0.4,
     "high": 32268,
     "low": 22676,
-    "volume": 5409812,
+    "volume": 5508926,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 24800,
-        "high": 24800,
-        "low": 24800,
-        "close": 24800,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 24934,
-        "high": 24934,
-        "low": 24934,
-        "close": 24934,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 24833,
-        "high": 24833,
-        "low": 24833,
-        "close": 24833,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 25045,
-        "high": 25045,
-        "low": 25045,
-        "close": 25045,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 25118,
@@ -23444,13 +23412,45 @@
         "low": 26135,
         "close": 26135,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 25924,
+        "high": 25924,
+        "low": 25924,
+        "close": 25924,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 25623,
+        "high": 25623,
+        "low": 25623,
+        "close": 25623,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 26007,
+        "high": 26007,
+        "low": 26007,
+        "close": 26007,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 25633,
+        "high": 25633,
+        "low": 25633,
+        "close": 25633,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "BHARTIARTL",
     "name": "Bharti Airtel",
-    "price": 1086,
+    "price": 1087,
     "previousClose": 1051,
     "todayOpen": 1051,
     "fairValue": 1250,
@@ -23460,40 +23460,8 @@
     "beta": 0.95,
     "high": 1141,
     "low": 944,
-    "volume": 211931,
+    "volume": 215917,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1053,
-        "high": 1053,
-        "low": 1053,
-        "close": 1053,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1041,
-        "high": 1041,
-        "low": 1041,
-        "close": 1041,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1064,
-        "high": 1064,
-        "low": 1064,
-        "close": 1064,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1072,
-        "high": 1072,
-        "low": 1072,
-        "close": 1072,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1038,
@@ -24421,13 +24389,45 @@
         "low": 1088,
         "close": 1088,
         "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1085,
+        "high": 1085,
+        "low": 1085,
+        "close": 1085,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1085,
+        "high": 1085,
+        "low": 1085,
+        "close": 1085,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1094,
+        "high": 1094,
+        "low": 1094,
+        "close": 1094,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1092,
+        "high": 1092,
+        "low": 1092,
+        "close": 1092,
+        "volume": 0
       }
     ]
   },
   {
     "symbol": "SUNPHARMA",
     "name": "Sun Pharma",
-    "price": 1336,
+    "price": 1366,
     "previousClose": 1230,
     "todayOpen": 1230,
     "fairValue": 1250,
@@ -24435,42 +24435,10 @@
     "marketCap": 300000,
     "pe": 28,
     "beta": 0.7,
-    "high": 1374,
+    "high": 1385,
     "low": 1148,
-    "volume": 257418,
+    "volume": 262446,
     "intraday": [
-      {
-        "tStart": 1779510861555,
-        "open": 1251,
-        "high": 1251,
-        "low": 1251,
-        "close": 1251,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510921570,
-        "open": 1255,
-        "high": 1255,
-        "low": 1255,
-        "close": 1255,
-        "volume": 0
-      },
-      {
-        "tStart": 1779510981570,
-        "open": 1252,
-        "high": 1252,
-        "low": 1252,
-        "close": 1252,
-        "volume": 0
-      },
-      {
-        "tStart": 1779511041581,
-        "open": 1209,
-        "high": 1209,
-        "low": 1209,
-        "close": 1209,
-        "volume": 0
-      },
       {
         "tStart": 1779511101595,
         "open": 1236,
@@ -25397,6 +25365,38 @@
         "high": 1340,
         "low": 1340,
         "close": 1340,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518370891,
+        "open": 1342,
+        "high": 1342,
+        "low": 1342,
+        "close": 1342,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518430905,
+        "open": 1323,
+        "high": 1323,
+        "low": 1323,
+        "close": 1323,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518490910,
+        "open": 1359,
+        "high": 1359,
+        "low": 1359,
+        "close": 1359,
+        "volume": 0
+      },
+      {
+        "tStart": 1779518550921,
+        "open": 1362,
+        "high": 1362,
+        "low": 1362,
+        "close": 1362,
         "volume": 0
       }
     ]
