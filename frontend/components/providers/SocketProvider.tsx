@@ -16,6 +16,14 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
     if (initialized.current) return;
     initialized.current = true;
 
+    let lastHealthCheck = 0;
+    const throttledVerifyHealth = async () => {
+      const now = Date.now();
+      if (now - lastHealthCheck < 10000) return; // 10s throttle
+      lastHealthCheck = now;
+      await verifyBackendHealth();
+    };
+
     const handleConnect = () => {
         console.log("🟢 socket connected");
         
@@ -39,8 +47,8 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
 
         console.log("⚠️ socket connect_error:", err.message);
   
-        // backend unreachable
-        useServerErrorStore.getState().setServerError(true);
+        // Verify if the API is actually down before showing Server Unavailable
+        throttledVerifyHealth();
     }
 
     console.log("🚀 SocketProvider initialized once");

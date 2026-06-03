@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useServerErrorStore } from "@/stores/useServerErrorStore";
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
