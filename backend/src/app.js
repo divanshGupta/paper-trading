@@ -6,7 +6,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { allowedOrigins } from "./config/corsConfig.js";
 import logger from "./utils/logger.js";
-import { apiLimiter, authLimiter, tradeLimiter } from "./middlewares/rateLimit.middleware.js";
+import {
+  apiLimiter,
+  authLimiter,
+  tradeLimiter,
+} from "./middlewares/rateLimit.middleware.js";
 import userRouter from "./routes/user.routes.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
 import portfolioRouter from "./routes/portfolio.routes.js";
@@ -14,6 +18,7 @@ import tradeRouter from "./routes/trade.routes.js";
 import marketRouter from "./routes/market.routes.js";
 import transactionRouter from "./routes/transaction.routes.js";
 import watchlistRouter from "./routes/watchlist.routes.js";
+import candleRouter from "./routes/candle.routes.js";
 
 // Express app
 export const app = express();
@@ -29,7 +34,7 @@ app.use(
   helmet({
     contentSecurityPolicy: false, // disable CSP here if your app injects inline scripts; enable and tune for tighter security
     crossOriginEmbedderPolicy: false,
-  })
+  }),
 );
 
 // gzip responses
@@ -57,7 +62,6 @@ app.use(cors(corsOptions));
 // Respond to preflight requests quickly
 app.options(/^\/.*$/, cors(corsOptions));
 
-
 // ----------------------
 // Parsers & small middleware
 // ----------------------
@@ -83,7 +87,7 @@ app.use(
     stream: {
       write: (msg) => logger.info(msg.trim()),
     },
-  })
+  }),
 );
 
 // Quick inline logger for very early debugging (keeps your previous behaviour)
@@ -123,6 +127,7 @@ app.use("/api/v1/portfolio", portfolioRouter);
 app.use("/api/v1/market", marketRouter);
 app.use("/api/v1/transactions", transactionRouter);
 app.use("/api/v1/watchlist", watchlistRouter);
+app.use("/api/v1/candles", candleRouter);
 
 // ----------------------
 // 404 handler
@@ -137,7 +142,6 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 // Export `app` (server.js will import and create http.Server)
-
 
 // Short notes and rationale (quick)
 
