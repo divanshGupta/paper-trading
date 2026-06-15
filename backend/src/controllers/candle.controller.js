@@ -1,4 +1,4 @@
-import { getCandles, getOpenCandle } from "../services/candleService";
+import { getCandles, getOpenCandle } from "../services/candleService.js";
 
 const VALID_INTERVALS = ["1min", "5min", "15min", "1hour", "1day"];
 

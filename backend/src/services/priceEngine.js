@@ -3,7 +3,7 @@ import { isMarketOpen } from "../utils/marketTimes.js";
 import { loadPrices, savePrices } from "./priceStorage.js";
 import logger from "../utils/logger.js";
 import { DEFAULT_PRICES } from "../config/stocksData.js";
-import { processTick } from "./candleService";
+import { processTick } from "./candleService.js";
 
 /**
  * Advanced Fake Market Engine
@@ -421,13 +421,19 @@ export function startPriceEngine(io) {
   }
 
   // Start market status broadcaster
-  marketStatusIntervalHandle = setInterval(() => {
+  marketStatusIntervalHandle = setInterval(async () => {
     const openNow = isMarketOpen();
 
     // detect closed -> open transition
     if (!lastMarketOpenState && openNow) {
       handleMarketOpenReset();
     }
+
+    if (lastMarketOpenState && !openNow) {
+      logger.info("Market closed. Flushing candles.");
+      await flushAllOpenCandles();
+    }
+
     lastMarketOpenState = openNow;
 
     try {

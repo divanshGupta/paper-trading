@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getCandleData } from "../controllers/candle.controller";
-import { verifyAuth } from "../middlewares/auth.middleware";
+import { getCandleData } from "../controllers/candle.controller.js";
+import { verifyAuth } from "../middlewares/auth.middleware.js";
 
+console.log("CANDLE ROUTER LOADED");
 const candleRouter = Router();
 
-candleRouter.get("/:symbol", verifyAuth, getCandleData);
+candleRouter.get("/:symbol", getCandleData);
 
 export default candleRouter;

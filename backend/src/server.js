@@ -1,8 +1,9 @@
 // server.js
-import http from 'http';
-import { app } from './app.js';
-import { initSocket } from './config/socket.js';
-import logger from './utils/logger.js';
+import http from "http";
+import { app } from "./app.js";
+import { initSocket } from "./config/socket.js";
+import logger from "./utils/logger.js";
+import { flushAllOpenCandles } from "./services/candleService.js";
 
 // Create HTTP server
 const server = http.createServer(app);
@@ -19,21 +20,44 @@ server.listen(PORT, () => {
 });
 
 // Handle unhandled promise rejections
-process.on("unhandledRejection", (err) => {
-  console.error("⚠️ Unhandled Rejection:", err);
+process.on("unhandledRejection", async (err) => {
+  console.error(err);
+
+  try {
+    await flushAllOpenCandles();
+  } catch {}
+
   server.close(() => process.exit(1));
 });
 
 // Handle uncaught exceptions
-process.on("uncaughtException", (err) => {
-  console.error("💥 Uncaught Exception:", err);
+process.on("uncaughtException", async (err) => {
+  console.error(err);
+
+  try {
+    await flushAllOpenCandles();
+  } catch {}
+
   process.exit(1);
 });
 
 // Handle termination signals
-process.on("SIGTERM", () => {
-  console.log("👋 SIGTERM received. Shutting down gracefully...");
+process.on("SIGTERM", async () => {
+  console.log("Flushing candles before shutdown...");
+
+  await flushAllOpenCandles();
+
   server.close(() => {
-    console.log("🟢 Process terminated!");
+    process.exit(0);
+  });
+});
+
+process.on("SIGINT", async () => {
+  console.log("Flushing candles before shutdown...");
+
+  await flushAllOpenCandles();
+
+  server.close(() => {
+    process.exit(0);
   });
 });

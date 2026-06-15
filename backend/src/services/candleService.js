@@ -1,7 +1,7 @@
 // backend/src/services/candleService.js
 
-import { prisma } from "../utils/db";
-import { round2 } from "../utils/stockUtils";
+import { prisma } from "../utils/db.js";
+import { round2 } from "../utils/stockUtils.js";
 
 // Interval durations in milliseconds
 const INTERVALS = {
@@ -133,4 +133,12 @@ export async function getCandles(symbol, interval, limit = 500) {
  */
 export function getOpenCandle(symbol, interval) {
   return openCandles[`${symbol}:${interval}`] ?? null;
+}
+
+export async function flushAllOpenCandles() {
+  const candles = Object.values(openCandles);
+
+  await Promise.allSettled(candles.map((candle) => flushCandle(candle)));
+
+  Object.keys(openCandles).forEach((key) => delete openCandles[key]);
 }
