@@ -70,25 +70,14 @@ function nowISO() {
 }
 
 function initializePrices() {
-  // try disk load first
   try {
     const fromDisk = loadPrices?.();
     if (fromDisk && Array.isArray(fromDisk) && fromDisk.length > 0) {
-      // ensure shape for older files
-      return fromDisk.map((s) => ({
-        ...s,
-        high: s.high ?? s.price,
-        low: s.low ?? s.price,
-        volume: s.volume ?? 0,
-        intraday: Array.isArray(s.intraday) ? s.intraday : [],
-      }));
 
-      // ✅ FIX: If market is already open on startup and todayOpen date
-      // doesn't match today, treat current price as the open
       if (isMarketOpen()) {
         const today = new Date().toDateString();
-        return loaded.map((s) => {
-          const openDate = s.todayOpenDate; // we'll store this (see fix 2)
+        return fromDisk.map((s) => {
+          const openDate = s.todayOpenDate;
           if (openDate !== today) {
             return {
               ...s,
@@ -101,21 +90,29 @@ function initializePrices() {
               volume: 0,
             };
           }
-          return s;
+          return {
+            ...s,
+            high: s.high ?? s.price,
+            low: s.low ?? s.price,
+            volume: s.volume ?? 0,
+            intraday: Array.isArray(s.intraday) ? s.intraday : [],
+          };
         });
       }
 
-      return loaded;
+      // Market closed — just ensure shape
+      return fromDisk.map((s) => ({
+        ...s,
+        high: s.high ?? s.price,
+        low: s.low ?? s.price,
+        volume: s.volume ?? 0,
+        intraday: Array.isArray(s.intraday) ? s.intraday : [],
+      }));
     }
   } catch (err) {
-    logger.warn(
-      nowISO(),
-      "Failed to load prices from disk — falling back to defaults",
-      err,
-    );
+    logger.warn(nowISO(), "Failed to load prices from disk — falling back to defaults", err);
   }
 
-  // fallback to defaults
   return DEFAULT_PRICES.map((s) => ({
     ...s,
     high: s.price,
@@ -373,14 +370,14 @@ function startPeriodicSave() {
        todayOpen = price at open
      This runs once per market open (not on server restart)
    ------------------------- */
-function handleMarketOpenReset() {
-  logger.info(nowISO(), "Market opened — performing daily reset");
+export function handleMarketOpenReset() {
   const today = new Date().toDateString(); // e.g. "sat may 23 2026"
   PRICES = PRICES.map((s) => ({
     ...s,
     previousClose: s.price,
     todayOpen: s.price,
     todayOpenDate: today,
+    fairvalue: s.price, // anchor fair value to current price on each new day
     intraday: [],
     high: s.price,
     low: s.price,
@@ -411,6 +408,11 @@ export function startPriceEngine(io) {
 
   // Start periodic persistence
   startPeriodicSave();
+
+  // Hnadle startup mid market trainsition detection wont catch this
+  if (isMarketOpen()) {
+    handleMarketOpenReset();
+  }
 
   // Immediately broadcast current snapshot (loaded from disk or defaults)
   try {

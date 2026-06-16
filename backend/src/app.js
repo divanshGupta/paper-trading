@@ -20,6 +20,9 @@ import transactionRouter from "./routes/transaction.routes.js";
 import watchlistRouter from "./routes/watchlist.routes.js";
 import candleRouter from "./routes/candle.routes.js";
 
+import { PRICES } from "./services/priceEngine.js";
+import { handleMarketOpenReset } from "./services/priceEngine.js";
+
 // Express app
 export const app = express();
 
@@ -112,6 +115,11 @@ app.use("/api/order", tradeLimiter);
 // ----------------------
 app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 app.get("/ready", (_req, res) => res.status(200).send("ready"));
+// Temporarily add this route in your dev environment
+app.get("/debug/market-reset", (req, res) => {
+  handleMarketOpenReset(); // make sure this is exported or move route into priceEngine
+  res.json({ message: "reset fired", sample: PRICES[0] });
+});
 
 // ----------------------
 // Routes

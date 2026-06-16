@@ -24,7 +24,7 @@ export async function processTick(symbol, price, volume) {
   const now = Date.now();
 
   for (const [interval, duration] of Object.entries(INTERVALS)) {
-    const key = `${symbol}:${interval}`;
+    const key = `${symbol.toUpperCase()}:${interval}`;
     const tStart = new Date(Math.floor(now / duration) * duration);
     const tEnd = new Date(tStart.getTime() + duration);
 
@@ -124,7 +124,13 @@ export async function getCandles(symbol, interval, limit = 500) {
   });
 
   // Reverse so oldest is first (LightweightCharts expects ascending time)
-  return candles.reverse();
+  return candles.reverse().map((c) => ({
+    ...c,
+    open: Number(c.open),
+    high: Number(c.high),
+    low: Number(c.low),
+    close: Number(c.close),
+  }));
 }
 
 /**
@@ -132,7 +138,7 @@ export async function getCandles(symbol, interval, limit = 500) {
  * Frontend uses this to render the live-updating last candle
  */
 export function getOpenCandle(symbol, interval) {
-  return openCandles[`${symbol}:${interval}`] ?? null;
+  return openCandles[`${symbol.toUpperCase()}:${interval}`] ?? null;
 }
 
 export async function flushAllOpenCandles() {
