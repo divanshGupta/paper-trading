@@ -377,7 +377,7 @@ export function handleMarketOpenReset() {
     previousClose: s.price,
     todayOpen: s.price,
     todayOpenDate: today,
-    fairvalue: s.price, // anchor fair value to current price on each new day
+    fairValue: s.price, // anchor fair value to current price on each new day
     intraday: [],
     high: s.price,
     low: s.price,

@@ -5,7 +5,7 @@
     "price": 2419,
     "previousClose": 2419,
     "todayOpen": 2419,
-    "fairValue": 3047,
+    "fairValue": 2419,
     "sector": "IT",
     "marketCap": 1400000,
     "pe": 32,
@@ -14,7 +14,8 @@
     "low": 2419,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 2419
   },
   {
     "symbol": "INFY",
@@ -22,7 +23,7 @@
     "price": 2030,
     "previousClose": 2030,
     "todayOpen": 2030,
-    "fairValue": 1530,
+    "fairValue": 2030,
     "sector": "IT",
     "marketCap": 650000,
     "pe": 28,
@@ -31,7 +32,8 @@
     "low": 2030,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 2030
   },
   {
     "symbol": "WIPRO",
@@ -39,7 +41,7 @@
     "price": 373,
     "previousClose": 373,
     "todayOpen": 373,
-    "fairValue": 465,
+    "fairValue": 373,
     "sector": "IT",
     "marketCap": 240000,
     "pe": 22,
@@ -48,7 +50,8 @@
     "low": 373,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 373
   },
   {
     "symbol": "HCLTECH",
@@ -56,7 +59,7 @@
     "price": 1016,
     "previousClose": 1016,
     "todayOpen": 1016,
-    "fairValue": 1180,
+    "fairValue": 1016,
     "sector": "IT",
     "marketCap": 350000,
     "pe": 25,
@@ -65,7 +68,8 @@
     "low": 1016,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1016
   },
   {
     "symbol": "TECHM",
@@ -73,7 +77,7 @@
     "price": 734,
     "previousClose": 734,
     "todayOpen": 734,
-    "fairValue": 1280,
+    "fairValue": 734,
     "sector": "IT",
     "marketCap": 120000,
     "pe": 20,
@@ -82,7 +86,8 @@
     "low": 734,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 734
   },
   {
     "symbol": "HDFCBANK",
@@ -90,7 +95,7 @@
     "price": 1016,
     "previousClose": 1016,
     "todayOpen": 1016,
-    "fairValue": 991,
+    "fairValue": 1016,
     "sector": "Banking",
     "marketCap": 1100000,
     "pe": 18,
@@ -99,7 +104,8 @@
     "low": 1016,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1016
   },
   {
     "symbol": "ICICIBANK",
@@ -107,7 +113,7 @@
     "price": 802,
     "previousClose": 802,
     "todayOpen": 802,
-    "fairValue": 1010,
+    "fairValue": 802,
     "sector": "Banking",
     "marketCap": 750000,
     "pe": 20,
@@ -116,7 +122,8 @@
     "low": 802,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 802
   },
   {
     "symbol": "KOTAKBANK",
@@ -124,7 +131,7 @@
     "price": 1575,
     "previousClose": 1575,
     "todayOpen": 1575,
-    "fairValue": 1680,
+    "fairValue": 1575,
     "sector": "Banking",
     "marketCap": 340000,
     "pe": 22,
@@ -133,7 +140,8 @@
     "low": 1575,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1575
   },
   {
     "symbol": "AXISBANK",
@@ -141,7 +149,7 @@
     "price": 1196,
     "previousClose": 1196,
     "todayOpen": 1196,
-    "fairValue": 1100,
+    "fairValue": 1196,
     "sector": "Banking",
     "marketCap": 350000,
     "pe": 16,
@@ -150,7 +158,8 @@
     "low": 1196,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1196
   },
   {
     "symbol": "SBIN",
@@ -158,7 +167,7 @@
     "price": 760,
     "previousClose": 760,
     "todayOpen": 760,
-    "fairValue": 780,
+    "fairValue": 760,
     "sector": "Banking",
     "marketCap": 720000,
     "pe": 14,
@@ -167,7 +176,8 @@
     "low": 760,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 760
   },
   {
     "symbol": "TATAMOTORS",
@@ -175,7 +185,7 @@
     "price": 913,
     "previousClose": 913,
     "todayOpen": 913,
-    "fairValue": 915,
+    "fairValue": 913,
     "sector": "Auto",
     "marketCap": 350000,
     "pe": 18,
@@ -184,7 +194,8 @@
     "low": 913,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 913
   },
   {
     "symbol": "MARUTI",
@@ -192,7 +203,7 @@
     "price": 10584,
     "previousClose": 10584,
     "todayOpen": 10584,
-    "fairValue": 11800,
+    "fairValue": 10584,
     "sector": "Auto",
     "marketCap": 400000,
     "pe": 30,
@@ -201,7 +212,8 @@
     "low": 10584,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 10584
   },
   {
     "symbol": "M&M",
@@ -209,7 +221,7 @@
     "price": 2503,
     "previousClose": 2503,
     "todayOpen": 2503,
-    "fairValue": 1680,
+    "fairValue": 2503,
     "sector": "Auto",
     "marketCap": 270000,
     "pe": 26,
@@ -218,7 +230,8 @@
     "low": 2503,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 2503
   },
   {
     "symbol": "BAJAJ-AUTO",
@@ -226,7 +239,7 @@
     "price": 5437,
     "previousClose": 5437,
     "todayOpen": 5437,
-    "fairValue": 7800,
+    "fairValue": 5437,
     "sector": "Auto",
     "marketCap": 240000,
     "pe": 24,
@@ -235,7 +248,8 @@
     "low": 5437,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 5437
   },
   {
     "symbol": "RELIANCE",
@@ -243,7 +257,7 @@
     "price": 1141,
     "previousClose": 1141,
     "todayOpen": 1141,
-    "fairValue": 1493,
+    "fairValue": 1141,
     "sector": "Energy",
     "marketCap": 1800000,
     "pe": 24,
@@ -252,7 +266,8 @@
     "low": 1141,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1141
   },
   {
     "symbol": "ONGC",
@@ -260,7 +275,7 @@
     "price": 204,
     "previousClose": 204,
     "todayOpen": 204,
-    "fairValue": 190,
+    "fairValue": 204,
     "sector": "Energy",
     "marketCap": 220000,
     "pe": 9,
@@ -269,7 +284,8 @@
     "low": 204,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 204
   },
   {
     "symbol": "NTPC",
@@ -277,7 +293,7 @@
     "price": 273,
     "previousClose": 273,
     "todayOpen": 273,
-    "fairValue": 365,
+    "fairValue": 273,
     "sector": "Power",
     "marketCap": 120000,
     "pe": 12,
@@ -286,7 +302,8 @@
     "low": 273,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 273
   },
   {
     "symbol": "POWERGRID",
@@ -294,7 +311,7 @@
     "price": 251,
     "previousClose": 251,
     "todayOpen": 251,
-    "fairValue": 292,
+    "fairValue": 251,
     "sector": "Power",
     "marketCap": 200000,
     "pe": 10,
@@ -303,7 +320,8 @@
     "low": 251,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 251
   },
   {
     "symbol": "TATAPOWER",
@@ -311,7 +329,7 @@
     "price": 463,
     "previousClose": 463,
     "todayOpen": 463,
-    "fairValue": 410,
+    "fairValue": 463,
     "sector": "Power",
     "marketCap": 80000,
     "pe": 15,
@@ -320,7 +338,8 @@
     "low": 463,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 463
   },
   {
     "symbol": "ADANI",
@@ -328,7 +347,7 @@
     "price": 351,
     "previousClose": 351,
     "todayOpen": 351,
-    "fairValue": 456,
+    "fairValue": 351,
     "sector": "Infrastructure",
     "marketCap": 300000,
     "pe": 120,
@@ -337,7 +356,8 @@
     "low": 351,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 351
   },
   {
     "symbol": "BPCL",
@@ -345,7 +365,7 @@
     "price": 291,
     "previousClose": 291,
     "todayOpen": 291,
-    "fairValue": 256,
+    "fairValue": 291,
     "sector": "Energy",
     "marketCap": 70000,
     "pe": 7,
@@ -354,7 +374,8 @@
     "low": 291,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 291
   },
   {
     "symbol": "ITC",
@@ -362,7 +383,7 @@
     "price": 395,
     "previousClose": 395,
     "todayOpen": 395,
-    "fairValue": 435,
+    "fairValue": 395,
     "sector": "FMCG",
     "marketCap": 540000,
     "pe": 29,
@@ -371,7 +392,8 @@
     "low": 395,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 395
   },
   {
     "symbol": "HINDUNILVR",
@@ -379,7 +401,7 @@
     "price": 1926,
     "previousClose": 1926,
     "todayOpen": 1926,
-    "fairValue": 2400,
+    "fairValue": 1926,
     "sector": "FMCG",
     "marketCap": 560000,
     "pe": 60,
@@ -388,7 +410,8 @@
     "low": 1926,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1926
   },
   {
     "symbol": "NESTLE",
@@ -396,7 +419,7 @@
     "price": 29451,
     "previousClose": 29451,
     "todayOpen": 29451,
-    "fairValue": 25500,
+    "fairValue": 29451,
     "sector": "FMCG",
     "marketCap": 250000,
     "pe": 90,
@@ -405,7 +428,8 @@
     "low": 29451,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 29451
   },
   {
     "symbol": "BHARTIARTL",
@@ -413,7 +437,7 @@
     "price": 720,
     "previousClose": 720,
     "todayOpen": 720,
-    "fairValue": 1250,
+    "fairValue": 720,
     "sector": "Telecom",
     "marketCap": 460000,
     "pe": 24,
@@ -422,7 +446,8 @@
     "low": 720,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 720
   },
   {
     "symbol": "SUNPHARMA",
@@ -430,7 +455,7 @@
     "price": 1404,
     "previousClose": 1404,
     "todayOpen": 1404,
-    "fairValue": 1250,
+    "fairValue": 1404,
     "sector": "Pharma",
     "marketCap": 300000,
     "pe": 28,
@@ -439,6 +464,7 @@
     "low": 1404,
     "volume": 0,
     "intraday": [],
-    "todayOpenDate": "Tue Jun 16 2026"
+    "todayOpenDate": "Wed Jun 17 2026",
+    "fairvalue": 1404
   }
 ]
