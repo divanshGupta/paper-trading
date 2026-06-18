@@ -113,7 +113,12 @@ app.use("/api/order", tradeLimiter);
 // ----------------------
 // Health & readiness
 // ----------------------
-app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
+app.get("/health", (req, res) => {
+  res.set("Cache-Control", "no-store");
+  res.status(200).json({
+    status: "ok",
+  });
+});
 app.get("/ready", (_req, res) => res.status(200).send("ready"));
 // Temporarily add this route in your dev environment
 app.get("/debug/market-reset", (req, res) => {

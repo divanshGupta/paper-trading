@@ -280,14 +280,24 @@ export default function CandlestickChart({
         timeVisible: true,
         secondsVisible: false,
         rightOffset: 5,
-      },
-      localization: {
-        timeFormatter: (time: number) =>
-          new Date(time * 1000).toLocaleTimeString('en-IN', {
+        tickMarkFormatter: (time: number) => {
+          return new Date(time * 1000).toLocaleTimeString('en-IN', {
             hour: '2-digit',
             minute: '2-digit',
             timeZone: 'Asia/Kolkata',
-          }),
+          })
+        },
+      },
+      localization: {
+        priceFormatter: (price: number) => price.toFixed(0),
+        timeFormatter: (time: number) => {
+          console.log('axis timeFormatter raw input:', time, new Date(time * 1000).toISOString())
+          return new Date(time * 1000).toLocaleTimeString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'Asia/Kolkata',
+          })
+        },
       },
       handleScroll: true,
       handleScale: true,
@@ -351,6 +361,7 @@ export default function CandlestickChart({
 
     // ── Crosshair tooltip (OHLCV + RSI) ──
     chart.subscribeCrosshairMove((param) => {
+
       if (!param.time || !param.seriesData) {
         setTooltip(null)
         return
@@ -503,7 +514,7 @@ export default function CandlestickChart({
   return (
     <div className="flex flex-col h-full">
       {/* Controls row */}
-      <div className="flex items-center justify-between mb-2 min-h-[28px]">
+      <div className="flex items-center justify-between md:mb-2 min-h-[28px]">
         <div className="flex items-center gap-1">
           {TIMEFRAMES.map((tf) => (
             <button

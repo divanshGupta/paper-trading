@@ -18,7 +18,7 @@ function createSocket(): Socket | null {
   if (!socketInstance) {
     socketInstance = io(SOCKET_URL, {
       path: "/socket.io",
-      transports: ["websocket"],
+      transports: ["polling", "websocket"],
       autoConnect: false,
       withCredentials: true,
     });

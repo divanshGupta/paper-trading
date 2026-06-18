@@ -1,0 +1,1926 @@
+[
+  {
+    "symbol": "TCS",
+    "name": "Tata Consultancy Services",
+    "price": 2819,
+    "previousClose": 3029,
+    "todayOpen": 3029,
+    "fairValue": 3029,
+    "sector": "IT",
+    "marketCap": 1400000,
+    "pe": 32,
+    "beta": 0.95,
+    "high": 3070,
+    "low": 2676,
+    "volume": 18612,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 3047,
+        "high": 3047,
+        "low": 3047,
+        "close": 3047,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 2942,
+        "high": 2942,
+        "low": 2942,
+        "close": 2942,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 2838,
+        "high": 2838,
+        "low": 2838,
+        "close": 2838,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 2759,
+        "high": 2759,
+        "low": 2759,
+        "close": 2759,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 2773,
+        "high": 2773,
+        "low": 2773,
+        "close": 2773,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 2781,
+        "high": 2781,
+        "low": 2781,
+        "close": 2781,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 2856,
+        "high": 2856,
+        "low": 2856,
+        "close": 2856,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "INFY",
+    "name": "Infosys",
+    "price": 1345,
+    "previousClose": 1419,
+    "todayOpen": 1419,
+    "fairValue": 1419,
+    "sector": "IT",
+    "marketCap": 650000,
+    "pe": 28,
+    "beta": 0.9,
+    "high": 1444,
+    "low": 1334,
+    "volume": 8602,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1410,
+        "high": 1410,
+        "low": 1410,
+        "close": 1410,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1376,
+        "high": 1376,
+        "low": 1376,
+        "close": 1376,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1408,
+        "high": 1408,
+        "low": 1408,
+        "close": 1408,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1385,
+        "high": 1385,
+        "low": 1385,
+        "close": 1385,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1386,
+        "high": 1386,
+        "low": 1386,
+        "close": 1386,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1396,
+        "high": 1396,
+        "low": 1396,
+        "close": 1396,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1363,
+        "high": 1363,
+        "low": 1363,
+        "close": 1363,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "WIPRO",
+    "name": "Wipro Ltd",
+    "price": 490,
+    "previousClose": 470,
+    "todayOpen": 470,
+    "fairValue": 470,
+    "sector": "IT",
+    "marketCap": 240000,
+    "pe": 22,
+    "beta": 0.85,
+    "high": 505,
+    "low": 470,
+    "volume": 3213,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 476,
+        "high": 476,
+        "low": 476,
+        "close": 476,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 486,
+        "high": 486,
+        "low": 486,
+        "close": 486,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 487,
+        "high": 487,
+        "low": 487,
+        "close": 487,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 500,
+        "high": 500,
+        "low": 500,
+        "close": 500,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 501,
+        "high": 501,
+        "low": 501,
+        "close": 501,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 497,
+        "high": 497,
+        "low": 497,
+        "close": 497,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 491,
+        "high": 491,
+        "low": 491,
+        "close": 491,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "HCLTECH",
+    "name": "HCL Technologies",
+    "price": 1130,
+    "previousClose": 1168,
+    "todayOpen": 1168,
+    "fairValue": 1168,
+    "sector": "IT",
+    "marketCap": 350000,
+    "pe": 25,
+    "beta": 0.92,
+    "high": 1187,
+    "low": 1123,
+    "volume": 7651,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1179,
+        "high": 1179,
+        "low": 1179,
+        "close": 1179,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1186,
+        "high": 1186,
+        "low": 1186,
+        "close": 1186,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1169,
+        "high": 1169,
+        "low": 1169,
+        "close": 1169,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1155,
+        "high": 1155,
+        "low": 1155,
+        "close": 1155,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1151,
+        "high": 1151,
+        "low": 1151,
+        "close": 1151,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1139,
+        "high": 1139,
+        "low": 1139,
+        "close": 1139,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1130,
+        "high": 1130,
+        "low": 1130,
+        "close": 1130,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "TECHM",
+    "name": "Tech Mahindra",
+    "price": 1287,
+    "previousClose": 1292,
+    "todayOpen": 1292,
+    "fairValue": 1292,
+    "sector": "IT",
+    "marketCap": 120000,
+    "pe": 20,
+    "beta": 1.1,
+    "high": 1297,
+    "low": 1270,
+    "volume": 8564,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1289,
+        "high": 1289,
+        "low": 1289,
+        "close": 1289,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1292,
+        "high": 1292,
+        "low": 1292,
+        "close": 1292,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1277,
+        "high": 1277,
+        "low": 1277,
+        "close": 1277,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1283,
+        "high": 1283,
+        "low": 1283,
+        "close": 1283,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1289,
+        "high": 1289,
+        "low": 1289,
+        "close": 1289,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1276,
+        "high": 1276,
+        "low": 1276,
+        "close": 1276,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1289,
+        "high": 1289,
+        "low": 1289,
+        "close": 1289,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "HDFCBANK",
+    "name": "HDFC Bank",
+    "price": 955,
+    "previousClose": 984,
+    "todayOpen": 984,
+    "fairValue": 984,
+    "sector": "Banking",
+    "marketCap": 1100000,
+    "pe": 18,
+    "beta": 1.05,
+    "high": 984,
+    "low": 950,
+    "volume": 6464,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 974,
+        "high": 974,
+        "low": 974,
+        "close": 974,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 972,
+        "high": 972,
+        "low": 972,
+        "close": 972,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 971,
+        "high": 971,
+        "low": 971,
+        "close": 971,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 964,
+        "high": 964,
+        "low": 964,
+        "close": 964,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 964,
+        "high": 964,
+        "low": 964,
+        "close": 964,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 952,
+        "high": 952,
+        "low": 952,
+        "close": 952,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 958,
+        "high": 958,
+        "low": 958,
+        "close": 958,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "ICICIBANK",
+    "name": "ICICI Bank",
+    "price": 1039,
+    "previousClose": 996,
+    "todayOpen": 996,
+    "fairValue": 996,
+    "sector": "Banking",
+    "marketCap": 750000,
+    "pe": 20,
+    "beta": 1.1,
+    "high": 1049,
+    "low": 989,
+    "volume": 6539,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1002,
+        "high": 1002,
+        "low": 1002,
+        "close": 1002,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 999,
+        "high": 999,
+        "low": 999,
+        "close": 999,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1006,
+        "high": 1006,
+        "low": 1006,
+        "close": 1006,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1023,
+        "high": 1023,
+        "low": 1023,
+        "close": 1023,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1043,
+        "high": 1043,
+        "low": 1043,
+        "close": 1043,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1034,
+        "high": 1034,
+        "low": 1034,
+        "close": 1034,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1038,
+        "high": 1038,
+        "low": 1038,
+        "close": 1038,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "KOTAKBANK",
+    "name": "Kotak Mahindra Bank",
+    "price": 1698,
+    "previousClose": 1652,
+    "todayOpen": 1652,
+    "fairValue": 1652,
+    "sector": "Banking",
+    "marketCap": 340000,
+    "pe": 22,
+    "beta": 1.08,
+    "high": 1710,
+    "low": 1623,
+    "volume": 10825,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1625,
+        "high": 1625,
+        "low": 1625,
+        "close": 1625,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1667,
+        "high": 1667,
+        "low": 1667,
+        "close": 1667,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1674,
+        "high": 1674,
+        "low": 1674,
+        "close": 1674,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1671,
+        "high": 1671,
+        "low": 1671,
+        "close": 1671,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1685,
+        "high": 1685,
+        "low": 1685,
+        "close": 1685,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1685,
+        "high": 1685,
+        "low": 1685,
+        "close": 1685,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1707,
+        "high": 1707,
+        "low": 1707,
+        "close": 1707,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "AXISBANK",
+    "name": "Axis Bank",
+    "price": 1145,
+    "previousClose": 1115,
+    "todayOpen": 1115,
+    "fairValue": 1115,
+    "sector": "Banking",
+    "marketCap": 350000,
+    "pe": 16,
+    "beta": 1.12,
+    "high": 1151,
+    "low": 1102,
+    "volume": 7129,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1122,
+        "high": 1122,
+        "low": 1122,
+        "close": 1122,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1127,
+        "high": 1127,
+        "low": 1127,
+        "close": 1127,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1140,
+        "high": 1140,
+        "low": 1140,
+        "close": 1140,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1137,
+        "high": 1137,
+        "low": 1137,
+        "close": 1137,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1132,
+        "high": 1132,
+        "low": 1132,
+        "close": 1132,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1133,
+        "high": 1133,
+        "low": 1133,
+        "close": 1133,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1145,
+        "high": 1145,
+        "low": 1145,
+        "close": 1145,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "SBIN",
+    "name": "State Bank of India",
+    "price": 738,
+    "previousClose": 790,
+    "todayOpen": 790,
+    "fairValue": 790,
+    "sector": "Banking",
+    "marketCap": 720000,
+    "pe": 14,
+    "beta": 1.15,
+    "high": 791,
+    "low": 727,
+    "volume": 5131,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 779,
+        "high": 779,
+        "low": 779,
+        "close": 779,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 762,
+        "high": 762,
+        "low": 762,
+        "close": 762,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 759,
+        "high": 759,
+        "low": 759,
+        "close": 759,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 763,
+        "high": 763,
+        "low": 763,
+        "close": 763,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 747,
+        "high": 747,
+        "low": 747,
+        "close": 747,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 732,
+        "high": 732,
+        "low": 732,
+        "close": 732,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 738,
+        "high": 738,
+        "low": 738,
+        "close": 738,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "TATAMOTORS",
+    "name": "Tata Motors",
+    "price": 888,
+    "previousClose": 915,
+    "todayOpen": 915,
+    "fairValue": 915,
+    "sector": "Auto",
+    "marketCap": 350000,
+    "pe": 18,
+    "beta": 1.4,
+    "high": 926,
+    "low": 878,
+    "volume": 5621,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 919,
+        "high": 919,
+        "low": 919,
+        "close": 919,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 917,
+        "high": 917,
+        "low": 917,
+        "close": 917,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 907,
+        "high": 907,
+        "low": 907,
+        "close": 907,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 906,
+        "high": 906,
+        "low": 906,
+        "close": 906,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 891,
+        "high": 891,
+        "low": 891,
+        "close": 891,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 880,
+        "high": 880,
+        "low": 880,
+        "close": 880,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 882,
+        "high": 882,
+        "low": 882,
+        "close": 882,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "MARUTI",
+    "name": "Maruti Suzuki",
+    "price": 11958,
+    "previousClose": 11704,
+    "todayOpen": 11704,
+    "fairValue": 11704,
+    "sector": "Auto",
+    "marketCap": 400000,
+    "pe": 30,
+    "beta": 1.05,
+    "high": 11985,
+    "low": 11651,
+    "volume": 74698,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 11757,
+        "high": 11757,
+        "low": 11757,
+        "close": 11757,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 11713,
+        "high": 11713,
+        "low": 11713,
+        "close": 11713,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 11708,
+        "high": 11708,
+        "low": 11708,
+        "close": 11708,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 11775,
+        "high": 11775,
+        "low": 11775,
+        "close": 11775,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 11801,
+        "high": 11801,
+        "low": 11801,
+        "close": 11801,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 11864,
+        "high": 11864,
+        "low": 11864,
+        "close": 11864,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 11971,
+        "high": 11971,
+        "low": 11971,
+        "close": 11971,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "M&M",
+    "name": "Mahindra & Mahindra",
+    "price": 1692,
+    "previousClose": 1681,
+    "todayOpen": 1681,
+    "fairValue": 1681,
+    "sector": "Auto",
+    "marketCap": 270000,
+    "pe": 26,
+    "beta": 1.2,
+    "high": 1732,
+    "low": 1652,
+    "volume": 11033,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1674,
+        "high": 1674,
+        "low": 1674,
+        "close": 1674,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1653,
+        "high": 1653,
+        "low": 1653,
+        "close": 1653,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1695,
+        "high": 1695,
+        "low": 1695,
+        "close": 1695,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1719,
+        "high": 1719,
+        "low": 1719,
+        "close": 1719,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1703,
+        "high": 1703,
+        "low": 1703,
+        "close": 1703,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1700,
+        "high": 1700,
+        "low": 1700,
+        "close": 1700,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1701,
+        "high": 1701,
+        "low": 1701,
+        "close": 1701,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "BAJAJ-AUTO",
+    "name": "Bajaj Auto",
+    "price": 7854,
+    "previousClose": 7770,
+    "todayOpen": 7770,
+    "fairValue": 7770,
+    "sector": "Auto",
+    "marketCap": 240000,
+    "pe": 24,
+    "beta": 0.8,
+    "high": 7959,
+    "low": 7744,
+    "volume": 51156,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 7835,
+        "high": 7835,
+        "low": 7835,
+        "close": 7835,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 7871,
+        "high": 7871,
+        "low": 7871,
+        "close": 7871,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 7872,
+        "high": 7872,
+        "low": 7872,
+        "close": 7872,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 7861,
+        "high": 7861,
+        "low": 7861,
+        "close": 7861,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 7763,
+        "high": 7763,
+        "low": 7763,
+        "close": 7763,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 7804,
+        "high": 7804,
+        "low": 7804,
+        "close": 7804,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 7897,
+        "high": 7897,
+        "low": 7897,
+        "close": 7897,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "RELIANCE",
+    "name": "Reliance Industries",
+    "price": 1492,
+    "previousClose": 1498,
+    "todayOpen": 1498,
+    "fairValue": 1498,
+    "sector": "Energy",
+    "marketCap": 1800000,
+    "pe": 24,
+    "beta": 1,
+    "high": 1507,
+    "low": 1482,
+    "volume": 9793,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1504,
+        "high": 1504,
+        "low": 1504,
+        "close": 1504,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1504,
+        "high": 1504,
+        "low": 1504,
+        "close": 1504,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1486,
+        "high": 1486,
+        "low": 1486,
+        "close": 1486,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1489,
+        "high": 1489,
+        "low": 1489,
+        "close": 1489,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1490,
+        "high": 1490,
+        "low": 1490,
+        "close": 1490,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1492,
+        "high": 1492,
+        "low": 1492,
+        "close": 1492,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1491,
+        "high": 1491,
+        "low": 1491,
+        "close": 1491,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "ONGC",
+    "name": "Oil & Natural Gas Corp",
+    "price": 182,
+    "previousClose": 193,
+    "todayOpen": 193,
+    "fairValue": 193,
+    "sector": "Energy",
+    "marketCap": 220000,
+    "pe": 9,
+    "beta": 1.25,
+    "high": 195,
+    "low": 181,
+    "volume": 1316,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 192,
+        "high": 192,
+        "low": 192,
+        "close": 192,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 193,
+        "high": 193,
+        "low": 193,
+        "close": 193,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 193,
+        "high": 193,
+        "low": 193,
+        "close": 193,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 191,
+        "high": 191,
+        "low": 191,
+        "close": 191,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 185,
+        "high": 185,
+        "low": 185,
+        "close": 185,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 186,
+        "high": 186,
+        "low": 186,
+        "close": 186,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 182,
+        "high": 182,
+        "low": 182,
+        "close": 182,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "NTPC",
+    "name": "NTPC Ltd",
+    "price": 370,
+    "previousClose": 371,
+    "todayOpen": 371,
+    "fairValue": 371,
+    "sector": "Power",
+    "marketCap": 120000,
+    "pe": 12,
+    "beta": 0.95,
+    "high": 374,
+    "low": 361,
+    "volume": 2595,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 370,
+        "high": 370,
+        "low": 370,
+        "close": 370,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 366,
+        "high": 366,
+        "low": 366,
+        "close": 366,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 363,
+        "high": 363,
+        "low": 363,
+        "close": 363,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 365,
+        "high": 365,
+        "low": 365,
+        "close": 365,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 364,
+        "high": 364,
+        "low": 364,
+        "close": 364,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 365,
+        "high": 365,
+        "low": 365,
+        "close": 365,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 368,
+        "high": 368,
+        "low": 368,
+        "close": 368,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "POWERGRID",
+    "name": "Power Grid Corporation",
+    "price": 302,
+    "previousClose": 296,
+    "todayOpen": 296,
+    "fairValue": 296,
+    "sector": "Power",
+    "marketCap": 200000,
+    "pe": 10,
+    "beta": 0.9,
+    "high": 306,
+    "low": 291,
+    "volume": 1959,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 294,
+        "high": 294,
+        "low": 294,
+        "close": 294,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 295,
+        "high": 295,
+        "low": 295,
+        "close": 295,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 292,
+        "high": 292,
+        "low": 292,
+        "close": 292,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 294,
+        "high": 294,
+        "low": 294,
+        "close": 294,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 295,
+        "high": 295,
+        "low": 295,
+        "close": 295,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 306,
+        "high": 306,
+        "low": 306,
+        "close": 306,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 304,
+        "high": 304,
+        "low": 304,
+        "close": 304,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "TATAPOWER",
+    "name": "Tata Power",
+    "price": 433,
+    "previousClose": 416,
+    "todayOpen": 416,
+    "fairValue": 416,
+    "sector": "Power",
+    "marketCap": 80000,
+    "pe": 15,
+    "beta": 1.12,
+    "high": 436,
+    "low": 416,
+    "volume": 2503,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 422,
+        "high": 422,
+        "low": 422,
+        "close": 422,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 423,
+        "high": 423,
+        "low": 423,
+        "close": 423,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 421,
+        "high": 421,
+        "low": 421,
+        "close": 421,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 425,
+        "high": 425,
+        "low": 425,
+        "close": 425,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 433,
+        "high": 433,
+        "low": 433,
+        "close": 433,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 432,
+        "high": 432,
+        "low": 432,
+        "close": 432,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 435,
+        "high": 435,
+        "low": 435,
+        "close": 435,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "ADANI",
+    "name": "Adani Enterprises",
+    "price": 449,
+    "previousClose": 450,
+    "todayOpen": 450,
+    "fairValue": 450,
+    "sector": "Infrastructure",
+    "marketCap": 300000,
+    "pe": 120,
+    "beta": 1.7,
+    "high": 451,
+    "low": 435,
+    "volume": 2541,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 443,
+        "high": 443,
+        "low": 443,
+        "close": 443,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 442,
+        "high": 442,
+        "low": 442,
+        "close": 442,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 441,
+        "high": 441,
+        "low": 441,
+        "close": 441,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 438,
+        "high": 438,
+        "low": 438,
+        "close": 438,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 442,
+        "high": 442,
+        "low": 442,
+        "close": 442,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 446,
+        "high": 446,
+        "low": 446,
+        "close": 446,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 447,
+        "high": 447,
+        "low": 447,
+        "close": 447,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "BPCL",
+    "name": "Bharat Petroleum LTD",
+    "price": 249,
+    "previousClose": 258,
+    "todayOpen": 258,
+    "fairValue": 258,
+    "sector": "Energy",
+    "marketCap": 70000,
+    "pe": 7,
+    "beta": 1.05,
+    "high": 260,
+    "low": 246,
+    "volume": 1653,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 259,
+        "high": 259,
+        "low": 259,
+        "close": 259,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 256,
+        "high": 256,
+        "low": 256,
+        "close": 256,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 252,
+        "high": 252,
+        "low": 252,
+        "close": 252,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 249,
+        "high": 249,
+        "low": 249,
+        "close": 249,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 248,
+        "high": 248,
+        "low": 248,
+        "close": 248,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 247,
+        "high": 247,
+        "low": 247,
+        "close": 247,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 248,
+        "high": 248,
+        "low": 248,
+        "close": 248,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "ITC",
+    "name": "ITC Ltd",
+    "price": 437,
+    "previousClose": 440,
+    "todayOpen": 440,
+    "fairValue": 440,
+    "sector": "FMCG",
+    "marketCap": 540000,
+    "pe": 29,
+    "beta": 0.65,
+    "high": 453,
+    "low": 437,
+    "volume": 2693,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 447,
+        "high": 447,
+        "low": 447,
+        "close": 447,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 449,
+        "high": 449,
+        "low": 449,
+        "close": 449,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 448,
+        "high": 448,
+        "low": 448,
+        "close": 448,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 452,
+        "high": 452,
+        "low": 452,
+        "close": 452,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 447,
+        "high": 447,
+        "low": 447,
+        "close": 447,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 441,
+        "high": 441,
+        "low": 441,
+        "close": 441,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 440,
+        "high": 440,
+        "low": 440,
+        "close": 440,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "HINDUNILVR",
+    "name": "Hindustan Unilever",
+    "price": 2381,
+    "previousClose": 2349,
+    "todayOpen": 2349,
+    "fairValue": 2349,
+    "sector": "FMCG",
+    "marketCap": 560000,
+    "pe": 60,
+    "beta": 0.5,
+    "high": 2449,
+    "low": 2349,
+    "volume": 15034,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 2401,
+        "high": 2401,
+        "low": 2401,
+        "close": 2401,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 2399,
+        "high": 2399,
+        "low": 2399,
+        "close": 2399,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 2395,
+        "high": 2395,
+        "low": 2395,
+        "close": 2395,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 2403,
+        "high": 2403,
+        "low": 2403,
+        "close": 2403,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 2364,
+        "high": 2364,
+        "low": 2364,
+        "close": 2364,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 2376,
+        "high": 2376,
+        "low": 2376,
+        "close": 2376,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 2365,
+        "high": 2365,
+        "low": 2365,
+        "close": 2365,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "NESTLE",
+    "name": "Nestle India",
+    "price": 25602,
+    "previousClose": 25878,
+    "todayOpen": 25878,
+    "fairValue": 25878,
+    "sector": "FMCG",
+    "marketCap": 250000,
+    "pe": 90,
+    "beta": 0.4,
+    "high": 26428,
+    "low": 25496,
+    "volume": 172550,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 25496,
+        "high": 25496,
+        "low": 25496,
+        "close": 25496,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 25680,
+        "high": 25680,
+        "low": 25680,
+        "close": 25680,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 26186,
+        "high": 26186,
+        "low": 26186,
+        "close": 26186,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 26253,
+        "high": 26253,
+        "low": 26253,
+        "close": 26253,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 26309,
+        "high": 26309,
+        "low": 26309,
+        "close": 26309,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 25746,
+        "high": 25746,
+        "low": 25746,
+        "close": 25746,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 25579,
+        "high": 25579,
+        "low": 25579,
+        "close": 25579,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "BHARTIARTL",
+    "name": "Bharti Airtel",
+    "price": 1162,
+    "previousClose": 1251,
+    "todayOpen": 1251,
+    "fairValue": 1251,
+    "sector": "Telecom",
+    "marketCap": 460000,
+    "pe": 24,
+    "beta": 0.95,
+    "high": 1251,
+    "low": 1162,
+    "volume": 7677,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1238,
+        "high": 1238,
+        "low": 1238,
+        "close": 1238,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1238,
+        "high": 1238,
+        "low": 1238,
+        "close": 1238,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1231,
+        "high": 1231,
+        "low": 1231,
+        "close": 1231,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1208,
+        "high": 1208,
+        "low": 1208,
+        "close": 1208,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1182,
+        "high": 1182,
+        "low": 1182,
+        "close": 1182,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1169,
+        "high": 1169,
+        "low": 1169,
+        "close": 1169,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1173,
+        "high": 1173,
+        "low": 1173,
+        "close": 1173,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  },
+  {
+    "symbol": "SUNPHARMA",
+    "name": "Sun Pharma",
+    "price": 1268,
+    "previousClose": 1253,
+    "todayOpen": 1253,
+    "fairValue": 1253,
+    "sector": "Pharma",
+    "marketCap": 300000,
+    "pe": 28,
+    "beta": 0.7,
+    "high": 1268,
+    "low": 1214,
+    "volume": 7735,
+    "intraday": [
+      {
+        "tStart": 1781784778676,
+        "open": 1240,
+        "high": 1240,
+        "low": 1240,
+        "close": 1240,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784838683,
+        "open": 1242,
+        "high": 1242,
+        "low": 1242,
+        "close": 1242,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784898697,
+        "open": 1230,
+        "high": 1230,
+        "low": 1230,
+        "close": 1230,
+        "volume": 0
+      },
+      {
+        "tStart": 1781784958709,
+        "open": 1221,
+        "high": 1221,
+        "low": 1221,
+        "close": 1221,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785018715,
+        "open": 1224,
+        "high": 1224,
+        "low": 1224,
+        "close": 1224,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785078721,
+        "open": 1241,
+        "high": 1241,
+        "low": 1241,
+        "close": 1241,
+        "volume": 0
+      },
+      {
+        "tStart": 1781785138736,
+        "open": 1263,
+        "high": 1263,
+        "low": 1263,
+        "close": 1263,
+        "volume": 0
+      }
+    ],
+    "todayOpenDate": "Thu Jun 18 2026"
+  }
+]

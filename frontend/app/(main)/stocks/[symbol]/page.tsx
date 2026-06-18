@@ -128,7 +128,7 @@ export default function StockInfoPage() {
         </div> */}
 
         {/* CHART — timeframe buttons now live inside CandlestickChart */}
-        <div className="mt-6 h-[280px] sm:h-[340px] md:h-[420px] w-full rounded-xl border border-border bg-bg-surface p-4">
+        <div className="mt-6 h-[400px] sm:h-[340px] md:h-[420px] w-full rounded-xl border border-border bg-bg-surface p-1 md:p-4">
           <CandlestickChart
             symbol={symbol}
             currentPrice={stock.price}
