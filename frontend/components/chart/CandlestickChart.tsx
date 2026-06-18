@@ -112,6 +112,9 @@ export default function CandlestickChart({
   const openVolumeRef = useRef<number>(0)
   const rsiDataRef = useRef<LineData[]>([])
 
+  // ref to track known cumulative volume per
+  const lastCumulativeVolumeRef = useRef<number>(0)
+
   const [timeframe, setTimeframe] = useState<Timeframe>('1D')
   const [showRSI, setShowRSI] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -318,12 +321,27 @@ export default function CandlestickChart({
     })
     rsiSeries.priceScale().applyOptions({
       scaleMargins: { top: 0.74, bottom: 0.02 },
-     
     })
     rsiSeries.applyOptions({
       autoscaleInfoProvider: () => ({
         priceRange: { minValue: 0, maxValue: 100 },
       }),
+    })
+    rsiSeries.createPriceLine({
+      price: 70,
+      color: CHART_COLORS.rsiRef,
+      lineWidth: 2, 
+      lineStyle: 2,
+      // axisLabelVisible: true,
+      // title: 'overbought',
+    })
+    rsiSeries.createPriceLine({
+      price: 30,
+      color: CHART_COLORS.rsiRef,
+      lineWidth: 2,
+      lineStyle: 2,
+      // axisLabelVisible: true,
+      // title: 'oversold',
     })
 
     chartRef.current = chart
@@ -413,7 +431,16 @@ export default function CandlestickChart({
 
       const isNewCandle = !openCandleRef.current || openCandleRef.current.time !== time
 
+      // tick.volume is CUMULATIVE daily volume from the backend, not a delta.
+      // To get "volume within this candle," track the baseline at candle open
+      // and subtract it from the current cumulative value.
+
+      const cumulativeVolume = tick.volume ?? 0
+
       if (isNewCandle) {
+        lastCumulativeVolumeRef.current = cumulativeVolume
+        openVolumeRef.current = 0
+
         openCandleRef.current = {
           time,
           open: tick.price,
@@ -442,13 +469,15 @@ export default function CandlestickChart({
             // non-critical — RSI just stays stale until next successful refresh
           })
       } else {
+
+        openVolumeRef.current = cumulativeVolume - lastCumulativeVolumeRef.current
+
         openCandleRef.current = {
           ...openCandleRef.current!,
           high: Math.max(openCandleRef.current!.high, tick.price),
           low: Math.min(openCandleRef.current!.low, tick.price),
           close: tick.price,
         }
-        openVolumeRef.current += tick.volume ?? 0
       }
 
       const isUp = openCandleRef.current.close >= openCandleRef.current.open

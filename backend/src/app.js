@@ -135,7 +135,6 @@ app.use("/api/v1/portfolio", portfolioRouter);
 app.use("/api/v1/market", marketRouter);
 app.use("/api/v1/transactions", transactionRouter);
 app.use("/api/v1/watchlist", watchlistRouter);
-console.log("Mounting candle routes");
 app.use("/api/v1/candles", candleRouter);
 
 // ----------------------

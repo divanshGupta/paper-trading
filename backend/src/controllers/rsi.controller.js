@@ -62,7 +62,7 @@ export const getRSI = async (req, res) => {
     // RSI output is offset by `period` relative to the input candles.
     // rsiValues[0] corresponds to candles[period], rsiValues[1] to candles[period + 1], etc.
     const rsi = rsiValues.map((value, i) => ({
-      time: candles[i + period].tStart,
+      time: candles[i + period].tEnd,
       value: Number(value.toFixed(2)),
     }));
 
