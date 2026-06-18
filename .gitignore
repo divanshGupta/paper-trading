@@ -19,3 +19,4 @@ yarn-error.log*
 .next/
 out/
 public/build/
+backend/src/storage/prices.json
