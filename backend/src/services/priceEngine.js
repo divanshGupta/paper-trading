@@ -3,6 +3,7 @@ import { isMarketOpen } from "../utils/marketTimes.js";
 import { loadPrices, savePrices } from "./priceStorage.js";
 import logger from "../utils/logger.js";
 import { DEFAULT_PRICES } from "../config/stocksData.js";
+import { processTick } from "./candleService.js";
 
 /**
  * Advanced Fake Market Engine
@@ -32,6 +33,10 @@ const MAX_INTRADAY_POINTS = 120; // keep last N per symbol (for sparklines)
 const NEWS_EVENT_PROBABILITY = 0.01; // per minute probability of a news event
 const NEWS_EVENT_DURATION_TICKS = 6; // number of ticks the news event affects volatility
 const SAVE_ON_EACH_TICK = false; // set true for maximum safety; false to save at interval
+const MEAN_REVERSION_STRENGTH = 0.02; // how strongly price pulls back to fair value
+// In DEFAULT_PRICES, add fairValue to each stock
+// This is the "true" price the stock gravitates toward
+// e.g. TCS fairValue: 3047 (starting price)
 
 /* -------------------------
    Load persisted prices if present, otherwise seed defaults
@@ -65,11 +70,37 @@ function nowISO() {
 }
 
 function initializePrices() {
-  // try disk load first
   try {
     const fromDisk = loadPrices?.();
     if (fromDisk && Array.isArray(fromDisk) && fromDisk.length > 0) {
-      // ensure shape for older files
+
+      if (isMarketOpen()) {
+        const today = new Date().toDateString();
+        return fromDisk.map((s) => {
+          const openDate = s.todayOpenDate;
+          if (openDate !== today) {
+            return {
+              ...s,
+              previousClose: s.price,
+              todayOpen: s.price,
+              todayOpenDate: today,
+              intraday: [],
+              high: s.price,
+              low: s.price,
+              volume: 0,
+            };
+          }
+          return {
+            ...s,
+            high: s.high ?? s.price,
+            low: s.low ?? s.price,
+            volume: s.volume ?? 0,
+            intraday: Array.isArray(s.intraday) ? s.intraday : [],
+          };
+        });
+      }
+
+      // Market closed — just ensure shape
       return fromDisk.map((s) => ({
         ...s,
         high: s.high ?? s.price,
@@ -82,7 +113,6 @@ function initializePrices() {
     logger.warn(nowISO(), "Failed to load prices from disk — falling back to defaults", err);
   }
 
-  // fallback to defaults
   return DEFAULT_PRICES.map((s) => ({
     ...s,
     high: s.price,
@@ -192,10 +222,11 @@ function nextTickEnhanced(prices) {
     const mm = now.getMinutes();
     const minutesSinceOpen = hh * 60 + mm;
     // if market just opened (9:15 - 9:30 IST), boost small volatility
-    const openBoost = minutesSinceOpen >= 555 && minutesSinceOpen <= 570 ? 1.5 : 1;
+    const openBoost =
+      minutesSinceOpen >= 555 && minutesSinceOpen <= 570 ? 1.5 : 1;
 
     // compute random percent change — gaussian-ish via two randoms
-    const rand = (Math.random() - 0.5) + (Math.random() - 0.5);
+    const rand = Math.random() - 0.5 + (Math.random() - 0.5);
     const pct = rand * baseVol * newsMult * openBoost; // e.g., ±1% etc.
 
     // compute raw new price
@@ -210,7 +241,15 @@ function nextTickEnhanced(prices) {
       newPrice = s.price + Math.sign(delta) * maxDelta;
       // trigger lock if the cap was exceeded drastically
       triggerCircuitLock(s.symbol);
-      logger.info(nowISO(), "circuit lock triggered on", s.symbol, "delta:", delta, "capped->", newPrice);
+      logger.info(
+        nowISO(),
+        "circuit lock triggered on",
+        s.symbol,
+        "delta:",
+        delta,
+        "capped->",
+        newPrice,
+      );
     }
 
     // simulate volume: base + random
@@ -252,11 +291,16 @@ function nextTickEnhanced(prices) {
 function aggregateMinuteCandles() {
   const ts = Date.now();
   PRICES = PRICES.map((s) => {
-    const lastIntraday = s.intraday?.length ? s.intraday[s.intraday.length - 1] : null;
+    const lastIntraday = s.intraday?.length
+      ? s.intraday[s.intraday.length - 1]
+      : null;
     const currentPrice = s.price;
 
     // if there is no current open candle (first minute or after reset), create one
-    if (!lastIntraday || ts - lastIntraday.tStart >= INTRADAY_CANDLE_INTERVAL_MS) {
+    if (
+      !lastIntraday ||
+      ts - lastIntraday.tStart >= INTRADAY_CANDLE_INTERVAL_MS
+    ) {
       const newCandle = {
         tStart: ts,
         open: currentPrice,
@@ -265,7 +309,9 @@ function aggregateMinuteCandles() {
         close: currentPrice,
         volume: 0,
       };
-      const arr = (s.intraday || []).concat(newCandle).slice(-MAX_INTRADAY_POINTS);
+      const arr = (s.intraday || [])
+        .concat(newCandle)
+        .slice(-MAX_INTRADAY_POINTS);
       return { ...s, intraday: arr };
     } else {
       // update existing candle
@@ -324,13 +370,14 @@ function startPeriodicSave() {
        todayOpen = price at open
      This runs once per market open (not on server restart)
    ------------------------- */
-function handleMarketOpenReset() {
-  logger.info(nowISO(), "Market opened — performing daily reset");
+export function handleMarketOpenReset() {
+  const today = new Date().toDateString(); // e.g. "sat may 23 2026"
   PRICES = PRICES.map((s) => ({
     ...s,
     previousClose: s.price,
     todayOpen: s.price,
-    // reset intraday arrays for the new day
+    todayOpenDate: today,
+    fairValue: s.price, // anchor fair value to current price on each new day
     intraday: [],
     high: s.price,
     low: s.price,
@@ -358,9 +405,14 @@ export function startPriceEngine(io) {
   }
 
   ioEmitter = io;
-  
+
   // Start periodic persistence
   startPeriodicSave();
+
+  // Hnadle startup mid market trainsition detection wont catch this
+  if (isMarketOpen()) {
+    handleMarketOpenReset();
+  }
 
   // Immediately broadcast current snapshot (loaded from disk or defaults)
   try {
@@ -371,13 +423,19 @@ export function startPriceEngine(io) {
   }
 
   // Start market status broadcaster
-  marketStatusIntervalHandle = setInterval(() => {
+  marketStatusIntervalHandle = setInterval(async () => {
     const openNow = isMarketOpen();
 
     // detect closed -> open transition
     if (!lastMarketOpenState && openNow) {
       handleMarketOpenReset();
     }
+
+    if (lastMarketOpenState && !openNow) {
+      logger.info("Market closed. Flushing candles.");
+      await flushAllOpenCandles();
+    }
+
     lastMarketOpenState = openNow;
 
     try {
@@ -416,10 +474,13 @@ export function startPriceEngine(io) {
 
       // Build diffs (only changed symbols)
       const diffs = [];
+      const candlePromises = [];
+
       for (let i = 0; i < PRICES.length; i++) {
         const prev = prevSnapshot[i];
         const cur = PRICES[i];
         if (!prev || cur.price === prev.price) continue;
+
         diffs.push({
           symbol: cur.symbol,
           price: cur.price,
@@ -428,9 +489,22 @@ export function startPriceEngine(io) {
           high: cur.high,
           low: cur.low,
           volume: cur.volume,
-          intradayLast: (cur.intraday && cur.intraday[cur.intraday.length - 1]) || null,
+          intradayLast:
+            (cur.intraday && cur.intraday[cur.intraday.length - 1]) || null,
         });
+
+        // feed every changes price into the candle builder
+        // compute per-tick volume delta
+        const tickVolumeDelta = cur.volume - (prev.volume ?? 0);
+        candlePromises.push(
+          processTick(cur.symbol, cur.price, tickVolumeDelta),
+        );
       }
+
+      // Fire candle writes without blocking the tick loop
+      Promise.allSettled(candlePromises).catch((err) =>
+        logger.error(nowISO(), "candleService processTick error:", err),
+      );
 
       if (diffs.length > 0) {
         try {
@@ -455,7 +529,12 @@ export function startPriceEngine(io) {
 
   // ensure storage saver is running
   startPeriodicSave();
-  logger.info(nowISO(), "Price engine started. TICK interval:", TICK_INTERVAL_MS, "ms");
+  logger.info(
+    nowISO(),
+    "Price engine started. TICK interval:",
+    TICK_INTERVAL_MS,
+    "ms",
+  );
 }
 
 /* stop engine safely (useful for tests) */
@@ -488,7 +567,6 @@ export function getSnapshot() {
   return PRICES.map((p) => ({ ...p }));
 }
 
-
 /*
 
 It upgrades your fake market engine to a realistic, dev-friendly simulator with:
@@ -514,7 +592,6 @@ safe, well-commented code so you can understand every part
 It expects a small helper priceStorage.js in the same folder (we used the same API you were given earlier: loadPrices() & savePrices(prices)).
 
 */
-
 
 /*
 Quick explanation / TL;DR of the main improvements

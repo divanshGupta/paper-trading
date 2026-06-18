@@ -74,7 +74,7 @@ export default function LoginPage() {
       <button
         onClick={handleSubmit}
         disabled={busy}
-        className={`${mode === "login" ? "bg-blue ": "bg-yellow"} text-black font-semibold px-4 py-2 rounded w-72 mt-2`}
+        className={`${mode === "login" ? "bg-[var(--color-brand)]": "bg-yellow"} text-black font-semibold px-4 py-2 rounded w-72 mt-2`}
       >
         {busy ? "Please wait..." : mode === "login" ? "Login" : "Sign Up"}
       </button>

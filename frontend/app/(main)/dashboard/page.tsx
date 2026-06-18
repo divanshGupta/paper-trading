@@ -1,9 +1,9 @@
+// frontend/app/(main)/dashboard/page.tsx
 "use client";
-
-import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
 import { useState, useMemo, useEffect } from "react";
-import { useLivePrices } from "../../../hooks/useLivePrices";
+import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
 import { useApp } from "@/components/providers/AppProvider";
+import { usePriceFeed } from "@/components/providers/PriceFeedProvider";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import Link from "next/link";
 import Sidebar from "@/components/dashboard/Sidebar";
@@ -14,15 +14,10 @@ import { Holding, StockFilterValue } from "@/types";
 
 export default function Dashboard() {
   const enriched = useEnrichedStocks();
-  const { bySymbol, flash, loading } = useLivePrices();
+  const { bySymbol } = usePriceFeed();
   const [filter, setFilter] = useState<StockFilterValue>("all");
-  const { state, buyStock, sellStock, tradingSymbol } = useApp();
+  const { state } = useApp();
   const { profile, holdings, realizedToday } = state;
-  const [marketOpen, setMarketOpen] = useState(false);
-
-  useEffect(() => {
-    setMarketOpen(getMarketStatusIST().marketOpen);
-  }, []);
 
   // Portfolio Value memoized
   const totalValue = useMemo(() => {
@@ -43,23 +38,23 @@ export default function Dashboard() {
 
   const dayPnl = unrealizedPnL + (realizedToday ?? 0);
 
-  const dashboardStocks = useMemo(() => {
-    switch (filter) {
-      case "gainers":
-        return enriched
-          .filter((s) => s.price > s.previousClose)
-          .sort((a, b) => b.changePercent - a.changePercent)
-          .slice(0, 6);
-
-      case "losers":
-        return enriched
-          .filter((s) => s.price < s.previousClose)
-          .sort((a, b) => a.changePercent - b.changePercent)
-          .slice(0, 6);
-
-      default:
-        return enriched.slice(0, 6);
+  // filtered symbols only - pass down as string[]
+  const filteredSymbols = useMemo(() => {
+    let list = enriched;
+    if (filter === "gainers") {
+      list = enriched
+        .filter((s) => s.price > s.previousClose)
+        .sort((a, b) => b.changePercent - a.changePercent)
+        .slice(0, 6);
+    } else if (filter === "losers") {
+      list = enriched
+        .filter((s) => s.price < s.previousClose)
+        .sort((a, b) => a.changePercent - b.changePercent)
+        .slice(0, 6);
+    } else {
+      list = enriched.slice(0, 6);
     }
+    return list.map((s) => s.symbol);
   }, [enriched, filter]);
 
   return (
@@ -74,16 +69,7 @@ export default function Dashboard() {
             <StockFilterTabs selected={filter} onSelect={setFilter} />
           </div>
 
-          <StocksList
-            prices={dashboardStocks}
-            flash={flash}
-            bySymbol={bySymbol}
-            marketOpen={marketOpen}
-            tradingSymbol={tradingSymbol}
-            onBuy={buyStock}
-            onSell={sellStock}
-            loading={loading}
-          />
+          <StocksList symbols={filteredSymbols} />
 
           <Link
             href="/stocks"

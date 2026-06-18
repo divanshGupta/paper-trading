@@ -9,6 +9,7 @@ import { EnrichedHolding, FlashState } from "@/types";
 import SellModal from "../trade/TradeModal";
 import { getMarketStatusIST } from "@/utils/marketTime";
 import { motion, AnimatePresence } from "framer-motion";
+import { Clock } from "lucide-react";
 
 interface HoldingsTableProps {
   holdings: EnrichedHolding[];
@@ -24,6 +25,29 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
   const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
   const [active, setActive] = useState<null | { symbol: string; holdingQty: number }>(null);
+
+  const handleSquareOff = async (symbol: string, price: number) => {
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+    if (!token) return router.replace("/login");
+
+    const res = await fetch(`${BACKEND_URL}/api/v1/trade/squareoff`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ symbol, price }),
+    });
+
+    const json = await res.json();
+    if (res.ok) {
+      toast.success("Square-off completed!");
+      onSuccess?.();
+    } else {
+      toast.error(json.message || "Failed");
+    }
+  };
 
   /* MOBILE CARD COMPONENT ----------------------------------- */
   const MobileCard = ({ h }: { h: EnrichedHolding }) => {
@@ -79,53 +103,33 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-3">
-          <button
-            disabled={!marketOpen}
-            className={`flex-1 py-2 rounded-lg text-sm 
-              ${marketOpen ? "bg-negative text-text" : "bg-bg-elevated cursor-not-allowed border border-border"}
-            `}
-            onClick={() => {
-              if (!marketOpen) return;
-              setActive({ symbol: h.symbol, holdingQty: h.quantity });
-            }}
+        {!marketOpen ? (
+          <div
+            className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-bg-elevated border border-border text-text-secondary text-xs font-semibold select-none cursor-help shadow-sm w-full"
+            title="Market is closed. Trading hours: 9:15 AM - 3:30 PM IST (Mon-Fri)"
           >
-            {marketOpen ? "Sell" : "Closed"}
-          </button>
+            <Clock size={14} className="text-text-secondary opacity-70" />
+            <span>Market Closed</span>
+          </div>
+        ) : (
+          <div className="flex gap-3 w-full">
+            <button
+              className="flex-1 py-2 rounded-lg text-sm bg-negative text-text font-medium hover:opacity-90 transition"
+              onClick={() => {
+                setActive({ symbol: h.symbol, holdingQty: h.quantity });
+              }}
+            >
+              Sell
+            </button>
 
-          <button
-            disabled={!marketOpen}
-            className={`flex-1 py-2 rounded-lg text-sm 
-              ${marketOpen ? "bg-red-600 text-text" : "bg-bg-elevated cursor-not-allowed border border-border"}
-            `}
-            onClick={async () => {
-              if (!marketOpen) return;
-
-              const { data } = await supabase.auth.getSession();
-              const token = data.session?.access_token;
-              if (!token) return router.replace("/login");
-
-              const res = await fetch(`${BACKEND_URL}/api/v1/trade/squareoff`, {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ symbol: h.symbol, price: h.livePrice }),
-              });
-
-              const json = await res.json();
-              if (res.ok) {
-                toast.success("Square-off completed!");
-                onSuccess?.();
-              } else {
-                toast.error(json.message || "Failed");
-              }
-            }}
-          >
-            {marketOpen ? "Exit" : "Closed"}
-          </button>
-        </div>
+            <button
+              className="flex-1 py-2 rounded-lg text-sm bg-red-600 text-text font-medium hover:bg-red-700 transition"
+              onClick={() => handleSquareOff(h.symbol, h.livePrice)}
+            >
+              Exit
+            </button>
+          </div>
+        )}
       </motion.div>
     );
   };
@@ -176,29 +180,37 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                     {h.unrealized.toFixed(2)}
                   </td>
 
-                  <td className="py-3 text-center">
-                    <button
-                      disabled={!marketOpen}
-                      className={`px-3 py-1 rounded-lg text-text
-                        ${marketOpen ? "bg-negative hover:bg-red-700" : "bg-bg-elevated cursor-not-allowed border border-border"}
-                      `}
-                      onClick={() => setActive({ symbol: h.symbol, holdingQty: h.quantity })}
-                    >
-                      {marketOpen ? "Sell" : "Closed"}
-                    </button>
-                  </td>
+                  {!marketOpen ? (
+                    <td colSpan={2} className="py-3 text-center">
+                      <div
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-bg-elevated border border-border text-text-secondary text-xs font-semibold select-none cursor-help shadow-sm mx-auto"
+                        title="Market is closed. Trading hours: 9:15 AM - 3:30 PM IST (Mon-Fri)"
+                      >
+                        <Clock size={12} className="text-text-secondary opacity-70" />
+                        <span>Market Closed</span>
+                      </div>
+                    </td>
+                  ) : (
+                    <>
+                      <td className="py-3 text-center">
+                        <button
+                          className="px-3 py-1 rounded-lg text-text bg-negative hover:bg-red-700 transition"
+                          onClick={() => setActive({ symbol: h.symbol, holdingQty: h.quantity })}
+                        >
+                          Sell
+                        </button>
+                      </td>
 
-                  <td className="py-3 text-center">
-                    <button
-                      disabled={!marketOpen}
-                      className={`px-3 py-1 rounded-lg text-text
-                        ${marketOpen ? "bg-red-600 hover:bg-red-700" : "bg-bg-elevated cursor-not-allowed border border-border"}
-                      `}
-                      onClick={() => {}}
-                    >
-                      {marketOpen ? "Exit" : "Closed"}
-                    </button>
-                  </td>
+                      <td className="py-3 text-center">
+                        <button
+                          className="px-3 py-1 rounded-lg text-text bg-red-600 hover:bg-red-700 transition"
+                          onClick={() => handleSquareOff(h.symbol, h.livePrice)}
+                        >
+                          Exit
+                        </button>
+                      </td>
+                    </>
+                  )}
                 </tr>
               );
             })}

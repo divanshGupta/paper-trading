@@ -11,27 +11,33 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  schemas  = ["public"]
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  schemas   = ["public"]
+  directUrl = env("DIRECT_URL")
 }
 
 // ------- Models -------
 
 // User model
 model User {
-  id          Int       @id @default(autoincrement())
-  supabaseId  String    @unique @db.Uuid
-  email       String    @unique
-  balance     Decimal   @default(100000) @db.Decimal(12,2)
-  name        String?
-  phone       String?   @unique
-  dob         DateTime?
-  gender      String?   // "male", "female", "other"
-  address     String?
-  fatherName  String?
-  createdAt   DateTime  @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id         Int       @id @default(autoincrement())
+  supabaseId String    @unique @db.Uuid
+  email      String    @unique
+  balance    Decimal   @default(100000) @db.Decimal(12, 2)
+  name       String?
+  phone      String?   @unique
+  dob        DateTime?
+  gender     String? // "male", "female", "other"
+  address    String?
+  fatherName String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
+
+  // Relations
+  portfolios   Portfolio[]
+  transactions Transaction[]
+  watchlists   Watchlist[]
 
   @@schema("public")
 }
@@ -42,11 +48,14 @@ model Portfolio {
   userId    String   @db.Uuid
   symbol    String
   quantity  Int
-  avgPrice  Decimal @db.Decimal(12,2)
+  avgPrice  Decimal  @db.Decimal(12, 2)
   updatedAt DateTime @default(now())
 
-  @@schema("public")
+  // Foreign key relation
+  user User @relation(fields: [userId], references: [supabaseId], onDelete: Cascade)
 
+  @@unique([userId, symbol])
+  @@schema("public")
 }
 
 // Each trade (buy/sell)
@@ -56,16 +65,16 @@ model Transaction {
   symbol      String
   type        String
   quantity    Int
-  price       Decimal  @db.Decimal(10,2)
-  total       Decimal  @db.Decimal(10,2)
-  realizedPnl Decimal? @db.Decimal(10,2)
-
+  price       Decimal  @db.Decimal(10, 2)
+  total       Decimal  @db.Decimal(10, 2)
+  realizedPnl Decimal? @db.Decimal(10, 2)
   createdAt   DateTime @default(now())
+
+  // Foreign key relation
+  user User @relation(fields: [userId], references: [supabaseId], onDelete: Cascade)
 
   @@schema("public")
 }
-
-
 
 // Watchlist for each user
 model Watchlist {
@@ -73,6 +82,27 @@ model Watchlist {
   userId String @db.Uuid
   symbol String
 
+  // Foreign key relation
+  user User @relation(fields: [userId], references: [supabaseId], onDelete: Cascade)
+
+  @@unique([userId, symbol])
   @@schema("public")
 }
 
+// CandleStick
+model Candle {
+  id       Int      @id @default(autoincrement())
+  symbol   String
+  interval String // "1min", "1day" etc.
+  open     Decimal  @db.Decimal(10, 2)
+  high     Decimal  @db.Decimal(10, 2)
+  low      Decimal  @db.Decimal(10, 2)
+  close    Decimal  @db.Decimal(10, 2)
+  volume   Int
+  tStart   DateTime // candle start time
+  tEnd     DateTime // candle end time
+
+  @@unique([symbol, interval, tStart])
+  @@index([symbol, interval, tStart])
+  @@schema("public")
+}

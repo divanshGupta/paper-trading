@@ -9,12 +9,12 @@ export default function MainLayout({
 }>) {
   return (
     <>
-            <Navbar />
-            <MarketPopupWrapper />
-              <main className="pt-20 md:pt-24">
-                {children}
-              </main>
-            <Footer />
+      <Navbar />
+      <MarketPopupWrapper />
+        <main className="pt-20 md:pt-24">
+          {children}
+        </main>
+      <Footer />
     </>
   );
 }

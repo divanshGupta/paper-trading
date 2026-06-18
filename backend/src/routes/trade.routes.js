@@ -1,3 +1,4 @@
+// backend/src/routes/trade.routes.js
 import { Router } from 'express';
 import { buyStock, sellStock, squaredOffPosition } from '../controllers/trade.controller.js';
 import { verifyAuth } from '../middlewares/auth.middleware.js';

@@ -3,7 +3,10 @@ import { Server } from "socket.io";
 import { allowedOrigins } from "./corsConfig.js";
 import { registerStockHandlers } from "../websocket/stockTicker.js";
 import { socketAuth } from "../middlewares/socketAuth.middleware.js";
-import { socketMessageLimiter, socketRateLimiter } from "../middlewares/socketRateLimit.middleware.js";
+import {
+  socketMessageLimiter,
+  socketRateLimiter,
+} from "../middlewares/socketRateLimit.middleware.js";
 import logger from "../utils/logger.js";
 
 let io = null;

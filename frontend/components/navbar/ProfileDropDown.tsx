@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { supabase } from "@/utils/supabaseClient";
-import { socket } from "@/lib/socket";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useApp } from "@/components/providers/AppProvider";
@@ -30,48 +29,13 @@ export default function ProfileMenu() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // logout 
+  const logout = useAuthStore((s) => s.logout);
 
-  
-  // logout function 
-async function logout() {
-  console.log("LOGOUT CLICKED");
-
-  // 1) Hard disconnect socket immediately
-  try {
-    socket.auth = {};
-    socket.disconnect();
-  } catch {}
-
-  // 2) Get latest session
-  const { data } = await supabase.auth.getSession();
-  const session = data.session;
-
-  // If no session, user is already logged out
-  if (!session) {
+  async function handleLogout() {
+    logout(); // signOut + clears store
     router.replace("/login");
-    return;
   }
-
-  // 3) Perform Supabase logout
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    console.error("Supabase logout error:", error.message);
-  }
-
-  // 4) Force-clear storage fallback
-  try {
-    localStorage.removeItem("supabase.auth.token");
-  } catch {}
-
-  // 5) Redirect user immediately (even if supabase returned error)
-  router.replace("/login");
-}
-
-
-
-
-
 
   return (
     <div className="relative" ref={menuRef}>
@@ -136,7 +100,7 @@ async function logout() {
 
             {/* Logout */}
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="
                 px-3 py-2 text-negative 
                 font-medium p-2 rounded-lg hover:bg-bg-surface

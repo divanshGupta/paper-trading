@@ -44,6 +44,7 @@ export interface EnrichedHolding extends Holding {
   livePrice: number;
   value: number;
   invested: number;
+  dayPnl: number;
   unrealized: number;
   flash: "up" | "down" | null;
   sector?: string | null;
@@ -154,6 +155,7 @@ export interface WatchlistResponse {
 export interface PortfolioUpdatePayload {
   holdings?: Holding[];
   balance?: number;
+  realizedToday?: number;
 }
 
 /* -------------------------------------

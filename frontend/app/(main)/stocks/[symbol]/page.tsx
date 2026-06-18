@@ -8,9 +8,10 @@ import { ArrowUp, ArrowDown } from "lucide-react";
 import BuySellPanel from "@/components/trade/BuySellPanel";
 import WatchlistButton from "@/components/stocks/WatchlistButton";
 import StockCard from "@/components/stocks/StockCard";
-import Sparkline from "@/components/chart/Sparkline";
+// import Sparkline from "@/components/chart/Sparkline";
 import TradeModal from "@/components/trade/TradeModal";
 import { Holding, TradeAction } from "@/types";
+import CandlestickChart from "@/components/chart/CandlestickChart";
 
 export default function StockInfoPage() {
   const { state, refresh } = useApp();
@@ -61,7 +62,7 @@ export default function StockInfoPage() {
 
   const dayChange = stock.price - (stock.previousClose ?? stock.price);
   const dayChangePct = (dayChange / (stock.previousClose ?? stock.price)) * 100;
-  const dayColor = dayChange >= 0 ? "text-green-600" : "text-red-600";
+  const dayColor = dayChange >= 0 ? "text-positive" : "text-negative";
 
   function Stat({ label, value }: { label: string; value: string | number | null | undefined }) {
     return (
@@ -107,15 +108,15 @@ export default function StockInfoPage() {
         </div>
 
         {/* CHART */}
-        <div className="mt-6 h-[240px] sm:h-[300px] md:h-[380px] w-full rounded-xl border border-border bg-bg-surface flex items-center justify-center">
+        {/* <div className="mt-6 h-[240px] sm:h-[300px] md:h-[380px] w-full rounded-xl border border-border bg-bg-surface flex items-center justify-center">
           <Sparkline
             data={stock.sparkline}
             positive={stock.price >= stock.previousClose}
           />
-        </div>
+        </div> */}
 
         {/* TIME BUTTONS */}
-        <div className="mt-4 flex flex-wrap justify-between gap-2 sm:gap-3">
+        {/* <div className="mt-4 flex flex-wrap justify-between gap-2 sm:gap-3">
           {["1D", "1W", "1M", "3M", "6M", "1Y", "5Y", "All"].map((t) => (
             <button
               key={t}
@@ -124,6 +125,15 @@ export default function StockInfoPage() {
               {t}
             </button>
           ))}
+        </div> */}
+
+        {/* CHART — timeframe buttons now live inside CandlestickChart */}
+        <div className="mt-6 h-[280px] sm:h-[340px] md:h-[420px] w-full rounded-xl border border-border bg-bg-surface p-4">
+          <CandlestickChart
+            symbol={symbol}
+            currentPrice={stock.price}
+            previousClose={stock.previousClose ?? stock.price}
+          />
         </div>
 
         {/* KEY STATS */}
