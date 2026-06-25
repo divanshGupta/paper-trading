@@ -6,8 +6,8 @@ export function Button({
   variant?: "primary" | "ghost";
 }) {
   const styles = {
-    primary: "bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)]",
-    ghost: "bg-transparent hover:bg-[var(--bg-surface)] border border-[var(--border)]",
+    primary: "bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand-dark)]",
+    ghost: "bg-transparent hover:bg-[var(--color-bg-surface)] border border-[var(--color-border)]",
   };
 
   return (

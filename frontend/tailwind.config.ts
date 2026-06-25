@@ -14,6 +14,8 @@ const config: Config = {
        boxShadow: {
         'brand-glow': '0 0 20px var(--color-brand-glow)',
         'purple-glow': '0 0 20px rgba(139, 92, 246, 0.25)',
+        'positive-glow': '0 0 15px rgba(16, 185, 129, 0.2)',
+        'negative-glow': '0 0 15px rgba(255, 59, 98, 0.2)',
       },
       backgroundImage: {
         'brand-gradient': 'linear-gradient(135deg, var(--color-brand) 0%, var(--color-purple) 100%)',

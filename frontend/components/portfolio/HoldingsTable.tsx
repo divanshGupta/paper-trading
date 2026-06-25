@@ -114,7 +114,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
         ) : (
           <div className="flex gap-3 w-full">
             <button
-              className="flex-1 py-2 rounded-lg text-sm bg-negative text-text font-medium hover:opacity-90 transition"
+              className="flex-1 py-2 rounded-lg text-sm bg-negative text-white font-medium hover:opacity-90 transition"
               onClick={() => {
                 setActive({ symbol: h.symbol, holdingQty: h.quantity });
               }}
@@ -123,7 +123,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
             </button>
 
             <button
-              className="flex-1 py-2 rounded-lg text-sm bg-red-600 text-text font-medium hover:bg-red-700 transition"
+              className="flex-1 py-2 rounded-lg text-sm bg-negative text-white font-medium hover:bg-red-700 transition"
               onClick={() => handleSquareOff(h.symbol, h.livePrice)}
             >
               Exit
@@ -194,7 +194,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
                     <>
                       <td className="py-3 text-center">
                         <button
-                          className="px-3 py-1 rounded-lg text-text bg-negative hover:bg-red-700 transition"
+                          className="px-3 py-1 rounded-lg text-white bg-negative hover:bg-red-700 transition"
                           onClick={() => setActive({ symbol: h.symbol, holdingQty: h.quantity })}
                         >
                           Sell
@@ -203,7 +203,7 @@ export default function HoldingsTable({ holdings, flash, onSuccess }: HoldingsTa
 
                       <td className="py-3 text-center">
                         <button
-                          className="px-3 py-1 rounded-lg text-text bg-red-600 hover:bg-red-700 transition"
+                          className="px-3 py-1 rounded-lg text-white bg-red-600 hover:bg-red-700 transition"
                           onClick={() => handleSquareOff(h.symbol, h.livePrice)}
                         >
                           Exit

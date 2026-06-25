@@ -87,7 +87,7 @@ export default function TradeModal({
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
-            className="border border-border bg-bg-surface outline-none text-text px-3 py-2 rounded-lg w-full mt-1"
+            className="border border-border bg-bg-surface outline-none text-white px-3 py-2 rounded-lg w-full mt-1"
             placeholder="Enter quantity"
           />
         </div>
@@ -132,7 +132,7 @@ export default function TradeModal({
           <button
             onClick={handleTrade}
             disabled={loading || !price}
-            className={`${isBuy ? "bg-positive" : "bg-negative"} text-text px-4 py-2 rounded-lg w-full font-semibold`}
+            className={`${isBuy ? "bg-positive" : "bg-negative"} text-white px-4 py-2 rounded-lg w-full font-semibold`}
           >
             {loading ? "Processing…" : isBuy ? "Buy" : "Sell"}
           </button>
@@ -140,7 +140,7 @@ export default function TradeModal({
           {isSell && (
             <button
               onClick={() => setQuantity(holdingQty)}
-              className="bg-gray-200 dark:bg-gray-700 text-text px-4 py-2 rounded-lg"
+              className="bg-gray-200 bg-bg-elevated hover:bg-bg-surface text-white px-4 py-2 rounded-lg"
             >
               Max
             </button>

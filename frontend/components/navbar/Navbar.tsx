@@ -60,8 +60,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-md font-medium transition-colors pb-1 ${
                   pathname === link.href
-                    ? "text-teal-600 border-b-2 border-teal-500"
-                    : "text-gray-600 hover:text-teal-600"
+                    ? "text-brand border-b-2 border-brand"
+                    : "text-text-secondary hover:text-teal-600"
                 }`}
               >
                 {link.label}

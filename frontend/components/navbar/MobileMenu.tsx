@@ -49,7 +49,9 @@ export default function MobileMenu({
           <motion.div
             className="
               fixed inset-0 z-50 
-              bg-bg-main/90 
+              bg-bg-surface 
+              border-border
+              text-text
               backdrop-blur-xl 
               flex flex-col 
               px-8 pt-24 pb-10
@@ -77,7 +79,7 @@ export default function MobileMenu({
             </button>
 
             {/* Menu Items */}
-            <nav className="mt-4 space-y-6 font-medium ">
+            <nav className="mt-4 space-y-6 font-medium">
               <MenuItem href="/stocks" icon={<LineChart />} onClose={onClose}>
                 Explore
               </MenuItem>

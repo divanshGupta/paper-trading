@@ -8,6 +8,7 @@ import Link from "next/link";
 import AuthGuard from "../../../hooks/authGaurd";
 import ProfileSkeleton from "@/components/skeletons/ProfileSkeleton";
 import { UserProfile } from "@/types";
+import { LogOut } from "lucide-react";
 
 function ProfilePage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -79,7 +80,7 @@ function ProfilePage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setEditing((s) => !s)}
-            className="px-4 py-2 rounded-lg bg-bg-main hover:bg-bg-elevated text-text border border-border"
+            className="bg-bg-elevated px-4 py-2 rounded-lg hover:bg-opacity-40 text-text border border-border"
           >
             {editing ? "Close" : "Edit Profile"}
           </button>
@@ -144,18 +145,48 @@ function ProfilePage() {
 
       {/* Footer */}
       <div className="mt-4 flex items-center justify-between">
-        <Link href="/dashboard" className="text-text-secondary font-medium">
-          ← Back to dashboard
-        </Link>
+        <Link
+        href="/dashboard"
+        className="group inline-flex items-center gap-2 text-text-secondary font-medium transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-text-primary"
+      >
+        <span className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1">
+          ←
+        </span>
+        <span className="relative">
+          Back to dashboard
+          <span className="absolute left-0 -bottom-0.5 h-px w-0 bg-current transition-[width] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
+        </span>
+      </Link>
+
+        {/* <button
+          className="bg-bg-elevated text-center w-40 rounded-2xl h-14 relative text-white text-md font-semibold group"
+          type="button"
+          
+        >
+          <div
+            className="bg-negative rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-full z-10 duration-500"
+          >
+            <LogOut />
+          </div>
+          <p className="translate-x-2">Logout</p>
+        </button> */}
+
 
         <button
-          className="px-4 py-2 rounded-lg hover:bg-bg-elevated border border-border"
-          onClick={() =>
-            supabase.auth.signOut().then(() => router.replace("/login"))
-          }
+          onClick={() => supabase.auth.signOut().then(() => router.replace("/login"))}
+          className="group flex h-11 w-11 items-center gap-2 overflow-hidden rounded-full bg-negative px-3 text-white shadow-lg transition-[width,border-radius,box-shadow,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:w-32 hover:rounded-lg active:translate-y-px"
         >
-          Logout
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <LogOut />
+          </span>
+
+          <span
+            className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 translate-x-2 transition-[max-width,opacity,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:max-w-[80px] group-hover:translate-x-0 group-hover:opacity-100"
+          >
+            Logout
+          </span>
         </button>
+
       </div>
     </div>
   );
