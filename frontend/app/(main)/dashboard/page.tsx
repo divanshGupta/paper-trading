@@ -1,10 +1,9 @@
 // frontend/app/(main)/dashboard/page.tsx
 "use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo} from "react";
 import useEnrichedStocks from "../../../hooks/useEnrichedStocks";
 import { useApp } from "@/components/providers/AppProvider";
 import { usePriceFeed } from "@/components/providers/PriceFeedProvider";
-import { getMarketStatusIST } from "@/utils/marketTime";
 import Link from "next/link";
 import Sidebar from "@/components/dashboard/Sidebar";
 import StockGrid from "@/components/stocks/StockGrid";

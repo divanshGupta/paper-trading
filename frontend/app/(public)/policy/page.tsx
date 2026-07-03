@@ -97,7 +97,7 @@ const POLICY_SECTIONS: PolicySection[] = [
   function (via Supabase Auth + PostgreSQL).
         </p>
         <p>
-         We don't sell or share your data with third parties.
+         We don&apos;t sell or share your data with third parties.
         </p>
         <p>
             You can request account deletion by emailing [your email].
@@ -111,9 +111,9 @@ const POLICY_SECTIONS: PolicySection[] = [
     content: (
       <>
         <p className="mb-4">
-          This app is provided "as is," built and maintained by a single developer
+          This app is provided &quot;as is&quot; built and maintained by a single developer
             as a demo project. Uptime, data persistence, and accuracy are not
-            guaranteed. Don't rely on it for anything beyond learning/demonstration.
+            guaranteed. Don&apos;t rely on it for anything beyond learning/demonstration.
         </p>
       </>
     ),

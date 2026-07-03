@@ -21,7 +21,6 @@ import {
   X,
   Mail,
   Shield,
-  TrendingUp,
   Award,
 } from "lucide-react";
 
@@ -423,45 +422,45 @@ function DetailCard({
   );
 }
 
-function StatCard({
-  icon,
-  label,
-  value,
-  color,
-  bgColor,
-  className = "",
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  color: string;
-  bgColor: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`flex items-center gap-3 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-surface)] hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 ${className}`}
-    >
-      <div
-        className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-        style={{ backgroundColor: bgColor, color: color }}
-      >
-        {icon}
-      </div>
-      <div>
-        <p
-          className="text-xs font-medium"
-          style={{ color: "var(--color-text-secondary)" }}
-        >
-          {label}
-        </p>
-        <p className="text-sm font-bold" style={{ color: color }}>
-          {value}
-        </p>
-      </div>
-    </div>
-  );
-}
+// function StatCard({
+//   icon,
+//   label,
+//   value,
+//   color,
+//   bgColor,
+//   className = "",
+// }: {
+//   icon: React.ReactNode;
+//   label: string;
+//   value: string;
+//   color: string;
+//   bgColor: string;
+//   className?: string;
+// }) {
+//   return (
+//     <div
+//       className={`flex items-center gap-3 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-surface)] hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 ${className}`}
+//     >
+//       <div
+//         className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+//         style={{ backgroundColor: bgColor, color: color }}
+//       >
+//         {icon}
+//       </div>
+//       <div>
+//         <p
+//           className="text-xs font-medium"
+//           style={{ color: "var(--color-text-secondary)" }}
+//         >
+//           {label}
+//         </p>
+//         <p className="text-sm font-bold" style={{ color: color }}>
+//           {value}
+//         </p>
+//       </div>
+//     </div>
+//   );
+// }
 
 const ProtectedProfilePage = () => (
   <AuthGuard>
