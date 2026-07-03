@@ -84,9 +84,9 @@ export default function Navbar() {
           {/* Notifications */}
           <button className="hidden md:block p-2 rounded-full hover:bg-bg-surface transition relative">
             <Bell size={20} />
-            <span className="absolute -top-1 -right-1 bg-negative text-text text-xs rounded-full px-[5px] py-[1px]">
+            {/* <span className="absolute -top-1 -right-1 bg-negative text-text text-xs rounded-full px-[5px] py-[1px]">
               5
-            </span>
+            </span> */}
           </button>
 
           {/* Avatar */}

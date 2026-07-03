@@ -4,6 +4,7 @@ import { loadPrices, savePrices } from "./priceStorage.js";
 import logger from "../utils/logger.js";
 import { DEFAULT_PRICES } from "../config/stocksData.js";
 import { processTick } from "./candleService.js";
+import { flushAllOpenCandles } from "./candleService.js";
 
 /**
  * Advanced Fake Market Engine
@@ -433,10 +434,14 @@ export function startPriceEngine(io) {
 
     if (lastMarketOpenState && !openNow) {
       logger.info("Market closed. Flushing candles.");
-      await flushAllOpenCandles();
+      try{ 
+        await flushAllOpenCandles();
+      } catch (err) {
+        logger.error(nowISO(), "Error flushing open candles on market close:", err);
+      }
     }
 
-    lastMarketOpenState = openNow;
+    lastMarketOpenState = openNow; // this must always run, even if flush throws
 
     try {
       io.emit("market:status", { open: openNow });
