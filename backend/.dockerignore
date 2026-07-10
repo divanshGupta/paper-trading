@@ -2,6 +2,12 @@ node_modules
 # Keep environment variables out of version control
 .env
 
+.env.*
+
+.git
+
+.gitignore
+
 /generated/prisma
 
 /src/generated/prisma

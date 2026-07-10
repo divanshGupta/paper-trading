@@ -72,7 +72,10 @@ export const socketMessageLimiter = (socket, eventName) => {
       logger.warn(`⚠️ Rate limit: ${key} sent ${bucket.count} '${eventName}' events in ${BUCKET_WINDOW_MS}ms`);
       // Inform the client politely but do NOT disconnect (avoids silent failures)
       socket.emit("rate-limit", { message: "Too many actions. Slow down a bit." });
+      return false; // caller must check this
     }
+
+    return true;
   } catch (err) {
     // never throw from limiter
     logger.error("socketMessageLimiter error:", err);

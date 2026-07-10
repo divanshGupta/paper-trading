@@ -14,6 +14,7 @@ try {
 
 // Validate required environment variables
 const requiredEnvVars = [
+    'PORT',
     'SUPABASE_URL',
     'SUPABASE_SERVICE_ROLE',
     'DATABASE_URL'

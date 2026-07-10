@@ -1,4 +1,3 @@
-// middlewares/rateLimiter.js
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import logger from "../utils/logger.js";
 
@@ -11,7 +10,7 @@ const getKey = (req) => {
 // Global API limit (100 requests per minute)
 export const apiLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 100,
+  max: 100, // per IP
   keyGenerator: getKey,
   handler: (req, res) => {
     logger.warn(`⚠️ Global rate limit exceeded: ${getKey(req)}`);
@@ -24,7 +23,7 @@ export const apiLimiter = rateLimit({
 
 // Authentication routes limit (20 per 15 mins)
 export const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: 15 * 60 * 1000, // 15 min
   max: 20,
   keyGenerator: getKey,
   handler: (req, res) => {

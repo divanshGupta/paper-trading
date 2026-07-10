@@ -21,7 +21,7 @@ export const buyStock = async (req, res) => {
     const { symbol, quantity } = req.body;
     const userId = req.user.id;
 
-    if (!symbol || !quantity || quantity <= 0) {
+    if (!symbol || !Number.isInteger(quantity) || quantity <= 0 || quantity > 100000) {
       return res.status(400).json({ message: "Valid symbol and quantity required" });
     }
 
@@ -150,7 +150,7 @@ export const sellStock = async (req, res) => {
     const { symbol, quantity } = req.body;
     const userId = req.user.id;
 
-    if (!symbol || !quantity || quantity <= 0) {
+    if (!symbol || !Number.isInteger(quantity) || quantity <= 0 || quantity > 100000) {
       return res.status(400).json({ message: "Valid symbol and quantity required" });
     }
 
@@ -273,7 +273,7 @@ export const squaredOffPosition = async (req, res) => {
       return res.status(403).json({ message: "Market is closed." });
     }
 
-    // const { symbol, price } = req.body;
+    const { symbol } = req.body;
     const userId = req.user.id;
 
     if (!symbol) {

@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -10,6 +10,8 @@ COPY prisma ./prisma
 
 # Install all dependencies (need dev for prisma CLI)
 RUN npm install
+RUN npx prisma generate
+RUN npm prune --production
 
 # Copy rest of source
 COPY . .

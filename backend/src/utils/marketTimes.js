@@ -1,9 +1,6 @@
 // Utility to check if the Indian stock market is open
 // Always evaluate market time in IST (Asia/Kolkata)
 export function isMarketOpen() {
-  if (process.env.FORCE_MARKET_OPEN === "true") {
-    return true;
-  }
   const nowUtc = new Date();
   const now = new Date(
     nowUtc.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }),

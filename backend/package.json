@@ -9,6 +9,9 @@
     "start:dev": "node -r dotenv/config src/server.js",
     "postinstall": "prisma generate"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
