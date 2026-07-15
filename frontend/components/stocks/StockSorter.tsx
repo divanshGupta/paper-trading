@@ -1,3 +1,5 @@
+"use client";
+
 import type { SortKey, StockSorterProps } from "@/types";
 
 const sortKeys: { label: string; value: SortKey }[] = [

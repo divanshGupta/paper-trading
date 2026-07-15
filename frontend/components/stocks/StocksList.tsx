@@ -21,7 +21,11 @@ export default function StocksList({ symbols }: Props) {
   const { loading } = usePriceFeed();
   const enriched = useEnrichedStocks();
 
-  const prices = symbols ? enriched.filter((s) => symbols.includes(s.symbol)) : enriched;
+  const prices = symbols
+    ? symbols
+        .map((symbol) => enriched.find((s) => s.symbol === symbol))
+        .filter((stock): stock is (typeof enriched)[number] => Boolean(stock))
+    : enriched;
   
   return (
     <div className="w-full">

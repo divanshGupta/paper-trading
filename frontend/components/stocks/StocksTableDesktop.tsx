@@ -1,5 +1,3 @@
-// frontend/components/stocks/StocksTableDesktop.tsx
-
 "use client";
 import React, { useEffect, useState} from "react";
 import { ArrowUp, ArrowDown, Clock } from "lucide-react";
@@ -32,8 +30,12 @@ export default function StocksTableDesktop({ symbols }: Props) {
     setMarketOpen(getMarketStatusIST().marketOpen);
   }, [])
 
-  // if symbols list privded, filter to those only 
-  const prices = symbols ? enriched.filter((s) => symbols.includes(s.symbol)) : enriched;
+  // if symbols list provided, preserve the order of the symbol list
+  const prices = symbols
+    ? symbols
+        .map((symbol) => enriched.find((s) => s.symbol === symbol))
+        .filter((stock): stock is (typeof enriched)[number] => Boolean(stock))
+    : enriched;
 
   return (
     <div className="hidden md:block w-full overflow-hidden rounded-xl shadow-card">
